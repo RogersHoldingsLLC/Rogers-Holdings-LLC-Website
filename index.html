@@ -3,95 +3,155 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rogers Holdings</title>
+  <title>Rogers Holdings LLC</title>
 
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: #0f0f0f;
-      color: #ffffff;
+      font-family: Georgia, 'Times New Roman', serif;
+      background: #f8f6f1;
+      color: #111;
     }
 
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 40px;
-      background: #000;
-      border-bottom: 1px solid #222;
+      padding: 22px 8%;
+      background: #ffffff;
+      border-bottom: 2px solid #c49a3a;
     }
 
     nav h2 {
       margin: 0;
-      color: #d4af37;
+      letter-spacing: 4px;
+      font-size: 18px;
+      color: #111;
     }
 
     nav a {
-      color: white;
+      color: #111;
       text-decoration: none;
-      margin-left: 20px;
-      font-size: 14px;
+      margin-left: 25px;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
     }
 
-    header {
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      background:
+        linear-gradient(rgba(255,255,255,0.88), rgba(255,255,255,0.88)),
+        url("brand-card.jpeg");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero-box {
+      max-width: 950px;
+      width: 100%;
       text-align: center;
-      padding: 100px 20px 80px;
-      background: linear-gradient(135deg, #111, #1f1f1f);
+      padding: 60px 30px;
+      border: 4px solid #c49a3a;
+      background: rgba(255,255,255,0.82);
     }
 
-    .logo {
-      max-width: 140px;
-      margin-bottom: 20px;
+    .rh-logo {
+      width: 150px;
+      margin-bottom: 30px;
+      border: 3px solid #c49a3a;
+      padding: 20px;
+      background: white;
     }
 
     h1 {
-      font-size: 44px;
-      margin: 10px 0;
-      color: #d4af37;
+      font-size: 64px;
+      margin: 0;
+      letter-spacing: 8px;
+      font-weight: 500;
+      color: #111;
     }
 
-    .subtitle {
-      font-size: 18px;
-      color: #ccc;
-      max-width: 600px;
-      margin: 0 auto;
+    .gold {
+      color: #c49a3a;
+    }
+
+    .tagline {
+      font-family: Arial, sans-serif;
+      font-size: 20px;
+      line-height: 1.8;
+      letter-spacing: 2px;
+      max-width: 750px;
+      margin: 35px auto 0;
+    }
+
+    .divider {
+      width: 180px;
+      height: 2px;
+      background: #c49a3a;
+      margin: 35px auto;
     }
 
     section {
-      padding: 60px 20px;
-      max-width: 900px;
-      margin: auto;
+      padding: 70px 8%;
+      background: #ffffff;
     }
 
     .card {
-      background: #1c1c1c;
-      padding: 30px;
-      margin-bottom: 25px;
-      border-radius: 12px;
-      border: 1px solid #2a2a2a;
+      max-width: 900px;
+      margin: 0 auto 35px;
+      padding: 40px;
+      border: 2px solid #c49a3a;
+      background: #fdfbf7;
+      text-align: center;
     }
 
     .card h2 {
+      font-size: 32px;
+      letter-spacing: 3px;
       margin-top: 0;
-      border-bottom: 1px solid #333;
-      padding-bottom: 10px;
-      color: #ffffff;
+      color: #111;
+    }
+
+    .card p {
+      font-family: Arial, sans-serif;
+      font-size: 18px;
+      line-height: 1.7;
+      letter-spacing: 1px;
     }
 
     footer {
       text-align: center;
-      padding: 30px;
-      background: #050505;
-      color: #777;
-      font-size: 14px;
-      border-top: 1px solid #222;
+      padding: 35px;
+      background: #111;
+      color: #c49a3a;
+      font-family: Arial, sans-serif;
+      letter-spacing: 2px;
+      font-size: 13px;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 700px) {
       nav {
         flex-direction: column;
-        align-items: flex-start;
+        gap: 15px;
+      }
+
+      h1 {
+        font-size: 38px;
+        letter-spacing: 4px;
+      }
+
+      .tagline {
+        font-size: 16px;
+      }
+
+      .hero-box {
+        padding: 40px 20px;
       }
     }
   </style>
@@ -100,49 +160,60 @@
 <body>
 
   <nav>
-    <h2>Rogers Holdings</h2>
+    <h2>ROGERS HOLDINGS LLC</h2>
     <div>
       <a href="#">Home</a>
-      <a href="#">About</a>
-      <a href="#">Contact</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
     </div>
   </nav>
 
-  <header>
-    <<img src="Profile Logo.png" class="logo" alt="Rogers Holdings Logo"
+  <div class="hero">
+    <div class="hero-box">
 
-    <h1>Rogers Holdings</h1>
-    <p class="subtitle">
-      Building strong businesses with purpose, vision, and long-term growth.
-    </p>
-  </header>
+      <!-- This uses your uploaded brand image -->
+      <img src="brand-card.jpeg" alt="Rogers Holdings LLC" class="rh-logo">
 
-  <section>
+      <h1>BUILD TRUST.</h1>
+      <h1 class="gold">THEN SCALE.</h1>
+
+      <div class="divider"></div>
+
+      <p class="tagline">
+        Strong businesses are not built on noise. They are built on credibility,
+        relationships, and repeatable execution.
+      </p>
+
+    </div>
+  </div>
+
+  <section id="about">
     <div class="card">
-      <h2>About Us</h2>
+      <h2>ABOUT US</h2>
       <p>
-        Rogers Holdings is a family-owned holding company focused on building,
-        acquiring, and developing businesses with a long-term mindset.
+        Rogers Holdings LLC is a family-owned holding company focused on building,
+        developing, and managing business ventures with a long-term mindset.
       </p>
     </div>
 
     <div class="card">
-      <h2>Our Focus</h2>
+      <h2>OUR FOCUS</h2>
       <p>
-        We are actively developing ventures in entertainment, family recreation,
-        and community-centered businesses, with a current emphasis on a premier
-        skating rink experience.
+        Our current focus is developing opportunities in entertainment, family recreation,
+        and community-centered businesses.
       </p>
     </div>
 
-    <div class="card">
-      <h2>Contact</h2>
-      <p>Email: yourbusiness@email.com</p>
+    <div class="card" id="contact">
+      <h2>CONTACT</h2>
+      <p>
+        Email: yourbusiness@email.com
+      </p>
     </div>
   </section>
 
   <footer>
-    © 2026 Rogers Holdings. All rights reserved.
+    © 2026 ROGERS HOLDINGS LLC. ALL RIGHTS RESERVED.
   </footer>
 
 </body>
