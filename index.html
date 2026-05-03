@@ -13,90 +13,53 @@
       color: #111;
     }
 
+    /* HEADER */
     nav {
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       align-items: center;
-      padding: 22px 8%;
+      padding: 25px 0;
       background: #ffffff;
       border-bottom: 2px solid #c49a3a;
     }
 
     nav h2 {
-      margin: 0;
+      margin: 0 0 10px 0;
       letter-spacing: 4px;
       font-size: 18px;
-      color: #111;
+    }
+
+    nav div {
+      display: flex;
+      gap: 25px;
     }
 
     nav a {
       color: #111;
       text-decoration: none;
-      margin-left: 25px;
       font-family: Arial, sans-serif;
       font-size: 13px;
       letter-spacing: 2px;
       text-transform: uppercase;
     }
 
+    /* HERO IMAGE (MAIN PIECE) */
     .hero {
-      min-height: 90vh;
       display: flex;
-      align-items: center;
       justify-content: center;
-      padding: 40px 20px;
-      background:
-        linear-gradient(rgba(255,255,255,0.88), rgba(255,255,255,0.88)),
-        url("brand-card.jpeg");
-      background-size: cover;
-      background-position: center;
+      align-items: center;
+      padding: 60px 20px;
+      background: #f8f6f1;
     }
 
-    .hero-box {
-      max-width: 950px;
+    .hero img {
+      max-width: 900px;
       width: 100%;
-      text-align: center;
-      padding: 60px 30px;
       border: 4px solid #c49a3a;
-      background: rgba(255,255,255,0.82);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
     }
 
-    .rh-logo {
-      width: 150px;
-      margin-bottom: 30px;
-      border: 3px solid #c49a3a;
-      padding: 20px;
-      background: white;
-    }
-
-    h1 {
-      font-size: 64px;
-      margin: 0;
-      letter-spacing: 8px;
-      font-weight: 500;
-      color: #111;
-    }
-
-    .gold {
-      color: #c49a3a;
-    }
-
-    .tagline {
-      font-family: Arial, sans-serif;
-      font-size: 20px;
-      line-height: 1.8;
-      letter-spacing: 2px;
-      max-width: 750px;
-      margin: 35px auto 0;
-    }
-
-    .divider {
-      width: 180px;
-      height: 2px;
-      background: #c49a3a;
-      margin: 35px auto;
-    }
-
+    /* CONTENT */
     section {
       padding: 70px 8%;
       background: #ffffff;
@@ -115,7 +78,6 @@
       font-size: 32px;
       letter-spacing: 3px;
       margin-top: 0;
-      color: #111;
     }
 
     .card p {
@@ -136,22 +98,8 @@
     }
 
     @media (max-width: 700px) {
-      nav {
-        flex-direction: column;
-        gap: 15px;
-      }
-
-      h1 {
-        font-size: 38px;
-        letter-spacing: 4px;
-      }
-
-      .tagline {
-        font-size: 16px;
-      }
-
-      .hero-box {
-        padding: 40px 20px;
+      .hero img {
+        max-width: 100%;
       }
     }
   </style>
@@ -168,25 +116,12 @@
     </div>
   </nav>
 
+  <!-- MAIN IMAGE -->
   <div class="hero">
-    <div class="hero-box">
-
-      <!-- This uses your uploaded brand image -->
-      <img src="brand-card.jpeg" alt="Rogers Holdings LLC" class="rh-logo">
-
-      <h1>BUILD TRUST.</h1>
-      <h1 class="gold">THEN SCALE.</h1>
-
-      <div class="divider"></div>
-
-      <p class="tagline">
-        Strong businesses are not built on noise. They are built on credibility,
-        relationships, and repeatable execution.
-      </p>
-
-    </div>
+    <img src="COVER 2.PNG" alt="Rogers Holdings Cover">
   </div>
 
+  <!-- CONTENT -->
   <section id="about">
     <div class="card">
       <h2>ABOUT US</h2>
@@ -206,9 +141,7 @@
 
     <div class="card" id="contact">
       <h2>CONTACT</h2>
-      <p>
-        Email: yourbusiness@email.com
-      </p>
+      <p>Email: yourbusiness@email.com</p>
     </div>
   </section>
 
