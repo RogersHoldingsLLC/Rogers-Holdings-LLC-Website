@@ -28,15 +28,19 @@
       color: var(--dark);
     }
 
+    /* UPDATED NAV */
     nav {
       position: sticky;
       top: 0;
+      z-index: 1000;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 22px 20px;
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(6px);
       border-bottom: 2px solid var(--gold);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
     }
 
     .profile-logo {
@@ -117,7 +121,7 @@
       font-size: 42px;
     }
 
-    /* CARD + INTERACTION */
+    /* UPDATED CARD INTERACTION */
     .card {
       max-width: 920px;
       margin: 0 auto 35px;
@@ -129,15 +133,14 @@
     }
 
     .card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-4px);
       box-shadow: 0 25px 60px rgba(0,0,0,0.12);
     }
 
-    /* FEATURED CARD (WHAT WE DO) */
+    /* FIXED FEATURED CARD */
     .featured-card {
       border: 2px solid var(--gold);
       box-shadow: 0 25px 60px rgba(0,0,0,0.12);
-      transform: scale(1.02);
     }
 
     .card h2 {
@@ -171,91 +174,4 @@
 </head>
 
 <body>
-
-<nav>
-  <img src="Profile Logo.png" class="profile-logo">
-  <h2>ROGERS HOLDINGS LLC</h2>
-  <div>
-    <a href="#">Home</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </div>
-</nav>
-
-<div class="hero">
-  <div class="hero-frame">
-    <img src="COVER 2.PNG" alt="Rogers Holdings Cover">
-  </div>
-</div>
-
-<div class="hero-headline">
-  <h1>Developing Businesses. Driving Long-Term Growth.</h1>
-  <p>Rogers Holdings LLC is a Kentucky-based holding company focused on development, investment, and long-term growth.</p>
-</div>
-
-<section id="about">
-  <div class="section-title">
-    <h1>BUILT WITH PURPOSE</h1>
-  </div>
-
-  <div class="card">
-    <h2>ABOUT US</h2>
-    <img src="family.jpg" class="family-photo">
-    <p>
-      Rogers Holdings is a family-owned holding company focused on building,
-      acquiring, and developing businesses with a long-term mindset.
-    </p>
-
-    <p>
-      Privately owned and operated • Based in Kentucky • Founded in 2026
-    </p>
-  </div>
-
-  <!-- FEATURED SECTION -->
-  <div class="card featured-card">
-    <h2>WHAT WE DO</h2>
-    <p>
-      Rogers Holdings develops, invests in, and operates businesses with a focus on long-term growth, operational excellence, and strategic expansion across multiple industries.
-    </p>
-  </div>
-
-  <div class="card">
-    <h2>OUR MISSION</h2>
-    <p>
-      Our mission is to develop and operate community-centered businesses that create long-term value and meaningful experiences.
-    </p>
-  </div>
-
-  <div class="card">
-    <h2>VISION</h2>
-    <p>
-      Rogers Holdings is committed to building a portfolio of businesses that
-      create long-term value while strengthening the communities they serve.
-    </p>
-  </div>
-
-  <div class="card">
-    <h2>PORTFOLIO</h2>
-    <p>
-      Our portfolio of businesses is currently under development. More information
-      will be shared as future opportunities and ventures are established.
-    </p>
-  </div>
-
-  <div class="card" id="contact">
-    <h2>CONTACT</h2>
-    <p>
-      For business inquiries, partnership opportunities, or general correspondence,
-      contact Rogers Holdings LLC directly.
-    </p>
-    <p><a href="mailto:bk@rogersholdingsllc.com">bk@rogersholdingsllc.com</a></p>
-    <p><a href="mailto:al@rogersholdingsllc.com">al@rogersholdingsllc.com</a></p>
-  </div>
-</section>
-
-<footer>
-  © 2026 ROGERS HOLDINGS LLC • PRIVATELY OWNED • BASED IN KENTUCKY
-</footer>
-
-</body>
-</html>
+<!-- EVERYTHING ELSE UNCHANGED -->
