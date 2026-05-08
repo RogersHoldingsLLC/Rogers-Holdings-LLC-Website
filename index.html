@@ -2,387 +2,1185 @@
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-MK4TVD3CYT"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MK4TVD3CYT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MK4TVD3CYT');
+  </script>
 
-  gtag('config', 'G-MK4TVD3CYT');
-</script>  <meta charset="UTF-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Rogers Holdings LLC | Business Development & Investments in Kentucky</title>
 
-  <meta name="description" content="Rogers Holdings LLC is a Kentucky-based holding company focused on business development, investments, and long-term growth across multiple industries.">
+  <meta name="description" content="Rogers Holdings LLC is a Kentucky-based holding company focused on business development, investments, private ownership, and long-term growth across multiple industries.">
   <meta name="keywords" content="Rogers Holdings LLC, Kentucky holding company, business development Kentucky, investments, Mount Sterling KY business">
   <meta name="author" content="Rogers Holdings LLC">
+  <meta name="robots" content="index, follow">
 
-  <link rel="icon" type="image/png" href="Profile Logo.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Rogers Holdings LLC">
+  <meta property="og:description" content="A Kentucky-based holding company focused on development, investment, and long-term growth.">
+  <meta property="og:url" content="https://rogersholdingsllc.com/">
+  <meta property="og:image" content="https://rogersholdingsllc.com/brand-card.jpeg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Rogers Holdings LLC">
+  <meta name="twitter:description" content="A Kentucky-based holding company focused on development, investment, and long-term growth.">
+  <meta name="twitter:image" content="https://rogersholdingsllc.com/brand-card.jpeg">
+
+  <link rel="canonical" href="https://rogersholdingsllc.com/">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="alternate icon" type="image/png" href="Profile Logo.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Rogers Holdings LLC",
+      "url": "https://rogersholdingsllc.com/",
+      "logo": "https://rogersholdingsllc.com/Profile%20Logo.png",
+      "email": "bk@rogersholdingsllc.com",
+      "foundingDate": "2026",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "KY",
+        "addressCountry": "US"
+      }
+    }
+  </script>
 
   <style>
     :root {
-      --gold: #c49a3a;
-      --dark: #111111;
-      --cream: #f8f6f1;
+      --gold: #b88728;
+      --gold-dark: #755515;
+      --ink: #141414;
+      --charcoal: #23211d;
+      --cream: #f6f1e8;
+      --paper: #fffdf8;
       --white: #ffffff;
-      --soft: #fdfbf7;
+      --sage: #687568;
+      --mist: #eef2ed;
+      --line: rgba(184, 135, 40, 0.35);
+      --shadow: 0 22px 60px rgba(20, 20, 20, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
       margin: 0;
-      font-family: Georgia, 'Times New Roman', serif;
+      font-family: Arial, Helvetica, sans-serif;
       background: var(--cream);
-      color: var(--dark);
+      color: var(--ink);
     }
 
-    nav {
+    img {
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .site-nav {
       position: sticky;
       top: 0;
-      z-index: 9999;
+      z-index: 20;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      padding: 22px 20px;
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(6px);
-      border-bottom: 2px solid var(--gold);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+      justify-content: space-between;
+      gap: 22px;
+      padding: 14px 6vw;
+      background: rgba(255, 253, 248, 0.95);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 24px rgba(20, 20, 20, 0.06);
+    }
+
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      min-width: 220px;
     }
 
     .profile-logo {
-      width: 92px;
-      margin-bottom: 12px;
+      width: 58px;
+      height: 58px;
+      object-fit: contain;
+      flex: 0 0 auto;
     }
 
-    nav h2 {
-      margin: 0 0 12px 0;
-      letter-spacing: 5px;
-      font-size: 18px;
+    .brand-name {
+      display: block;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 17px;
+      letter-spacing: 3px;
+      line-height: 1.15;
+      text-transform: uppercase;
     }
 
-    nav div {
-      display: flex;
-      gap: 28px;
-    }
-
-    nav a {
-      text-decoration: none;
-      font-size: 12px;
+    .brand-location {
+      display: block;
+      margin-top: 4px;
+      color: var(--gold-dark);
+      font-size: 11px;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: var(--dark);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 36px;
+      padding: 0 12px;
+      border: 1px solid rgba(184, 135, 40, 0.18);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.34);
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-dark);
+    }
+
+    .nav-links .inquiry-link {
+      border: 1px solid var(--gold);
+      background: var(--ink);
+      color: var(--white);
     }
 
     .hero {
+      display: grid;
+      background: var(--charcoal);
+      color: var(--white);
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: minmax(0, 0.82fr) minmax(260px, 0.38fr);
+      gap: 34px;
+      align-items: end;
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      padding: 34px 6vw 40px;
+    }
+
+    .hero-media {
       display: flex;
+      align-items: center;
       justify-content: center;
-      padding: 75px 20px;
-      background: linear-gradient(180deg, #fdfbf7, #f8f6f1);
+      padding: 22px 6vw;
+      background: linear-gradient(180deg, #fffdf8, #f6f1e8);
+      border-bottom: 1px solid var(--line);
     }
 
-    .hero-frame {
-      max-width: 980px;
-      width: 100%;
-      padding: 18px;
-      border: 1px solid rgba(196,154,58,0.7);
-      background: rgba(255,255,255,0.65);
+    .hero-media img {
+      display: block;
+      width: min(1000px, 100%);
+      aspect-ratio: 1983 / 793;
+      object-fit: cover;
+      border: 1px solid var(--line);
+      box-shadow: 0 22px 50px rgba(20, 20, 20, 0.13);
     }
 
-    .hero img {
-      width: 100%;
-      border: 4px solid var(--gold);
+    .mobile-brand-card {
+      display: none;
     }
 
-    .hero-headline {
-      text-align: center;
-      padding: 50px 20px 20px;
+    .eyebrow {
+      margin: 0 0 18px;
+      color: #ead3a1;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
     }
 
-    .hero-headline h1 {
-      font-size: 48px;
-      letter-spacing: 4px;
-      margin-bottom: 10px;
+    .hero h1 {
+      max-width: 700px;
+      margin: 0;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(36px, 4vw, 56px);
+      font-weight: 500;
+      line-height: 1.04;
+    }
+
+    .hero p {
+      max-width: 620px;
+      margin: 18px 0 0;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 17px;
+      line-height: 1.62;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: stretch;
+      justify-content: flex-end;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border: 1px solid var(--gold);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+    }
+
+    .button.primary {
+      background: var(--gold);
+      color: var(--ink);
+    }
+
+    .button.secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--white);
+    }
+
+    .button:hover,
+    .contact-card:hover,
+    .tile:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 38px rgba(20, 20, 20, 0.12);
+    }
+
+    .button,
+    .contact-card,
+    .tile {
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .quick-facts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid rgba(255, 255, 255, 0.28);
+      background: rgba(20, 20, 20, 0.72);
+      color: var(--white);
+    }
+
+    .fact {
+      padding: 18px 6vw;
+      border-right: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .fact:last-child {
+      border-right: 0;
+    }
+
+    .fact strong {
+      display: block;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 22px;
       font-weight: 500;
     }
 
-    .hero-headline p {
-      font-family: Arial, sans-serif;
-      font-size: 16px;
-      max-width: 600px;
-      margin: 0 auto;
-      line-height: 1.6;
+    .fact span {
+      display: block;
+      margin-top: 8px;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 12px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
     }
 
     section {
-      padding: 100px 8%;
-      background: var(--white);
+      padding: 92px 6vw;
+      scroll-margin-top: 140px;
     }
 
-    .section-title {
-      text-align: center;
-      margin-bottom: 45px;
-    }
-
-    .section-title h1 {
-      font-size: 42px;
-    }
-
-    .card {
-      position: relative;
-      z-index: 1;
-      max-width: 920px;
-      margin: 0 auto 35px;
-      padding: 45px;
-      border: 1px solid rgba(196,154,58,0.85);
-      text-align: center;
-      background: linear-gradient(180deg, #ffffff, var(--soft));
-      transition: all 0.25s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 25px 60px rgba(0,0,0,0.12);
-    }
-
-    .featured-card {
-      border: 2px solid var(--gold);
-      box-shadow: 0 25px 60px rgba(0,0,0,0.12);
-    }
-
-    .card h2 {
-      font-size: 28px;
-      letter-spacing: 3px;
-    }
-
-    .card p {
-      font-family: Arial, sans-serif;
-      line-height: 1.7;
-      max-width: 700px;
+    .section-inner {
+      width: min(1120px, 100%);
       margin: 0 auto;
     }
 
+    .section-heading {
+      max-width: 760px;
+      margin-bottom: 42px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(34px, 5vw, 56px);
+      font-weight: 500;
+      line-height: 1.05;
+    }
+
+    .section-heading p {
+      margin: 18px 0 0;
+      color: #4e4a42;
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .about {
+      background: var(--paper);
+    }
+
+    .profile-section {
+      background: var(--paper);
+      border-bottom: 1px solid rgba(184, 135, 40, 0.18);
+    }
+
+    .profile-panel {
+      display: grid;
+      grid-template-columns: minmax(260px, 0.7fr) minmax(420px, 1.3fr);
+      gap: 46px;
+      align-items: start;
+      padding: 42px;
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, var(--white), var(--paper));
+      box-shadow: 0 18px 44px rgba(20, 20, 20, 0.08);
+    }
+
+    .profile-panel h2 {
+      margin: 0;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(34px, 4vw, 50px);
+      font-weight: 500;
+      line-height: 1.05;
+    }
+
+    .profile-panel .eyebrow,
+    .contact .eyebrow {
+      color: var(--gold-dark);
+    }
+
+    .profile-panel > div > p {
+      margin: 18px 0 0;
+      color: #4e4a42;
+      line-height: 1.7;
+    }
+
+    .profile-list {
+      display: grid;
+      gap: 0;
+      margin: 0;
+    }
+
+    .profile-row {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 22px;
+      padding: 18px 0;
+      border-top: 1px solid rgba(184, 135, 40, 0.22);
+    }
+
+    .profile-row:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .profile-row dt {
+      color: var(--gold-dark);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .profile-row dd {
+      margin: 0;
+      color: #302d28;
+      line-height: 1.62;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(260px, 0.82fr) minmax(320px, 1.18fr);
+      gap: 54px;
+      align-items: center;
+    }
+
     .family-photo {
-      max-width: 400px;
-      margin: 20px auto;
       display: block;
-      border-radius: 10px;
+      width: 100%;
+      max-height: 620px;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: center;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .about-copy p {
+      color: #36332e;
+      font-size: 18px;
+      line-height: 1.75;
+    }
+
+    .signature-line {
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      color: var(--gold-dark);
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .focus {
+      background: var(--cream);
+    }
+
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .tile {
+      min-height: 218px;
+      padding: 30px;
+      border: 1px solid var(--line);
+      background: var(--white);
+    }
+
+    .tile-number {
+      display: block;
+      color: var(--gold-dark);
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 28px;
+    }
+
+    .tile h3 {
+      margin: 22px 0 12px;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 25px;
+      font-weight: 500;
+      line-height: 1.15;
+    }
+
+    .tile p {
+      margin: 0;
+      color: #4e4a42;
+      line-height: 1.65;
+    }
+
+    .portfolio {
+      background: var(--mist);
+    }
+
+    .portfolio-layout {
+      display: grid;
+      grid-template-columns: minmax(220px, 0.55fr) minmax(420px, 1.45fr);
+      gap: 42px;
+      align-items: center;
+    }
+
+    .brand-panel {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 260px;
+      padding: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(184, 135, 40, 0.5);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(246, 241, 232, 0.84)),
+        radial-gradient(circle at 22% 18%, rgba(184, 135, 40, 0.1), transparent 30%),
+        radial-gradient(circle at 80% 76%, rgba(104, 117, 104, 0.12), transparent 28%);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .brand-panel::before,
+    .brand-panel::after {
+      position: absolute;
+      content: "";
+      width: 220px;
+      height: 220px;
+      border: 1px solid rgba(184, 135, 40, 0.34);
+      transform: rotate(45deg);
+    }
+
+    .brand-panel::before {
+      top: -136px;
+      right: -136px;
+    }
+
+    .brand-panel::after {
+      bottom: -136px;
+      left: -136px;
+    }
+
+    .brand-panel-mark {
+      position: relative;
+      z-index: 1;
+      width: clamp(132px, 16vw, 180px);
+      height: clamp(132px, 16vw, 180px);
+      padding: clamp(22px, 3vw, 34px);
+      border: 1px solid var(--gold);
+      background: var(--white);
+      object-fit: contain;
+      box-shadow: 0 18px 40px rgba(20, 20, 20, 0.08);
+    }
+
+    .criteria-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .criteria-item {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 18px 0;
+      border-top: 1px solid rgba(104, 117, 104, 0.28);
+    }
+
+    .criteria-item span {
+      color: var(--sage);
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 22px;
+    }
+
+    .criteria-item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    .criteria-item p {
+      margin: 0;
+      color: #3f463f;
+      line-height: 1.6;
+    }
+
+    .contact {
+      background: var(--paper);
+    }
+
+    .contact-panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 38px;
+      align-items: center;
+      padding: 44px;
+      border: 1px solid var(--gold);
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .contact-panel h2 {
+      margin: 0;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 500;
+      line-height: 1.1;
+    }
+
+    .contact-panel p {
+      color: #4e4a42;
+      line-height: 1.7;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .contact-card {
+      display: block;
+      padding: 18px;
+      border: 1px solid var(--line);
+      text-decoration: none;
+      background: var(--paper);
+    }
+
+    .contact-card span {
+      display: block;
+      color: var(--gold-dark);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .contact-card strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 17px;
+      overflow-wrap: anywhere;
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 30;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--gold);
+      background: rgba(20, 20, 20, 0.92);
+      color: var(--white);
+      text-decoration: none;
+      box-shadow: 0 14px 34px rgba(20, 20, 20, 0.22);
+    }
+
+    .back-to-top span {
+      display: block;
+      transform: translateY(1px);
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .back-to-top:hover {
+      background: var(--gold);
+      color: var(--ink);
     }
 
     footer {
+      padding: 34px 6vw;
+      background: var(--ink);
+      color: #d8bd7e;
+      font-size: 12px;
+      letter-spacing: 1.8px;
       text-align: center;
-      padding: 42px;
-      background: var(--dark);
-      color: var(--gold);
-      font-size: 13px;
-      letter-spacing: 2px;
+      text-transform: uppercase;
     }
 
-    @media (max-width: 768px) {
-      nav {
-        padding: 16px 14px;
+    @media (max-width: 900px) {
+      .site-nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .hero-media {
+        padding: 26px 6vw;
+      }
+
+      .hero-actions {
+        justify-content: flex-start;
+      }
+
+      .quick-facts,
+      .profile-panel,
+      .about-grid,
+      .portfolio-layout,
+      .contact-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .focus-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-copy {
+        order: -1;
+      }
+
+      .fact {
+        border-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      }
+
+      .fact:last-child {
+        border-bottom: 0;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .site-nav {
+        padding: 12px 18px 14px;
       }
 
       .profile-logo {
-        width: 74px;
-        margin-bottom: 10px;
+        width: 48px;
+        height: 48px;
       }
 
-      nav h2 {
+      .brand-lockup {
+        min-width: 0;
+      }
+
+      .brand-name {
         font-size: 14px;
-        letter-spacing: 3px;
-        text-align: center;
+        letter-spacing: 2px;
       }
 
-      nav div {
-        gap: 18px;
-        flex-wrap: wrap;
+      .brand-location {
+        font-size: 10px;
+      }
+
+      .nav-links {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+      }
+
+      .nav-links a {
+        display: inline-flex;
+        align-items: center;
         justify-content: center;
+        min-height: 34px;
+        border: 1px solid rgba(184, 135, 40, 0.22);
+        color: var(--ink);
+        font-size: 9px;
+        letter-spacing: 1px;
+        background: rgba(255, 255, 255, 0.42);
       }
 
-      nav a {
+      .nav-links a[href="#portfolio"] {
+        display: none;
+      }
+
+      .inquiry-link {
+        padding: 0 10px;
+        border-color: var(--gold);
+        background: var(--ink);
+        color: var(--white);
+      }
+
+      .hero {
+        display: block;
+      }
+
+      .hero-content {
+        padding: 30px 18px 32px;
+      }
+
+      .hero-media {
+        padding: 18px;
+      }
+
+      .hero-media > img {
+        display: none;
+      }
+
+      .mobile-brand-card {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 100%;
+        min-height: 250px;
+        padding: 30px 20px 28px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        background:
+          linear-gradient(135deg, transparent 0 17%, rgba(184, 135, 40, 0.88) 17.2% 18.6%, transparent 18.8%),
+          linear-gradient(135deg, #151515 0 13%, #c39a3a 13.2% 15.4%, transparent 15.6%),
+          linear-gradient(315deg, transparent 0 17%, rgba(184, 135, 40, 0.88) 17.2% 18.6%, transparent 18.8%),
+          linear-gradient(315deg, #151515 0 13%, #c39a3a 13.2% 15.4%, transparent 15.6%),
+          radial-gradient(circle at 50% 48%, rgba(255, 255, 255, 0.86), rgba(255, 253, 248, 0.94) 58%, #f7f4ed 100%);
+        text-align: center;
+        box-shadow: 0 14px 32px rgba(20, 20, 20, 0.1);
+      }
+
+      .mobile-brand-card > * {
+        position: relative;
+        z-index: 2;
+      }
+
+      .mobile-brand-card .marble-veil {
+        position: absolute;
+        inset: 13px;
+        z-index: 1;
+        border: 0;
+        background:
+          linear-gradient(135deg, transparent 0 13%, rgba(184, 135, 40, 0.42) 13.2% 13.8%, transparent 14%),
+          linear-gradient(315deg, transparent 0 13%, rgba(184, 135, 40, 0.42) 13.2% 13.8%, transparent 14%);
+      }
+
+      .mobile-brand-card::before,
+      .mobile-brand-card::after {
+        position: absolute;
+        content: "";
+        z-index: 1;
+        width: 145px;
+        height: 2px;
+        background: var(--gold);
+      }
+
+      .mobile-brand-card::before {
+        top: 28px;
+        right: -34px;
+        transform: rotate(45deg);
+      }
+
+      .mobile-brand-card::after {
+        bottom: 28px;
+        left: -34px;
+        transform: rotate(45deg);
+      }
+
+      .mobile-brand-card img {
+        width: 82px;
+        height: 82px;
+        object-fit: contain;
+        margin-bottom: 20px;
+        filter: drop-shadow(0 4px 10px rgba(20, 20, 20, 0.08));
+      }
+
+      .mobile-brand-card strong {
+        display: block;
+        color: var(--ink);
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 26px;
+        font-weight: 500;
+        letter-spacing: 3px;
+        line-height: 1.18;
+        text-transform: uppercase;
+      }
+
+      .mobile-brand-card span {
+        display: block;
+        max-width: 250px;
+        margin-top: 13px;
+        margin-left: auto;
+        margin-right: auto;
+        color: var(--gold-dark);
+        font-size: 10px;
+        letter-spacing: 1.8px;
+        line-height: 1.6;
+        text-transform: uppercase;
+      }
+
+      .hero h1 {
+        font-size: 34px;
+        line-height: 1.08;
+      }
+
+      .hero p {
+        margin-top: 16px;
+        font-size: 15px;
+        line-height: 1.65;
+      }
+
+      .hero .eyebrow {
+        max-width: 310px;
+        margin-bottom: 14px;
+        font-size: 10px;
+        letter-spacing: 2px;
+        line-height: 1.7;
+      }
+
+      .hero-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-top: 26px;
+        max-width: 260px;
+      }
+
+      .hero-actions .button {
+        width: 100%;
+        min-height: 48px;
+        padding: 0 14px;
         font-size: 11px;
         letter-spacing: 1.5px;
       }
 
-      .hero {
-        padding: 42px 14px;
-      }
-
-      .hero-frame {
-        padding: 10px;
-      }
-
-      .hero img {
-        display: block;
-        border-width: 3px;
-      }
-
-      .hero-headline {
-        padding: 34px 18px 10px;
-      }
-
-      .hero-headline h1 {
-        font-size: 30px;
-        letter-spacing: 2px;
-        line-height: 1.2;
-      }
-
-      .hero-headline p {
-        font-size: 15px;
+      .family-photo {
+        max-height: 520px;
       }
 
       section {
-        padding: 60px 18px;
+        padding: 56px 18px;
+        scroll-margin-top: 180px;
       }
 
-      .section-title {
-        margin-bottom: 30px;
+      .section-heading {
+        margin-bottom: 28px;
       }
 
-      .section-title h1 {
-        font-size: 30px;
-        line-height: 1.2;
+      .profile-panel {
+        padding: 28px 22px;
+        gap: 28px;
       }
 
-      .card {
-        padding: 30px 20px;
-        margin-bottom: 26px;
+      .profile-row {
+        grid-template-columns: 1fr;
+        gap: 7px;
+        padding: 16px 0;
       }
 
-      .card h2 {
-        font-size: 22px;
-        letter-spacing: 2px;
-        line-height: 1.2;
-      }
-
-      .card p {
+      .profile-panel > div > p,
+      .profile-row dd {
         font-size: 15px;
       }
 
-      .family-photo {
-        width: 100%;
-        max-width: 320px;
-        height: auto;
+      .section-heading h2,
+      .contact-panel h2 {
+        font-size: 32px;
+        line-height: 1.12;
+      }
+
+      .section-heading p,
+      .about-copy p,
+      .contact-panel p {
+        font-size: 15px;
+        line-height: 1.72;
+      }
+
+      .tile {
+        min-height: 0;
+        padding: 24px;
+      }
+
+      .contact-panel {
+        padding: 28px 20px;
+      }
+
+      .brand-panel {
+        min-height: 220px;
+        padding: 24px;
+      }
+
+      .back-to-top {
+        right: 16px;
+        bottom: 22px;
+        width: 42px;
+        height: 42px;
       }
 
       footer {
-        padding: 34px 18px;
-        font-size: 11px;
-        line-height: 1.6;
-      }
-    }
-
-    @media (max-width: 420px) {
-      nav h2 {
-        font-size: 13px;
-        letter-spacing: 2px;
-      }
-
-      nav div {
-        gap: 14px;
-      }
-
-      .hero-headline h1 {
-        font-size: 26px;
-      }
-
-      .section-title h1 {
-        font-size: 26px;
-      }
-
-      .card {
-        padding: 26px 16px;
+        padding: 28px 18px;
+        line-height: 1.7;
       }
     }
   </style>
 </head>
 
 <body>
+  <nav class="site-nav" aria-label="Primary navigation">
+    <a href="#" class="brand-lockup" aria-label="Rogers Holdings LLC home">
+      <img src="Profile Logo.png" class="profile-logo" alt="Rogers Holdings LLC logo">
+      <span>
+        <span class="brand-name">Rogers Holdings LLC</span>
+        <span class="brand-location">Kentucky Based</span>
+      </span>
+    </a>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#about">About</a>
+      <a href="#focus">Focus</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#contact" class="inquiry-link">Inquiries</a>
+    </div>
+  </nav>
 
-<nav>
-  <img src="Profile Logo.png" class="profile-logo">
-  <h2>ROGERS HOLDINGS LLC</h2>
-  <div>
-    <a href="#">Home</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </div>
-</nav>
+  <main>
+    <header class="hero">
+      <div class="hero-media" aria-label="Rogers Holdings LLC cover image">
+        <img src="COVER 2.PNG" alt="Rogers Holdings LLC building and managing long-term value">
+        <div class="mobile-brand-card" aria-hidden="true">
+          <span class="marble-veil"></span>
+          <img src="Profile Logo.png" alt="">
+          <div>
+            <strong>Rogers Holdings LLC</strong>
+            <span>Building and managing long-term value</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-content">
+        <div>
+          <p class="eyebrow">Family-owned holding company</p>
+          <h1>Developing businesses. Driving long-term growth.</h1>
+          <p>Rogers Holdings LLC is a Kentucky-based holding company focused on development, investment, and long-term growth.</p>
+        </div>
+        <div class="hero-actions">
+          <a href="#contact" class="button primary">Start a Conversation</a>
+          <a href="#focus" class="button secondary">Explore Our Focus</a>
+        </div>
+      </div>
+    </header>
 
-<div class="hero">
-  <div class="hero-frame">
-    <img src="COVER 2.PNG" alt="Rogers Holdings Cover">
-  </div>
-</div>
+    <div class="quick-facts" aria-label="Company highlights">
+      <div class="fact">
+        <strong>2026</strong>
+        <span>Founded</span>
+      </div>
+      <div class="fact">
+        <strong>Family-Owned</strong>
+        <span>Privately operated</span>
+      </div>
+      <div class="fact">
+        <strong>Long-Term</strong>
+        <span>Growth mindset</span>
+      </div>
+    </div>
 
-<div class="hero-headline">
-  <h1>Developing Businesses. Driving Long-Term Growth.</h1>
-  <p>Rogers Holdings LLC is a Kentucky-based holding company focused on development, investment, and long-term growth.</p>
-</div>
+    <section class="profile-section" aria-labelledby="company-profile-title">
+      <div class="section-inner profile-panel">
+        <div>
+          <p class="eyebrow">Company profile</p>
+          <h2 id="company-profile-title">A private holding company built for steady growth.</h2>
+          <p>Rogers Holdings LLC is being built as a long-term platform for business development, investment, and operating opportunities.</p>
+        </div>
+        <dl class="profile-list">
+          <div class="profile-row">
+            <dt>Structure</dt>
+            <dd>Family-owned holding company with a private ownership model.</dd>
+          </div>
+          <div class="profile-row">
+            <dt>Base</dt>
+            <dd>Kentucky-based and focused on practical, relationship-driven growth.</dd>
+          </div>
+          <div class="profile-row">
+            <dt>Focus</dt>
+            <dd>Business development, investment, and operations across practical opportunities.</dd>
+          </div>
+          <div class="profile-row">
+            <dt>Status</dt>
+            <dd>Portfolio currently under development as opportunities and ventures are established.</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
 
-<section id="about">
-  <div class="section-title">
-    <h1>BUILT WITH PURPOSE</h1>
-  </div>
+    <section class="about" id="about">
+      <div class="section-inner about-grid">
+        <img src="family.jpg" class="family-photo" alt="The Rogers family">
+        <div class="about-copy">
+          <div class="section-heading">
+            <h2>Built with purpose.</h2>
+            <p>Rogers Holdings is family-owned and built around steady work, practical judgment, and responsibility to the people connected to each business.</p>
+          </div>
+          <p>We believe strong businesses are shaped by dependable service, clear values, and the willingness to keep improving the details that customers and communities feel every day.</p>
+          <p>As Rogers Holdings grows, the goal is to build a portfolio that reflects those standards instead of chasing growth for its own sake.</p>
+          <div class="signature-line">Privately owned and operated • Based in Kentucky • Founded in 2026</div>
+        </div>
+      </div>
+    </section>
 
-  <div class="card">
-    <h2>ABOUT US</h2>
-    <img src="family.jpg" class="family-photo">
-    <p>
-      Rogers Holdings is a family-owned holding company focused on building,
-      acquiring, and developing businesses with a long-term mindset.
-    </p>
+    <section class="focus" id="focus">
+      <div class="section-inner">
+        <div class="section-heading">
+          <h2>What we do.</h2>
+          <p>Our work falls into three practical lanes. Each one supports the same goal: build useful businesses that can operate well and grow responsibly.</p>
+        </div>
+        <div class="focus-grid">
+          <article class="tile">
+            <span class="tile-number">01</span>
+            <h3>Business Development</h3>
+            <p>Shaping early ideas, improving existing operations, and turning practical opportunities into organized businesses.</p>
+          </article>
+          <article class="tile">
+            <span class="tile-number">02</span>
+            <h3>Investment</h3>
+            <p>Looking at opportunities through fit, usefulness, risk, and the ability to create durable value.</p>
+          </article>
+          <article class="tile">
+            <span class="tile-number">03</span>
+            <h3>Operations</h3>
+            <p>Supporting the daily systems, customer experience, and decisions that make a business stronger over time.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-    <p>
-      Privately owned and operated • Based in Kentucky • Founded in 2026
-    </p>
-  </div>
+    <section class="portfolio" id="portfolio">
+      <div class="section-inner portfolio-layout">
+        <div class="brand-panel" aria-label="Rogers Holdings brand panel">
+          <img src="Profile Logo.png" class="brand-panel-mark" alt="Rogers Holdings LLC logo mark">
+        </div>
+        <div>
+          <div class="section-heading">
+            <h2>Portfolio.</h2>
+            <p>The portfolio is currently under development. This section will become the home for active ventures, operating companies, and future updates as they are established.</p>
+          </div>
+          <div class="criteria-list">
+            <div class="criteria-item">
+              <span>01</span>
+              <div>
+                <strong>Active ventures</strong>
+                <p>Future operating companies and projects will be listed here as they become ready to share publicly.</p>
+              </div>
+            </div>
+            <div class="criteria-item">
+              <span>02</span>
+              <div>
+                <strong>Company updates</strong>
+                <p>Milestones, launches, acquisitions, and major developments can be added as the portfolio grows.</p>
+              </div>
+            </div>
+            <div class="criteria-item">
+              <span>03</span>
+              <div>
+                <strong>Opportunity notes</strong>
+                <p>Areas of interest can be refined here once Rogers Holdings is ready to communicate them publicly.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <div class="card featured-card">
-    <h2>WHAT WE DO</h2>
-    <p>
-      Rogers Holdings develops, invests in, and operates businesses with a focus on long-term growth, operational excellence, and strategic expansion across multiple industries.
-    </p>
-  </div>
+    <section class="contact" id="contact">
+      <div class="section-inner contact-panel">
+        <div>
+          <p class="eyebrow">Business inquiries</p>
+          <h2>Partnerships, opportunities, and correspondence.</h2>
+          <p>For business inquiries, partnership opportunities, or general correspondence, contact Rogers Holdings LLC directly.</p>
+        </div>
+        <div class="contact-list">
+          <a href="mailto:bk@rogersholdingsllc.com" class="contact-card">
+            <span>Primary Contact</span>
+            <strong>bk@rogersholdingsllc.com</strong>
+          </a>
+          <a href="mailto:al@rogersholdingsllc.com" class="contact-card">
+            <span>Additional Contact</span>
+            <strong>al@rogersholdingsllc.com</strong>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-  <div class="card">
-    <h2>OUR MISSION</h2>
-    <p>
-      Our mission is to develop and operate community-centered businesses that create long-term value and meaningful experiences.
-    </p>
-  </div>
+  <a href="#" class="back-to-top" aria-label="Back to top">
+    <span aria-hidden="true">↑</span>
+  </a>
 
-  <div class="card">
-    <h2>VISION</h2>
-    <p>
-      Rogers Holdings is committed to building a portfolio of businesses that
-      create long-term value while strengthening the communities they serve.
-    </p>
-  </div>
-
-  <div class="card">
-    <h2>PORTFOLIO</h2>
-    <p>
-      Our portfolio of businesses is currently under development. More information
-      will be shared as future opportunities and ventures are established.
-    </p>
-  </div>
-
-  <div class="card" id="contact">
-    <h2>CONTACT</h2>
-    <p>
-      For business inquiries, partnership opportunities, or general correspondence,
-      contact Rogers Holdings LLC directly.
-    </p>
-    <p><a href="mailto:bk@rogersholdingsllc.com">bk@rogersholdingsllc.com</a></p>
-    <p><a href="mailto:al@rogersholdingsllc.com">al@rogersholdingsllc.com</a></p>
-  </div>
-</section>
-
-<footer>
-  © 2026 ROGERS HOLDINGS LLC • PRIVATELY OWNED • BASED IN KENTUCKY
-</footer>
-
+  <footer>
+    © 2026 Rogers Holdings LLC • Privately Owned • Based in Kentucky
+  </footer>
 </body>
 </html>
