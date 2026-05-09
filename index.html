@@ -66,6 +66,7 @@
       --mist: #eef2ed;
       --line: rgba(184, 135, 40, 0.35);
       --shadow: 0 22px 60px rgba(20, 20, 20, 0.12);
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     * {
@@ -211,17 +212,33 @@
       align-items: center;
       justify-content: center;
       min-height: 46px;
-      padding: 0 18px;
+      padding: 0 22px;
       border: 1px solid var(--gold);
+      position: relative;
+      overflow: hidden;
       text-decoration: none;
       font-size: 12px;
       letter-spacing: 1.8px;
       text-transform: uppercase;
     }
 
+    .button::after {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, transparent 0 36%, rgba(255, 255, 255, 0.26) 48%, transparent 60%);
+      content: "";
+      transform: translateX(-120%);
+      transition: transform 0.55s var(--ease);
+    }
+
+    .button:hover::after {
+      transform: translateX(120%);
+    }
+
     .button.primary {
-      background: var(--gold);
+      background: linear-gradient(135deg, #c8952f, var(--gold));
       color: var(--ink);
+      box-shadow: 0 14px 30px rgba(184, 135, 40, 0.18);
     }
 
     .button.secondary {
@@ -232,14 +249,14 @@
     .button:hover,
     .contact-card:hover,
     .tile:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 18px 38px rgba(20, 20, 20, 0.18);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 44px rgba(20, 20, 20, 0.2);
     }
 
     .button,
     .contact-card,
     .tile {
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      transition: transform 0.24s var(--ease), box-shadow 0.24s var(--ease), border-color 0.24s var(--ease), background 0.24s var(--ease);
     }
 
     section {
@@ -445,12 +462,23 @@
     }
 
     .services-note {
+      position: relative;
       padding: 28px;
       border: 1px solid rgba(184, 135, 40, 0.42);
       border-left: 3px solid var(--gold);
       background:
         linear-gradient(135deg, rgba(255, 253, 248, 0.96), rgba(246, 241, 232, 0.72));
       box-shadow: 0 16px 40px rgba(20, 20, 20, 0.07);
+    }
+
+    .services-note::after {
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      width: 58px;
+      height: 1px;
+      background: rgba(184, 135, 40, 0.7);
+      content: "";
     }
 
     .services-note p {
@@ -467,13 +495,48 @@
     }
 
     .service-item {
+      position: relative;
       min-height: 126px;
-      padding: 20px;
+      padding: 22px;
+      overflow: hidden;
       border: 1px solid rgba(184, 135, 40, 0.36);
-      background: rgba(255, 255, 255, 0.52);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.68), rgba(246, 241, 232, 0.38)),
+        rgba(255, 255, 255, 0.52);
+      box-shadow: 0 14px 34px rgba(20, 20, 20, 0.055);
+      transition: transform 0.24s var(--ease), box-shadow 0.24s var(--ease), border-color 0.24s var(--ease), background 0.24s var(--ease);
+    }
+
+    .service-item::before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 54px;
+      height: 54px;
+      border-top: 1px solid rgba(184, 135, 40, 0.62);
+      border-right: 1px solid rgba(184, 135, 40, 0.62);
+      content: "";
+      opacity: 0.56;
+      transition: width 0.24s var(--ease), height 0.24s var(--ease), opacity 0.24s var(--ease);
+    }
+
+    .service-item:hover {
+      transform: translateY(-5px);
+      border-color: rgba(184, 135, 40, 0.68);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(246, 241, 232, 0.5)),
+        rgba(255, 255, 255, 0.62);
+      box-shadow: 0 22px 44px rgba(20, 20, 20, 0.09);
+    }
+
+    .service-item:hover::before {
+      width: 72px;
+      height: 72px;
+      opacity: 0.86;
     }
 
     .service-item span {
+      position: relative;
       display: block;
       color: var(--gold-dark);
       font-size: 11px;
@@ -482,6 +545,7 @@
     }
 
     .service-item strong {
+      position: relative;
       display: block;
       margin-top: 14px;
       font-family: Georgia, 'Times New Roman', serif;
@@ -491,10 +555,35 @@
     }
 
     .portfolio {
+      overflow: hidden;
       background:
-        linear-gradient(135deg, rgba(31, 31, 31, 0.98), rgba(48, 47, 44, 0.96)),
+        linear-gradient(135deg, rgba(31, 31, 31, 0.98), rgba(48, 47, 44, 0.96) 62%, rgba(37, 36, 33, 0.98)),
         radial-gradient(circle at 12% 24%, rgba(184, 135, 40, 0.16), transparent 32%);
       color: var(--white);
+    }
+
+    .portfolio::before,
+    .portfolio::after {
+      position: absolute;
+      content: "";
+      pointer-events: none;
+    }
+
+    .portfolio::before {
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(210, 173, 89, 0.74), transparent);
+    }
+
+    .portfolio::after {
+      right: -140px;
+      bottom: 80px;
+      width: 420px;
+      height: 420px;
+      border: 1px solid rgba(184, 135, 40, 0.12);
+      transform: rotate(45deg);
     }
 
     .portfolio .section-heading h2 {
@@ -505,6 +594,10 @@
       color: rgba(255, 255, 255, 0.76);
     }
 
+    .portfolio .section-inner {
+      width: min(1500px, 88vw);
+    }
+
     .portfolio p {
       color: rgba(255, 255, 255, 0.76);
       line-height: 1.68;
@@ -512,26 +605,49 @@
 
     .portfolio-layout {
       display: grid;
-      grid-template-columns: minmax(340px, 0.95fr) minmax(420px, 1.05fr);
-      gap: 42px;
-      align-items: center;
+      grid-template-columns: minmax(430px, 0.95fr) minmax(520px, 1.05fr);
+      gap: clamp(42px, 5vw, 72px);
+      align-items: start;
+    }
+
+    .project-visual {
+      display: grid;
+      gap: 30px;
+      padding-top: 12px;
+    }
+
+    .project-brand-logo {
+      width: min(320px, 68%);
+      height: auto;
+      object-fit: contain;
+      justify-self: center;
+      filter: drop-shadow(0 14px 28px rgba(20, 20, 20, 0.16));
     }
 
     .project-preview {
       position: relative;
       padding: 12px;
       overflow: hidden;
-      border: 1px solid rgba(184, 135, 40, 0.5);
+      border: 1px solid rgba(184, 135, 40, 0.58);
       background:
         linear-gradient(135deg, rgba(255, 253, 248, 0.96), rgba(246, 241, 232, 0.82)),
         radial-gradient(circle at 22% 18%, rgba(184, 135, 40, 0.12), transparent 30%);
-      box-shadow: var(--shadow);
-      transition: transform 180ms ease, border-color 180ms ease;
+      box-shadow:
+        18px 18px 0 rgba(184, 135, 40, 0.08),
+        0 30px 70px rgba(0, 0, 0, 0.26);
+      transition: transform 0.28s var(--ease), border-color 0.28s var(--ease), box-shadow 0.28s var(--ease);
+    }
+
+    .project-visual .project-preview {
+      margin-top: 18px;
     }
 
     .project-preview:hover {
-      transform: translateY(-4px);
+      transform: translateY(-6px);
       border-color: rgba(210, 173, 89, 0.82);
+      box-shadow:
+        22px 22px 0 rgba(184, 135, 40, 0.1),
+        0 38px 80px rgba(0, 0, 0, 0.32);
     }
 
     .project-preview::before,
@@ -573,9 +689,10 @@
       left: 28px;
       bottom: 28px;
       z-index: 3;
-      padding: 10px 12px;
+      padding: 11px 14px;
       border: 1px solid rgba(184, 135, 40, 0.62);
-      background: rgba(31, 31, 31, 0.92);
+      background: rgba(31, 31, 31, 0.88);
+      backdrop-filter: blur(8px);
       color: var(--white);
       font-size: 10px;
       letter-spacing: 1.7px;
@@ -590,9 +707,33 @@
     }
 
     .project-meta-item {
-      padding: 14px;
-      border: 1px solid rgba(184, 135, 40, 0.3);
-      background: rgba(255, 255, 255, 0.04);
+      position: relative;
+      min-height: 94px;
+      padding: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(184, 135, 40, 0.34);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.025));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      transition: transform 0.24s var(--ease), border-color 0.24s var(--ease), background 0.24s var(--ease);
+    }
+
+    .project-meta-item::after {
+      position: absolute;
+      right: -28px;
+      bottom: -28px;
+      width: 84px;
+      height: 84px;
+      border: 1px solid rgba(184, 135, 40, 0.13);
+      content: "";
+      transform: rotate(45deg);
+    }
+
+    .project-meta-item:hover {
+      transform: translateY(-3px);
+      border-color: rgba(184, 135, 40, 0.56);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.078), rgba(255, 255, 255, 0.034));
     }
 
     .project-meta-item span {
@@ -623,18 +764,65 @@
     }
 
     .project-features li {
-      padding: 12px 14px;
+      padding: 13px 15px;
       border-left: 2px solid var(--gold);
-      background: rgba(255, 255, 255, 0.045);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
       color: rgba(255, 255, 255, 0.76);
       font-size: 14px;
       line-height: 1.45;
+      transition: transform 0.22s var(--ease), background 0.22s var(--ease), color 0.22s var(--ease);
+    }
+
+    .project-features li:hover {
+      transform: translateX(4px);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.082), rgba(255, 255, 255, 0.04));
+      color: rgba(255, 255, 255, 0.88);
     }
 
     .project-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
+    }
+
+    .portfolio-closing {
+      position: relative;
+      z-index: 1;
+      width: min(980px, 100%);
+      margin: 72px auto 0;
+      padding: 30px 34px;
+      border: 1px solid rgba(184, 135, 40, 0.32);
+      border-left: 3px solid var(--gold);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.025));
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.16);
+    }
+
+    .portfolio-closing span {
+      display: block;
+      color: #d2ad59;
+      font-size: 11px;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+    }
+
+    .portfolio-closing strong {
+      display: block;
+      margin-top: 10px;
+      color: var(--white);
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(24px, 3vw, 34px);
+      font-weight: 500;
+      line-height: 1.12;
+    }
+
+    .portfolio-closing p {
+      max-width: 760px;
+      margin: 14px 0 0;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 15.5px;
     }
 
     .criteria-list {
@@ -826,6 +1014,10 @@
       .portfolio-layout,
       .contact-panel {
         grid-template-columns: 1fr;
+      }
+
+      .portfolio .section-inner {
+        width: min(1120px, 100%);
       }
 
       .focus-grid {
@@ -1071,6 +1263,19 @@
         padding: 9px;
       }
 
+      .project-visual {
+        gap: 20px;
+        padding-top: 0;
+      }
+
+      .project-visual .project-preview {
+        margin-top: 4px;
+      }
+
+      .project-brand-logo {
+        width: min(250px, 74%);
+      }
+
       .project-preview::before {
         top: 9px;
         right: 9px;
@@ -1092,6 +1297,16 @@
       .project-actions .button {
         width: 100%;
         justify-content: center;
+      }
+
+      .portfolio-closing {
+        margin-top: 44px;
+        padding: 24px 20px;
+      }
+
+      .portfolio-closing p {
+        font-size: 14.5px;
+        line-height: 1.62;
       }
 
       .criteria-item:nth-child(2),
@@ -1167,6 +1382,17 @@
       footer {
         padding: 28px 18px;
         line-height: 1.7;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
       }
     }
   </style>
@@ -1296,10 +1522,13 @@
 
     <section class="portfolio" id="portfolio">
       <div class="section-inner portfolio-layout">
-        <a class="project-preview" href="https://www.eastlandfirstchurchofgod.com" target="_blank" rel="noopener" aria-label="View the Eastland First Church of God website project">
-          <img src="eastland-project-preview.png" alt="Eastland First Church of God website homepage preview for a digital credibility project in Mount Sterling Kentucky">
-          <span class="project-label">Live project preview</span>
-        </a>
+        <div class="project-visual">
+          <img src="eastland-project-logo.jpg" class="project-brand-logo" alt="Eastland First Church of God logo">
+          <a class="project-preview" href="https://www.eastlandfirstchurchofgod.com" target="_blank" rel="noopener" aria-label="View the Eastland First Church of God website project">
+            <img src="eastland-project-preview.png" alt="Eastland First Church of God website homepage preview for a digital credibility project in Mount Sterling Kentucky">
+            <span class="project-label">Desktop project preview</span>
+          </a>
+        </div>
         <div class="project-content">
           <div class="section-heading">
             <p class="eyebrow">Featured Project</p>
@@ -1339,6 +1568,11 @@
             <a href="https://www.eastlandfirstchurchofgod.com" class="button primary" target="_blank" rel="noopener">View Project</a>
           </div>
         </div>
+      </div>
+      <div class="portfolio-closing">
+        <span>Portfolio development</span>
+        <strong>Additional projects, ventures, and operational developments will be added as they become available.</strong>
+        <p>Rogers Holdings LLC continues to expand its portfolio through digital optimization, business development, operational improvement, and long-term growth initiatives.</p>
       </div>
     </section>
 
