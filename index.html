@@ -242,8 +242,13 @@
     }
 
     section {
+      position: relative;
       padding: 92px 6vw;
       scroll-margin-top: 140px;
+    }
+
+    section + section {
+      border-top: 1px solid rgba(184, 135, 40, 0.24);
     }
 
     .section-inner {
@@ -272,7 +277,9 @@
     }
 
     .about {
-      background: var(--paper);
+      background:
+        linear-gradient(90deg, rgba(184, 135, 40, 0.08), transparent 22%),
+        var(--paper);
     }
 
     .contact .eyebrow {
@@ -293,8 +300,15 @@
       aspect-ratio: 4 / 5;
       object-fit: cover;
       object-position: center;
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
+      border: 1px solid rgba(184, 135, 40, 0.58);
+      box-shadow:
+        16px 16px 0 rgba(184, 135, 40, 0.12),
+        var(--shadow);
+    }
+
+    .about-copy {
+      padding-left: 26px;
+      border-left: 3px solid var(--gold);
     }
 
     .about-copy p {
@@ -314,7 +328,9 @@
     }
 
     .focus {
-      background: var(--cream);
+      background:
+        linear-gradient(180deg, rgba(255, 253, 248, 0.72), rgba(246, 241, 232, 0.96)),
+        repeating-linear-gradient(90deg, rgba(184, 135, 40, 0.08) 0 1px, transparent 1px 86px);
     }
 
     .focus-grid {
@@ -386,8 +402,33 @@
       line-height: 1.65;
     }
 
+    .tile:nth-child(2) {
+      transform: translateY(18px);
+    }
+
+    .tile:nth-child(2):hover {
+      transform: translateY(14px);
+    }
+
+    .tile:nth-child(3) {
+      background:
+        linear-gradient(135deg, rgba(20, 20, 20, 0.98), rgba(35, 33, 29, 0.98)),
+        radial-gradient(circle at 0% 0%, rgba(184, 135, 40, 0.16), transparent 36%);
+    }
+
     .portfolio {
-      background: var(--mist);
+      background:
+        linear-gradient(135deg, rgba(20, 20, 20, 0.98), rgba(35, 33, 29, 0.96)),
+        radial-gradient(circle at 12% 24%, rgba(184, 135, 40, 0.16), transparent 32%);
+      color: var(--white);
+    }
+
+    .portfolio .section-heading h2 {
+      color: var(--white);
+    }
+
+    .portfolio .section-heading p {
+      color: rgba(255, 255, 255, 0.76);
     }
 
     .portfolio-layout {
@@ -447,7 +488,7 @@
 
     .criteria-list {
       display: grid;
-      gap: 14px;
+      gap: 10px;
       margin-top: 28px;
     }
 
@@ -456,12 +497,14 @@
       grid-template-columns: 42px 1fr;
       gap: 16px;
       align-items: start;
-      padding: 18px 0;
-      border-top: 1px solid rgba(104, 117, 104, 0.28);
+      padding: 18px;
+      border: 1px solid rgba(184, 135, 40, 0.28);
+      border-left: 3px solid var(--gold);
+      background: rgba(255, 255, 255, 0.035);
     }
 
     .criteria-item span {
-      color: var(--sage);
+      color: #d2ad59;
       font-family: Georgia, 'Times New Roman', serif;
       font-size: 22px;
     }
@@ -472,27 +515,54 @@
       font-family: Georgia, 'Times New Roman', serif;
       font-size: 20px;
       font-weight: 500;
+      color: var(--white);
     }
 
     .criteria-item p {
       margin: 0;
-      color: #3f463f;
+      color: rgba(255, 255, 255, 0.72);
       line-height: 1.6;
     }
 
     .contact {
-      background: var(--paper);
+      background:
+        linear-gradient(180deg, var(--cream), var(--paper));
     }
 
     .contact-panel {
+      position: relative;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 38px;
       align-items: center;
       padding: 44px;
       border: 1px solid var(--gold);
-      background: var(--white);
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(35, 33, 29, 0.98), rgba(20, 20, 20, 0.98)),
+        radial-gradient(circle at 100% 0%, rgba(184, 135, 40, 0.16), transparent 34%);
       box-shadow: var(--shadow);
+    }
+
+    .contact-panel::before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 120px;
+      height: 120px;
+      border-top: 2px solid var(--gold);
+      border-right: 2px solid var(--gold);
+      content: "";
+      opacity: 0.72;
+    }
+
+    .contact-panel > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-panel .eyebrow {
+      color: #d2ad59;
     }
 
     .contact-panel h2 {
@@ -501,10 +571,11 @@
       font-size: clamp(32px, 4vw, 48px);
       font-weight: 500;
       line-height: 1.1;
+      color: var(--white);
     }
 
     .contact-panel p {
-      color: #4e4a42;
+      color: rgba(255, 255, 255, 0.76);
       line-height: 1.7;
     }
 
@@ -599,6 +670,14 @@
 
       .focus-grid {
         grid-template-columns: 1fr;
+      }
+
+      .tile:nth-child(2) {
+        transform: none;
+      }
+
+      .tile:nth-child(2):hover {
+        transform: translateY(-2px);
       }
 
       .about-copy {
@@ -772,6 +851,13 @@
 
       .family-photo {
         max-height: 520px;
+        box-shadow:
+          10px 10px 0 rgba(184, 135, 40, 0.12),
+          var(--shadow);
+      }
+
+      .about-copy {
+        padding-left: 16px;
       }
 
       section {
@@ -823,7 +909,7 @@
       .criteria-item {
         grid-template-columns: 34px 1fr;
         gap: 12px;
-        padding: 16px 0;
+        padding: 16px;
       }
 
       .criteria-item span {
@@ -911,10 +997,10 @@
         <div class="about-copy">
           <div class="section-heading">
             <h2>Built with purpose.</h2>
-            <p>Rogers Holdings LLC is family-owned and built around steady work, practical judgment, and respect for the people connected to each business.</p>
+            <p>Rogers Holdings LLC is a privately held, family-owned company established to build, own, and support businesses with long-term value.</p>
           </div>
-          <p>We believe good businesses are shaped by dependable service, clear standards, and consistent attention to the details customers feel every day.</p>
-          <p>As the company grows, the goal is simple: build a portfolio that reflects those standards in the real world.</p>
+          <p>Our approach is grounded in disciplined decision-making, dependable execution, and respect for the customers, employees, partners, and communities connected to each venture.</p>
+          <p>As the company grows, our focus is to develop a portfolio of practical businesses that are useful, well-managed, and built to endure.</p>
           <div class="signature-line">Privately owned and operated • Based in Kentucky • Founded in 2026</div>
         </div>
       </div>
@@ -924,23 +1010,23 @@
       <div class="section-inner">
         <div class="section-heading">
           <h2>What we do.</h2>
-          <p>Rogers Holdings works across three practical lanes: developing opportunities, evaluating investments, and supporting operations.</p>
+          <p>Rogers Holdings focuses on the work behind durable companies: identifying opportunities, evaluating fit, and helping businesses operate with stronger systems.</p>
         </div>
         <div class="focus-grid">
           <article class="tile">
             <span class="tile-number">01</span>
             <h3>Business Development</h3>
-            <p>Turning practical ideas and existing opportunities into organized businesses with clearer systems and direction.</p>
+            <p>Building clear plans around practical ideas, market needs, and operating opportunities that can become real businesses.</p>
           </article>
           <article class="tile">
             <span class="tile-number">02</span>
             <h3>Investment</h3>
-            <p>Reviewing opportunities through fit, usefulness, risk, and the potential to create durable value.</p>
+            <p>Evaluating opportunities with attention to strategic fit, risk, operating reality, and the potential for lasting value.</p>
           </article>
           <article class="tile">
             <span class="tile-number">03</span>
             <h3>Operations</h3>
-            <p>Strengthening daily systems, customer experience, and decisions that help a business perform better over time.</p>
+            <p>Supporting the systems, service standards, and daily decisions that help a business perform with consistency.</p>
           </article>
         </div>
       </div>
@@ -954,28 +1040,28 @@
         <div>
           <div class="section-heading">
             <h2>Portfolio.</h2>
-            <p>The portfolio is currently under development. This space will be updated as ventures, operating companies, and public milestones are ready to share.</p>
+            <p>Rogers Holdings is in the early stages of building its portfolio. This section will be updated as operating companies, ventures, and public milestones are ready to announce.</p>
           </div>
           <div class="criteria-list">
             <div class="criteria-item">
               <span>01</span>
               <div>
                 <strong>Active ventures</strong>
-                <p>Operating companies and projects will be listed here as they become ready for public release.</p>
+                <p>Current operating companies and active projects will be listed here when they are ready for public release.</p>
               </div>
             </div>
             <div class="criteria-item">
               <span>02</span>
               <div>
                 <strong>Company updates</strong>
-                <p>Launches, acquisitions, milestones, and major developments can be added as the company grows.</p>
+                <p>Launches, acquisitions, partnerships, and meaningful milestones will be shared as the company develops.</p>
               </div>
             </div>
             <div class="criteria-item">
               <span>03</span>
               <div>
                 <strong>Opportunity notes</strong>
-                <p>Areas of interest can be refined here when Rogers Holdings is ready to communicate them publicly.</p>
+                <p>Investment interests and development priorities may be added here as they become appropriate to communicate publicly.</p>
               </div>
             </div>
           </div>
@@ -987,8 +1073,8 @@
       <div class="section-inner contact-panel">
         <div>
           <p class="eyebrow">Business inquiries</p>
-          <h2>Partnerships, opportunities, and correspondence.</h2>
-          <p>For business inquiries, partnership opportunities, or general correspondence, contact Rogers Holdings LLC directly.</p>
+          <h2>Business inquiries and correspondence.</h2>
+          <p>For operating opportunities, partnership discussions, investment inquiries, or general correspondence, contact Rogers Holdings LLC directly.</p>
         </div>
         <div class="contact-list">
           <a href="mailto:bk@rogersholdingsllc.com" class="contact-card">
