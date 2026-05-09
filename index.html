@@ -16,7 +16,7 @@
   <title>Rogers Holdings LLC | Kentucky Holding Company & Digital Optimization</title>
 
   <meta name="description" content="Rogers Holdings LLC is a Kentucky-based holding company focused on business development, investments, digital credibility, operational optimization, and long-term growth.">
-  <meta name="keywords" content="Rogers Holdings LLC, Kentucky holding company, business development Kentucky, digital optimization Kentucky, digital credibility, SEO foundations, Google Business Profile optimization, investments, Mount Sterling KY business">
+  <meta name="keywords" content="Rogers Holdings LLC, Kentucky holding company, business development Kentucky, digital optimization Kentucky, digital credibility, SEO foundations, Google Business Profile optimization, church website development, investments, Mount Sterling KY business">
   <meta name="author" content="Rogers Holdings LLC">
   <meta name="robots" content="index, follow">
 
@@ -333,6 +333,15 @@
       margin: 0 8px;
     }
 
+    .signature-line span:last-child {
+      display: block;
+      margin-top: 8px;
+    }
+
+    .signature-line span:last-child::before {
+      content: none;
+    }
+
     .focus {
       background:
         linear-gradient(180deg, rgba(255, 253, 248, 0.72), rgba(246, 241, 232, 0.96)),
@@ -496,59 +505,136 @@
       color: rgba(255, 255, 255, 0.76);
     }
 
+    .portfolio p {
+      color: rgba(255, 255, 255, 0.76);
+      line-height: 1.68;
+    }
+
     .portfolio-layout {
       display: grid;
-      grid-template-columns: minmax(220px, 0.55fr) minmax(420px, 1.45fr);
+      grid-template-columns: minmax(340px, 0.95fr) minmax(420px, 1.05fr);
       gap: 42px;
       align-items: center;
     }
 
-    .brand-panel {
+    .project-preview {
       position: relative;
-      display: grid;
-      place-items: center;
-      min-height: 260px;
-      padding: 28px;
+      padding: 12px;
       overflow: hidden;
       border: 1px solid rgba(184, 135, 40, 0.5);
       background:
-        linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(246, 241, 232, 0.84)),
-        radial-gradient(circle at 22% 18%, rgba(184, 135, 40, 0.1), transparent 30%),
-        radial-gradient(circle at 80% 76%, rgba(104, 117, 104, 0.12), transparent 28%);
+        linear-gradient(135deg, rgba(255, 253, 248, 0.96), rgba(246, 241, 232, 0.82)),
+        radial-gradient(circle at 22% 18%, rgba(184, 135, 40, 0.12), transparent 30%);
       box-shadow: var(--shadow);
-      text-align: center;
+      transition: transform 180ms ease, border-color 180ms ease;
     }
 
-    .brand-panel::before,
-    .brand-panel::after {
+    .project-preview:hover {
+      transform: translateY(-4px);
+      border-color: rgba(210, 173, 89, 0.82);
+    }
+
+    .project-preview::before,
+    .project-preview::after {
       position: absolute;
       content: "";
-      width: 220px;
-      height: 220px;
-      border: 1px solid rgba(184, 135, 40, 0.34);
-      transform: rotate(45deg);
+      pointer-events: none;
     }
 
-    .brand-panel::before {
-      top: -136px;
-      right: -136px;
+    .project-preview::before {
+      top: 12px;
+      right: 12px;
+      width: 92px;
+      height: 92px;
+      border-top: 2px solid var(--gold);
+      border-right: 2px solid var(--gold);
+      z-index: 2;
+      opacity: 0.62;
     }
 
-    .brand-panel::after {
-      bottom: -136px;
-      left: -136px;
+    .project-preview::after {
+      inset: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.34);
+      z-index: 2;
     }
 
-    .brand-panel-mark {
-      position: relative;
-      z-index: 1;
-      width: clamp(132px, 16vw, 180px);
-      height: clamp(132px, 16vw, 180px);
-      padding: clamp(22px, 3vw, 34px);
-      border: 1px solid var(--gold);
-      background: var(--white);
-      object-fit: contain;
-      box-shadow: 0 18px 40px rgba(20, 20, 20, 0.08);
+    .project-preview img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      object-position: top center;
+      border: 1px solid rgba(20, 20, 20, 0.08);
+      filter: saturate(0.94) contrast(1.02);
+    }
+
+    .project-label {
+      position: absolute;
+      left: 28px;
+      bottom: 28px;
+      z-index: 3;
+      padding: 10px 12px;
+      border: 1px solid rgba(184, 135, 40, 0.62);
+      background: rgba(31, 31, 31, 0.92);
+      color: var(--white);
+      font-size: 10px;
+      letter-spacing: 1.7px;
+      text-transform: uppercase;
+    }
+
+    .project-meta {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin: 26px 0;
+    }
+
+    .project-meta-item {
+      padding: 14px;
+      border: 1px solid rgba(184, 135, 40, 0.3);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .project-meta-item span {
+      display: block;
+      color: #d2ad59;
+      font-size: 10px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+    }
+
+    .project-meta-item strong {
+      display: block;
+      margin-top: 8px;
+      color: var(--white);
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.2;
+    }
+
+    .project-features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      padding: 0;
+      margin: 0 0 28px;
+      list-style: none;
+    }
+
+    .project-features li {
+      padding: 12px 14px;
+      border-left: 2px solid var(--gold);
+      background: rgba(255, 255, 255, 0.045);
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .project-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
     .criteria-list {
@@ -755,6 +841,10 @@
       }
 
       .about-copy {
+        order: -1;
+      }
+
+      .project-content {
         order: -1;
       }
     }
@@ -972,6 +1062,38 @@
         padding: 16px;
       }
 
+      .project-meta,
+      .project-features {
+        grid-template-columns: 1fr;
+      }
+
+      .project-preview {
+        padding: 9px;
+      }
+
+      .project-preview::before {
+        top: 9px;
+        right: 9px;
+        width: 70px;
+        height: 70px;
+      }
+
+      .project-preview::after {
+        inset: 9px;
+      }
+
+      .project-label {
+        left: 20px;
+        bottom: 20px;
+        max-width: calc(100% - 40px);
+        font-size: 9px;
+      }
+
+      .project-actions .button {
+        width: 100%;
+        justify-content: center;
+      }
+
       .criteria-item:nth-child(2),
       .criteria-item:nth-child(3) {
         transform: none;
@@ -1174,36 +1296,47 @@
 
     <section class="portfolio" id="portfolio">
       <div class="section-inner portfolio-layout">
-        <div class="brand-panel" aria-label="Rogers Holdings brand panel">
-          <img src="Profile Logo.png" class="brand-panel-mark" alt="Rogers Holdings LLC logo mark">
-        </div>
-        <div>
+        <a class="project-preview" href="https://www.eastlandfirstchurchofgod.com" target="_blank" rel="noopener" aria-label="View the Eastland First Church of God website project">
+          <img src="eastland-project-preview.png" alt="Eastland First Church of God website homepage preview for a digital credibility project in Mount Sterling Kentucky">
+          <span class="project-label">Live project preview</span>
+        </a>
+        <div class="project-content">
           <div class="section-heading">
-            <h2>Portfolio.</h2>
-            <p>Rogers Holdings is in the early stages of building its portfolio. This section will be updated as operating companies, service lines, ventures, and public milestones are ready to announce.</p>
+            <p class="eyebrow">Featured Project</p>
+            <h2>Eastland First Church of God.</h2>
+            <p>Rogers Holdings LLC completed a professional digital credibility and community engagement project for Eastland First Church of God in Mount Sterling, Kentucky.</p>
           </div>
-          <div class="criteria-list">
-            <div class="criteria-item">
-              <span>01</span>
-              <div>
-                <strong>Active ventures</strong>
-                <p>Current operating companies, digital optimization work, and active projects will be listed here when they are ready for public release.</p>
-              </div>
+          <p>Designed and developed a modern, mobile-responsive church website focused on accessibility, community engagement, SEO foundations, and improving the church's overall digital presence.</p>
+          <div class="project-meta" aria-label="Eastland First Church of God project details">
+            <div class="project-meta-item">
+              <span>Client</span>
+              <strong>Eastland First Church of God</strong>
             </div>
-            <div class="criteria-item">
-              <span>02</span>
-              <div>
-                <strong>Company updates</strong>
-                <p>Launches, acquisitions, partnerships, and meaningful milestones will be shared as the company develops.</p>
-              </div>
+            <div class="project-meta-item">
+              <span>Location</span>
+              <strong>Mount Sterling, Kentucky</strong>
             </div>
-            <div class="criteria-item">
-              <span>03</span>
-              <div>
-                <strong>Opportunity notes</strong>
-                <p>Investment interests and development priorities may be added here as they become appropriate to communicate publicly.</p>
-              </div>
+            <div class="project-meta-item">
+              <span>Project Type</span>
+              <strong>Church Website</strong>
             </div>
+            <div class="project-meta-item">
+              <span>Focus</span>
+              <strong>Digital Presence Optimization</strong>
+            </div>
+          </div>
+          <ul class="project-features" aria-label="Eastland project features">
+            <li>Responsive mobile-first design</li>
+            <li>SEO foundation and Google indexing setup</li>
+            <li>Clear service times and visitor information</li>
+            <li>Ministry and event organization</li>
+            <li>Community-focused branding</li>
+            <li>Social media integration</li>
+            <li>Online giving readiness</li>
+            <li>Optimized experience for visitors and members</li>
+          </ul>
+          <div class="project-actions">
+            <a href="https://www.eastlandfirstchurchofgod.com" class="button primary" target="_blank" rel="noopener">View Project</a>
           </div>
         </div>
       </div>
