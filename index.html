@@ -125,8 +125,9 @@
     .brand-name {
       display: block;
       font-family: Georgia, 'Times New Roman', serif;
-      font-size: 17px;
-      letter-spacing: 3px;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 3.4px;
       line-height: 1.15;
       text-transform: uppercase;
     }
@@ -149,27 +150,57 @@
     }
 
     .nav-links a {
+      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 36px;
-      padding: 0 12px;
-      border: 1px solid rgba(184, 135, 40, 0.18);
+      min-height: 40px;
+      padding: 0 16px;
+      overflow: hidden;
+      border: 1px solid rgba(184, 135, 40, 0.32);
       text-decoration: none;
       font-size: 12px;
       letter-spacing: 1.8px;
       text-transform: uppercase;
-      background: rgba(255, 255, 255, 0.34);
+      background:
+        linear-gradient(135deg, rgba(255, 253, 248, 0.78), rgba(246, 241, 232, 0.48)),
+        rgba(255, 255, 255, 0.34);
+      box-shadow: 0 10px 24px rgba(20, 20, 20, 0.055);
+      transition: transform 0.24s var(--ease), box-shadow 0.24s var(--ease), border-color 0.24s var(--ease), color 0.24s var(--ease);
+    }
+
+    .nav-links a::before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 26px;
+      height: 26px;
+      border-top: 1px solid rgba(184, 135, 40, 0.58);
+      border-right: 1px solid rgba(184, 135, 40, 0.58);
+      content: "";
+      opacity: 0.54;
+      transition: width 0.24s var(--ease), height 0.24s var(--ease), opacity 0.24s var(--ease);
     }
 
     .nav-links a:hover {
+      transform: translateY(-3px);
+      border-color: rgba(184, 135, 40, 0.58);
       color: var(--gold-dark);
+      box-shadow: 0 16px 34px rgba(20, 20, 20, 0.1);
+    }
+
+    .nav-links a:hover::before {
+      width: 38px;
+      height: 38px;
+      opacity: 0.82;
     }
 
     .nav-links .inquiry-link {
       border: 1px solid var(--gold);
-      background: var(--ink);
+      background:
+        linear-gradient(135deg, rgba(48, 47, 44, 0.98), rgba(31, 31, 31, 0.98));
       color: var(--white);
+      box-shadow: 0 14px 32px rgba(20, 20, 20, 0.14);
     }
 
     .hero {
@@ -1056,17 +1087,13 @@
       }
 
       .brand-name {
-        font-size: 14px;
-        letter-spacing: 2px;
-      }
-
-      .brand-location {
-        font-size: 10px;
+        font-size: 16px;
+        letter-spacing: 2.2px;
       }
 
       .nav-links {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         gap: 8px;
       }
 
@@ -1074,16 +1101,15 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-height: 34px;
-        border: 1px solid rgba(184, 135, 40, 0.22);
+        min-height: 36px;
+        padding: 0 8px;
+        border: 1px solid rgba(184, 135, 40, 0.3);
         color: var(--ink);
         font-size: 9px;
         letter-spacing: 1px;
-        background: rgba(255, 255, 255, 0.42);
-      }
-
-      .nav-links a[href="#portfolio"] {
-        display: none;
+        background:
+          linear-gradient(135deg, rgba(255, 253, 248, 0.72), rgba(246, 241, 232, 0.45)),
+          rgba(255, 255, 255, 0.42);
       }
 
       .inquiry-link {
@@ -1404,7 +1430,6 @@
       <img src="Profile Logo.png" class="profile-logo" alt="Rogers Holdings LLC logo">
       <span>
         <span class="brand-name">Rogers Holdings LLC</span>
-        <span class="brand-location">Kentucky Based</span>
       </span>
     </a>
     <div class="nav-links">
