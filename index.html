@@ -32,7 +32,7 @@
 
   <link rel="canonical" href="https://rogersholdingsllc.com/">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="alternate icon" type="image/png" href="Profile Logo.png">
+  <link rel="alternate icon" type="image/png" href="apple-touch-icon.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
   <script type="application/ld+json">
@@ -325,6 +325,11 @@
       font-size: 12px;
       letter-spacing: 2px;
       text-transform: uppercase;
+    }
+
+    .signature-line span + span::before {
+      content: "•";
+      margin: 0 8px;
     }
 
     .focus {
@@ -931,6 +936,14 @@
         line-height: 1.7;
       }
 
+      .signature-line span {
+        display: block;
+      }
+
+      .signature-line span + span::before {
+        content: none;
+      }
+
       .contact-panel {
         padding: 28px 20px;
       }
@@ -1001,7 +1014,11 @@
           </div>
           <p>Our approach is grounded in disciplined decision-making, dependable execution, and respect for the customers, employees, partners, and communities connected to each venture.</p>
           <p>As the company grows, our focus is to develop a portfolio of practical businesses that are useful, well-managed, and built to endure.</p>
-          <div class="signature-line">Privately owned and operated • Based in Kentucky • Founded in 2026</div>
+          <div class="signature-line">
+            <span>Privately owned and operated</span>
+            <span>Based in Kentucky</span>
+            <span>Founded in 2026</span>
+          </div>
         </div>
       </div>
     </section>
