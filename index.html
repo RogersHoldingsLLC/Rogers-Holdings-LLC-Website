@@ -755,7 +755,17 @@
         text-transform: uppercase;
       }
 
-      .mobile-brand-card span em {
+      .mobile-brand-card .tagline-line {
+        display: block;
+        max-width: none;
+        margin: 0;
+      }
+
+      .mobile-brand-card .tagline-line + .tagline-line {
+        margin-top: 4px;
+      }
+
+      .mobile-brand-card em {
         color: var(--gold);
         font-style: normal;
       }
@@ -886,7 +896,10 @@
           <img src="Profile Logo.png" alt="">
           <div>
             <strong>Rogers Holdings LLC</strong>
-            <span>Building and Managing <em>Long-Term</em> Value.</span>
+            <span>
+              <span class="tagline-line">Building and Managing</span>
+              <span class="tagline-line"><em>Long-Term</em> Value.</span>
+            </span>
           </div>
         </div>
       </div>
