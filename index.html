@@ -404,6 +404,8 @@
 
     .tile {
       position: relative;
+      display: grid;
+      align-content: center;
       min-height: 218px;
       padding: 30px;
       overflow: hidden;
@@ -412,6 +414,7 @@
         linear-gradient(135deg, rgba(48, 47, 44, 0.98), rgba(31, 31, 31, 0.98)),
         radial-gradient(circle at 100% 0%, rgba(184, 135, 40, 0.16), transparent 34%);
       color: var(--white);
+      text-align: center;
     }
 
     .tile::before,
@@ -433,10 +436,11 @@
 
     .tile::after {
       bottom: 24px;
-      left: 30px;
+      left: 50%;
       width: 74px;
       height: 2px;
       background: var(--gold);
+      transform: translateX(-50%);
     }
 
     .tile > * {
@@ -527,6 +531,9 @@
 
     .service-item {
       position: relative;
+      display: grid;
+      align-content: center;
+      justify-items: center;
       min-height: 126px;
       padding: 22px;
       overflow: hidden;
@@ -535,20 +542,35 @@
         linear-gradient(135deg, rgba(255, 255, 255, 0.68), rgba(246, 241, 232, 0.38)),
         rgba(255, 255, 255, 0.52);
       box-shadow: 0 14px 34px rgba(20, 20, 20, 0.055);
+      text-align: center;
       transition: transform 0.24s var(--ease), box-shadow 0.24s var(--ease), border-color 0.24s var(--ease), background 0.24s var(--ease);
     }
 
-    .service-item::before {
+    .service-item::before,
+    .service-item::after {
       position: absolute;
+      content: "";
+      pointer-events: none;
+    }
+
+    .service-item::before {
       top: 0;
       right: 0;
       width: 54px;
       height: 54px;
       border-top: 1px solid rgba(184, 135, 40, 0.62);
       border-right: 1px solid rgba(184, 135, 40, 0.62);
-      content: "";
       opacity: 0.56;
       transition: width 0.24s var(--ease), height 0.24s var(--ease), opacity 0.24s var(--ease);
+    }
+
+    .service-item::after {
+      bottom: 18px;
+      left: 50%;
+      width: 46px;
+      height: 1px;
+      background: rgba(184, 135, 40, 0.62);
+      transform: translateX(-50%);
     }
 
     .service-item:hover {
@@ -626,7 +648,7 @@
     }
 
     .portfolio .section-inner {
-      width: min(1500px, 88vw);
+      width: min(1180px, 88vw);
     }
 
     .portfolio p {
@@ -636,27 +658,47 @@
 
     .portfolio-layout {
       display: grid;
-      grid-template-columns: minmax(430px, 0.95fr) minmax(520px, 1.05fr);
-      gap: clamp(42px, 5vw, 72px);
-      align-items: start;
+      grid-template-columns: 1fr;
+      gap: clamp(28px, 4vw, 46px);
+      align-items: center;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .project-content {
+      display: grid;
+      justify-items: center;
+      width: 100%;
+      max-width: 1060px;
+    }
+
+    .project-content .section-heading,
+    .project-content > p {
+      max-width: 880px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .project-visual {
       display: grid;
-      gap: 30px;
-      padding-top: 12px;
+      justify-items: center;
+      width: 100%;
+      max-width: 980px;
+      gap: 22px;
     }
 
     .project-brand-logo {
-      width: min(320px, 68%);
+      width: min(210px, 54vw);
       height: auto;
       object-fit: contain;
       justify-self: center;
+      margin-bottom: 20px;
       filter: drop-shadow(0 14px 28px rgba(20, 20, 20, 0.16));
     }
 
     .project-preview {
       position: relative;
+      width: 100%;
       padding: 12px;
       overflow: hidden;
       border: 1px solid rgba(184, 135, 40, 0.58);
@@ -670,7 +712,11 @@
     }
 
     .project-visual .project-preview {
-      margin-top: 18px;
+      margin-top: 0;
+    }
+
+    .project-preview-secondary {
+      width: min(860px, 92%);
     }
 
     .project-preview:hover {
@@ -708,11 +754,15 @@
     .project-preview img {
       display: block;
       width: 100%;
-      aspect-ratio: 16 / 10;
+      aspect-ratio: 4 / 3;
       object-fit: cover;
       object-position: top center;
       border: 1px solid rgba(20, 20, 20, 0.08);
       filter: saturate(0.94) contrast(1.02);
+    }
+
+    .project-preview-secondary img {
+      aspect-ratio: 3 / 2;
     }
 
     .project-label {
@@ -732,13 +782,17 @@
 
     .project-meta {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 10px;
-      margin: 26px 0;
+      width: 100%;
+      margin: 26px auto;
     }
 
     .project-meta-item {
       position: relative;
+      display: grid;
+      align-content: center;
+      justify-items: center;
       min-height: 94px;
       padding: 18px;
       overflow: hidden;
@@ -746,6 +800,7 @@
       background:
         linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.025));
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      text-align: center;
       transition: transform 0.24s var(--ease), border-color 0.24s var(--ease), background 0.24s var(--ease);
     }
 
@@ -787,26 +842,32 @@
 
     .project-features {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 10px;
+      width: 100%;
       padding: 0;
       margin: 0 0 28px;
       list-style: none;
     }
 
     .project-features li {
-      padding: 13px 15px;
-      border-left: 2px solid var(--gold);
+      display: grid;
+      align-content: center;
+      min-height: 74px;
+      padding: 16px 15px;
+      border: 1px solid rgba(184, 135, 40, 0.22);
+      border-top: 2px solid rgba(184, 135, 40, 0.78);
       background:
         linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
       color: rgba(255, 255, 255, 0.76);
       font-size: 14px;
       line-height: 1.45;
+      text-align: center;
       transition: transform 0.22s var(--ease), background 0.22s var(--ease), color 0.22s var(--ease);
     }
 
     .project-features li:hover {
-      transform: translateX(4px);
+      transform: translateY(-3px);
       background:
         linear-gradient(135deg, rgba(255, 255, 255, 0.082), rgba(255, 255, 255, 0.04));
       color: rgba(255, 255, 255, 0.88);
@@ -815,12 +876,14 @@
     .project-actions {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 12px;
     }
 
     .project-visual .project-actions {
       display: block;
-      margin-top: -8px;
+      width: 100%;
+      margin-top: 0;
     }
 
     .project-visual .project-actions .button {
@@ -873,13 +936,14 @@
 
     .criteria-item {
       display: grid;
-      grid-template-columns: 42px 1fr;
-      gap: 16px;
-      align-items: start;
+      justify-items: center;
+      gap: 12px;
+      align-items: center;
       padding: 18px;
       border: 1px solid rgba(184, 135, 40, 0.28);
-      border-left: 3px solid var(--gold);
+      border-top: 3px solid var(--gold);
       background: rgba(255, 255, 255, 0.035);
+      text-align: center;
     }
 
     .criteria-item span {
@@ -972,12 +1036,14 @@
     }
 
     .contact-card {
-      display: block;
+      display: grid;
+      justify-items: center;
       padding: 18px;
       border: 1px solid rgba(184, 135, 40, 0.55);
       text-decoration: none;
       background:
         linear-gradient(135deg, rgba(255, 253, 248, 0.96), rgba(246, 241, 232, 0.72));
+      text-align: center;
     }
 
     .contact-card span {
@@ -1266,7 +1332,7 @@
 
       .tile::after {
         bottom: 20px;
-        left: 22px;
+        left: 50%;
       }
 
       .tile-number {
@@ -1284,7 +1350,6 @@
       }
 
       .criteria-item {
-        grid-template-columns: 34px 1fr;
         gap: 12px;
         padding: 16px;
       }
@@ -1556,17 +1621,8 @@
 
     <section class="portfolio" id="portfolio">
       <div class="section-inner portfolio-layout">
-        <div class="project-visual">
-          <img src="eastland-project-logo.jpg" class="project-brand-logo" alt="Eastland First Church of God logo">
-          <a class="project-preview" href="https://www.eastlandfirstchurchofgod.com" target="_blank" rel="noopener" aria-label="View the Eastland First Church of God website project">
-            <img src="eastland-project-preview.png" alt="Eastland First Church of God website homepage preview for a digital credibility project in Mount Sterling Kentucky">
-            <span class="project-label">Desktop project preview</span>
-          </a>
-          <div class="project-actions">
-            <a href="https://www.eastlandfirstchurchofgod.com" class="button primary" target="_blank" rel="noopener">View Project</a>
-          </div>
-        </div>
         <div class="project-content">
+          <img src="eastland-project-logo.jpg" class="project-brand-logo" alt="Eastland First Church of God logo">
           <div class="section-heading">
             <p class="eyebrow">Featured Project</p>
             <h2>Eastland First Church of God</h2>
@@ -1601,6 +1657,19 @@
             <li>Online giving readiness</li>
             <li>Optimized experience for visitors and members</li>
           </ul>
+        </div>
+        <div class="project-visual">
+          <a class="project-preview" href="https://www.eastlandfirstchurchofgod.com" target="_blank" rel="noopener" aria-label="View the Eastland First Church of God website project">
+            <img src="eastland-project-laptop.jpg" alt="Laptop mockup showing the Eastland First Church of God desktop website homepage">
+            <span class="project-label">Desktop project preview</span>
+          </a>
+          <a class="project-preview project-preview-secondary" href="https://www.eastlandfirstchurchofgod.com" target="_blank" rel="noopener" aria-label="View the Eastland First Church of God mobile website project">
+            <img src="eastland-mobile-app-preview.jpg" alt="Mobile device preview showing Eastland First Church of God website and home screen access instructions">
+            <span class="project-label">Mobile access preview</span>
+          </a>
+          <div class="project-actions">
+            <a href="https://www.eastlandfirstchurchofgod.com" class="button primary" target="_blank" rel="noopener">View Project</a>
+          </div>
         </div>
       </div>
       <div class="portfolio-closing">
