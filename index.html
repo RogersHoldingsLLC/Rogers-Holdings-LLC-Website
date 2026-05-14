@@ -570,8 +570,8 @@
       display: grid;
       align-content: center;
       justify-items: center;
-      min-height: 126px;
-      padding: 22px;
+      min-height: 176px;
+      padding: 24px 22px 30px;
       overflow: hidden;
       border: 1px solid rgba(184, 135, 40, 0.36);
       background:
@@ -641,6 +641,15 @@
       font-size: 21px;
       font-weight: 500;
       line-height: 1.15;
+    }
+
+    .service-item p {
+      position: relative;
+      max-width: 260px;
+      margin: 12px auto 0;
+      color: #4f4940;
+      font-size: 13.5px;
+      line-height: 1.5;
     }
 
     .portfolio {
@@ -1107,74 +1116,6 @@
       overflow-wrap: anywhere;
     }
 
-    .lead-form {
-      display: grid;
-      gap: 14px;
-    }
-
-    .lead-form-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    .lead-field {
-      display: grid;
-      gap: 7px;
-      text-align: left;
-    }
-
-    .lead-field.full {
-      grid-column: 1 / -1;
-    }
-
-    .lead-field span {
-      color: #d2ad59;
-      font-size: 10px;
-      letter-spacing: 1.8px;
-      text-transform: uppercase;
-    }
-
-    .lead-field input,
-    .lead-field textarea {
-      width: 100%;
-      border: 1px solid rgba(184, 135, 40, 0.48);
-      padding: 13px 14px;
-      background: rgba(255, 253, 248, 0.94);
-      color: var(--ink);
-      font: inherit;
-      outline: none;
-      transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
-    }
-
-    .lead-field textarea {
-      min-height: 132px;
-      resize: vertical;
-    }
-
-    .lead-field input:focus,
-    .lead-field textarea:focus {
-      border-color: rgba(210, 173, 89, 0.88);
-      box-shadow: 0 0 0 3px rgba(184, 135, 40, 0.14);
-    }
-
-    .lead-honeypot {
-      position: absolute;
-      left: -9999px;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-    }
-
-    .lead-form-status {
-      min-height: 22px;
-      margin: 0;
-      color: rgba(255, 255, 255, 0.74);
-      font-size: 13px;
-      line-height: 1.5;
-      text-align: center;
-    }
-
     .back-to-top {
       position: fixed;
       right: 22px;
@@ -1587,10 +1528,6 @@
         padding: 28px 20px;
       }
 
-      .lead-form-grid {
-        grid-template-columns: 1fr;
-      }
-
       .brand-panel {
         min-height: 220px;
         padding: 24px;
@@ -1719,26 +1656,32 @@
           <div class="service-item">
             <span>01</span>
             <strong>Website Development</strong>
+            <p>Modern, mobile-friendly websites built to make a business look established, clear, and easy to contact.</p>
           </div>
           <div class="service-item">
             <span>02</span>
             <strong>SEO Foundations</strong>
+            <p>Basic search structure, page titles, descriptions, and indexing details that help customers find the business.</p>
           </div>
           <div class="service-item">
             <span>03</span>
             <strong>Google Business Profile Optimization</strong>
+            <p>Clearer business information, service details, and profile improvements for stronger local visibility.</p>
           </div>
           <div class="service-item">
             <span>04</span>
             <strong>Analytics &amp; Search Console Setup</strong>
+            <p>Tracking tools that show how people find the site, what they visit, and where improvements are needed.</p>
           </div>
           <div class="service-item">
             <span>05</span>
             <strong>Brand Credibility Improvements</strong>
+            <p>Consistent messaging, visuals, and trust signals that help a business look more professional online.</p>
           </div>
           <div class="service-item">
             <span>06</span>
             <strong>Digital Presence Optimization</strong>
+            <p>A practical review of the website, search presence, listings, and online touchpoints customers see first.</p>
           </div>
         </div>
       </div>
@@ -1809,7 +1752,9 @@
         <div>
           <p class="eyebrow">Business inquiries</p>
           <h2>Business inquiries and correspondence.</h2>
-          <p>For operating opportunities, digital credibility services, partnership discussions, investment inquiries, or general correspondence, submit an inquiry and Rogers Holdings LLC will follow up directly.</p>
+          <p>For operating opportunities, digital credibility services, partnership discussions, investment inquiries, or general correspondence, contact Rogers Holdings LLC directly by email.</p>
+        </div>
+        <div>
           <div class="contact-list">
             <a href="mailto:briankeith@rogersholdingsllc.com" class="contact-card">
               <span>Primary Contact</span>
@@ -1819,45 +1764,8 @@
               <span>Additional Contact</span>
               <strong>alilashae@rogersholdingsllc.com</strong>
             </a>
+            <a href="mailto:briankeith@rogersholdingsllc.com?subject=Rogers%20Holdings%20LLC%20Inquiry" class="button primary">Email Rogers Holdings</a>
           </div>
-        </div>
-        <div>
-          <form class="lead-form" id="lead-form" data-endpoint="https://script.google.com/macros/s/AKfycbyu034C4A_nKybQoAwK_1xdEjVde1piwc_MtfxpRD_lAfLcpoLKYgTidnrKMsrfyddL/exec" novalidate>
-            <input type="hidden" name="sourceUrl" id="lead-source-url">
-            <div class="lead-honeypot" aria-hidden="true">
-              <label>Website
-                <input type="text" name="website" tabindex="-1" autocomplete="off">
-              </label>
-            </div>
-            <div class="lead-form-grid">
-              <label class="lead-field">
-                <span>First name</span>
-                <input type="text" name="firstName" autocomplete="given-name" required>
-              </label>
-              <label class="lead-field">
-                <span>Last name</span>
-                <input type="text" name="lastName" autocomplete="family-name" required>
-              </label>
-              <label class="lead-field">
-                <span>Email</span>
-                <input type="email" name="email" autocomplete="email" required>
-              </label>
-              <label class="lead-field">
-                <span>Phone</span>
-                <input type="tel" name="phone" autocomplete="tel">
-              </label>
-              <label class="lead-field full">
-                <span>Company</span>
-                <input type="text" name="company" autocomplete="organization">
-              </label>
-              <label class="lead-field full">
-                <span>Message</span>
-                <textarea name="message" required></textarea>
-              </label>
-            </div>
-            <button type="submit" class="button primary">Submit Inquiry</button>
-            <p class="lead-form-status" id="lead-form-status" role="status" aria-live="polite"></p>
-          </form>
         </div>
       </div>
     </section>
@@ -1870,92 +1778,5 @@
   <footer>
     © 2026 Rogers Holdings LLC • Privately Owned • Based in Kentucky
   </footer>
-  <script>
-    (function () {
-      var form = document.getElementById('lead-form');
-      if (!form) return;
-
-      var status = document.getElementById('lead-form-status');
-      var sourceUrl = document.getElementById('lead-source-url');
-      var submitButton = form.querySelector('button[type="submit"]');
-      var endpoint = form.getAttribute('data-endpoint') || '';
-
-      if (sourceUrl) {
-        sourceUrl.value = window.location.href;
-      }
-
-      function setStatus(message) {
-        if (status) status.textContent = message;
-      }
-
-      function isValidEmail(value) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-      }
-
-      form.addEventListener('submit', function (event) {
-        event.preventDefault();
-
-        var formData = new FormData(form);
-        var firstName = String(formData.get('firstName') || '').trim();
-        var lastName = String(formData.get('lastName') || '').trim();
-        var email = String(formData.get('email') || '').trim();
-        var message = String(formData.get('message') || '').trim();
-        var honeypot = String(formData.get('website') || '').trim();
-        var lastSubmit = Number(window.localStorage.getItem('rogersLeadLastSubmit') || 0);
-        var now = Date.now();
-
-        if (honeypot) {
-          setStatus('Thank you. Your inquiry has been received.');
-          form.reset();
-          return;
-        }
-
-        if (!firstName || !lastName || !email || !message) {
-          setStatus('Please complete your name, email, and message.');
-          return;
-        }
-
-        if (!isValidEmail(email)) {
-          setStatus('Please enter a valid email address.');
-          return;
-        }
-
-        if (now - lastSubmit < 60000) {
-          setStatus('Please wait a moment before submitting another inquiry.');
-          return;
-        }
-
-        if (!endpoint) {
-          setStatus('Online inquiry setup is pending. Please email briankeith@rogersholdingsllc.com.');
-          return;
-        }
-
-        if (sourceUrl) {
-          sourceUrl.value = window.location.href;
-          formData.set('sourceUrl', sourceUrl.value);
-        }
-
-        formData.set('submittedAt', new Date().toISOString());
-        window.localStorage.setItem('rogersLeadLastSubmit', String(now));
-        if (submitButton) submitButton.disabled = true;
-        setStatus('Submitting inquiry...');
-
-        fetch(endpoint, {
-          method: 'POST',
-          mode: 'no-cors',
-          body: formData
-        }).then(function () {
-          setStatus('Thank you. Your inquiry has been received.');
-          form.reset();
-          if (sourceUrl) sourceUrl.value = window.location.href;
-        }).catch(function () {
-          window.localStorage.removeItem('rogersLeadLastSubmit');
-          setStatus('Something went wrong. Please email briankeith@rogersholdingsllc.com.');
-        }).finally(function () {
-          if (submitButton) submitButton.disabled = false;
-        });
-      });
-    }());
-  </script>
 </body>
 </html>
