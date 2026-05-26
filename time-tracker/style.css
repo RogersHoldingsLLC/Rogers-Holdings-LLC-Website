@@ -36,6 +36,70 @@ textarea {
   font: inherit;
 }
 
+[hidden] {
+  display: none !important;
+}
+
+.member-gate {
+  align-items: center;
+  background:
+    linear-gradient(180deg, rgba(47, 46, 43, 0.92), rgba(47, 46, 43, 0.86)),
+    var(--cream);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+  position: fixed;
+  z-index: 20;
+}
+
+.member-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  max-width: 430px;
+  padding: 30px;
+  width: 100%;
+}
+
+.member-card img {
+  display: block;
+  height: 58px;
+  margin-bottom: 18px;
+  object-fit: contain;
+  width: 58px;
+}
+
+.member-card h1 {
+  color: var(--navy);
+  font-size: 2rem;
+  line-height: 1.08;
+}
+
+.member-copy {
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 14px 0 20px;
+}
+
+.member-card label {
+  color: var(--muted);
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.member-card input {
+  min-height: 54px;
+}
+
+.member-card button {
+  width: 100%;
+}
+
 .app-shell {
   width: min(960px, calc(100% - 32px));
   margin: 0 auto;

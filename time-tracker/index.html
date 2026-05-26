@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="RH Time Tracker" />
+    <meta name="robots" content="noindex, nofollow" />
     <meta name="theme-color" content="#2f2e2b" />
     <title>Rogers Holdings Business Time Tracker</title>
     <link rel="icon" href="assets/profile-logo.png" />
@@ -13,6 +14,26 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <section class="member-gate" id="memberGate" aria-label="Member access">
+      <form class="member-card" id="memberForm">
+        <img src="assets/profile-logo.png" alt="Rogers Holdings LLC logo" />
+        <p class="eyebrow">Members Only</p>
+        <h1>Rogers Holdings Time Tracker</h1>
+        <p class="member-copy">
+          Enter the member access code to open the private timekeeping system.
+        </p>
+        <label for="memberCode">Access Code</label>
+        <input
+          id="memberCode"
+          type="password"
+          autocomplete="current-password"
+          placeholder="Enter code"
+        />
+        <button class="primary-action" type="submit">Open Tracker</button>
+        <p class="message" id="memberMessage" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
     <main class="app-shell">
       <section class="brand-panel" aria-label="Rogers Holdings LLC">
         <div class="brand-lockup">

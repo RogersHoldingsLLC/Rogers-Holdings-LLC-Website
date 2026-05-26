@@ -7,11 +7,13 @@
   3. Paste it below between the quotes.
 */
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbynzYDOH7Gt_MJRGJwEuN2hzRMIIg5i_EfhZs1Rz_4EirNCxtvZZgi6bbxiQ3jumRzn/exec";
+const MEMBER_ACCESS_CODE = "RH-MEMBER";
 
 const STORAGE_KEYS = {
   activeSession: "rogersTimeTracker.activeSession",
   completedSessions: "rogersTimeTracker.completedSessions",
   personName: "rogersTimeTracker.personName",
+  memberAccess: "rogersTimeTracker.memberAccess",
 };
 
 // Some browsers restrict localStorage on file:// pages. This fallback keeps
@@ -28,12 +30,17 @@ const notesField = document.getElementById("notes");
 const clockInBtn = document.getElementById("clockInBtn");
 const clockOutBtn = document.getElementById("clockOutBtn");
 const message = document.getElementById("message");
+const memberGate = document.getElementById("memberGate");
+const memberForm = document.getElementById("memberForm");
+const memberCode = document.getElementById("memberCode");
+const memberMessage = document.getElementById("memberMessage");
 
 let activeSession = readJson(STORAGE_KEYS.activeSession, null);
 let completedSessions = readJson(STORAGE_KEYS.completedSessions, []);
 let sheetTotals = null;
 let timerInterval = null;
 
+memberForm.addEventListener("submit", handleMemberAccess);
 clockInBtn.addEventListener("click", handleClockIn);
 clockOutBtn.addEventListener("click", handleClockOut);
 personNameField.addEventListener("change", savePersonName);
@@ -42,9 +49,46 @@ notesField.addEventListener("input", saveActiveNotes);
 
 loadPersonName();
 loadSavedNotes();
+initMemberGate();
 render();
 startTimer();
 refreshTotalsFromSheet();
+
+function initMemberGate() {
+  const accessFromUrl = new URLSearchParams(window.location.search).get("access");
+
+  if (accessFromUrl === MEMBER_ACCESS_CODE) {
+    grantMemberAccess();
+    window.history.replaceState({}, document.title, window.location.pathname);
+    return;
+  }
+
+  if (readStorageItem(STORAGE_KEYS.memberAccess) === "granted") {
+    hideMemberGate();
+  }
+}
+
+function handleMemberAccess(event) {
+  event.preventDefault();
+
+  if (memberCode.value.trim() !== MEMBER_ACCESS_CODE) {
+    memberMessage.textContent = "That code did not match. Please try again.";
+    memberMessage.className = "message error";
+    memberCode.select();
+    return;
+  }
+
+  grantMemberAccess();
+}
+
+function grantMemberAccess() {
+  writeStorageItem(STORAGE_KEYS.memberAccess, "granted");
+  hideMemberGate();
+}
+
+function hideMemberGate() {
+  memberGate.hidden = true;
+}
 
 function handleClockIn() {
   const person = getPersonName();
