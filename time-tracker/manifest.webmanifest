@@ -1,0 +1,20 @@
+{
+  "name": "Rogers Holdings Business Time Tracker",
+  "short_name": "RH Time",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f6f1e8",
+  "theme_color": "#2f2e2b",
+  "icons": [
+    {
+      "src": "assets/profile-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/profile-logo-180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

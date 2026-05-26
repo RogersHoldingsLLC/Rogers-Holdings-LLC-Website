@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="RH Time Tracker" />
+    <meta name="theme-color" content="#2f2e2b" />
+    <title>Rogers Holdings Business Time Tracker</title>
+    <link rel="icon" href="assets/profile-logo.png" />
+    <link rel="apple-touch-icon" href="assets/profile-logo-180.png" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="brand-panel" aria-label="Rogers Holdings LLC">
+        <div class="brand-lockup">
+          <img
+            class="brand-logo"
+            src="assets/profile-logo.png"
+            alt="Rogers Holdings LLC logo"
+          />
+          <div>
+            <p class="eyebrow">Rogers Holdings LLC</p>
+            <h1>Business Time Tracker</h1>
+            <p class="brand-subtitle">Private operations timekeeping</p>
+          </div>
+        </div>
+        <div class="status-pill" id="statusPill">Clocked Out</div>
+      </section>
+
+      <section class="brand-media" aria-label="Rogers Holdings LLC brand imagery">
+        <img
+          class="cover-image"
+          src="assets/cover.png"
+          alt="Rogers Holdings LLC building and managing long-term value"
+        />
+        <div class="brand-card-image">
+          <img
+            src="assets/brand-card.jpeg"
+            alt="Rogers Holdings LLC brand card"
+          />
+        </div>
+      </section>
+
+      <section class="dashboard" aria-label="Time tracker controls">
+        <div class="section-heading">
+          <p class="eyebrow">Work Session</p>
+          <p>Track business activity with a clean record in Google Sheets.</p>
+        </div>
+
+        <label class="person-label" for="personName">Person</label>
+        <input
+          id="personName"
+          list="personSuggestions"
+          placeholder="Enter your name..."
+          autocomplete="name"
+        />
+        <datalist id="personSuggestions">
+          <option value="Brian Rogers"></option>
+          <option value="Intern - Karmen Rogers"></option>
+        </datalist>
+
+        <div class="timer-panel">
+          <p class="label">Current Session</p>
+          <div class="session-time" id="sessionTimer">00:00:00</div>
+          <p class="session-detail" id="sessionDetail">Ready to clock in.</p>
+        </div>
+
+        <div class="totals-grid" aria-label="Time totals">
+          <article class="total-card">
+            <p class="label">Today</p>
+            <strong id="todayTotal">0.00 hrs</strong>
+          </article>
+          <article class="total-card">
+            <p class="label">This Week</p>
+            <strong id="weekTotal">0.00 hrs</strong>
+          </article>
+        </div>
+
+        <label class="notes-label" for="notes">Notes</label>
+        <textarea
+          id="notes"
+          rows="5"
+          placeholder="Briefly describe what you worked on..."
+        ></textarea>
+
+        <div class="button-row">
+          <button class="primary-action" id="clockInBtn" type="button">
+            Clock In
+          </button>
+          <button class="secondary-action" id="clockOutBtn" type="button">
+            Clock Out
+          </button>
+        </div>
+
+        <p class="message" id="message" role="status" aria-live="polite"></p>
+      </section>
+
+      <footer class="app-footer">
+        <span>Rogers Holdings LLC</span>
+        <span>Business records system</span>
+      </footer>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
