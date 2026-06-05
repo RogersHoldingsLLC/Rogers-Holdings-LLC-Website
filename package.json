@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "images:optimize": "node tools/optimize-images.mjs",
+    "images:html": "node tools/rewire-html-for-webp.mjs",
+    "images:upgrade": "npm run images:optimize && npm run images:html"
+  },
+  "devDependencies": {
+    "sharp": "latest"
+  }
+}
