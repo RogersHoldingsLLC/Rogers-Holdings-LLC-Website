@@ -1872,53 +1872,6 @@
   <footer>
     © 2026 Rogers Holdings LLC • Privately Owned • Based in Kentucky
   </footer>
-  <script>
-    (function () {
-      var form = document.getElementById('betaSignupForm');
-      var status = document.getElementById('betaSignupStatus');
-
-      if (!form) {
-        return;
-      }
-
-      form.addEventListener('submit', function (event) {
-        event.preventDefault();
-
-        var data = new FormData(form);
-
-        if (data.get('website')) {
-          return;
-        }
-
-        var name = String(data.get('name') || '').trim();
-        var email = String(data.get('email') || '').trim();
-        var useCase = String(data.get('useCase') || '').trim();
-
-        if (!name || !email || !useCase) {
-          if (status) {
-            status.textContent = 'Please complete the beta request fields.';
-          }
-          return;
-        }
-
-        var subject = encodeURIComponent('Rogers Family Vault beta request');
-        var body = encodeURIComponent([
-          'Rogers Family Vault beta request',
-          '',
-          'Name: ' + name,
-          'Email: ' + email,
-          '',
-          'Use case:',
-          useCase
-        ].join('\n'));
-
-        window.location.href = 'mailto:briankeith@rogersholdingsllc.com?subject=' + subject + '&body=' + body;
-
-        if (status) {
-          status.textContent = 'Your email app should open with the beta request ready to send.';
-        }
-      });
-    })();
-  </script>
+  
 </body>
 </html>
