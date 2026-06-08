@@ -98,6 +98,7 @@
           "knowsAbout": [
             "Business development",
             "Digital infrastructure",
+            "Family finance systems",
             "Website development",
             "SEO foundations",
             "Google Business Profile optimization",
@@ -161,6 +162,17 @@
             "@id": "https://rogersholdingsllc.com/#organization"
           },
           "about": "Church website development and digital infrastructure for Eastland First Church of God in Mount Sterling, Kentucky."
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://rogersholdingsllc.com/#rogers-family-vault",
+          "name": "Rogers Family Vault",
+          "applicationCategory": "FinanceApplication",
+          "operatingSystem": "Web",
+          "creator": {
+            "@id": "https://rogersholdingsllc.com/#organization"
+          },
+          "description": "A private family financial command center concept for organizing cash, bills, debt, goals, and household financial decisions."
         }
       ]
     }
@@ -737,6 +749,17 @@
       text-align: center;
     }
 
+    .portfolio-layout + .portfolio-layout {
+      margin-top: clamp(72px, 9vw, 118px);
+    }
+
+    .portfolio-divider {
+      width: min(980px, 82vw);
+      height: 1px;
+      margin: clamp(72px, 8vw, 104px) auto 0;
+      background: linear-gradient(90deg, transparent, rgba(210, 173, 89, 0.62), transparent);
+    }
+
     .project-content {
       display: grid;
       justify-items: center;
@@ -766,6 +789,23 @@
       justify-self: center;
       margin-bottom: 20px;
       filter: drop-shadow(0 14px 28px rgba(20, 20, 20, 0.16));
+    }
+
+    .vault-mark {
+      display: inline-grid;
+      place-items: center;
+      width: 78px;
+      height: 78px;
+      margin-bottom: 22px;
+      border: 1px solid rgba(210, 173, 89, 0.52);
+      background:
+        linear-gradient(135deg, rgba(111, 235, 214, 0.92), rgba(139, 92, 246, 0.9)),
+        var(--white);
+      color: #101716;
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
     }
 
     .project-preview {
@@ -837,6 +877,36 @@
       aspect-ratio: 3 / 2;
     }
 
+    .vault-visual .project-preview img {
+      aspect-ratio: 16 / 11;
+      object-position: top left;
+    }
+
+    .vault-gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      width: 100%;
+    }
+
+    .vault-gallery img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      object-position: top center;
+      border: 1px solid rgba(184, 135, 40, 0.3);
+      background: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.14);
+      transition: transform 0.24s var(--ease), border-color 0.24s var(--ease), filter 0.24s var(--ease);
+    }
+
+    .vault-gallery img:hover {
+      transform: translateY(-4px);
+      border-color: rgba(210, 173, 89, 0.72);
+      filter: saturate(1.05) contrast(1.04);
+    }
+
     .project-label {
       position: absolute;
       left: 28px;
@@ -903,6 +973,11 @@
       transition: transform 0.22s var(--ease), background 0.22s var(--ease), color 0.22s var(--ease);
     }
 
+    .project-features.compact-features {
+      grid-template-columns: repeat(4, 1fr);
+      margin-bottom: 0;
+    }
+
     .project-features li::before {
       display: block;
       width: 28px;
@@ -934,6 +1009,104 @@
 
     .project-visual .project-actions .button {
       width: 100%;
+    }
+
+    .beta-signup-card {
+      width: min(760px, 100%);
+      margin-top: 28px;
+      padding: 28px;
+      border: 1px solid rgba(210, 173, 89, 0.34);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025));
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.14);
+      text-align: left;
+    }
+
+    .beta-signup-card h3 {
+      margin: 0;
+      color: var(--white);
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(24px, 3vw, 34px);
+      font-weight: 500;
+      line-height: 1.1;
+      text-align: center;
+    }
+
+    .beta-signup-card p {
+      max-width: 560px;
+      margin: 10px auto 22px;
+      text-align: center;
+    }
+
+    .beta-signup-form {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .beta-signup-form label {
+      display: grid;
+      gap: 7px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 10px;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+    }
+
+    .beta-signup-form label.full-width,
+    .beta-signup-form .button,
+    .beta-signup-form .signup-status {
+      grid-column: 1 / -1;
+    }
+
+    .beta-signup-form input,
+    .beta-signup-form textarea {
+      width: 100%;
+      min-height: 44px;
+      padding: 12px 13px;
+      border: 1px solid rgba(210, 173, 89, 0.28);
+      border-radius: 0;
+      outline: none;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--white);
+      font: inherit;
+      font-size: 14px;
+      line-height: 1.45;
+      transition: border-color 0.22s var(--ease), background 0.22s var(--ease), box-shadow 0.22s var(--ease);
+    }
+
+    .beta-signup-form textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+
+    .beta-signup-form input:focus,
+    .beta-signup-form textarea:focus {
+      border-color: rgba(210, 173, 89, 0.78);
+      background: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 0 0 3px rgba(184, 135, 40, 0.12);
+    }
+
+    .beta-signup-form .button {
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .signup-status {
+      min-height: 20px;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.68);
+      font-size: 13px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .hp-field {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
     }
 
     .portfolio-closing {
@@ -1124,6 +1297,11 @@
 
       .capability-grid,
       .project-features {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .project-features.compact-features,
+      .vault-gallery {
         grid-template-columns: repeat(2, 1fr);
       }
 
@@ -1330,6 +1508,12 @@
         grid-template-columns: 1fr;
       }
 
+      .project-features.compact-features,
+      .vault-gallery,
+      .beta-signup-form {
+        grid-template-columns: 1fr;
+      }
+
       .project-preview {
         padding: 9px;
       }
@@ -1368,6 +1552,10 @@
       .project-actions .button {
         width: 100%;
         justify-content: center;
+      }
+
+      .beta-signup-card {
+        padding: 24px 18px;
       }
 
       .portfolio-closing {
@@ -1567,6 +1755,67 @@
           </div>
         </div>
       </div>
+      <div class="portfolio-divider" aria-hidden="true"></div>
+      <div class="section-inner portfolio-layout vault-project">
+        <div class="project-content">
+          <div class="vault-mark" aria-hidden="true">RF</div>
+          <div class="section-heading">
+            <p class="eyebrow">Beta Project</p>
+            <h2>Rogers Family Vault</h2>
+            <p>A private family financial command center built to organize cash, bills, debt, goals, and next-step financial decisions in one focused system.</p>
+          </div>
+          <div class="project-outcome">
+            <span>Project focus</span>
+            <p>Designed as a beta product for households that want clearer financial visibility, simpler organization, and a more practical way to review family money decisions.</p>
+          </div>
+          <ul class="project-features compact-features" aria-label="Rogers Family Vault beta features">
+            <li>Family dashboard</li>
+            <li>Cash and bill tracking</li>
+            <li>Debt visibility</li>
+            <li>Goal progress</li>
+            <li>Guided setup</li>
+            <li>Account organization</li>
+            <li>Family CFO summary</li>
+            <li>Private beta access</li>
+          </ul>
+          <div class="beta-signup-card">
+            <h3>Join the beta list.</h3>
+            <p>Request early access and share how Rogers Family Vault could support your household or family finance workflow.</p>
+            <form class="beta-signup-form" id="betaSignupForm">
+              <label>
+                Name
+                <input type="text" name="name" autocomplete="name" required>
+              </label>
+              <label>
+                Email
+                <input type="email" name="email" autocomplete="email" required>
+              </label>
+              <label class="full-width">
+                What would you use it for?
+                <textarea name="useCase" placeholder="Family budgeting, debt tracking, savings goals, household planning..." required></textarea>
+              </label>
+              <label class="hp-field" aria-hidden="true">
+                Website
+                <input type="text" name="website" tabindex="-1" autocomplete="off">
+              </label>
+              <button class="button primary" type="submit">Request Beta Access</button>
+              <p class="signup-status" id="betaSignupStatus" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+        <div class="project-visual vault-visual">
+          <a class="project-preview" href="#betaSignupForm" aria-label="Request beta access for Rogers Family Vault">
+            <img src="portfolio-assets/rogers-family-vault/01-dashboard.png" alt="Rogers Family Vault dashboard showing family financial command center metrics, bills, goals, and family CFO summary">
+            <span class="project-label">Beta dashboard preview</span>
+          </a>
+          <div class="vault-gallery" aria-label="Rogers Family Vault screenshot previews">
+            <img src="portfolio-assets/rogers-family-vault/02-family-cfo.png" alt="Rogers Family Vault Family CFO summary screen">
+            <img src="portfolio-assets/rogers-family-vault/03-guided-setup.png" alt="Rogers Family Vault guided setup wizard screen">
+            <img src="portfolio-assets/rogers-family-vault/04-accounts.png" alt="Rogers Family Vault accounts organization screen">
+            <img src="portfolio-assets/rogers-family-vault/05-goals.png" alt="Rogers Family Vault goals progress screen">
+          </div>
+        </div>
+      </div>
       <div class="portfolio-closing">
         <strong>Additional projects and ventures will be added as the Rogers Holdings portfolio grows.</strong>
       </div>
@@ -1606,5 +1855,53 @@
   <footer>
     © 2026 Rogers Holdings LLC • Privately Owned • Based in Kentucky
   </footer>
+  <script>
+    (function () {
+      var form = document.getElementById('betaSignupForm');
+      var status = document.getElementById('betaSignupStatus');
+
+      if (!form) {
+        return;
+      }
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        var data = new FormData(form);
+
+        if (data.get('website')) {
+          return;
+        }
+
+        var name = String(data.get('name') || '').trim();
+        var email = String(data.get('email') || '').trim();
+        var useCase = String(data.get('useCase') || '').trim();
+
+        if (!name || !email || !useCase) {
+          if (status) {
+            status.textContent = 'Please complete the beta request fields.';
+          }
+          return;
+        }
+
+        var subject = encodeURIComponent('Rogers Family Vault beta request');
+        var body = encodeURIComponent([
+          'Rogers Family Vault beta request',
+          '',
+          'Name: ' + name,
+          'Email: ' + email,
+          '',
+          'Use case:',
+          useCase
+        ].join('\n'));
+
+        window.location.href = 'mailto:briankeith@rogersholdingsllc.com?subject=' + subject + '&body=' + body;
+
+        if (status) {
+          status.textContent = 'Your email app should open with the beta request ready to send.';
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
