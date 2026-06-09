@@ -56,7 +56,45 @@
     .contact{background:linear-gradient(180deg,var(--cream),var(--paper))}.contact-panel{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:38px;align-items:center;padding:44px;border:1px solid var(--gold);overflow:hidden;background:linear-gradient(135deg,rgba(48,47,44,.98),rgba(31,31,31,.98));box-shadow:var(--shadow)}.contact-panel::before{position:absolute;top:0;right:0;width:120px;height:120px;border-top:2px solid var(--gold);border-right:2px solid var(--gold);content:"";opacity:.72}.contact-panel>*{position:relative;z-index:1}.contact-panel .eyebrow{color:#d2ad59}.contact-panel h2{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:clamp(32px,4vw,48px);font-weight:500;line-height:1.1;color:var(--white)}.contact-panel p{color:rgba(255,255,255,.76);line-height:1.7}.contact-list{display:grid;gap:10px;margin-top:18px}.contact-card{display:grid;justify-items:center;padding:18px;border:1px solid rgba(184,135,40,.55);text-decoration:none;background:linear-gradient(135deg,rgba(255,253,248,.96),rgba(246,241,232,.72));text-align:center;transition:transform .24s var(--ease),box-shadow .24s var(--ease)}.contact-card:hover{transform:translateY(-4px);box-shadow:0 20px 44px rgba(20,20,20,.2)}.contact-card span{display:block;color:var(--gold-dark);font-size:11px;letter-spacing:2px;text-transform:uppercase}.contact-card strong{display:block;margin-top:8px;font-size:17px;overflow-wrap:anywhere}.back-to-top{position:fixed;right:22px;bottom:22px;z-index:30;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border:1px solid var(--gold);background:rgba(31,31,31,.94);color:var(--white);text-decoration:none;box-shadow:0 14px 34px rgba(20,20,20,.22)}.back-to-top span{font-size:24px;line-height:1}footer{padding:34px 6vw;background:var(--ink);color:#d8bd7e;font-size:12px;letter-spacing:1.8px;text-align:center;text-transform:uppercase}
     @media (max-width:900px){.site-nav{align-items:flex-start;flex-direction:column}.nav-links{width:100%;justify-content:flex-start}.about-grid,.systems-grid,.contact-panel{grid-template-columns:1fr}.about-copy{order:-1}.capability-grid,.project-features{grid-template-columns:repeat(2,1fr)}}
     @media (max-width:700px){.site-nav{padding:18px}.profile-logo{width:48px;height:48px}.brand-lockup{min-width:0}.brand-name{font-size:19px;letter-spacing:3px}.nav-links{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;width:100%}.nav-links a{min-height:76px;font-size:12px;letter-spacing:2px}.hero{min-height:690px;background-position:center center}.hero::before{background:linear-gradient(90deg,rgba(8,8,8,.68),rgba(8,8,8,.44)),linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.5))}.hero::after{inset:14px}.hero-inner{width:100%;padding:64px 32px}.hero-copy{max-width:100%;padding-top:18px}.hero-kicker{font-size:11px;letter-spacing:3px}.hero h1{font-size:clamp(42px,11vw,56px);line-height:1.05;letter-spacing:-1px}.hero p{font-size:18px;line-height:1.7}.hero .button{width:100%;min-height:62px;font-size:14px;margin-top:30px}section{padding:62px 18px;scroll-margin-top:180px}.section-heading{margin-bottom:26px}.section-heading h2,.contact-panel h2{font-size:36px;line-height:1.1}.section-heading p,.about-copy p,.contact-panel p{font-size:18px;line-height:1.72}.about-copy{padding-left:18px}.family-photo{max-height:620px;box-shadow:10px 10px 0 rgba(184,135,40,.12),var(--shadow)}.signature-line{font-size:11px;line-height:1.8}.signature-line span{display:block}.signature-line span+span::before{content:none}.capability-grid,.project-features{grid-template-columns:1fr}.capability-card{min-height:0;padding:22px}.project-preview{padding:9px}.project-label{left:20px;bottom:20px;max-width:calc(100% - 40px);font-size:9px}.project-actions .button{width:100%}.systems-grid{text-align:center}.systems-pills{justify-content:center}.contact-panel{padding:28px 20px}.back-to-top{right:16px;bottom:22px;width:42px;height:42px}footer{padding:28px 18px;line-height:1.7}}
-    @media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
+    
+.family-photo-wrap{
+  position:relative;
+}
+
+.family-photo{
+  filter:saturate(.88) contrast(1.04) brightness(.98);
+  transition:transform .35s ease, box-shadow .35s ease;
+}
+
+.family-photo:hover{
+  transform:scale(1.02);
+  box-shadow:24px 24px 0 rgba(184,135,40,.12),0 34px 90px rgba(20,20,20,.22);
+}
+
+.family-caption{
+  margin-top:18px;
+  text-align:center;
+}
+
+.family-caption strong{
+  display:block;
+  font-family:Georgia,'Times New Roman',serif;
+  font-size:18px;
+  font-weight:500;
+  color:#755515;
+}
+
+.family-caption span{
+  display:block;
+  margin-top:6px;
+  font-size:12px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:#6b645a;
+}
+
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
   </style>
 </head>
 <body>
@@ -80,11 +118,17 @@
     </header>
     <section class="about" id="about">
       <div class="section-inner about-grid">
-        <img src="family.jpg" class="family-photo" alt="The Rogers family">
+        <div class="family-photo-wrap">
+<img src="family.jpg" class="family-photo" alt="The Rogers family">
+<div class="family-caption">
+<strong>The Rogers Family</strong>
+<span>Building for the next generation.</span>
+</div>
+</div>
         <div class="about-copy">
           <div class="section-heading"><p class="eyebrow">Family-Owned • Long-Term Focus</p><h2>Built to operate.</h2><p>Rogers Holdings LLC develops practical businesses, operating systems, and long-term ventures.</p></div>
           <p>We focus on projects that solve real problems, improve operations, and create lasting value through steady execution.</p>
-          <p class="about-closing">Family-owned. Long-term focused.</p>
+          <p class="about-closing">Building for the next generation.</p>
           <div class="signature-line"><span>Privately Owned</span><span>Family Operated</span><span>Established 2026</span></div>
         </div>
       </div>
