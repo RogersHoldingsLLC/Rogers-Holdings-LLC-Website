@@ -7,6 +7,8 @@ The public website for Rogers Holdings LLC. The site positions Rogers Holdings a
 The production site is intentionally framework-free and is hosted through GitHub Pages.
 
 - `index.html` contains the homepage content, metadata, and structured data.
+- `business-snapshot/index.html` contains the client-facing intake experience.
+- `privacy/index.html` contains the privacy policy used by the intake form.
 - `assets/css/site.css` contains the shared responsive design system.
 - `assets/js/site.js` contains lightweight navigation and analytics behavior.
 - `CNAME` preserves the `rogersholdingsllc.com` custom domain.
@@ -43,7 +45,34 @@ The Phase 1 homepage organizes the company's services beneath Business Optimizat
 - Eastland First Church of God case study
 - Family-owned company positioning and direct contact paths
 
-The Free Website Report workflow is not implemented yet. Report CTAs intentionally remain non-navigating placeholders until the secure intake flow is built.
+Homepage assessment CTAs lead to the Business Snapshot intake page.
+
+## Business Snapshot lead delivery
+
+The Business Snapshot page includes client-facing context, accessible validation, consent, analytics events, and complete loading, success, configuration, and delivery-error states. A lead-delivery service has not been configured, so the page currently directs a validated submission to the published email and phone contact paths instead of claiming it was delivered.
+
+To connect delivery:
+
+1. Create a production HTTPS form endpoint that accepts `multipart/form-data` via `POST`.
+2. The endpoint must accept these fields: `firstName`, `lastName`, `businessName`, `email`, `phone`, `website`, `primaryChallenge`, `notes`, and `consent`.
+3. Protect the endpoint with server-side validation, spam controls, rate limiting, secure storage or email delivery, and appropriate logging. Do not rely on the browser validation alone.
+4. Return any `2xx` response when the lead has been accepted. Return a non-`2xx` response when it has not.
+5. Set the empty `action` attribute on the form marked `data-lead-form` in `business-snapshot/index.html` to that endpoint URL.
+6. Submit a production test lead and confirm receipt, the success state, the failure path, consent capture, and any provider-domain or CORS requirements.
+
+The browser sends an `Accept: application/json` header and displays the success state only after the endpoint returns a successful response.
+
+## Business Snapshot release
+
+This release preserves the Phase 1.5 homepage and adds:
+
+- A dedicated Business Snapshot intake route
+- Clear expectations about audience, review scope, deliverable, and follow-up
+- Required contact and business fields, optional notes, and plain-English consent
+- Accessible client-side validation and honest success/error handling
+- Direct email and phone paths for talking with Rogers Holdings
+- A lead-form privacy policy
+- Updated homepage assessment CTAs and sitemap entries
 
 ## Phase 1.5 visual elevation
 
