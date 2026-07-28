@@ -888,9 +888,9 @@ h3 { letter-spacing: -.015em; }
 
 .phase3-owner { background: var(--color-elevated); }
 .phase3-owner-layout { display: grid; grid-template-columns: minmax(260px, .52fr) minmax(0, 1.48fr); gap: var(--home-composition-gap); align-items: center; }
-.phase3-owner figure { width: min(100%, 360px); margin: 0; justify-self: center; }
-.phase3-owner figure img { width: 100%; aspect-ratio: 629 / 957; object-fit: cover; object-position: center 28%; filter: saturate(.82); }
-.phase3-owner figcaption { padding-top: 11px; color: var(--color-text-secondary); font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.phase3-owner figure { width: min(100%, 360px); margin: clamp(10px, 1.25vw, 18px) 0; justify-self: center; }
+.phase3-owner figure img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: contain; object-position: center; }
+.phase3-owner figcaption { padding: 9px 2px 1px; color: var(--color-text-secondary); font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 .phase3-owner-layout > div { max-width: 760px; }
 .phase3-owner h2 { max-width: 14ch; }
 .phase3-owner-lede { max-width: 62ch; color: var(--color-text-secondary); font-size: 18px; }
@@ -955,7 +955,6 @@ h3 { letter-spacing: -.015em; }
   .phase3-platform-copy { max-width: 720px; }
   .phase3-workflow { width: min(720px, 100%); }
   .phase3-case-visual, .phase3-case-details { max-width: 760px; }
-  .phase3-owner figure { width: min(100%, 310px); justify-self: start; }
   .phase3-owner-layout > div { max-width: 760px; }
   .phase3-cta-layout > div:last-child { max-width: 460px; }
   .phase3-footer-layout { grid-template-columns: 1fr 1fr; }
@@ -1006,7 +1005,6 @@ h3 { letter-spacing: -.015em; }
   .phase3-case-client { width: min(210px, 100%); }
   .phase3-case-layout { gap: 36px; padding-top: 42px; }
   .phase3-case-details article { grid-template-columns: 1fr; gap: 8px; }
-  .phase3-owner figure { width: min(78%, 280px); }
   .phase3-owner ul { grid-template-columns: 1fr; }
   .phase3-owner li, .phase3-owner li:nth-child(even) { padding: 20px 0; border-left: 0; }
   .phase3-principles ol { grid-template-columns: 1fr; }
@@ -1259,17 +1257,15 @@ h3 { letter-spacing: -.015em; }
     var(--surface-elevated);
 }
 .phase3-owner figure {
-  width: min(100%, 386px);
-  padding: 11px;
+  padding: 8px;
   border: 1px solid rgba(95,93,87,.22);
   background: #eee7da;
   box-shadow: 0 19px 48px rgba(36,36,33,.105);
 }
 .phase3-owner figure img {
   border: 1px solid rgba(95,93,87,.16);
-  filter: saturate(.8) contrast(1.025);
 }
-.phase3-owner figcaption { padding: 12px 4px 2px; text-align: left; }
+.phase3-owner figcaption { text-align: left; }
 .phase3-owner-layout > div { position: relative; }
 .phase3-owner-layout > div::before {
   position: absolute;
@@ -1360,7 +1356,6 @@ h3 { letter-spacing: -.015em; }
   .phase3-case-client { padding: 10px; }
   .phase3-case-visual { padding: 9px; }
   .phase3-case-details { padding-left: 13px; }
-  .phase3-owner figure { width: min(82%, 292px); padding: 8px; }
 }
 
 /* Phase 3.7 — premium material art direction */
@@ -1615,7 +1610,6 @@ h3 { letter-spacing: -.015em; }
     var(--material-elevated-paper);
 }
 .phase3-owner figure {
-  padding: 12px;
   border-color: rgba(95,93,87,.32);
   background: linear-gradient(145deg, #f5f1e8, #ded6c8);
   box-shadow: 0 28px 58px rgba(36,36,33,.15), 0 1px 0 rgba(255,255,255,.92) inset;
@@ -1674,6 +1668,8 @@ h3 { letter-spacing: -.015em; }
 
 @media (max-width: 960px) {
   .home-page .phase3-owner { background: var(--material-elevated-paper); }
+  .phase3-owner-layout { row-gap: clamp(38px, 5.5vw, 48px); }
+  .phase3-owner figure { width: min(100%, 560px); justify-self: center; }
   .phase3-case-heading { background: none; }
   .phase3-footer-layout > div:last-child { padding-left: 0; border-left: 0; }
 }
@@ -1710,7 +1706,8 @@ h3 { letter-spacing: -.015em; }
   .phase3-case-visual { padding: 10px; box-shadow: 0 20px 40px rgba(36,36,33,.11), 0 1px 0 rgba(255,255,255,.9) inset; }
   .phase3-case-details { padding-left: 10px; }
   .phase3-case-details article { padding-inline: 9px; }
-  .phase3-owner figure { padding: 9px; box-shadow: 0 18px 36px rgba(36,36,33,.12), 0 1px 0 rgba(255,255,255,.9) inset; }
+  .phase3-owner figure { width: min(100%, 420px); padding: 6px; margin-block: 8px; box-shadow: 0 18px 36px rgba(36,36,33,.12), 0 1px 0 rgba(255,255,255,.9) inset; }
+  .phase3-owner figcaption { padding: 8px 2px 1px; }
   .phase3-cta-layout > div:last-child { padding: 18px; }
   .home-page .phase3-footer { background: linear-gradient(180deg, var(--material-executive-black), #090908); }
 }
@@ -2259,9 +2256,6 @@ h3 { letter-spacing: -.015em; }
 .phase3-case-details article {
   padding-block: 18px;
 }
-.phase3-owner figure {
-  width: min(100%, 330px);
-}
 .phase3-owner ul {
   margin-top: clamp(20px, 1.8vw, 26px);
 }
@@ -2326,16 +2320,6 @@ h3 { letter-spacing: -.015em; }
     gap: 27px;
     padding-top: 25px;
   }
-  .phase3-owner figure {
-    width: 100%;
-  }
-  .phase3-owner figure img {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 3 / 2;
-    object-fit: contain;
-    object-position: center;
-  }
   .phase3-owner li,
   .phase3-owner li:nth-child(even) {
     padding-block: 17px;
@@ -2358,43 +2342,5 @@ h3 { letter-spacing: -.015em; }
 @media (max-width: 360px) {
   .home-page .section {
     padding-block: 60px;
-  }
-}
-
-/* Owner figure — landscape frame refinement */
-.phase3-owner figure {
-  width: min(100%, 360px);
-  padding: 8px;
-  margin-block: clamp(10px, 1.25vw, 18px);
-}
-.phase3-owner figure img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 3 / 2;
-  object-fit: contain;
-  object-position: center;
-}
-.phase3-owner figcaption {
-  padding: 9px 2px 1px;
-}
-
-@media (max-width: 960px) {
-  .phase3-owner-layout {
-    row-gap: clamp(38px, 5.5vw, 48px);
-  }
-  .phase3-owner figure {
-    width: min(100%, 560px);
-    justify-self: center;
-  }
-}
-
-@media (max-width: 680px) {
-  .phase3-owner figure {
-    width: min(100%, 420px);
-    padding: 6px;
-    margin-block: 8px;
-  }
-  .phase3-owner figcaption {
-    padding: 8px 2px 1px;
   }
 }
