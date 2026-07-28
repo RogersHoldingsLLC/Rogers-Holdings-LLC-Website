@@ -2360,3 +2360,41 @@ h3 { letter-spacing: -.015em; }
     padding-block: 60px;
   }
 }
+
+/* Owner figure — landscape frame refinement */
+.phase3-owner figure {
+  width: min(100%, 360px);
+  padding: 8px;
+  margin-block: clamp(10px, 1.25vw, 18px);
+}
+.phase3-owner figure img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: contain;
+  object-position: center;
+}
+.phase3-owner figcaption {
+  padding: 9px 2px 1px;
+}
+
+@media (max-width: 960px) {
+  .phase3-owner-layout {
+    row-gap: clamp(38px, 5.5vw, 48px);
+  }
+  .phase3-owner figure {
+    width: min(100%, 560px);
+    justify-self: center;
+  }
+}
+
+@media (max-width: 680px) {
+  .phase3-owner figure {
+    width: min(100%, 420px);
+    padding: 6px;
+    margin-block: 8px;
+  }
+  .phase3-owner figcaption {
+    padding: 8px 2px 1px;
+  }
+}
