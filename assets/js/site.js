@@ -26,12 +26,18 @@ if (menuToggle && navigation) {
   });
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') closeMenu();
-  });
+    if (!navigation.classList.contains('is-open')) return;
 
-  navigation.addEventListener('keydown', (event) => {
-    if (event.key !== 'Tab' || !navigation.classList.contains('is-open')) return;
-    const focusable = [menuToggle, ...navigation.querySelectorAll('a')];
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      closeMenu();
+      menuToggle.focus();
+      return;
+    }
+
+    if (event.key !== 'Tab') return;
+    const visibleLinks = [...navigation.querySelectorAll('a')].filter((link) => !link.hidden);
+    const focusable = [menuToggle, ...visibleLinks];
     const first = focusable[0];
     const last = focusable[focusable.length - 1];
     if (event.shiftKey && document.activeElement === first) {
@@ -48,10 +54,11 @@ if (menuToggle && navigation) {
   });
 }
 
-window.addEventListener('scroll', () => {
-  header?.classList.toggle('is-scrolled', window.scrollY > 20);
-}, { passive: true });
-header?.classList.toggle('is-scrolled', window.scrollY > 20);
+function updateHeader() {
+  header?.classList.toggle('is-scrolled', window.scrollY > 20 || document.body.classList.contains('interior-page'));
+}
+window.addEventListener('scroll', updateHeader, { passive: true });
+updateHeader();
 
 if ('IntersectionObserver' in window && !reduceMotion.matches) {
   document.documentElement.classList.add('motion-ready');
@@ -101,8 +108,7 @@ if ('IntersectionObserver' in window) {
 }
 
 document.querySelectorAll('[data-report-link]').forEach((link) => {
-  link.addEventListener('click', (event) => {
-    event.preventDefault();
+  link.addEventListener('click', () => {
     if (typeof window.gtag === 'function') {
       window.gtag('event', 'report_cta_selected', { event_category: 'engagement' });
     }
@@ -112,3 +118,94 @@ document.querySelectorAll('[data-report-link]').forEach((link) => {
 document.querySelectorAll('[data-current-year]').forEach((element) => {
   element.textContent = String(new Date().getFullYear());
 });
+
+const leadForm = document.querySelector('[data-lead-form]');
+
+if (leadForm) {
+  const formStatus = leadForm.querySelector('[data-form-status]');
+  const formStartedAt = leadForm.querySelector('[data-form-started-at]');
+  const fields = [...leadForm.querySelectorAll('[data-validate]')];
+
+  if (formStartedAt) {
+    formStartedAt.value = new Date().toISOString();
+  }
+
+  const validationMessages = {
+    firstName: 'Enter your first name.',
+    lastName: 'Enter your last name.',
+    businessName: 'Enter your business name.',
+    email: 'Enter a valid email address.',
+    phone: 'Enter a phone number.',
+    website: 'Enter a complete URL beginning with http:// or https://.',
+    primaryChallenge: 'Tell us about your primary business challenge.',
+    consent: 'Confirm that we may review your request and contact you.'
+  };
+
+  function errorElement(field) {
+    return document.getElementById(`${field.id}-error`);
+  }
+
+  function setFieldState(field) {
+    const error = errorElement(field);
+    if (!error) return field.validity.valid;
+    const isValid = field.validity.valid;
+    const descriptionIds = field.dataset.descriptionId ? [field.dataset.descriptionId] : [];
+    if (!isValid) descriptionIds.push(error.id);
+    field.setAttribute('aria-invalid', String(!isValid));
+    if (descriptionIds.length) {
+      field.setAttribute('aria-describedby', descriptionIds.join(' '));
+    } else {
+      field.removeAttribute('aria-describedby');
+    }
+    error.textContent = isValid ? '' : (validationMessages[field.name] || field.validationMessage);
+    return isValid;
+  }
+
+  fields.forEach((field) => {
+    field.addEventListener('blur', () => setFieldState(field));
+    field.addEventListener('input', () => {
+      if (field.getAttribute('aria-invalid') === 'true') setFieldState(field);
+    });
+    field.addEventListener('change', () => {
+      if (field.getAttribute('aria-invalid') === 'true') setFieldState(field);
+    });
+  });
+
+  leadForm.addEventListener('submit', (event) => {
+    formStatus.hidden = true;
+    formStatus.className = 'form-status';
+
+    const invalidFields = fields.filter((field) => !setFieldState(field));
+    if (invalidFields.length) {
+      event.preventDefault();
+      formStatus.textContent = 'Please review the highlighted fields and try again.';
+      formStatus.classList.add('is-error');
+      formStatus.hidden = false;
+      invalidFields[0].focus();
+      return;
+    }
+
+    const endpoint = leadForm.getAttribute('action')?.trim();
+    const endpointConfigured = leadForm.dataset.endpointConfigured === 'true';
+    let endpointIsSecure = false;
+
+    try {
+      endpointIsSecure = new URL(endpoint).protocol === 'https:';
+    } catch {
+      endpointIsSecure = false;
+    }
+
+    if (!endpointConfigured || !endpointIsSecure) {
+      event.preventDefault();
+      formStatus.innerHTML = 'Online delivery is being connected. Please email <a href="mailto:briankeith@rogersholdingsllc.com?subject=Business%20Snapshot%20Request">briankeith@rogersholdingsllc.com</a> or call <a href="tel:+18594047300">859-404-7300</a> so we can help now.';
+      formStatus.classList.add('is-error');
+      formStatus.hidden = false;
+      formStatus.focus();
+      return;
+    }
+
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'business_snapshot_submitted', { event_category: 'lead' });
+    }
+  });
+}

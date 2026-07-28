@@ -7,6 +7,8 @@ The public website for Rogers Holdings LLC. The site positions Rogers Holdings a
 The production site is intentionally framework-free and is hosted through GitHub Pages.
 
 - `index.html` contains the homepage content, metadata, and structured data.
+- `business-snapshot/index.html` contains the client-facing intake experience.
+- `privacy/index.html` contains the privacy policy used by the intake form.
 - `assets/css/site.css` contains the shared responsive design system.
 - `assets/js/site.js` contains lightweight navigation and analytics behavior.
 - `CNAME` preserves the `rogersholdingsllc.com` custom domain.
@@ -42,7 +44,56 @@ The Phase 1 homepage organizes the company's services beneath Business Optimizat
 - Eastland First Church of God case study
 - Family-owned company positioning and direct contact paths
 
-The Free Website Report workflow is not implemented yet. Report CTAs intentionally remain non-navigating placeholders until the secure intake flow is built.
+Homepage assessment CTAs lead to the Business Snapshot intake page.
+
+## Business Snapshot lead delivery
+
+The Business Snapshot page includes client-facing context, accessible validation, explicit consent, spam-control fields, analytics events, and an honest configuration-error state. A lead-delivery service has not been configured, so the page currently directs a validated submission to the published email and phone contact paths instead of claiming it was delivered.
+
+To connect delivery:
+
+1. Create a Google Sheet whose header row uses this exact order: `submittedAt`, `firstName`, `lastName`, `businessName`, `email`, `phone`, `website`, `primaryChallenge`, `notes`, `consent`, `formStartedAt`, `company`.
+2. Create and deploy a Google Apps Script web app with a `doPost(e)` handler. The form uses a normal browser `POST` (`application/x-www-form-urlencoded`) and may navigate to the HTML response returned by Apps Script.
+3. Treat `submittedAt` as a server-generated timestamp. Accept the remaining fields from the POST body in the order documented below.
+4. Perform authoritative required-field, length, email, phone, and URL validation in Apps Script. Browser validation improves usability but is not a security boundary.
+5. Require `consent` to equal `business-snapshot-contact-consent-v1`; record that exact value when accepted.
+6. Treat `company` as a honeypot spam-control field, not a business-name field. Legitimate submissions use `businessName` and must leave `company` empty.
+7. Parse `formStartedAt` as an ISO 8601 UTC timestamp (for example, `2026-07-27T14:05:30.123Z`) and compare it with the server time as part of the spam checks.
+8. Add rate limiting, safe logging, Sheet writes, and lead notifications. Return a branded confirmation page only after an accepted write; return an honest branded error page otherwise.
+9. In `business-snapshot/index.html`, set the form `action` to the production HTTPS Google Apps Script `/exec` URL and change `data-endpoint-configured="false"` to `"true"`. Both values are required; the client guard prevents submission while either is missing or insecure.
+10. Submit production test leads and confirm accepted writes, rejected invalid data, empty and populated honeypot behavior, timing checks, consent capture, notifications, and both confirmation and error response pages.
+
+### Form POST contract
+
+The browser submits these fields:
+
+| Field | Required | Contract |
+| --- | --- | --- |
+| `firstName` | Yes | Plain text, maximum 80 characters |
+| `lastName` | Yes | Plain text, maximum 80 characters |
+| `businessName` | Yes | Legitimate organization name, maximum 140 characters |
+| `email` | Yes | Email address, maximum 254 characters |
+| `phone` | Yes | Telephone number, maximum 30 characters |
+| `website` | Yes | Absolute `http://` or `https://` URL, maximum 2048 characters |
+| `primaryChallenge` | Yes | Plain text, maximum 2000 characters |
+| `notes` | No | Plain text, maximum 3000 characters |
+| `consent` | Yes | Exact value `business-snapshot-contact-consent-v1` |
+| `formStartedAt` | Yes | Client-generated ISO 8601 UTC timestamp set when the form initializes |
+| `company` | No | Honeypot; must be empty. This is never the legitimate business name. |
+
+`submittedAt` is intentionally not sent by the browser. Apps Script must generate it from the server time before writing the row.
+
+## Business Snapshot release
+
+This release preserves the Phase 1.5 homepage and adds:
+
+- A dedicated Business Snapshot intake route
+- Clear expectations about audience, review scope, deliverable, and follow-up
+- Required contact and business fields, optional notes, and plain-English consent
+- Accessible client-side validation and honest success/error handling
+- Direct email and phone paths for talking with Rogers Holdings
+- A lead-form privacy policy
+- Updated homepage assessment CTAs and sitemap entries
 
 ## Internal utility security
 
