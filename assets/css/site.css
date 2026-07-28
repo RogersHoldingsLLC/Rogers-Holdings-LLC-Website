@@ -1668,7 +1668,7 @@ h3 { letter-spacing: -.015em; }
 
 @media (max-width: 960px) {
   .home-page .phase3-owner { background: var(--material-elevated-paper); }
-  .phase3-owner-layout { row-gap: clamp(38px, 5.5vw, 48px); }
+  .phase3-owner-layout { row-gap: clamp(18px, 3vw, 28px); }
   .phase3-owner figure { width: min(100%, 560px); justify-self: center; }
   .phase3-case-heading { background: none; }
   .phase3-footer-layout > div:last-child { padding-left: 0; border-left: 0; }
