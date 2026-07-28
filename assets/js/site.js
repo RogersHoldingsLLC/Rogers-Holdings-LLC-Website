@@ -91,6 +91,34 @@ if ('IntersectionObserver' in window && !reduceMotion.matches) {
   document.querySelectorAll('.assessment-shell, .platform-panel, .process-list').forEach((item) => interfaceObserver.observe(item));
 }
 
+const parallaxScenes = [...document.querySelectorAll('[data-scene-parallax]')];
+
+if (parallaxScenes.length && !reduceMotion.matches) {
+  let parallaxFrame;
+
+  const updateSceneParallax = () => {
+    const viewportCenter = window.innerHeight / 2;
+
+    parallaxScenes.forEach((scene) => {
+      const bounds = scene.getBoundingClientRect();
+      const sceneCenter = bounds.top + (bounds.height / 2);
+      const normalizedDistance = Math.max(-1, Math.min(1, (sceneCenter - viewportCenter) / window.innerHeight));
+      scene.style.setProperty('--scene-parallax-y', `${(normalizedDistance * -7).toFixed(2)}px`);
+    });
+
+    parallaxFrame = undefined;
+  };
+
+  const requestSceneParallax = () => {
+    if (parallaxFrame) return;
+    parallaxFrame = window.requestAnimationFrame(updateSceneParallax);
+  };
+
+  window.addEventListener('scroll', requestSceneParallax, { passive: true });
+  window.addEventListener('resize', requestSceneParallax, { passive: true });
+  updateSceneParallax();
+}
+
 if ('IntersectionObserver' in window) {
   const navigationLinks = [...document.querySelectorAll('.primary-nav a[href^="#"]:not([href="#"])')];
   const sectionLinks = new Map(navigationLinks.map((link) => [link.getAttribute('href').slice(1), link]));

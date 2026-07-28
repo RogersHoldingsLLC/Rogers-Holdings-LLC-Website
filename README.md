@@ -142,6 +142,14 @@ Phase 3.7 strengthens the approved CSS-only material system so its archival pape
 
 The laptop space-efficiency pass preserves the approved Phase 3.7 visual direction while making the homepage hero content-driven and introducing a reusable responsive spacing scale for section rhythm, content relationships, panel rows, and composition gaps. It reduces unnecessary vertical space on common laptop screens without changing homepage copy, structure, typography sizes, material treatments, or mobile navigation behavior.
 
+## Desktop owner presentation
+
+The desktop owner section gives the framed landscape image greater presence in its left column and aligns it with the main headline, while preserving the approved presentation at tablet and mobile widths.
+
+## Executive visual design system
+
+The executive visual system turns the approved Executive Materials scene into a reusable component for reports, assessments, plans, process maps, dashboards, strategy sessions, and automation workspaces. Shared framing, material variants, responsive aspect ratios, captions, restrained elevation, reveal behavior, optional slow parallax, and reduced-motion support are documented in `docs/EXECUTIVE_VISUAL_SYSTEM.md`.
+
 ## Release checks
 
 Before publishing a homepage change:
