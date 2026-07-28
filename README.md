@@ -48,18 +48,40 @@ Homepage assessment CTAs lead to the Business Snapshot intake page.
 
 ## Business Snapshot lead delivery
 
-The Business Snapshot page includes client-facing context, accessible validation, consent, analytics events, and complete loading, success, configuration, and delivery-error states. A lead-delivery service has not been configured, so the page currently directs a validated submission to the published email and phone contact paths instead of claiming it was delivered.
+The Business Snapshot page includes client-facing context, accessible validation, explicit consent, spam-control fields, analytics events, and an honest configuration-error state. A lead-delivery service has not been configured, so the page currently directs a validated submission to the published email and phone contact paths instead of claiming it was delivered.
 
 To connect delivery:
 
-1. Create a production HTTPS form endpoint that accepts `multipart/form-data` via `POST`.
-2. The endpoint must accept these fields: `firstName`, `lastName`, `businessName`, `email`, `phone`, `website`, `primaryChallenge`, `notes`, and `consent`.
-3. Protect the endpoint with server-side validation, spam controls, rate limiting, secure storage or email delivery, and appropriate logging. Do not rely on the browser validation alone.
-4. Return any `2xx` response when the lead has been accepted. Return a non-`2xx` response when it has not.
-5. Set the empty `action` attribute on the form marked `data-lead-form` in `business-snapshot/index.html` to that endpoint URL.
-6. Submit a production test lead and confirm receipt, the success state, the failure path, consent capture, and any provider-domain or CORS requirements.
+1. Create a Google Sheet whose header row uses this exact order: `submittedAt`, `firstName`, `lastName`, `businessName`, `email`, `phone`, `website`, `primaryChallenge`, `notes`, `consent`, `formStartedAt`, `company`.
+2. Create and deploy a Google Apps Script web app with a `doPost(e)` handler. The form uses a normal browser `POST` (`application/x-www-form-urlencoded`) and may navigate to the HTML response returned by Apps Script.
+3. Treat `submittedAt` as a server-generated timestamp. Accept the remaining fields from the POST body in the order documented below.
+4. Perform authoritative required-field, length, email, phone, and URL validation in Apps Script. Browser validation improves usability but is not a security boundary.
+5. Require `consent` to equal `business-snapshot-contact-consent-v1`; record that exact value when accepted.
+6. Treat `company` as a honeypot spam-control field, not a business-name field. Legitimate submissions use `businessName` and must leave `company` empty.
+7. Parse `formStartedAt` as an ISO 8601 UTC timestamp (for example, `2026-07-27T14:05:30.123Z`) and compare it with the server time as part of the spam checks.
+8. Add rate limiting, safe logging, Sheet writes, and lead notifications. Return a branded confirmation page only after an accepted write; return an honest branded error page otherwise.
+9. In `business-snapshot/index.html`, set the form `action` to the production HTTPS Google Apps Script `/exec` URL and change `data-endpoint-configured="false"` to `"true"`. Both values are required; the client guard prevents submission while either is missing or insecure.
+10. Submit production test leads and confirm accepted writes, rejected invalid data, empty and populated honeypot behavior, timing checks, consent capture, notifications, and both confirmation and error response pages.
 
-The browser sends an `Accept: application/json` header and displays the success state only after the endpoint returns a successful response.
+### Form POST contract
+
+The browser submits these fields:
+
+| Field | Required | Contract |
+| --- | --- | --- |
+| `firstName` | Yes | Plain text, maximum 80 characters |
+| `lastName` | Yes | Plain text, maximum 80 characters |
+| `businessName` | Yes | Legitimate organization name, maximum 140 characters |
+| `email` | Yes | Email address, maximum 254 characters |
+| `phone` | Yes | Telephone number, maximum 30 characters |
+| `website` | Yes | Absolute `http://` or `https://` URL, maximum 2048 characters |
+| `primaryChallenge` | Yes | Plain text, maximum 2000 characters |
+| `notes` | No | Plain text, maximum 3000 characters |
+| `consent` | Yes | Exact value `business-snapshot-contact-consent-v1` |
+| `formStartedAt` | Yes | Client-generated ISO 8601 UTC timestamp set when the form initializes |
+| `company` | No | Honeypot; must be empty. This is never the legitimate business name. |
+
+`submittedAt` is intentionally not sent by the browser. Apps Script must generate it from the server time before writing the row.
 
 ## Business Snapshot release
 

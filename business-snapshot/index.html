@@ -79,7 +79,7 @@
           </div>
           <div class="snapshot-steps">
             <article><span>01</span><div><h3>What we review</h3><p>Your stated challenge, website and digital presence, customer path, visible workflows, systems, and other information you choose to share.</p></div></article>
-            <article><span>02</span><div><h3>What you receive</h3><p>A focused follow-up that summarizes the most visible opportunities and clarifies a practical next step. The depth of the review depends on the information available.</p></div></article>
+            <article><span>02</span><div><h3>What you receive</h3><p>Your complimentary Business Snapshot will be delivered as a focused written summary with practical recommendations, typically within three business days. The depth of the review depends on the information available.</p></div></article>
             <article><span>03</span><div><h3>What happens next</h3><p>We review your submission and contact you using the details provided. If there appears to be a fit, we will discuss the findings, answer questions, and outline any recommended next engagement.</p></div></article>
           </div>
           <aside class="direct-contact">
@@ -95,67 +95,71 @@
             <h2>Tell us about your business.</h2>
             <p>Fields marked <span aria-hidden="true">*</span><span class="sr-only">with an asterisk</span> are required.</p>
           </div>
-          <!-- BACKEND CONNECTION POINT: replace the empty action with the production HTTPS form endpoint. -->
-          <form class="lead-form" action="" method="post" data-lead-form novalidate>
+          <!--
+            BACKEND CONNECTION POINT:
+            1. Replace the empty action with the production Google Apps Script /exec URL.
+            2. Change data-endpoint-configured to "true" only after the deployment is ready.
+            The guard in site.js prevents an unconfigured form from posting back to this page.
+          -->
+          <form class="lead-form" action="" method="post" data-lead-form data-endpoint-configured="false" novalidate>
             <div class="form-grid">
               <div class="field">
                 <label for="first-name">First name <span aria-hidden="true">*</span></label>
-                <input id="first-name" name="firstName" type="text" autocomplete="given-name" required maxlength="80">
+                <input id="first-name" name="firstName" type="text" autocomplete="given-name" required maxlength="80" data-validate>
                 <span class="field-error" id="first-name-error"></span>
               </div>
               <div class="field">
                 <label for="last-name">Last name <span aria-hidden="true">*</span></label>
-                <input id="last-name" name="lastName" type="text" autocomplete="family-name" required maxlength="80">
+                <input id="last-name" name="lastName" type="text" autocomplete="family-name" required maxlength="80" data-validate>
                 <span class="field-error" id="last-name-error"></span>
               </div>
               <div class="field field-full">
                 <label for="business-name">Business name <span aria-hidden="true">*</span></label>
-                <input id="business-name" name="businessName" type="text" autocomplete="organization" required maxlength="140">
+                <input id="business-name" name="businessName" type="text" autocomplete="organization" required maxlength="140" data-validate>
                 <span class="field-error" id="business-name-error"></span>
               </div>
               <div class="field">
                 <label for="email">Email <span aria-hidden="true">*</span></label>
-                <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="254">
+                <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="254" data-validate>
                 <span class="field-error" id="email-error"></span>
               </div>
               <div class="field">
                 <label for="phone">Phone <span aria-hidden="true">*</span></label>
-                <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required maxlength="30">
+                <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required maxlength="30" data-validate>
                 <span class="field-error" id="phone-error"></span>
               </div>
               <div class="field field-full">
                 <label for="website">Website URL <span aria-hidden="true">*</span></label>
-                <input id="website" name="website" type="url" autocomplete="url" inputmode="url" required placeholder="https://example.com" maxlength="2048">
-                <span class="field-hint">Include https:// or http://.</span>
+                <input id="website" name="website" type="url" autocomplete="url" inputmode="url" required placeholder="https://example.com" maxlength="2048" aria-describedby="website-hint" data-description-id="website-hint" data-validate>
+                <span class="field-hint" id="website-hint">Include https:// or http://.</span>
                 <span class="field-error" id="website-error"></span>
               </div>
               <div class="field field-full">
                 <label for="challenge">Primary business challenge <span aria-hidden="true">*</span></label>
-                <textarea id="challenge" name="primaryChallenge" required maxlength="2000" rows="5" placeholder="What is getting in the way, and what would you like to improve?"></textarea>
+                <textarea id="challenge" name="primaryChallenge" required maxlength="2000" rows="5" placeholder="What is getting in the way, and what would you like to improve?" data-validate></textarea>
                 <span class="field-error" id="challenge-error"></span>
               </div>
               <div class="field field-full">
                 <label for="notes">Optional notes</label>
-                <textarea id="notes" name="notes" maxlength="3000" rows="4" placeholder="Share any useful context, goals, or timing."></textarea>
+                <textarea id="notes" name="notes" maxlength="3000" rows="4" placeholder="Share any useful context, goals, or timing." data-validate></textarea>
                 <span class="field-error" id="notes-error"></span>
               </div>
             </div>
             <div class="consent-field">
-              <input id="consent" name="consent" type="checkbox" value="yes" required>
+              <input id="consent" name="consent" type="checkbox" value="business-snapshot-contact-consent-v1" required data-validate>
               <label for="consent">I agree that Rogers Holdings may use the information I provide to review my request and contact me about it. My information will be handled as described in the <a href="../privacy/">Privacy Policy</a>. <span aria-hidden="true">*</span></label>
               <span class="field-error" id="consent-error"></span>
+            </div>
+            <input name="formStartedAt" type="hidden" value="" data-form-started-at>
+            <!-- Spam control: `company` is a honeypot, not the legitimate `businessName` field. It must remain empty. -->
+            <div class="honeypot-field" aria-hidden="true">
+              <label for="company">Leave this field empty</label>
+              <input id="company" name="company" type="text" value="" tabindex="-1" autocomplete="off">
             </div>
             <div class="form-status" data-form-status role="status" aria-live="polite" tabindex="-1" hidden></div>
             <button class="button button-gold submit-button" type="submit" data-submit-button>Request My Business Snapshot</button>
             <p class="form-fallback">Having trouble with the form? Email <a href="mailto:briankeith@rogersholdingsllc.com?subject=Business%20Snapshot%20Request">briankeith@rogersholdingsllc.com</a> or call <a href="tel:+18594047300">859-404-7300</a>.</p>
           </form>
-          <div class="form-success" data-form-success hidden tabindex="-1">
-            <span aria-hidden="true">✓</span>
-            <p class="eyebrow">Request received</p>
-            <h2>Thank you. We’ll review what you shared.</h2>
-            <p>Rogers Holdings will contact you using the information provided after reviewing your request.</p>
-            <a class="text-link" href="../">Return to the homepage</a>
-          </div>
         </div>
       </div>
     </section>

@@ -26,12 +26,18 @@ if (menuToggle && navigation) {
   });
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') closeMenu();
-  });
+    if (!navigation.classList.contains('is-open')) return;
 
-  navigation.addEventListener('keydown', (event) => {
-    if (event.key !== 'Tab' || !navigation.classList.contains('is-open')) return;
-    const focusable = [menuToggle, ...navigation.querySelectorAll('a')];
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      closeMenu();
+      menuToggle.focus();
+      return;
+    }
+
+    if (event.key !== 'Tab') return;
+    const visibleLinks = [...navigation.querySelectorAll('a')].filter((link) => !link.hidden);
+    const focusable = [menuToggle, ...visibleLinks];
     const first = focusable[0];
     const last = focusable[focusable.length - 1];
     if (event.shiftKey && document.activeElement === first) {
@@ -116,11 +122,13 @@ document.querySelectorAll('[data-current-year]').forEach((element) => {
 const leadForm = document.querySelector('[data-lead-form]');
 
 if (leadForm) {
-  const submitButton = leadForm.querySelector('[data-submit-button]');
   const formStatus = leadForm.querySelector('[data-form-status]');
-  const successPanel = document.querySelector('[data-form-success]');
-  const formCard = leadForm.closest('.form-card');
-  const fields = [...leadForm.querySelectorAll('input, textarea')];
+  const formStartedAt = leadForm.querySelector('[data-form-started-at]');
+  const fields = [...leadForm.querySelectorAll('[data-validate]')];
+
+  if (formStartedAt) {
+    formStartedAt.value = new Date().toISOString();
+  }
 
   const validationMessages = {
     firstName: 'Enter your first name.',
@@ -141,9 +149,14 @@ if (leadForm) {
     const error = errorElement(field);
     if (!error) return field.validity.valid;
     const isValid = field.validity.valid;
+    const descriptionIds = field.dataset.descriptionId ? [field.dataset.descriptionId] : [];
+    if (!isValid) descriptionIds.push(error.id);
     field.setAttribute('aria-invalid', String(!isValid));
-    field.toggleAttribute('aria-describedby', !isValid);
-    if (!isValid) field.setAttribute('aria-describedby', error.id);
+    if (descriptionIds.length) {
+      field.setAttribute('aria-describedby', descriptionIds.join(' '));
+    } else {
+      field.removeAttribute('aria-describedby');
+    }
     error.textContent = isValid ? '' : (validationMessages[field.name] || field.validationMessage);
     return isValid;
   }
@@ -158,13 +171,13 @@ if (leadForm) {
     });
   });
 
-  leadForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
+  leadForm.addEventListener('submit', (event) => {
     formStatus.hidden = true;
     formStatus.className = 'form-status';
 
     const invalidFields = fields.filter((field) => !setFieldState(field));
     if (invalidFields.length) {
+      event.preventDefault();
       formStatus.textContent = 'Please review the highlighted fields and try again.';
       formStatus.classList.add('is-error');
       formStatus.hidden = false;
@@ -173,7 +186,17 @@ if (leadForm) {
     }
 
     const endpoint = leadForm.getAttribute('action')?.trim();
-    if (!endpoint) {
+    const endpointConfigured = leadForm.dataset.endpointConfigured === 'true';
+    let endpointIsSecure = false;
+
+    try {
+      endpointIsSecure = new URL(endpoint).protocol === 'https:';
+    } catch {
+      endpointIsSecure = false;
+    }
+
+    if (!endpointConfigured || !endpointIsSecure) {
+      event.preventDefault();
       formStatus.innerHTML = 'Online delivery is being connected. Please email <a href="mailto:briankeith@rogersholdingsllc.com?subject=Business%20Snapshot%20Request">briankeith@rogersholdingsllc.com</a> or call <a href="tel:+18594047300">859-404-7300</a> so we can help now.';
       formStatus.classList.add('is-error');
       formStatus.hidden = false;
@@ -181,34 +204,8 @@ if (leadForm) {
       return;
     }
 
-    submitButton.disabled = true;
-    submitButton.textContent = 'Sending…';
-    leadForm.setAttribute('aria-busy', 'true');
-
-    try {
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        body: new FormData(leadForm),
-        headers: { Accept: 'application/json' }
-      });
-      if (!response.ok) throw new Error(`Submission failed with status ${response.status}`);
-
-      if (typeof window.gtag === 'function') {
-        window.gtag('event', 'business_snapshot_submitted', { event_category: 'lead' });
-      }
-      leadForm.hidden = true;
-      formCard?.querySelector('.form-heading')?.setAttribute('hidden', '');
-      successPanel.hidden = false;
-      successPanel.focus();
-    } catch (error) {
-      formStatus.innerHTML = 'We could not send your request. Please try again, or contact us at <a href="mailto:briankeith@rogersholdingsllc.com?subject=Business%20Snapshot%20Request">briankeith@rogersholdingsllc.com</a> or <a href="tel:+18594047300">859-404-7300</a>.';
-      formStatus.classList.add('is-error');
-      formStatus.hidden = false;
-      formStatus.focus();
-    } finally {
-      submitButton.disabled = false;
-      submitButton.textContent = 'Request My Business Snapshot';
-      leadForm.removeAttribute('aria-busy');
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'business_snapshot_submitted', { event_category: 'lead' });
     }
   });
 }
