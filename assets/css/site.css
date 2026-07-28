@@ -2258,6 +2258,18 @@ h3 { letter-spacing: -.015em; }
 .phase3-owner li {
   padding-block: 16px;
 }
+@media (min-width: 961px) {
+  .phase3-owner-layout {
+    grid-template-columns: clamp(364px, 30vw, 430px) minmax(0, 1fr);
+    align-items: start;
+  }
+  .phase3-owner figure {
+    width: 100%;
+    margin-top: 36px;
+    margin-bottom: 0;
+    justify-self: stretch;
+  }
+}
 .home-page .phase3-final-cta {
   padding-block: clamp(54px, 4.2vw, 72px);
 }
