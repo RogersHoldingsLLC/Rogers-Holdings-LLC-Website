@@ -13,7 +13,6 @@ The production site is intentionally framework-free and is hosted through GitHub
 - `assets/js/site.js` contains lightweight navigation and analytics behavior.
 - `CNAME` preserves the `rogersholdingsllc.com` custom domain.
 - `robots.txt`, `sitemap.xml`, and the Google verification file support search visibility.
-- `time-tracker/` is a separate internal utility and is outside the public homepage scope.
 
 ## Local preview
 
@@ -74,6 +73,17 @@ This release preserves the Phase 1.5 homepage and adds:
 - A lead-form privacy policy
 - Updated homepage assessment CTAs and sitemap entries
 
+## Internal utility security
+
+Internal utilities must not be stored in this public GitHub Pages repository.
+
+Owner follow-up checklist:
+
+- Disable the existing Google Apps Script web app deployment.
+- Review the connected Google Sheet for unexpected or unauthorized records.
+- Move the utility to a private repository or rebuild it with authenticated Google Workspace access.
+- If the tracker is retained, create a new deployment URL restricted to authorized users only.
+
 ## Phase 1.5 visual elevation
 
 Phase 1.5 preserves the Business Optimization strategy and static architecture while refining the homepage into a more premium executive experience. The release includes:
@@ -94,5 +104,4 @@ Before publishing a homepage change:
 3. Validate headings, links, image alternatives, and color contrast.
 4. Confirm analytics, canonical metadata, social metadata, JSON-LD, favicons, and Search Console verification remain intact.
 5. Verify email, telephone, and featured-project links.
-6. Confirm `time-tracker/` remains unaffected.
-7. Review Git status and the complete diff before committing.
+6. Review Git status and the complete diff before committing.
