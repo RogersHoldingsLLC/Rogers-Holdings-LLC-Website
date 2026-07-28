@@ -2327,11 +2327,12 @@ h3 { letter-spacing: -.015em; }
     padding-top: 25px;
   }
   .phase3-owner figure {
-    width: min(100%, 520px);
+    width: 100%;
   }
   .phase3-owner figure img {
+    width: 100%;
     height: auto;
-    aspect-ratio: auto;
+    aspect-ratio: 3 / 2;
     object-fit: contain;
     object-position: center;
   }
