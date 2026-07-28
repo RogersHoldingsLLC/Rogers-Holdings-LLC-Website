@@ -138,6 +138,10 @@ Phase 3.6 preserves the approved homepage structure, content, typography, brandi
 
 Phase 3.7 strengthens the approved CSS-only material system so its archival paper, smoked graphite, executive black, brass, inset, and evidence surfaces remain visibly distinct at normal viewing distance. The pass adds controlled architectural lighting, clearer edge definition, deeper panel framing, a canonical brass treatment for primary Business Snapshot calls to action, and more deliberate Eastland and owner-image matting without changing homepage structure, copy, branding, dependencies, or interaction behavior.
 
+## Laptop space-efficiency pass
+
+The laptop space-efficiency pass preserves the approved Phase 3.7 visual direction while making the homepage hero content-driven and introducing a reusable responsive spacing scale for section rhythm, content relationships, panel rows, and composition gaps. It reduces unnecessary vertical space on common laptop screens without changing homepage copy, structure, typography sizes, material treatments, or mobile navigation behavior.
+
 ## Release checks
 
 Before publishing a homepage change:
