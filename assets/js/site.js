@@ -63,7 +63,7 @@ updateHeader();
 if ('IntersectionObserver' in window && !reduceMotion.matches) {
   document.documentElement.classList.add('motion-ready');
   const revealItems = document.querySelectorAll(
-    '.section-intro, .split-heading, .problem-card, .pillar-grid article, .process-list li, .services-grid article, .platform-copy, .platform-panel, .case-header, .case-image, .case-narrative article, .about-image, .about-copy, .why-statement, .why-principles li, .final-cta-inner'
+    '[data-reveal], .section-intro, .split-heading, .problem-card, .pillar-grid article, .process-list li, .services-grid article, .platform-copy, .platform-panel, .case-header, .case-image, .case-narrative article, .about-image, .about-copy, .why-statement, .why-principles li, .final-cta-inner'
   );
   revealItems.forEach((item, index) => {
     item.classList.add('reveal-item');

@@ -117,6 +117,31 @@ Phase 1.5 preserves the Business Optimization strategy and static architecture w
 - Lightweight entrance, reveal, progress, hover, navigation, and header motion
 - Reduced-motion support and improved mobile navigation focus behavior
 
+## Phase 3 homepage restructure
+
+Phase 3 reorganizes the production homepage around the approved executive consultancy direction while preserving the Phase 2 foundation, protected metadata, analytics, and lead path. The release includes:
+
+- A shorter, positioning-led hero with Business Snapshot as the primary action
+- Editorial business-problem framing and a clearer Assess, Prioritize, Improve methodology
+- A connected five-step implementation sequence
+- Grouped capabilities across digital optimization, websites, Google Workspace, automation, AI, and operational consulting
+- A restrained Business Optimization Platform presentation
+- A stronger evidence-led Eastland case study
+- Refined owner-led accountability, operating principles, final CTA, and footer sections
+- Homepage-scoped responsive styling and asset versioning for reliable deployment
+
+## Phase 3.6 material depth
+
+Phase 3.6 preserves the approved homepage structure, content, typography, branding, and interaction model while adding a restrained CSS-only surface system. The pass differentiates warm paper, elevated light, executive dark, graphite technical, inset, and evidence surfaces; refines section rhythm, case-study framing, and the owner image; and keeps grain, gradients, shadows, and hover depth intentionally subtle and dependency-free.
+
+## Phase 3.7 premium material art direction
+
+Phase 3.7 strengthens the approved CSS-only material system so its archival paper, smoked graphite, executive black, brass, inset, and evidence surfaces remain visibly distinct at normal viewing distance. The pass adds controlled architectural lighting, clearer edge definition, deeper panel framing, a canonical brass treatment for primary Business Snapshot calls to action, and more deliberate Eastland and owner-image matting without changing homepage structure, copy, branding, dependencies, or interaction behavior.
+
+## Laptop space-efficiency pass
+
+The laptop space-efficiency pass preserves the approved Phase 3.7 visual direction while making the homepage hero content-driven and introducing a reusable responsive spacing scale for section rhythm, content relationships, panel rows, and composition gaps. It reduces unnecessary vertical space on common laptop screens without changing homepage copy, structure, typography sizes, material treatments, or mobile navigation behavior.
+
 ## Release checks
 
 Before publishing a homepage change:
