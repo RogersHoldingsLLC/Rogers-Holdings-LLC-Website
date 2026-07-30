@@ -1,0 +1,15 @@
+{
+  "name": "rogers-holdings-business-snapshot-staging-gateway",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "check": "node --check src/worker.js && node --check src/staging-page.js",
+    "dev": "wrangler dev",
+    "deploy:staging": "wrangler deploy --env staging",
+    "deploy:dry-run": "wrangler deploy --env staging --dry-run"
+  },
+  "devDependencies": {
+    "wrangler": "^4.36.0"
+  }
+}
