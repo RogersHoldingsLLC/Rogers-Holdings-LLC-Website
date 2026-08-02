@@ -1,54 +1,40 @@
 import assert from 'node:assert/strict';
-import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
+import { __test } from '../src/worker.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const WEBSITE = path.resolve(ROOT, '..');
-const STAGING = path.join(WEBSITE, 'staging-gateway');
 
 function read(relative) {
   return fs.readFileSync(path.join(ROOT, relative), 'utf8');
 }
 
-function hash(file) {
-  return crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
-}
-
-test('production and staging gateways remain structurally isolated', () => {
+test('production gateway contains no staging dependency or public route', () => {
   const production = read('src/worker.js');
-  const staging = fs.readFileSync(path.join(STAGING, 'src/worker.js'), 'utf8');
   const productionConfig = read('wrangler.jsonc');
-  const stagingConfig = fs.readFileSync(path.join(STAGING, 'wrangler.jsonc'), 'utf8');
   const productionManifest = JSON.parse(productionConfig);
-  const stagingManifest = JSON.parse(stagingConfig);
   assert.equal(production.includes("from './staging-page.js'"), false);
   assert.equal(production.includes('NON_PRODUCTION'), false);
   assert.equal(production.includes('testSecret'), false);
   assert.equal(production.includes('testClientId'), false);
-  assert.equal(staging.includes('NON_PRODUCTION'), true);
-  assert.equal(staging.includes('testSecret'), true);
   assert.match(productionConfig, /business-snapshot-production/);
-  assert.match(stagingConfig, /business-snapshot-staging/);
-  assert.notEqual(productionManifest.name, stagingManifest.env.staging.name);
-  const productionNamespaces = new Set(
-    productionManifest.ratelimits.map((binding) => binding.namespace_id)
-  );
-  assert.equal(
-    stagingManifest.env.staging.ratelimits.some(
-      (binding) => productionNamespaces.has(binding.namespace_id)
-    ),
-    false
-  );
   assert.equal(productionManifest.workers_dev, false);
-  assert.notEqual(hash(path.join(ROOT, 'src/worker.js')), hash(path.join(STAGING, 'src/worker.js')));
+  assert.equal(productionManifest.preview_urls, false);
+  assert.equal(Object.hasOwn(productionManifest, 'routes'), false);
+  assert.equal(Object.hasOwn(productionManifest, 'route'), false);
+  assert.equal(Object.hasOwn(productionManifest, 'custom_domains'), false);
+  const namespaces = productionManifest.ratelimits.map(
+    (binding) => binding.namespace_id
+  );
+  assert.equal(new Set(namespaces).size, namespaces.length);
 });
 
 test('tracked production configuration contains no private values', () => {
   const files = [
     '.dev.vars.example',
+    'fixtures/website-activation-contract.json',
     'README.md',
     'package.json',
     'scripts/package.mjs',
@@ -77,14 +63,20 @@ test('source URL policy permits only the Turnstile provider literal', () => {
   }
 });
 
-test('current website public payload remains accepted by the production gateway', () => {
-  const site = fs.readFileSync(path.join(WEBSITE, 'assets/js/site.js'), 'utf8');
-  for (const field of [
-    'schemaVersion', 'requestId', 'fullName', 'businessName', 'email', 'phone',
-    'website', 'primaryChallenge', 'consent', 'turnstileToken'
-  ]) assert.match(site, new RegExp(`\\b${field}\\b`));
-  assert.equal(site.includes('receiverSecret'), false);
-  assert.equal(site.includes('clientKey'), false);
+test('committed website activation contract is disabled and gateway-compatible', () => {
+  const contract = JSON.parse(read('fixtures/website-activation-contract.json'));
+  assert.equal(contract.routeEnabled, false);
+  assert.equal(contract.schemaVersion, 'business-snapshot.v1');
+  assert.deepEqual(
+    [...contract.publicRequestFields].sort(),
+    [...__test.ALLOWED_FIELDS].sort()
+  );
+  assert.deepEqual(contract.publicSuccessFields, [
+    'ok', 'environment', 'requestId', 'retry'
+  ]);
+  assert.equal(contract.publicRequestFields.includes('receiverSecret'), false);
+  assert.equal(contract.publicRequestFields.includes('clientKey'), false);
+  assert.equal(contract.publicRequestFields.includes('acceptedAt'), false);
 });
 
 test('deployment package inventory is fixed and identifier-free', () => {

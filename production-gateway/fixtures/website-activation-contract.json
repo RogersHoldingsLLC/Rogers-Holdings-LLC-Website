@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "business-snapshot.v1",
+  "routeEnabled": false,
+  "publicRequestFields": [
+    "schemaVersion",
+    "requestId",
+    "fullName",
+    "businessName",
+    "email",
+    "phone",
+    "website",
+    "primaryChallenge",
+    "consent",
+    "turnstileToken",
+    "company"
+  ],
+  "publicSuccessFields": [
+    "ok",
+    "environment",
+    "requestId",
+    "retry"
+  ]
+}
