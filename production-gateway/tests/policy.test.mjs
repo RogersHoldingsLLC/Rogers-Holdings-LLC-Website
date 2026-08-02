@@ -63,7 +63,7 @@ test('source URL policy permits only the Turnstile provider literal', () => {
   }
 });
 
-test('committed website activation contract is disabled and gateway-compatible', () => {
+test('committed website and receiver activation contract is disabled and compatible', () => {
   const contract = JSON.parse(read('fixtures/website-activation-contract.json'));
   assert.equal(contract.routeEnabled, false);
   assert.equal(contract.schemaVersion, 'business-snapshot.v1');
@@ -74,9 +74,19 @@ test('committed website activation contract is disabled and gateway-compatible',
   assert.deepEqual(contract.publicSuccessFields, [
     'ok', 'environment', 'requestId', 'retry'
   ]);
+  assert.deepEqual(contract.receiverRequestFields, [
+    'schemaVersion', 'requestId', 'fullName', 'businessName', 'email', 'phone',
+    'website', 'primaryChallenge', 'consent', 'receiverSecret', 'clientKey'
+  ]);
+  assert.deepEqual(contract.receiverSuccessFields, [
+    'ok', 'environment', 'requestId', 'prospectId', 'retry'
+  ]);
   assert.equal(contract.publicRequestFields.includes('receiverSecret'), false);
   assert.equal(contract.publicRequestFields.includes('clientKey'), false);
   assert.equal(contract.publicRequestFields.includes('acceptedAt'), false);
+  assert.equal(contract.receiverRequestFields.includes('acceptedAt'), false);
+  assert.equal(contract.receiverRequestFields.includes('testSecret'), false);
+  assert.equal(contract.receiverRequestFields.includes('testClientId'), false);
 });
 
 test('deployment package inventory is fixed and identifier-free', () => {

@@ -19,5 +19,25 @@
     "environment",
     "requestId",
     "retry"
+  ],
+  "receiverRequestFields": [
+    "schemaVersion",
+    "requestId",
+    "fullName",
+    "businessName",
+    "email",
+    "phone",
+    "website",
+    "primaryChallenge",
+    "consent",
+    "receiverSecret",
+    "clientKey"
+  ],
+  "receiverSuccessFields": [
+    "ok",
+    "environment",
+    "requestId",
+    "prospectId",
+    "retry"
   ]
 }
