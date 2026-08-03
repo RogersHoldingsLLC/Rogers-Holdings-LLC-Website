@@ -48,20 +48,21 @@ Homepage assessment CTAs lead to the Business Snapshot intake page.
 
 ## Business Snapshot lead delivery
 
-The Business Snapshot page includes client-facing context, accessible validation, explicit consent, spam-control fields, analytics events, and an honest configuration-error state. A lead-delivery service has not been configured, so the page currently directs a validated submission to the published email and phone contact paths instead of claiming it was delivered.
+The approved production architecture uses an isolated Cloudflare Worker gateway
+at the planned public custom domain `intake.rogersholdingsllc.com`. The gateway
+validates the public request, enforces origin, rate-limit, honeypot, and
+Turnstile controls, authenticates privately to the production receiver, and
+returns a deliberately narrow public response.
 
-To connect delivery:
+The website remains disconnected while
+`data-endpoint-configured="false"`. In that state it makes no intake request,
+keeps the prepared-email fallback visible, and never shows online confirmation.
+The tracked Turnstile value is an inactive public-site-key placeholder until a
+separately approved production configuration step.
 
-1. Create a Google Sheet whose header row uses this exact order: `submittedAt`, `firstName`, `lastName`, `businessName`, `email`, `phone`, `website`, `primaryChallenge`, `notes`, `consent`, `formStartedAt`, `company`.
-2. Create and deploy a Google Apps Script web app with a `doPost(e)` handler. The form uses a normal browser `POST` (`application/x-www-form-urlencoded`) and may navigate to the HTML response returned by Apps Script.
-3. Treat `submittedAt` as a server-generated timestamp. Accept the remaining fields from the POST body in the order documented below.
-4. Perform authoritative required-field, length, email, phone, and URL validation in Apps Script. Browser validation improves usability but is not a security boundary.
-5. Require `consent` to equal `business-snapshot-contact-consent-v1`; record that exact value when accepted.
-6. Treat `company` as a honeypot spam-control field, not a business-name field. Legitimate submissions use `businessName` and must leave `company` empty.
-7. Parse `formStartedAt` as an ISO 8601 UTC timestamp (for example, `2026-07-27T14:05:30.123Z`) and compare it with the server time as part of the spam checks.
-8. Add rate limiting, safe logging, Sheet writes, and lead notifications. Return a branded confirmation page only after an accepted write; return an honest branded error page otherwise.
-9. In `business-snapshot/index.html`, set the form `action` to the production HTTPS Google Apps Script `/exec` URL and change `data-endpoint-configured="false"` to `"true"`. Both values are required; the client guard prevents submission while either is missing or insecure.
-10. Submit production test leads and confirm accepted writes, rejected invalid data, empty and populated honeypot behavior, timing checks, consent capture, notifications, and both confirmation and error response pages.
+Receiver endpoints, shared credentials, Turnstile secrets, deployment
+credentials, account identifiers, and BOP configuration must remain outside
+tracked website source.
 
 ### Form POST contract
 
@@ -69,19 +70,23 @@ The browser submits these fields:
 
 | Field | Required | Contract |
 | --- | --- | --- |
-| `firstName` | Yes | Plain text, maximum 80 characters |
-| `lastName` | Yes | Plain text, maximum 80 characters |
+| `fullName` | Yes | Plain text, maximum 120 characters |
 | `businessName` | Yes | Legitimate organization name, maximum 140 characters |
 | `email` | Yes | Email address, maximum 254 characters |
-| `phone` | Yes | Telephone number, maximum 30 characters |
-| `website` | Yes | Absolute `http://` or `https://` URL, maximum 2048 characters |
-| `primaryChallenge` | Yes | Plain text, maximum 2000 characters |
-| `notes` | No | Plain text, maximum 3000 characters |
+| `phone` | No | Telephone number, maximum 30 characters |
+| `website` | No | When provided, an absolute `http://` or `https://` URL, maximum 2048 characters |
+| `primaryChallenge` | Yes | Plain text, 20–2000 characters |
 | `consent` | Yes | Exact value `business-snapshot-contact-consent-v1` |
-| `formStartedAt` | Yes | Client-generated ISO 8601 UTC timestamp set when the form initializes |
-| `company` | No | Honeypot; must be empty. This is never the legitimate business name. |
+| `company` | No | Honeypot; must be empty. This is never the legitimate business name and is never stored for accepted submissions. |
 
-`submittedAt` is intentionally not sent by the browser. Apps Script must generate it from the server time before writing the row.
+An accepted public response must contain `ok: true`, `environment: production`,
+the exact submitted `requestId`, and Boolean `retry`. No prospect identifier or
+private receiver value is returned to the browser.
+
+Activation requires separate approval for DNS and nameserver migration,
+Cloudflare custom-domain and Turnstile configuration, the final website flag,
+and the first controlled production submission. Rollback removes the Worker
+custom-domain mapping first and restores the endpoint-disabled website state.
 
 ## Business Snapshot release
 
@@ -89,11 +94,20 @@ This release preserves the Phase 1.5 homepage and adds:
 
 - A dedicated Business Snapshot intake route
 - Clear expectations about audience, review scope, deliverable, and follow-up
-- Required contact and business fields, optional notes, and plain-English consent
+- Essential contact and business fields, optional phone and website, and plain-English consent
 - Accessible client-side validation and honest success/error handling
 - Direct email and phone paths for talking with Rogers Holdings
 - A lead-form privacy policy
 - Updated homepage assessment CTAs and sitemap entries
+
+## Premium Business Snapshot experience
+
+The premium experience branch preserves the established form contract and
+delivery architecture while elevating the customer-facing Snapshot journey.
+It adds executive offer positioning, mobile-first layouts, live completion
+progress, polished inline validation, restrained motion, a contained submission
+state, a confirmation experience with an optional review-conversation CTA, and
+clearer privacy, timing, scope, and human-review reassurance.
 
 ## Internal utility security
 

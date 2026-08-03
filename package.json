@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "test": "npm run test:business-snapshot-frontend",
+    "test:business-snapshot-frontend": "node tests/business-snapshot-frontend.test.js"
+  },
   "devDependencies": {
     "sharp": "latest"
   }
