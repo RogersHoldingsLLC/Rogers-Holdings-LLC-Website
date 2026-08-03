@@ -31,6 +31,18 @@ test('production gateway contains no staging dependency or public route', () => 
   assert.equal(new Set(namespaces).size, namespaces.length);
 });
 
+test('planned custom domain remains review-only and disconnected', () => {
+  const contract = JSON.parse(read('fixtures/website-activation-contract.json'));
+  const productionManifest = JSON.parse(read('wrangler.jsonc'));
+  assert.equal(contract.plannedCustomDomain, 'intake.rogersholdingsllc.com');
+  assert.equal(contract.routeEnabled, false);
+  assert.equal(contract.websiteEndpointConfigured, false);
+  assert.equal(contract.turnstileSiteKeyConfigured, false);
+  assert.equal(productionManifest.workers_dev, false);
+  assert.equal(productionManifest.preview_urls, false);
+  assert.equal(Object.hasOwn(productionManifest, 'routes'), false);
+});
+
 test('tracked production configuration contains no private values', () => {
   const files = [
     '.dev.vars.example',
@@ -83,6 +95,8 @@ test('committed website and receiver activation contract is disabled and compati
   ]);
   assert.equal(contract.publicRequestFields.includes('receiverSecret'), false);
   assert.equal(contract.publicRequestFields.includes('clientKey'), false);
+  assert.equal(contract.publicRequestFields.includes('company'), true);
+  assert.equal(contract.publicRequestFields.includes('formStartedAt'), false);
   assert.equal(contract.publicRequestFields.includes('acceptedAt'), false);
   assert.equal(contract.receiverRequestFields.includes('acceptedAt'), false);
   assert.equal(contract.receiverRequestFields.includes('testSecret'), false);

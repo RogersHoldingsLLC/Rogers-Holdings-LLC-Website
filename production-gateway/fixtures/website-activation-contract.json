@@ -1,6 +1,9 @@
 {
   "schemaVersion": "business-snapshot.v1",
   "routeEnabled": false,
+  "plannedCustomDomain": "intake.rogersholdingsllc.com",
+  "websiteEndpointConfigured": false,
+  "turnstileSiteKeyConfigured": false,
   "publicRequestFields": [
     "schemaVersion",
     "requestId",
