@@ -22,6 +22,15 @@ test('production gateway contains no staging dependency or public route', () => 
   assert.match(productionConfig, /business-snapshot-production/);
   assert.equal(productionManifest.workers_dev, false);
   assert.equal(productionManifest.preview_urls, false);
+  assert.equal(productionManifest.vars.BUSINESS_SNAPSHOT_ENVIRONMENT, 'production');
+  assert.equal(
+    productionManifest.vars.BUSINESS_SNAPSHOT_TURNSTILE_ACTION,
+    'business_snapshot'
+  );
+  assert.equal(
+    productionManifest.vars.BUSINESS_SNAPSHOT_TURNSTILE_HOSTNAME,
+    'rogersholdingsllc.com'
+  );
   assert.equal(Object.hasOwn(productionManifest, 'routes'), false);
   assert.equal(Object.hasOwn(productionManifest, 'route'), false);
   assert.equal(Object.hasOwn(productionManifest, 'custom_domains'), false);
