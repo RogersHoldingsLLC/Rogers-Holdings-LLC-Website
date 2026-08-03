@@ -10,7 +10,9 @@
     "head_sampling_rate": 1
   },
   "vars": {
-    "BUSINESS_SNAPSHOT_ENVIRONMENT": "production"
+    "BUSINESS_SNAPSHOT_ENVIRONMENT": "production",
+    "BUSINESS_SNAPSHOT_TURNSTILE_ACTION": "business_snapshot",
+    "BUSINESS_SNAPSHOT_TURNSTILE_HOSTNAME": "rogersholdingsllc.com"
   },
   "ratelimits": [
     {
