@@ -1,0 +1,14 @@
+{
+  "name": "rogers-holdings-business-snapshot-production-gateway",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node --check src/worker.js && node --check scripts/package.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "package": "node scripts/package.mjs",
+    "deploy:dry-run": "wrangler deploy --dry-run --outdir .wrangler-dry-run"
+  },
+  "devDependencies": {
+    "wrangler": "4.115.0"
+  }
+}

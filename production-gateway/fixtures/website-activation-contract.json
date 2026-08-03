@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "business-snapshot.v1",
+  "routeEnabled": false,
+  "plannedCustomDomain": "intake.rogersholdingsllc.com",
+  "websiteEndpointConfigured": false,
+  "turnstileSiteKeyConfigured": false,
+  "publicRequestFields": [
+    "schemaVersion",
+    "requestId",
+    "fullName",
+    "businessName",
+    "email",
+    "phone",
+    "website",
+    "primaryChallenge",
+    "consent",
+    "turnstileToken",
+    "company"
+  ],
+  "publicSuccessFields": [
+    "ok",
+    "environment",
+    "requestId",
+    "retry"
+  ],
+  "receiverRequestFields": [
+    "schemaVersion",
+    "requestId",
+    "fullName",
+    "businessName",
+    "email",
+    "phone",
+    "website",
+    "primaryChallenge",
+    "consent",
+    "receiverSecret",
+    "clientKey"
+  ],
+  "receiverSuccessFields": [
+    "ok",
+    "environment",
+    "requestId",
+    "prospectId",
+    "retry"
+  ]
+}
