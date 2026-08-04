@@ -297,7 +297,11 @@
         <figure class="executive-scene executive-scene--landscape executive-scene--paper" data-reveal data-scene-parallax>
           <div class="executive-scene__frame">
             <div class="executive-scene__media">
-              <img class="executive-scene__image" src="assets/images/brand/rh-executive-materials-01.png" width="1536" height="1024" loading="lazy" decoding="async" alt="Rogers Holdings executive branding materials">
+              <picture>
+                <source type="image/avif" srcset="assets/images/brand/rh-executive-materials-01-480.avif 480w, assets/images/brand/rh-executive-materials-01-768.avif 768w" sizes="(max-width: 680px) calc(100vw - 40px), (max-width: 960px) min(560px, calc(100vw - 64px)), 620px">
+                <source type="image/webp" srcset="assets/images/brand/rh-executive-materials-01-480.webp 480w, assets/images/brand/rh-executive-materials-01-768.webp 768w" sizes="(max-width: 680px) calc(100vw - 40px), (max-width: 960px) min(560px, calc(100vw - 64px)), 620px">
+                <img class="executive-scene__image" src="assets/images/brand/rh-executive-materials-01-768.jpg" width="768" height="512" loading="lazy" decoding="async" alt="Rogers Holdings executive branding materials">
+              </picture>
             </div>
           </div>
           <figcaption class="executive-scene__caption"><span>Executive Materials</span><small>Rogers Holdings visual standard</small></figcaption>

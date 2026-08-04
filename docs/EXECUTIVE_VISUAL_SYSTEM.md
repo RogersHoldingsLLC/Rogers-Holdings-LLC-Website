@@ -15,6 +15,13 @@ The system should always feel credible, quiet, useful, and connected to a real b
 - Editorial spacing should leave enough room for each visual to read as evidence.
 - Shadows should suggest physical depth without making the artwork appear to float.
 
+### Logo contrast rule
+
+- Light backgrounds use `assets/images/brand/rogers-holdings-logo.png`.
+- Dark or black backgrounds use `assets/images/brand/rogers-holdings-logo-reversed.png`.
+- The reversed asset contains the white RH mark and preserved gold frame. Do not
+  use CSS filters as the permanent logo treatment.
+
 ## Canonical component
 
 Use this structure for all executive artwork:
@@ -24,11 +31,16 @@ Use this structure for all executive artwork:
   data-reveal data-scene-parallax>
   <div class="executive-scene__frame">
     <div class="executive-scene__media">
-      <img class="executive-scene__image"
-        src="assets/images/brand/example-scene.png"
-        width="1536" height="1024"
-        loading="lazy" decoding="async"
-        alt="Plain-language description of the business artifact">
+      <picture>
+        <source type="image/avif" srcset="example-480.avif 480w, example-768.avif 768w"
+          sizes="(max-width: 680px) calc(100vw - 40px), 620px">
+        <source type="image/webp" srcset="example-480.webp 480w, example-768.webp 768w"
+          sizes="(max-width: 680px) calc(100vw - 40px), 620px">
+        <img class="executive-scene__image"
+          src="example-768.jpg" width="768" height="512"
+          loading="lazy" decoding="async"
+          alt="Plain-language description of the business artifact">
+      </picture>
     </div>
   </div>
   <figcaption class="executive-scene__caption">
@@ -118,7 +130,7 @@ When `prefers-reduced-motion: reduce` is active, reveals are immediately visible
 - Keep screens and document text sparse enough to avoid illegible or invented copy.
 - Do not include unsupported performance claims, fabricated client names, awards, or metrics.
 - Do not bake the Rogers Holdings logo into every scene. Use it only where a real report cover, folio, or branded material would naturally carry it.
-- Export final web artwork as AVIF or WebP when browser support and the publishing workflow permit; keep a high-quality PNG master.
+- Export final web artwork as AVIF or WebP when browser support and the publishing workflow permit; keep a high-quality PNG master only as a source asset.
 - Use descriptive filenames such as `rh-business-snapshot-report-01.webp`.
 
 ## Placement rules
@@ -127,6 +139,9 @@ When `prefers-reduced-motion: reduce` is active, reveals are immediately visible
 - Let the scene support nearby copy; do not repeat the same information inside the image.
 - Use `loading="lazy"` below the first viewport. A first-viewport scene may use `fetchpriority="high"` if performance testing supports it.
 - Always supply intrinsic width and height to prevent layout shift.
+- Prefer a `<picture>` source set with AVIF, WebP, and JPEG fallback. The
+  Executive Materials scene uses 480px and 768px derivatives and a maximum
+  display width of 620px.
 - Write alternative text that describes the meaningful artifact, not its visual style.
 - Do not put text or buttons over executive artwork.
 - Do not combine the executive frame with an additional page-specific border or shadow.
