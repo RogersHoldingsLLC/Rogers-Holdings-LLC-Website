@@ -1,7 +1,8 @@
 {
   "scripts": {
-    "test": "npm run test:business-snapshot-frontend",
-    "test:business-snapshot-frontend": "node tests/business-snapshot-frontend.test.js"
+    "test": "npm run test:business-snapshot-frontend && npm run test:homepage-premium-trust-conversion",
+    "test:business-snapshot-frontend": "node tests/business-snapshot-frontend.test.js",
+    "test:homepage-premium-trust-conversion": "node tests/homepage-premium-trust-conversion.test.js"
   },
   "devDependencies": {
     "sharp": "latest"

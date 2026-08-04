@@ -164,6 +164,10 @@ The desktop owner section gives the framed landscape image greater presence in i
 
 The executive visual system turns the approved Executive Materials scene into a reusable component for reports, assessments, plans, process maps, dashboards, strategy sessions, and automation workspaces. Shared framing, material variants, responsive aspect ratios, captions, restrained elevation, reveal behavior, optional slow parallax, and reduced-motion support are documented in `docs/EXECUTIVE_VISUAL_SYSTEM.md`.
 
+## Homepage premium trust and conversion refinement
+
+This refinement preserves the approved homepage visual system while improving mobile navigation reliability, Business Snapshot clarity, methodology rhythm, capability grouping, platform positioning, and featured-project specificity. It also replaces the large executive-materials download with responsive AVIF, WebP, and JPEG sources while retaining lazy loading and fixed image dimensions.
+
 ## Release checks
 
 Before publishing a homepage change:
