@@ -2477,11 +2477,12 @@ h3 { letter-spacing: -.015em; }
 }
 @media (min-width: 961px) {
   .phase3-owner-layout {
-    grid-template-columns: clamp(364px, 30vw, 430px) minmax(0, 1fr);
+    grid-template-columns: minmax(420px, .95fr) minmax(0, 1.05fr);
     align-items: start;
   }
   .phase3-owner figure {
     width: 100%;
+    max-width: 620px;
     margin-top: 36px;
     margin-bottom: 0;
     justify-self: stretch;
