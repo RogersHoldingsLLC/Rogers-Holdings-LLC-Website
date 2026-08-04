@@ -71,7 +71,7 @@ function fetchHarness(options = {}) {
       if (options.turnstileReject) {
         return Response.json({
           success: false,
-          'error-codes': ['private-provider-diagnostic']
+          'error-codes': options.turnstileErrorCodes || ['private-provider-diagnostic']
         });
       }
       return Response.json({
@@ -125,11 +125,24 @@ async function run(body = payload(), options = {}) {
     {},
     {
       fetch: harness.fetcher,
-      receiverTimeoutMs: options.receiverTimeoutMs
+      receiverTimeoutMs: options.receiverTimeoutMs,
+      now: options.now
     }
   );
   const raw = await response.text();
   return { response, body: JSON.parse(raw), raw, calls: harness.calls };
+}
+
+async function captureLogs(action) {
+  const entries = [];
+  const original = console.log;
+  console.log = (entry) => entries.push(String(entry));
+  try {
+    const result = await action();
+    return { result, entries: entries.map((entry) => JSON.parse(entry)) };
+  } finally {
+    console.log = original;
+  }
 }
 
 test('valid production request transforms to the exact immutable receiver contract', async () => {
@@ -321,20 +334,70 @@ test('idempotent retry preserves the public request identity and retry flag', as
   assert.equal(result.body.retry, true);
 });
 
+test('success logs contain privacy-safe correlation, retry, stage, and durations', async () => {
+  let clock = 1000;
+  const { entries } = await captureLogs(() => run(payload(), {
+    retry: true,
+    now: () => {
+      clock += 7;
+      return clock;
+    }
+  }));
+  assert.equal(entries.length, 1);
+  const [entry] = entries;
+  assert.equal(entry.event, 'request_accepted');
+  assert.equal(entry.environment, 'production');
+  assert.equal(entry.status, 200);
+  assert.equal(entry.stage, 'complete');
+  assert.match(entry.request_ref, /^[a-f0-9]{24}$/);
+  assert.notEqual(entry.request_ref, REQUEST_ID);
+  assert.equal(entry.retry, true);
+  assert.equal(Number.isInteger(entry.duration_ms), true);
+  assert.equal(Number.isInteger(entry.receiver_duration_ms), true);
+  assert.equal(entry.duration_ms >= entry.receiver_duration_ms, true);
+  assert.equal(entry.turnstile_category, '');
+});
+
+test('Turnstile logs expose only an allowlisted rejection category', async () => {
+  const { result, entries } = await captureLogs(() => run(payload(), {
+    turnstileReject: true,
+    turnstileErrorCodes: ['timeout-or-duplicate', 'private-provider-diagnostic']
+  }));
+  assert.equal(result.response.status, 400);
+  assert.equal(entries.length, 1);
+  assert.equal(entries[0].event, 'turnstile_rejected');
+  assert.equal(entries[0].stage, 'turnstile');
+  assert.equal(entries[0].turnstile_category, 'timeout_or_duplicate');
+  assert.match(entries[0].request_ref, /^[a-f0-9]{24}$/);
+  assert.equal(JSON.stringify(entries).includes('private-provider-diagnostic'), false);
+});
+
+test('receiver failures retain correlation and receiver duration without private detail', async () => {
+  const { result, entries } = await captureLogs(() => run(payload(), {
+    receiverTimeout: true,
+    receiverTimeoutMs: 5
+  }));
+  assert.equal(result.response.status, 503);
+  assert.equal(entries.length, 1);
+  assert.equal(entries[0].event, 'receiver_timeout');
+  assert.equal(entries[0].stage, 'receiver');
+  assert.match(entries[0].request_ref, /^[a-f0-9]{24}$/);
+  assert.equal(Number.isInteger(entries[0].receiver_duration_ms), true);
+  assert.equal(entries[0].retry, null);
+  assert.equal(JSON.stringify(entries).includes('private timeout'), false);
+});
+
 test('logs contain no secret, client key, request identity, or personal fields', async () => {
-  const entries = [];
-  const original = console.log;
-  console.log = (entry) => entries.push(String(entry));
-  try {
-    await run(payload({
+  const { entries } = await captureLogs(() => run(payload({
       fullName: 'Unique Sensitive Fixture',
       businessName: 'Unique Fixture Business',
-      email: 'unique-sensitive@example.invalid'
-    }));
-  } finally {
-    console.log = original;
-  }
-  const logs = entries.join('\n');
+      email: 'unique-sensitive@example.invalid',
+      phone: '+1-555-0199',
+      website: 'https://unique-sensitive.example.invalid',
+      primaryChallenge: 'Unique sensitive free-text challenge.',
+      turnstileToken: 'unique-sensitive-turnstile-token'
+  })));
+  const logs = JSON.stringify(entries);
   for (const prohibited of [
     REQUEST_ID,
     'fixture-receiver-credential',
@@ -342,10 +405,37 @@ test('logs contain no secret, client key, request identity, or personal fields',
     'Unique Sensitive Fixture',
     'Unique Fixture Business',
     'unique-sensitive@example.invalid',
+    '+1-555-0199',
+    'https://unique-sensitive.example.invalid',
+    'Unique sensitive free-text challenge.',
+    'unique-sensitive-turnstile-token',
+    '192.0.2.20',
+    'production-gateway-test',
     'clientKey',
     RECEIVER
   ]) assert.equal(logs.includes(prohibited), false);
   assert.match(logs, /"event":"request_accepted"/);
+  assert.match(logs, /"request_ref":"[a-f0-9]{24}"/);
+});
+
+test('logs omit raw upstream bodies and private exception details', async () => {
+  const malformed = await captureLogs(() => run(payload(), { receiverHtml: true }));
+  assert.equal(malformed.result.response.status, 503);
+  assert.equal(JSON.stringify(malformed.entries).includes('private upstream page'), false);
+
+  const privateFailure = new Error('private stack trace marker');
+  privateFailure.stack = 'private stack trace body';
+  const unexpected = await captureLogs(() => run(payload(), {
+    env: {
+      BUSINESS_SNAPSHOT_RATE_LIMITER: {
+        limit: async () => { throw privateFailure; }
+      }
+    }
+  }));
+  const unexpectedLogs = JSON.stringify(unexpected.entries);
+  assert.equal(unexpected.result.response.status, 503);
+  assert.equal(unexpectedLogs.includes('private stack trace marker'), false);
+  assert.equal(unexpectedLogs.includes('private stack trace body'), false);
 });
 
 test('route, method, and preflight handling remain narrow and typed', async () => {

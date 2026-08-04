@@ -41,15 +41,47 @@ const JSON_HEADERS = {
   'X-Content-Type-Options': 'nosniff',
   'Referrer-Policy': 'no-referrer'
 };
+const LOG_STAGES = new Set([
+  'configuration',
+  'origin',
+  'validation',
+  'rate_limit',
+  'turnstile',
+  'receiver',
+  'complete'
+]);
+const TURNSTILE_LOG_CATEGORIES = new Set([
+  'configuration_incomplete',
+  'missing_token',
+  'provider_unavailable',
+  'provider_response_invalid',
+  'missing_input_secret',
+  'invalid_input_secret',
+  'missing_input_response',
+  'invalid_input_response',
+  'bad_request',
+  'timeout_or_duplicate',
+  'internal_error',
+  'action_mismatch',
+  'hostname_mismatch',
+  'unknown'
+]);
 
 class GatewayError extends Error {
-  constructor(code, safeMessage, status = 400, event = 'request_rejected') {
+  constructor(
+    code,
+    safeMessage,
+    status = 400,
+    event = 'request_rejected',
+    logMetadata = {}
+  ) {
     super(event);
     this.name = 'GatewayError';
     this.code = code;
     this.safeMessage = safeMessage;
     this.status = status;
     this.event = event;
+    this.logMetadata = logMetadata;
   }
 }
 
@@ -77,12 +109,47 @@ function publicError(error, requestId, origin) {
 }
 
 function safeLog(event, metadata = {}) {
+  const requestRef = /^[a-f0-9]{24}$/.test(String(metadata.requestRef || ''))
+    ? String(metadata.requestRef)
+    : '';
+  const stage = LOG_STAGES.has(metadata.stage) ? metadata.stage : 'validation';
+  const turnstileCategory = TURNSTILE_LOG_CATEGORIES.has(
+    metadata.turnstileCategory
+  ) ? metadata.turnstileCategory : '';
+  const durationMs = Number.isFinite(metadata.durationMs)
+    ? Math.max(0, Math.round(metadata.durationMs))
+    : 0;
+  const receiverDurationMs = Number.isFinite(metadata.receiverDurationMs)
+    ? Math.max(0, Math.round(metadata.receiverDurationMs))
+    : null;
   console.log(JSON.stringify({
     event,
     environment: 'production',
     code: String(metadata.code || ''),
-    status: Number(metadata.status || 0)
+    status: Number(metadata.status || 0),
+    stage,
+    request_ref: requestRef,
+    retry: typeof metadata.retry === 'boolean' ? metadata.retry : null,
+    duration_ms: durationMs,
+    receiver_duration_ms: receiverDurationMs,
+    turnstile_category: turnstileCategory
   }));
+}
+
+function elapsedMilliseconds(startedAt, now) {
+  const elapsed = Number(now()) - Number(startedAt);
+  return Number.isFinite(elapsed) ? Math.max(0, Math.round(elapsed)) : 0;
+}
+
+function turnstileRejectionCategory(result) {
+  const codes = Array.isArray(result?.['error-codes'])
+    ? result['error-codes']
+    : [];
+  for (const code of codes) {
+    const normalized = String(code || '').toLowerCase().replace(/-/g, '_');
+    if (TURNSTILE_LOG_CATEGORIES.has(normalized)) return normalized;
+  }
+  return 'unknown';
 }
 
 function requiredEnvironment(env) {
@@ -347,7 +414,8 @@ async function verifyTurnstile(submission, request, env, fetcher) {
       'BUSINESS_SNAPSHOT_CONFIGURATION',
       SAFE_MESSAGES.BUSINESS_SNAPSHOT_CONFIGURATION,
       503,
-      'turnstile_configuration_incomplete'
+      'turnstile_configuration_incomplete',
+      { turnstileCategory: 'configuration_incomplete' }
     );
   }
   if (!submission.turnstileToken) {
@@ -355,7 +423,8 @@ async function verifyTurnstile(submission, request, env, fetcher) {
       'BUSINESS_SNAPSHOT_VALIDATION',
       'Human verification is required.',
       400,
-      'turnstile_missing'
+      'turnstile_missing',
+      { turnstileCategory: 'missing_token' }
     );
   }
   const form = new FormData();
@@ -376,7 +445,8 @@ async function verifyTurnstile(submission, request, env, fetcher) {
       'BUSINESS_SNAPSHOT_TEMPORARY_FAILURE',
       'Human verification is temporarily unavailable.',
       503,
-      'turnstile_unavailable'
+      'turnstile_unavailable',
+      { turnstileCategory: 'provider_unavailable' }
     );
   }
   if (!response.ok) {
@@ -384,7 +454,8 @@ async function verifyTurnstile(submission, request, env, fetcher) {
       'BUSINESS_SNAPSHOT_TEMPORARY_FAILURE',
       'Human verification is temporarily unavailable.',
       503,
-      'turnstile_unavailable'
+      'turnstile_unavailable',
+      { turnstileCategory: 'provider_unavailable' }
     );
   }
   let result;
@@ -395,7 +466,8 @@ async function verifyTurnstile(submission, request, env, fetcher) {
       'BUSINESS_SNAPSHOT_TEMPORARY_FAILURE',
       'Human verification is temporarily unavailable.',
       503,
-      'turnstile_response_invalid'
+      'turnstile_response_invalid',
+      { turnstileCategory: 'provider_response_invalid' }
     );
   }
   if (!result || result.success !== true) {
@@ -403,7 +475,8 @@ async function verifyTurnstile(submission, request, env, fetcher) {
       'BUSINESS_SNAPSHOT_VALIDATION',
       'Human verification failed. Please try again.',
       400,
-      'turnstile_rejected'
+      'turnstile_rejected',
+      { turnstileCategory: turnstileRejectionCategory(result) }
     );
   }
   if (
@@ -414,7 +487,8 @@ async function verifyTurnstile(submission, request, env, fetcher) {
       'BUSINESS_SNAPSHOT_VALIDATION',
       'Human verification failed. Please try again.',
       400,
-      'turnstile_action_mismatch'
+      'turnstile_action_mismatch',
+      { turnstileCategory: 'action_mismatch' }
     );
   }
   if (
@@ -425,7 +499,8 @@ async function verifyTurnstile(submission, request, env, fetcher) {
       'BUSINESS_SNAPSHOT_VALIDATION',
       'Human verification failed. Please try again.',
       400,
-      'turnstile_hostname_mismatch'
+      'turnstile_hostname_mismatch',
+      { turnstileCategory: 'hostname_mismatch' }
     );
   }
 }
@@ -575,6 +650,8 @@ async function callReceiver(
 
 export async function handleRequest(request, env, _ctx, dependencies = {}) {
   const fetcher = dependencies.fetch || globalThis.fetch;
+  const now = dependencies.now || Date.now;
+  const startedAt = now();
   const receiverTimeoutMs =
     dependencies.receiverTimeoutMs || RECEIVER_TIMEOUT_MS;
   const url = new URL(request.url);
@@ -617,10 +694,15 @@ export async function handleRequest(request, env, _ctx, dependencies = {}) {
   }
 
   let requestId = '';
+  let requestRef = '';
   let origin = '';
+  let stage = 'configuration';
+  let receiverDurationMs = null;
   try {
     requiredEnvironment(env);
+    stage = 'origin';
     origin = allowedOrigin(request, env);
+    stage = 'validation';
     const contentType = (request.headers.get('Content-Type') || '')
       .toLowerCase()
       .split(';')[0]
@@ -653,24 +735,47 @@ export async function handleRequest(request, env, _ctx, dependencies = {}) {
     }
     const submission = parseAndValidate(new TextDecoder().decode(buffer));
     requestId = submission.requestId;
+    requestRef = await sha256Prefix(requestId);
+    stage = 'rate_limit';
     const clientKey = await enforceRateLimits(submission, request, env);
+    stage = 'turnstile';
     await verifyTurnstile(submission, request, env, fetcher);
-    const result = await callReceiver(
-      submission,
-      clientKey,
-      env,
-      fetcher,
-      receiverTimeoutMs
-    );
+    stage = 'receiver';
+    const receiverStartedAt = now();
+    let result;
+    try {
+      result = await callReceiver(
+        submission,
+        clientKey,
+        env,
+        fetcher,
+        receiverTimeoutMs
+      );
+    } finally {
+      receiverDurationMs = elapsedMilliseconds(receiverStartedAt, now);
+    }
+    stage = 'complete';
     safeLog('request_accepted', {
-      status: 200
+      status: 200,
+      stage,
+      requestRef,
+      retry: result.retry,
+      durationMs: elapsedMilliseconds(startedAt, now),
+      receiverDurationMs
     });
     return jsonResponse(result, 200, origin);
   } catch (error) {
     const response = publicError(error, requestId, origin);
     safeLog(error instanceof GatewayError ? error.event : 'unexpected_error', {
       code: error instanceof GatewayError ? error.code : 'BUSINESS_SNAPSHOT_TEMPORARY_FAILURE',
-      status: response.status
+      status: response.status,
+      stage,
+      requestRef,
+      durationMs: elapsedMilliseconds(startedAt, now),
+      receiverDurationMs,
+      turnstileCategory: error instanceof GatewayError
+        ? error.logMetadata.turnstileCategory
+        : ''
     });
     return response;
   }
@@ -688,5 +793,6 @@ export const __test = {
   MAX_BODY_BYTES,
   RECEIVER_TIMEOUT_MS,
   TURNSTILE_TIMEOUT_MS,
-  parseAndValidate
+  parseAndValidate,
+  turnstileRejectionCategory
 };

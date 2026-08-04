@@ -30,6 +30,8 @@ const {
   businessSnapshotEndpointIsConfigured,
   businessSnapshotResponseIsAccepted,
   classifyBusinessSnapshotFailure,
+  createBusinessSnapshotJourneyTracker,
+  createBusinessSnapshotRuntimeErrorReporter,
   trackBusinessSnapshotEvent
 } = require('../assets/js/site.js');
 
@@ -147,6 +149,9 @@ trackBusinessSnapshotEvent('business_snapshot_submitted');
 trackBusinessSnapshotEvent('business_snapshot_email_prepared');
 trackBusinessSnapshotEvent('business_snapshot_submission_failed', 'ambiguous_network');
 trackBusinessSnapshotEvent('business_snapshot_submission_failed', 'private-detail-must-not-pass');
+trackBusinessSnapshotEvent('business_snapshot_abandoned', 'submit_attempted');
+trackBusinessSnapshotEvent('business_snapshot_abandoned', 'private-stage-must-not-pass');
+trackBusinessSnapshotEvent('business_snapshot_runtime_failed', 'window_error');
 assert.deepEqual(analytics[0], ['event', 'business_snapshot_submitted', { event_category: 'lead' }]);
 assert.deepEqual(analytics[1], ['event', 'business_snapshot_email_prepared', { event_category: 'lead' }]);
 assert.deepEqual(analytics[2], ['event', 'business_snapshot_submission_failed', {
@@ -154,8 +159,66 @@ assert.deepEqual(analytics[2], ['event', 'business_snapshot_submission_failed', 
   failure_category: 'ambiguous_network'
 }]);
 assert.deepEqual(analytics[3], ['event', 'business_snapshot_submission_failed', { event_category: 'lead' }]);
+assert.deepEqual(analytics[4], ['event', 'business_snapshot_abandoned', {
+  event_category: 'lead',
+  journey_stage: 'submit_attempted',
+  transport_type: 'beacon'
+}]);
+assert.deepEqual(analytics[5], ['event', 'business_snapshot_abandoned', { event_category: 'lead' }]);
+assert.deepEqual(analytics[6], ['event', 'business_snapshot_runtime_failed', {
+  event_category: 'lead',
+  runtime_category: 'window_error'
+}]);
 assert.equal(JSON.stringify(analytics).includes(requestId), false);
 assert.equal(JSON.stringify(analytics).includes('turnstile-token'), false);
 assert.equal(JSON.stringify(analytics).includes('jordan@example.com'), false);
+assert.equal(JSON.stringify(analytics).includes('private-stage-must-not-pass'), false);
+
+const journeyEvents = [];
+const journey = createBusinessSnapshotJourneyTracker((...args) => journeyEvents.push(args));
+assert.equal(journey.currentStage(), 'not_started');
+assert.equal(journey.start(), true);
+assert.equal(journey.start(), false, 'form start is emitted once');
+assert.equal(journey.submitAttempted(), true);
+assert.equal(journey.fail(), true);
+assert.equal(journey.abandon(), true);
+assert.equal(journey.abandon(), false, 'abandonment is emitted once');
+assert.deepEqual(journeyEvents, [
+  ['business_snapshot_form_started'],
+  ['business_snapshot_submit_attempted'],
+  ['business_snapshot_abandoned', 'failed']
+]);
+
+const completedJourneyEvents = [];
+const completedJourney = createBusinessSnapshotJourneyTracker(
+  (...args) => completedJourneyEvents.push(args)
+);
+completedJourney.start();
+completedJourney.submitAttempted();
+completedJourney.complete();
+assert.equal(completedJourney.abandon(), false, 'accepted forms are never abandoned');
+assert.deepEqual(completedJourneyEvents, [
+  ['business_snapshot_form_started'],
+  ['business_snapshot_submit_attempted']
+]);
+
+const runtimeEvents = [];
+const reportRuntimeError = createBusinessSnapshotRuntimeErrorReporter(
+  (...args) => runtimeEvents.push(args)
+);
+assert.equal(reportRuntimeError('private-runtime-detail'), false);
+assert.equal(reportRuntimeError('window_error'), true);
+assert.equal(reportRuntimeError('unhandled_rejection'), false, 'runtime failure is emitted once');
+assert.deepEqual(runtimeEvents, [
+  ['business_snapshot_runtime_failed', 'window_error']
+]);
+assert.equal(JSON.stringify(runtimeEvents).includes('private-runtime-detail'), false);
+
+assert.match(source, /business_snapshot_form_started/);
+assert.match(source, /business_snapshot_submit_attempted/);
+assert.match(source, /business_snapshot_abandoned/);
+assert.match(source, /business_snapshot_runtime_failed/);
+assert.match(source, /window\.addEventListener\('pagehide'/);
+assert.match(source, /window\.addEventListener\('unhandledrejection'/);
 
 console.log('Business Snapshot frontend contract tests passed.');

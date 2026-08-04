@@ -162,6 +162,24 @@ const BUSINESS_SNAPSHOT_FAILURE_CATEGORIES = new Set([
   'ambiguous_response',
   'administrative_review'
 ]);
+const BUSINESS_SNAPSHOT_JOURNEY_STAGES = new Set([
+  'started',
+  'submit_attempted',
+  'failed'
+]);
+const BUSINESS_SNAPSHOT_RUNTIME_CATEGORIES = new Set([
+  'window_error',
+  'unhandled_rejection'
+]);
+const BUSINESS_SNAPSHOT_ANALYTICS_EVENTS = new Set([
+  'business_snapshot_form_started',
+  'business_snapshot_submit_attempted',
+  'business_snapshot_submitted',
+  'business_snapshot_email_prepared',
+  'business_snapshot_submission_failed',
+  'business_snapshot_abandoned',
+  'business_snapshot_runtime_failed'
+]);
 
 const businessSnapshotFailureMessages = {
   user_validation: 'Please review your information and try again. If the problem continues, use the prepared email below.',
@@ -228,19 +246,90 @@ function classifyBusinessSnapshotFailure({ error, response, result }) {
   return 'ambiguous_response';
 }
 
-function trackBusinessSnapshotEvent(eventName, failureCategory) {
-  const allowedEvents = new Set([
-    'business_snapshot_submitted',
-    'business_snapshot_email_prepared',
-    'business_snapshot_submission_failed'
-  ]);
-  if (!allowedEvents.has(eventName) || typeof window.gtag !== 'function') return;
+function trackBusinessSnapshotEvent(eventName, category) {
+  if (
+    !BUSINESS_SNAPSHOT_ANALYTICS_EVENTS.has(eventName)
+    || typeof window.gtag !== 'function'
+  ) return;
   const parameters = { event_category: 'lead' };
   if (
     eventName === 'business_snapshot_submission_failed'
-    && BUSINESS_SNAPSHOT_FAILURE_CATEGORIES.has(failureCategory)
-  ) parameters.failure_category = failureCategory;
-  window.gtag('event', eventName, parameters);
+    && BUSINESS_SNAPSHOT_FAILURE_CATEGORIES.has(category)
+  ) parameters.failure_category = category;
+  if (
+    eventName === 'business_snapshot_abandoned'
+    && BUSINESS_SNAPSHOT_JOURNEY_STAGES.has(category)
+  ) {
+    parameters.journey_stage = category;
+    parameters.transport_type = 'beacon';
+  }
+  if (
+    eventName === 'business_snapshot_runtime_failed'
+    && BUSINESS_SNAPSHOT_RUNTIME_CATEGORIES.has(category)
+  ) parameters.runtime_category = category;
+  try {
+    window.gtag('event', eventName, parameters);
+  } catch {
+    // Analytics must never interrupt the form experience.
+  }
+}
+
+function createBusinessSnapshotJourneyTracker(trackEvent = trackBusinessSnapshotEvent) {
+  let stage = 'not_started';
+  let completed = false;
+  let abandonmentReported = false;
+
+  return {
+    start() {
+      if (stage !== 'not_started' || completed) return false;
+      stage = 'started';
+      trackEvent('business_snapshot_form_started');
+      return true;
+    },
+    submitAttempted() {
+      if (completed) return false;
+      if (stage === 'not_started') this.start();
+      stage = 'submit_attempted';
+      trackEvent('business_snapshot_submit_attempted');
+      return true;
+    },
+    fail() {
+      if (completed || stage === 'not_started') return false;
+      stage = 'failed';
+      return true;
+    },
+    complete() {
+      completed = true;
+      stage = 'submitted';
+    },
+    abandon() {
+      if (
+        completed
+        || abandonmentReported
+        || !BUSINESS_SNAPSHOT_JOURNEY_STAGES.has(stage)
+      ) return false;
+      abandonmentReported = true;
+      trackEvent('business_snapshot_abandoned', stage);
+      return true;
+    },
+    currentStage() {
+      return stage;
+    }
+  };
+}
+
+function createBusinessSnapshotRuntimeErrorReporter(
+  trackEvent = trackBusinessSnapshotEvent
+) {
+  let reported = false;
+  return (category) => {
+    if (reported || !BUSINESS_SNAPSHOT_RUNTIME_CATEGORIES.has(category)) {
+      return false;
+    }
+    reported = true;
+    trackEvent('business_snapshot_runtime_failed', category);
+    return true;
+  };
 }
 
 let renderBusinessSnapshotTurnstile = () => {};
@@ -269,9 +358,17 @@ if (leadForm) {
     ? 'Request My Business Snapshot'
     : 'Prepare My Snapshot Request';
   const requestId = crypto.randomUUID();
+  const journey = createBusinessSnapshotJourneyTracker();
+  const reportRuntimeError = createBusinessSnapshotRuntimeErrorReporter();
   let submissionPending = false;
   let turnstileWidgetId = null;
   let turnstileToken = '';
+
+  window.addEventListener('error', () => reportRuntimeError('window_error'));
+  window.addEventListener('unhandledrejection', () => {
+    reportRuntimeError('unhandled_rejection');
+  });
+  window.addEventListener('pagehide', () => journey.abandon());
 
   function setSubmitLabel(label) {
     if (!submitButton) return;
@@ -453,11 +550,13 @@ if (leadForm) {
       updateProgress();
     });
     field.addEventListener('input', () => {
+      journey.start();
       if (field.getAttribute('aria-invalid') === 'true') setFieldState(field);
       updateProgress();
       if (field === challengeField) updateCharacterCount();
     });
     field.addEventListener('change', () => {
+      journey.start();
       if (field.getAttribute('aria-invalid') === 'true') setFieldState(field);
       updateProgress();
     });
@@ -477,6 +576,8 @@ if (leadForm) {
       formStatus.classList.add('is-error');
       formStatus.hidden = false;
       invalidFields[0].focus();
+      journey.fail();
+      trackBusinessSnapshotEvent('business_snapshot_submission_failed', 'user_validation');
       return;
     }
 
@@ -502,9 +603,11 @@ if (leadForm) {
         error: true
       });
       trackBusinessSnapshotEvent('business_snapshot_submission_failed', 'turnstile_missing');
+      journey.fail();
       return;
     }
 
+    journey.submitAttempted();
     setPending(true);
     showPendingStatus();
     const controller = new AbortController();
@@ -550,6 +653,7 @@ if (leadForm) {
         confirmation.focus({ preventScroll: true });
       }
       trackBusinessSnapshotEvent('business_snapshot_submitted');
+      journey.complete();
     } catch (error) {
       const failureCategory = error.failureCategory
         || classifyBusinessSnapshotFailure({ error, response, result });
@@ -565,6 +669,7 @@ if (leadForm) {
         error: true
       });
       trackBusinessSnapshotEvent('business_snapshot_submission_failed', failureCategory);
+      journey.fail();
     } finally {
       window.clearTimeout(timeout);
       setPending(false);
@@ -580,6 +685,8 @@ if (typeof module !== 'undefined' && module.exports) {
     businessSnapshotEndpointIsConfigured,
     businessSnapshotResponseIsAccepted,
     classifyBusinessSnapshotFailure,
+    createBusinessSnapshotJourneyTracker,
+    createBusinessSnapshotRuntimeErrorReporter,
     trackBusinessSnapshotEvent
   };
 }
