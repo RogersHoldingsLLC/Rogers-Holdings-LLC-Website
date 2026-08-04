@@ -51,8 +51,10 @@ function request(values = {}) {
 assert.equal(BUSINESS_SNAPSHOT_ENDPOINT, 'https://intake.rogersholdingsllc.com/api/business-snapshot');
 assert.equal(BUSINESS_SNAPSHOT_TIMEOUT_MS, 40000);
 assert.match(html, /action="https:\/\/intake\.rogersholdingsllc\.com\/api\/business-snapshot"/);
-assert.match(html, /data-endpoint-configured="false"/);
-assert.match(html, /PUBLIC_PRODUCTION_TURNSTILE_SITE_KEY_NOT_CONFIGURED/);
+assert.match(html, /data-endpoint-configured="true"/);
+assert.match(html, /data-sitekey="0x4AAAAAAEFhF9RRNG4A4T1Q"/);
+assert.match(html, /data-action="business_snapshot"/);
+assert.doesNotMatch(html, /PUBLIC_PRODUCTION_TURNSTILE_SITE_KEY_NOT_CONFIGURED|TURNSTILE_SECRET_KEY/);
 assert.doesNotMatch(html, /name="formStartedAt"|data-form-started-at/);
 assert.match(html, /data-error-callback="businessSnapshotTurnstileError"/);
 assert.match(html, /data-expired-callback="businessSnapshotTurnstileExpired"/);
