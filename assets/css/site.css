@@ -3134,6 +3134,127 @@ h3 { letter-spacing: -.015em; }
 .eastland-iphone-screen img { object-fit: cover; }
 .eastland-context-proofs { display: none; }
 
+/* Refined physical-device treatment: restrained aluminum, glass, and depth. */
+.eastland-laptop-mockup,
+.eastland-monitor-mockup,
+.eastland-ipad-mockup,
+.eastland-iphone-mockup { isolation: isolate; }
+.eastland-laptop-screen {
+  position: relative;
+  border-color: #171916;
+  background: #0b0c0b;
+  box-shadow: 0 34px 60px rgba(24,25,22,.28), 0 1px 0 rgba(255,255,255,.28) inset, 0 0 0 1px rgba(0,0,0,.55);
+}
+.eastland-laptop-screen::after,
+.eastland-monitor-screen::after,
+.eastland-ipad-screen::after,
+.eastland-iphone-screen::after {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: inherit;
+  content: "";
+  pointer-events: none;
+}
+.eastland-laptop-base {
+  position: relative;
+  width: 108%;
+  margin-left: -4%;
+  background: linear-gradient(180deg, #e4e5df 0%, #bfc1bb 34%, #8d9089 100%);
+  box-shadow: 0 15px 24px rgba(24,25,22,.2), 0 1px 0 rgba(255,255,255,.78) inset, 0 -1px 0 rgba(60,61,57,.28) inset;
+}
+.eastland-laptop-base::before {
+  position: absolute;
+  top: -2px;
+  right: 10%;
+  left: 10%;
+  height: 2px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.72);
+  content: "";
+}
+.eastland-laptop-base span { background: #70736d; box-shadow: 0 1px 0 rgba(255,255,255,.36) inset; }
+.eastland-monitor-mockup { filter: drop-shadow(0 12px 14px rgba(24,25,22,.08)); }
+.eastland-monitor-screen {
+  border-width: 6px;
+  border-color: #d5d7d1;
+  border-radius: 10px;
+  background: #f5f6f2;
+  box-shadow: 0 25px 46px rgba(24,25,22,.24), 0 1px 0 rgba(255,255,255,.92) inset, 0 0 0 1px rgba(65,66,61,.42);
+}
+.eastland-monitor-stand {
+  width: 34%;
+  height: 31px;
+  background: linear-gradient(90deg, #9da09a, #e0e1dc 48%, #979a94);
+  box-shadow: 0 1px 0 rgba(255,255,255,.7) inset;
+}
+.eastland-monitor-stand::before {
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  width: 36%;
+  height: 7px;
+  border-radius: 50%;
+  background: #858983;
+  content: "";
+  transform: translateX(-50%);
+}
+.eastland-monitor-stand span { bottom: -9px; height: 7px; background: linear-gradient(#a9aba5, #7b7e78); }
+.eastland-ipad-mockup {
+  border-width: 5px;
+  border-color: #777b76;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #d8dad4 0%, #9b9f98 48%, #777b76 100%);
+  box-shadow: 0 28px 48px rgba(24,25,22,.25), 0 1px 0 rgba(255,255,255,.72) inset, 0 0 0 1px rgba(38,39,36,.4);
+}
+.eastland-ipad-screen { border-radius: 12px; background: #0c0d0d; }
+.eastland-ipad-camera { top: 5px; width: 6px; height: 6px; background: #222522; box-shadow: 0 0 0 1px rgba(255,255,255,.25); }
+.eastland-iphone-mockup {
+  border-width: 5px;
+  border-color: #101210;
+  border-radius: 27px;
+  background: linear-gradient(145deg, #454944, #151715 48%, #30332f);
+  box-shadow: 0 32px 54px rgba(24,25,22,.3), 0 0 0 1px rgba(255,255,255,.22) inset, 0 0 0 2px rgba(0,0,0,.5);
+}
+.eastland-iphone-screen { border-radius: 20px; background: #060706; }
+.eastland-iphone-speaker {
+  top: 6px;
+  width: 36%;
+  height: 10px;
+  border-radius: 0 0 10px 10px;
+  background: #050605;
+  box-shadow: 0 1px 0 rgba(255,255,255,.12) inset;
+}
+.eastland-testimonial {
+  max-width: 720px;
+  margin: clamp(26px, 4vw, 48px) auto 18px;
+  padding: clamp(22px, 3vw, 34px) clamp(24px, 4vw, 48px);
+  border-left: 2px solid var(--color-gold);
+  background: rgba(255,255,255,.58);
+  box-shadow: 0 18px 34px rgba(36,36,33,.07), 0 1px 0 rgba(255,255,255,.9) inset;
+}
+.eastland-testimonial p {
+  margin: 0;
+  color: var(--color-text);
+  font-family: var(--serif);
+  font-size: clamp(20px, 2.4vw, 30px);
+  line-height: 1.25;
+}
+.eastland-testimonial footer {
+  margin-top: 16px;
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .05em;
+}
+.eastland-testimonial small {
+  display: block;
+  margin-top: 9px;
+  color: var(--color-text-secondary);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
 @media (min-width: 961px) {
   .eastland-monitor-screen picture img { object-fit: contain; background: #fff; }
   .eastland-ipad-screen picture img { object-fit: contain; background: #f7f6f2; }
@@ -3151,4 +3272,6 @@ h3 { letter-spacing: -.015em; }
   .eastland-monitor-mockup { grid-column: 1 / 2; width: 100%; padding-bottom: 0; }
   .eastland-ipad-mockup { grid-column: 2 / 3; width: 100%; padding-bottom: 0; }
   .eastland-iphone-mockup { grid-column: 2 / 3; width: min(62%, 150px); justify-self: end; margin: -82px 6% 0 0; }
+  .eastland-testimonial { margin-top: 26px; padding: 22px 20px; }
+  .eastland-testimonial p { font-size: 22px; }
 }
