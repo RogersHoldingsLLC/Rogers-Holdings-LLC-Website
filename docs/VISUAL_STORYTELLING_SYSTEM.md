@@ -13,7 +13,7 @@ This phase uses supplied Rogers Holdings deliverables and approved Eastland Firs
 
 The homepage presents four assessment views (cover, executive briefing, key findings, roadmap), four improvement-plan views (cover, deliverables, timeline, next steps), and a factual Eastland journey from Facebook presence through search/profile discovery to an owned website experience.
 
-Eastland website captures are presented in CSS-only MacBook and iPhone frames. The iPhone uses the supplied full Mobile Safari capture, including its original Safari UI. The approved Google Business Profile capture is shown in a restrained browser shell; the Facebook history is explained in a factual before-state callout rather than repeated as a gallery image. The frames add context and hierarchy; they do not recreate or redraw the captured interfaces.
+Eastland proof is presented as a four-device sequence: MacBook, desktop monitor with the real Google Search/Business Profile capture, iPad, and iPhone. The iPhone uses the supplied full Mobile Safari capture, including its original Safari UI. The iPad uses the supplied tablet-sized website capture without altering its contents. Facebook history is explained in a factual before-state callout rather than repeated as a gallery image. The frames add context and hierarchy; they do not recreate or redraw the captured interfaces.
 
 The Business Optimization Platform is mentioned only as Rogers Holdings' internal system for organizing evidence, priorities, and next actions. Its interface is not a public proof asset.
 
