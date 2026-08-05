@@ -61,8 +61,8 @@ assert.doesNotMatch(html, /name="formStartedAt"|data-form-started-at/);
 assert.match(html, /data-error-callback="businessSnapshotTurnstileError"/);
 assert.match(html, /data-expired-callback="businessSnapshotTurnstileExpired"/);
 assert.match(html, /data-timeout-callback="businessSnapshotTurnstileTimeout"/);
-assert.match(html, /site\.css\?v=business-snapshot-activation-review-1/);
-assert.match(html, /site\.js\?v=business-snapshot-activation-review-1/);
+assert.match(html, /site\.css\?v=whole-site-refinement-1/);
+assert.match(html, /site\.js\?v=whole-site-refinement-1/);
 
 const disabledForm = {
   dataset: { endpointConfigured: 'false' },
@@ -140,6 +140,7 @@ assert.match(source, /confirmation\.focus\(\{ preventScroll: true \}\)/);
 assert.match(source, /resetTurnstileForFreshToken/);
 assert.match(source, /businessSnapshotTurnstileExpired/);
 assert.match(source, /businessSnapshotTurnstileTimeout/);
+assert.match(source, /businessSnapshotTurnstileError = \(\) => \{[\s\S]*?setTurnstileStatus\('error', businessSnapshotFailureMessages\.turnstile_error\);/);
 assert.match(source, /const requestId = crypto\.randomUUID\(\);/);
 assert.equal((source.match(/const requestId = crypto\.randomUUID\(\);/g) || []).length, 1);
 

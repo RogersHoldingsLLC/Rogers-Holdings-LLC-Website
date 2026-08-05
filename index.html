@@ -42,7 +42,7 @@
   <link rel="icon" type="image/png" sizes="1024x1024" href="apple-touch-icon.png?v=7">
   <link rel="shortcut icon" href="favicon.ico?v=7">
   <link rel="apple-touch-icon" href="apple-touch-icon.png?v=7">
-  <link rel="stylesheet" href="assets/css/site.css?v=homepage-trust-conversion-1">
+  <link rel="stylesheet" href="assets/css/site.css?v=whole-site-refinement-1">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -141,13 +141,20 @@
           <p class="phase3-hero-note">Complimentary written review · Human-reviewed · Typically within three business days</p>
         </div>
 
-        <figure class="phase3-assessment phase3-snapshot-proof" data-reveal>
-          <picture>
-            <source type="image/avif" srcset="assets/images/proof/north-point-assessment-briefing-480.avif 480w, assets/images/proof/north-point-assessment-briefing-768.avif 768w, assets/images/proof/north-point-assessment-briefing-1200.avif 1200w" sizes="(max-width: 680px) calc(100vw - 40px), (max-width: 960px) 48vw, 560px">
-            <source type="image/webp" srcset="assets/images/proof/north-point-assessment-briefing-480.webp 480w, assets/images/proof/north-point-assessment-briefing-768.webp 768w, assets/images/proof/north-point-assessment-briefing-1200.webp 1200w" sizes="(max-width: 680px) calc(100vw - 40px), (max-width: 960px) 48vw, 560px">
-            <img src="assets/images/proof/north-point-assessment-briefing.jpg" width="832" height="980" loading="eager" decoding="async" alt="Illustrative sanitized Business Snapshot executive briefing for North Point Fitness">
-          </picture>
-          <figcaption>Illustrative audit preview · fictional business information</figcaption>
+        <figure class="phase3-assessment phase3-snapshot-proof" data-reveal aria-labelledby="snapshot-sample-label">
+          <div class="snapshot-document-stack">
+            <picture class="snapshot-document-page snapshot-document-page--secondary" aria-hidden="true">
+              <source type="image/avif" srcset="assets/images/proof/north-point-assessment-findings-480.avif 480w, assets/images/proof/north-point-assessment-findings-768.avif 768w" sizes="(max-width: 680px) 44vw, (max-width: 960px) 23vw, 250px">
+              <source type="image/webp" srcset="assets/images/proof/north-point-assessment-findings-480.webp 480w, assets/images/proof/north-point-assessment-findings-768.webp 768w" sizes="(max-width: 680px) 44vw, (max-width: 960px) 23vw, 250px">
+              <img src="assets/images/proof/north-point-assessment-findings.jpg" width="832" height="980" loading="eager" decoding="async" alt="">
+            </picture>
+            <picture class="snapshot-document-page snapshot-document-page--primary">
+              <source type="image/avif" srcset="assets/images/proof/north-point-assessment-briefing-480.avif 480w, assets/images/proof/north-point-assessment-briefing-768.avif 768w, assets/images/proof/north-point-assessment-briefing-1200.avif 1200w" sizes="(max-width: 680px) 78vw, (max-width: 960px) 43vw, 470px">
+              <source type="image/webp" srcset="assets/images/proof/north-point-assessment-briefing-480.webp 480w, assets/images/proof/north-point-assessment-briefing-768.webp 768w, assets/images/proof/north-point-assessment-briefing-1200.webp 1200w" sizes="(max-width: 680px) 78vw, (max-width: 960px) 43vw, 470px">
+              <img src="assets/images/proof/north-point-assessment-briefing.jpg" width="832" height="980" loading="eager" decoding="async" alt="Sample Executive Snapshot briefing for the fictional North Point Fitness business">
+            </picture>
+          </div>
+          <figcaption id="snapshot-sample-label"><strong>Sample Executive Snapshot</strong><span>Illustrative example using fictional business information</span></figcaption>
         </figure>
       </div>
     </section>
@@ -244,6 +251,7 @@
       </div>
     </section>
 
+    <div class="visual-proof-pair" aria-label="Business assessment and improvement plan examples">
     <section class="section visual-proof" id="proof" aria-labelledby="proof-heading">
       <div class="container">
         <div class="phase3-section-heading phase3-editorial-header" data-reveal>
@@ -272,6 +280,7 @@
         </div>
       </div>
     </section>
+    </div>
 
     <section class="section phase3-case" id="work">
       <div class="container">
@@ -371,11 +380,11 @@
 
   <footer class="site-footer phase3-footer">
     <div class="container phase3-footer-layout">
-      <div class="footer-brand"><a class="brand-lockup brand-lockup-light" href="#top" aria-label="Rogers Holdings LLC home"><span class="header-logo-mark" aria-hidden="true"><img class="header-logo-base" src="assets/images/brand/rogers-holdings-logo.png" width="52" height="52" alt=""><img class="header-logo-primary" src="assets/images/brand/rogers-holdings-logo.png" width="52" height="52" alt=""></span><span>Rogers Holdings <small>LLC</small></span></a><p>Kentucky-based, family-owned, and focused on practical business improvement.</p></div>
-      <div><h2>Explore &amp; contact</h2><nav aria-label="Footer navigation"><a href="#approach">Approach</a><a href="#capabilities">Capabilities</a><a href="#work">Our Work</a><a href="business-snapshot/">Business Snapshot</a><a href="privacy/">Privacy</a></nav><address><a href="mailto:briankeith@rogersholdingsllc.com">briankeith@rogersholdingsllc.com</a><a href="tel:+18594047300">859-404-7300</a><span>Kentucky · Serving businesses across the U.S.</span></address></div>
+      <div class="footer-brand"><a class="brand-lockup brand-lockup-light" href="#top" aria-label="Rogers Holdings LLC home"><img src="assets/images/brand/rogers-holdings-logo-reversed.png" width="52" height="52" alt=""><span>Rogers Holdings <small>LLC</small></span></a><p>Kentucky-based, family-owned, and focused on practical business improvement.</p></div>
+      <div><h2>Explore &amp; contact</h2><nav aria-label="Footer navigation"><a href="#approach">Approach</a><a href="#process">Process</a><a href="#capabilities">Capabilities</a><a href="#work">Our Work</a><a href="#about">About</a><a href="#contact">Contact</a><a href="business-snapshot/">Business Snapshot</a><a href="privacy/">Privacy</a></nav><address><a href="mailto:briankeith@rogersholdingsllc.com">briankeith@rogersholdingsllc.com</a><a href="tel:+18594047300">859-404-7300</a><span>Kentucky · Serving businesses across the U.S.</span></address></div>
     </div>
     <div class="container footer-bottom"><span>© <span data-current-year>2026</span> Rogers Holdings LLC</span><span>Privately held · Family operated</span></div>
   </footer>
-  <script src="assets/js/site.js?v=executive-visual-system-1" defer></script>
+  <script src="assets/js/site.js?v=whole-site-refinement-1" defer></script>
 </body>
 </html>

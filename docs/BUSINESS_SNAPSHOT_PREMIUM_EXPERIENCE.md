@@ -64,6 +64,16 @@ Final activation requires these separate approvals in order:
 Rollback removes the custom-domain mapping first and restores the reviewed
 endpoint-disabled website state without changing BOP or receiver deployments.
 
+## Turnstile preview-host limitation
+
+The production widget is restricted to `rogersholdingsllc.com`. Temporary
+preview hosts, including `trycloudflare.com` tunnels, are intentionally not
+authorized and can fail before human verification begins. That failure is
+expected and must not be addressed by weakening the production hostname
+restriction. The form presents a polished refresh-or-contact fallback when the
+Turnstile API cannot initialize. Preview validation must not submit a lead;
+production verification remains limited to the approved production hostname.
+
 ## Screenshots
 
 - `business-snapshot-premium-desktop.png`

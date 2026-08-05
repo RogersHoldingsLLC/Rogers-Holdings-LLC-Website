@@ -41,7 +41,10 @@ for (const asset of [
 assert.doesNotMatch(html, /Rogers Holdings gave our church|Draft testimonial copy/);
 assert.ok(html.includes('phase3-snapshot-proof'));
 assert.ok(html.includes('north-point-assessment-briefing-1200.avif'));
-assert.ok(html.includes('Illustrative sanitized Business Snapshot executive briefing'));
+assert.ok(html.includes('north-point-assessment-findings-1200.avif'));
+assert.ok(html.includes('Sample Executive Snapshot'));
+assert.ok(html.includes('snapshot-document-page--primary'));
+assert.ok(html.includes('snapshot-document-page--secondary'));
 assert.doesNotMatch(html, /phase3-snapshot-report/);
 assert.match(css, /phase3-method-sequence\s*\{[^}]*display:\s*block/s);
 assert.match(css, /eastland-visual-stage\s*\{[^}]*grid-template-columns:/s);
