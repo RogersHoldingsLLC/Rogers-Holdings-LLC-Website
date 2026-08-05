@@ -10,7 +10,7 @@ const proof = path.join(root, 'assets/images/proof');
 const requiredBases = [
   'north-point-assessment-cover', 'north-point-assessment-briefing', 'north-point-assessment-findings', 'north-point-assessment-roadmap',
   'north-point-plan-cover', 'north-point-plan-deliverables', 'north-point-plan-timeline', 'north-point-plan-next-steps',
-  'eastland-google-business-profile', 'eastland-website-desktop', 'eastland-website-mobile-safari', 'eastland-tablet-home'
+  'eastland-google-business-profile', 'eastland-website-mobile-safari'
 ];
 for (const base of requiredBases) {
   for (const ext of ['jpg', '480.webp', '768.webp', '1200.webp', '480.avif', '768.avif', '1200.avif']) {
@@ -30,23 +30,26 @@ assert.ok(html.includes('eastland-monitor-mockup') && html.includes('eastland-ip
 const stageStart = html.indexOf('<div class="eastland-visual-stage"');
 const journeyStart = html.indexOf('<div class="eastland-journey"', stageStart);
 const eastlandStage = stageStart >= 0 && journeyStart > stageStart ? html.slice(stageStart, journeyStart) : '';
-assert.ok(eastlandStage.includes('eastland-website-desktop-1200.avif'));
 assert.ok(eastlandStage.includes('eastland-website-mobile-safari-1200.avif'));
 assert.doesNotMatch(eastlandStage, /eastland-facebook|facebook-primary|facebook\.com/i);
-assert.ok(html.includes('Rogers Holdings gave our church a clear, welcoming online home'));
-assert.ok(html.includes('— Church Leader, Eastland First Church of God'));
-assert.ok(html.includes('Draft testimonial copy'));
+assert.ok(eastlandStage.includes('eastland-website-desktop-live.jpg'));
+assert.ok(eastlandStage.includes('eastland-website-tablet-live.jpg'));
+for (const asset of [
+  'eastland-website-desktop-live.jpg', 'eastland-website-desktop-live-768.avif', 'eastland-website-desktop-live-1200.webp',
+  'eastland-website-tablet-live.jpg', 'eastland-website-tablet-live-480.avif', 'eastland-website-tablet-live-768.webp'
+]) assert.ok(fs.existsSync(path.join(proof, asset)), `missing live viewport proof asset: ${asset}`);
+assert.doesNotMatch(html, /Rogers Holdings gave our church|Draft testimonial copy/);
 assert.ok(html.includes('phase3-snapshot-proof'));
 assert.ok(html.includes('north-point-assessment-briefing-1200.avif'));
 assert.ok(html.includes('Illustrative sanitized Business Snapshot executive briefing'));
 assert.doesNotMatch(html, /phase3-snapshot-report/);
 assert.match(css, /phase3-method-sequence\s*\{[^}]*display:\s*block/s);
 assert.match(css, /eastland-visual-stage\s*\{[^}]*grid-template-columns:/s);
-assert.match(css, /eastland-monitor-screen[^}]*aspect-ratio:\s*16\s*\/\s*10/s);
+assert.match(css, /eastland-monitor-screen[^}]*aspect-ratio:\s*16\s*\/\s*9/s);
 assert.match(css, /eastland-laptop-base::before/);
 assert.match(css, /eastland-monitor-stand::before/);
 assert.match(css, /eastland-iphone-mockup[^}]*border-radius/);
-assert.ok(html.includes('eastland-google-business-profile.jpg') && html.includes('eastland-tablet-home.jpg'));
+assert.ok(html.includes('eastland-google-business-profile.jpg') && html.includes('eastland-website-tablet-live.jpg'));
 assert.ok(!html.includes('eastland-context-proofs') && !html.includes('eastland-proof-grid'));
 assert.ok(html.includes('eastland-before-callout'));
 assert.ok(html.includes('primarily relied on Facebook as its online presence'));

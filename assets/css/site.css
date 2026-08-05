@@ -3225,35 +3225,6 @@ h3 { letter-spacing: -.015em; }
   background: #050605;
   box-shadow: 0 1px 0 rgba(255,255,255,.12) inset;
 }
-.eastland-testimonial {
-  max-width: 720px;
-  margin: clamp(26px, 4vw, 48px) auto 18px;
-  padding: clamp(22px, 3vw, 34px) clamp(24px, 4vw, 48px);
-  border-left: 2px solid var(--color-gold);
-  background: rgba(255,255,255,.58);
-  box-shadow: 0 18px 34px rgba(36,36,33,.07), 0 1px 0 rgba(255,255,255,.9) inset;
-}
-.eastland-testimonial p {
-  margin: 0;
-  color: var(--color-text);
-  font-family: var(--serif);
-  font-size: clamp(20px, 2.4vw, 30px);
-  line-height: 1.25;
-}
-.eastland-testimonial footer {
-  margin-top: 16px;
-  color: var(--color-text-secondary);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .05em;
-}
-.eastland-testimonial small {
-  display: block;
-  margin-top: 9px;
-  color: var(--color-text-secondary);
-  font-size: 11px;
-  line-height: 1.45;
-}
 
 @media (min-width: 961px) {
   .eastland-monitor-screen picture img { object-fit: contain; background: #fff; }
@@ -3272,6 +3243,203 @@ h3 { letter-spacing: -.015em; }
   .eastland-monitor-mockup { grid-column: 1 / 2; width: 100%; padding-bottom: 0; }
   .eastland-ipad-mockup { grid-column: 2 / 3; width: 100%; padding-bottom: 0; }
   .eastland-iphone-mockup { grid-column: 2 / 3; width: min(62%, 150px); justify-self: end; margin: -82px 6% 0 0; }
-  .eastland-testimonial { margin-top: 26px; padding: 22px 20px; }
-  .eastland-testimonial p { font-size: 22px; }
+}
+
+/* Eastland device composition v3 — product-scale proportions and true viewport captures. */
+.eastland-visual-stage {
+  position: relative;
+  grid-template-columns: minmax(0, 1.58fr) minmax(0, 1.08fr) minmax(150px, .62fr) minmax(104px, .4fr);
+  align-items: end;
+  gap: clamp(12px, 1.35vw, 20px);
+  margin: clamp(44px, 5vw, 72px) 0 36px;
+  padding: 0 4px 22px;
+  perspective: none;
+}
+.eastland-visual-stage::after {
+  position: absolute;
+  right: 2%;
+  bottom: 13px;
+  left: 2%;
+  z-index: 0;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(35,36,33,.17), transparent 70%);
+  content: "";
+  filter: blur(5px);
+  pointer-events: none;
+}
+.eastland-laptop-mockup,
+.eastland-monitor-mockup,
+.eastland-ipad-mockup,
+.eastland-iphone-mockup {
+  z-index: 1;
+  align-self: end;
+  padding-bottom: 0;
+  transform: none;
+  filter: none;
+}
+.eastland-laptop-screen {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 7px solid #181a18;
+  border-bottom-width: 9px;
+  border-radius: 12px 12px 5px 5px;
+  background: #080908;
+  box-shadow: 0 22px 38px rgba(30,31,28,.2), 0 0 0 1px rgba(0,0,0,.72), 0 1px 0 rgba(255,255,255,.2) inset;
+}
+.eastland-laptop-screen > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.eastland-laptop-screen::before {
+  position: absolute;
+  top: 3px;
+  left: 50%;
+  z-index: 2;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #343733;
+  box-shadow: 0 0 0 1px #050605;
+  content: "";
+  transform: translateX(-50%);
+}
+.eastland-laptop-base {
+  width: 108%;
+  height: 15px;
+  margin-left: -4%;
+  border-radius: 1px 1px 11px 11px;
+  background: linear-gradient(180deg, #e9eae6 0%, #b8bbb5 48%, #888b85 100%);
+  box-shadow: 0 11px 15px rgba(31,32,29,.17), 0 1px 0 rgba(255,255,255,.9) inset;
+  clip-path: polygon(2% 0, 98% 0, 100% 58%, 94% 100%, 6% 100%, 0 58%);
+}
+.eastland-laptop-base span { width: 20%; height: 3px; background: #777a74; }
+.eastland-monitor-mockup { padding-bottom: 19px; }
+.eastland-monitor-screen {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 5px solid #c9cbc6;
+  border-bottom-width: 7px;
+  border-radius: 7px;
+  background: #090a09;
+  box-shadow: 0 23px 40px rgba(30,31,28,.2), 0 0 0 1px rgba(70,72,68,.5), 0 1px 0 rgba(255,255,255,.95) inset;
+}
+.eastland-monitor-screen picture,
+.eastland-monitor-screen picture img { width: 100%; height: 100%; }
+.eastland-monitor-screen picture img {
+  display: block;
+  object-fit: contain;
+  object-position: center;
+  background: #17191a;
+}
+.eastland-monitor-screen::before {
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  z-index: 2;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #7c807b;
+  content: "";
+  transform: translateX(-50%);
+}
+.eastland-monitor-stand {
+  width: 31%;
+  height: 42px;
+  margin-top: -1px;
+  background: linear-gradient(90deg, #a4a7a1, #e2e3df 48%, #969a94);
+  clip-path: polygon(38% 0, 62% 0, 72% 79%, 92% 100%, 8% 100%, 28% 79%);
+  box-shadow: none;
+}
+.eastland-monitor-stand::before { top: 0; width: 25%; height: 5px; }
+.eastland-monitor-stand span {
+  right: -64%;
+  bottom: -4px;
+  left: -64%;
+  height: 6px;
+  border-radius: 50%;
+  background: linear-gradient(#b9bbb6, #7f827c);
+  box-shadow: 0 6px 10px rgba(30,31,28,.18);
+}
+.eastland-ipad-mockup {
+  padding: 7px;
+  border: 3px solid #a6aaa4;
+  border-radius: 17px;
+  background: linear-gradient(135deg, #dfe1dc 0%, #a3a7a0 52%, #858982 100%);
+  box-shadow: 0 21px 34px rgba(30,31,28,.2), 0 0 0 1px rgba(72,74,69,.58), 0 1px 0 rgba(255,255,255,.82) inset;
+}
+.eastland-ipad-screen {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 11px;
+  background: #070807;
+}
+.eastland-ipad-screen > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+.eastland-ipad-camera {
+  top: 4px;
+  width: 4px;
+  height: 4px;
+  background: #4c504b;
+  box-shadow: 0 0 0 1px rgba(25,26,24,.65);
+}
+.eastland-iphone-mockup {
+  margin: 0;
+  padding: 4px;
+  border: 2px solid #8f938d;
+  border-radius: 24px;
+  background: linear-gradient(145deg, #c1c4be 0%, #6c706a 38%, #242724 55%, #969a94 100%);
+  box-shadow: 0 22px 36px rgba(30,31,28,.23), 0 0 0 1px rgba(21,22,20,.7), 0 1px 0 rgba(255,255,255,.58) inset;
+}
+.eastland-iphone-screen {
+  aspect-ratio: 944 / 2048;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #050605;
+}
+.eastland-iphone-screen picture,
+.eastland-iphone-screen picture img { display: block; width: 100%; height: 100%; }
+.eastland-iphone-screen picture img { object-fit: cover; object-position: top center; }
+.eastland-iphone-speaker {
+  top: 7px;
+  width: 34%;
+  height: 7px;
+  border-radius: 999px;
+  background: #050605;
+  box-shadow: none;
+}
+
+@media (max-width: 1100px) {
+  .eastland-visual-stage {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: 30px 24px;
+    padding-inline: clamp(8px, 3vw, 28px);
+  }
+  .eastland-laptop-mockup,
+  .eastland-monitor-mockup { width: 100%; }
+  .eastland-ipad-mockup { width: min(42%, 260px); justify-self: end; }
+  .eastland-iphone-mockup { width: min(25%, 150px); justify-self: start; }
+}
+
+@media (max-width: 680px) {
+  .eastland-visual-stage {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 16px;
+    margin-top: 34px;
+    padding: 0 0 18px;
+  }
+  .eastland-laptop-mockup,
+  .eastland-monitor-mockup { grid-column: 1 / -1; width: 100%; }
+  .eastland-monitor-mockup { padding-bottom: 17px; }
+  .eastland-ipad-mockup { grid-column: 1 / 2; width: min(100%, 190px); justify-self: end; }
+  .eastland-iphone-mockup { grid-column: 2 / 3; width: min(72%, 126px); justify-self: start; margin: 0; }
 }

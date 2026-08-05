@@ -13,7 +13,9 @@ This phase uses supplied Rogers Holdings deliverables and approved Eastland Firs
 
 The homepage presents four assessment views (cover, executive briefing, key findings, roadmap), four improvement-plan views (cover, deliverables, timeline, next steps), and a factual Eastland journey from Facebook presence through search/profile discovery to an owned website experience.
 
-Eastland proof is presented as a four-device sequence: MacBook, desktop monitor with the real Google Search/Business Profile capture, iPad, and iPhone. The iPhone uses the supplied full Mobile Safari capture, including its original Safari UI. The iPad uses the supplied tablet-sized website capture without altering its contents. Facebook history is explained in a factual before-state callout rather than repeated as a gallery image. The frames add context and hierarchy; they do not recreate or redraw the captured interfaces.
+Eastland proof is presented as a four-device sequence: MacBook, desktop monitor with the real Google Search/Business Profile capture, iPad, and iPhone. The MacBook uses a clean 1440 × 900 capture from the live Eastland website; the iPad uses a separate 1024 × 1366 responsive capture from that same site. The iPhone uses the supplied 944 × 2048 full Mobile Safari capture, including its original Safari UI. Facebook history is explained in a factual before-state callout rather than repeated as a gallery image. The unbranded device frames add physical context and hierarchy; they do not recreate or redraw the captured interfaces.
+
+The live desktop and tablet captures were taken from the canonical public Eastland website on August 5, 2026. Their responsive AVIF and WebP derivatives preserve the source aspect ratios; the JPEG originals remain the fallbacks. The Google evidence remains the approved 1500 × 700 Search/Business Profile capture. No screenshot is stretched across a different device ratio, and no Facebook interface appears in the device presentation.
 
 The Business Optimization Platform is mentioned only as Rogers Holdings' internal system for organizing evidence, priorities, and next actions. Its interface is not a public proof asset.
 
