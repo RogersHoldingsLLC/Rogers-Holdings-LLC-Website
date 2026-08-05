@@ -10,7 +10,7 @@ const proof = path.join(root, 'assets/images/proof');
 const requiredBases = [
   'north-point-assessment-cover', 'north-point-assessment-briefing', 'north-point-assessment-findings', 'north-point-assessment-roadmap',
   'north-point-plan-cover', 'north-point-plan-deliverables', 'north-point-plan-timeline', 'north-point-plan-next-steps',
-  'eastland-facebook-presence', 'eastland-google-business-profile', 'eastland-website-desktop', 'eastland-website-mobile-detail'
+  'eastland-google-business-profile', 'eastland-website-desktop', 'eastland-website-mobile-safari'
 ];
 for (const base of requiredBases) {
   for (const ext of ['jpg', '480.webp', '768.webp', '1200.webp', '480.avif', '768.avif', '1200.avif']) {
@@ -28,6 +28,9 @@ assert.ok(html.includes('Visitors now have a clearer mobile path to essential in
 assert.ok(html.includes('eastland-laptop-mockup') && html.includes('eastland-iphone-mockup'));
 assert.ok(html.includes('eastland-browser-proof') && html.includes('eastland-google-business-profile.jpg'));
 assert.ok(html.includes('eastland-context-proofs') && !html.includes('eastland-proof-grid'));
+assert.ok(html.includes('eastland-before-callout'));
+assert.ok(html.includes('primarily relied on Facebook as its online presence'));
+assert.ok(!html.includes('eastland-facebook-presence'));
 assert.ok(!html.includes('Mobile-first client work'));
 assert.ok(css.includes('.visual-proof-grid') && css.includes('.eastland-journey'));
 assert.ok((html.match(/loading="lazy"/g) || []).length >= 10, 'proof images should lazy-load');
