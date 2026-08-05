@@ -60,6 +60,62 @@ function updateHeader() {
 window.addEventListener('scroll', updateHeader, { passive: true });
 updateHeader();
 
+function siteHeaderOffset() {
+  return Math.ceil(header?.getBoundingClientRect().height || 78) + 16;
+}
+
+function revealTargetContext(target) {
+  const revealItems = [target, ...(target.querySelectorAll?.('[data-reveal], .reveal-item') || [])];
+  revealItems.forEach((item) => item.classList?.add('is-visible'));
+}
+
+function scrollToPageTarget(target, behavior = 'auto') {
+  revealTargetContext(target);
+  const destination = Math.max(0, target.getBoundingClientRect().top + window.scrollY - siteHeaderOffset());
+  if (behavior === 'smooth') {
+    window.scrollTo({ top: destination, behavior: 'smooth' });
+    return;
+  }
+  const previousBehavior = document.documentElement.style.scrollBehavior;
+  document.documentElement.style.scrollBehavior = 'auto';
+  window.scrollTo({ top: destination, behavior: 'auto' });
+  window.requestAnimationFrame(() => {
+    document.documentElement.style.scrollBehavior = previousBehavior;
+  });
+}
+
+document.addEventListener('click', (event) => {
+  const link = event.target.closest('a[href^="#"]');
+  if (!link) return;
+  if (link.classList.contains('skip-link')) return;
+  const hash = link.getAttribute('href');
+  if (!hash || hash === '#') return;
+  const target = document.getElementById(hash.slice(1));
+  if (!target) return;
+  event.preventDefault();
+  closeMenu();
+  const distance = Math.abs(target.getBoundingClientRect().top - siteHeaderOffset());
+  const behavior = reduceMotion.matches || distance > window.innerHeight * 1.35
+    ? 'auto'
+    : 'smooth';
+  if (window.location.hash !== hash) window.history.pushState(null, '', hash);
+  scrollToPageTarget(target, behavior);
+});
+
+function alignCurrentHash() {
+  if (!window.location?.hash) return;
+  const target = document.getElementById(window.location.hash.slice(1));
+  if (!target) return;
+  window.requestAnimationFrame(() => {
+    window.requestAnimationFrame(() => scrollToPageTarget(target, 'auto'));
+  });
+}
+
+if (window.location?.hash) {
+  window.addEventListener('load', alignCurrentHash, { once: true });
+}
+window.addEventListener('hashchange', alignCurrentHash);
+
 if ('IntersectionObserver' in window && !reduceMotion.matches) {
   document.documentElement.classList.add('motion-ready');
   const revealItems = document.querySelectorAll(
@@ -185,7 +241,7 @@ const businessSnapshotFailureMessages = {
   user_validation: 'Please review your information and try again. If the problem continues, use the prepared email below.',
   turnstile_missing: 'Complete the human verification and try the secure form again.',
   turnstile_rejected: 'Human verification was not accepted. Complete a fresh check and try again.',
-  turnstile_error: 'Human verification could not start. Refresh the page or use the prepared email below.',
+  turnstile_error: 'Secure human verification could not start in this browser or on this preview address. Refresh the page, or use the email and phone options below.',
   turnstile_expired: 'Human verification expired. Complete the fresh check and try again.',
   turnstile_timeout: 'Human verification timed out. Complete the fresh check and try again.',
   retryable_service: 'The secure service is temporarily unavailable. Try again shortly or use the prepared email below.',
@@ -513,7 +569,7 @@ if (leadForm) {
   };
   window.businessSnapshotTurnstileError = () => {
     turnstileToken = '';
-    setTurnstileStatus('error', businessSnapshotFailureMessages.turnstile_error, true);
+    setTurnstileStatus('error', businessSnapshotFailureMessages.turnstile_error);
     trackBusinessSnapshotEvent('business_snapshot_submission_failed', 'turnstile_error');
   };
   window.businessSnapshotTurnstileExpired = () => {
@@ -533,16 +589,29 @@ if (leadForm) {
     if (!sitekey || sitekey.includes('NOT_CONFIGURED')) return;
     turnstileShell.hidden = false;
     if (turnstileWidgetId !== null) return;
-    turnstileWidgetId = window.turnstile.render(turnstileElement, {
-      sitekey,
-      action: turnstileElement.dataset.action,
-      callback: window.businessSnapshotTurnstileSuccess,
-      'error-callback': window.businessSnapshotTurnstileError,
-      'expired-callback': window.businessSnapshotTurnstileExpired,
-      'timeout-callback': window.businessSnapshotTurnstileTimeout
-    });
+    try {
+      turnstileWidgetId = window.turnstile.render(turnstileElement, {
+        sitekey,
+        action: turnstileElement.dataset.action,
+        callback: window.businessSnapshotTurnstileSuccess,
+        'error-callback': window.businessSnapshotTurnstileError,
+        'expired-callback': window.businessSnapshotTurnstileExpired,
+        'timeout-callback': window.businessSnapshotTurnstileTimeout
+      });
+    } catch {
+      window.businessSnapshotTurnstileError();
+    }
   };
   renderBusinessSnapshotTurnstile();
+
+  if (isConfigured) {
+    window.setTimeout(() => {
+      if (turnstileWidgetId === null && !window.turnstile?.render) {
+        if (turnstileShell) turnstileShell.hidden = false;
+        setTurnstileStatus('error', businessSnapshotFailureMessages.turnstile_error);
+      }
+    }, 8000);
+  }
 
   fields.forEach((field) => {
     field.addEventListener('blur', () => {

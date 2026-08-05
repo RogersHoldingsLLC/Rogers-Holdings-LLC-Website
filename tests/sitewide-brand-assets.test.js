@@ -10,8 +10,8 @@ const privacy = read('privacy/index.html');
 const css = read('assets/css/site.css');
 const visualSystem = read('docs/EXECUTIVE_VISUAL_SYSTEM.md');
 
-assert.match(snapshot, /<footer class="site-footer">[\s\S]*?rogers-holdings-logo-reversed\.png/);
-assert.match(privacy, /<footer class="site-footer">[\s\S]*?rogers-holdings-logo-reversed\.png/);
+assert.match(snapshot, /<footer class="[^"]*site-footer[^"]*">[\s\S]*?rogers-holdings-logo-reversed\.png/);
+assert.match(privacy, /<footer class="[^"]*site-footer[^"]*">[\s\S]*?rogers-holdings-logo-reversed\.png/);
 assert.doesNotMatch(snapshot, /<footer[\s\S]*?rogers-holdings-logo\.png/);
 assert.doesNotMatch(privacy, /<footer[\s\S]*?rogers-holdings-logo\.png/);
 assert.equal((homepage.match(/rh-executive-materials-01-480\.avif/g) || []).length, 1);
