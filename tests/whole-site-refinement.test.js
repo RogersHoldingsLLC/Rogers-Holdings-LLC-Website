@@ -15,17 +15,19 @@ const labels = ['Approach', 'Process', 'Capabilities', 'Our Work', 'About', 'Con
 for (const [name, html] of [['homepage', home], ['Business Snapshot', snapshot], ['Privacy', privacy]]) {
   for (const label of labels) assert.ok(html.includes(`>${label}</a>`), `${name} missing ${label}`);
   assert.ok(html.includes('Request Your Business Snapshot'), `${name} missing normalized CTA`);
-  assert.match(html, /site\.css\?v=whole-site-refinement-1/);
   assert.match(html, /site\.js\?v=whole-site-refinement-1/);
 }
 
-assert.ok(home.includes('Sample Executive Snapshot'));
-assert.ok(home.includes('north-point-assessment-briefing-1200.avif'));
-assert.ok(home.includes('north-point-assessment-findings-1200.avif'));
-assert.ok(home.includes('snapshot-document-page--primary'));
-assert.ok(home.includes('snapshot-document-page--secondary'));
-assert.ok(home.includes('visual-proof-pair'));
-assert.doesNotMatch(home.slice(home.indexOf('phase3-snapshot-proof'), home.indexOf('</figure>', home.indexOf('phase3-snapshot-proof'))), /laptop|notebook|desk|BOP interface/i);
+assert.match(home, /site\.css\?v=website-visual-integration-1/);
+assert.match(snapshot, /site\.css\?v=whole-site-refinement-1/);
+assert.match(privacy, /site\.css\?v=whole-site-refinement-1/);
+
+assert.ok(home.includes('phase3-snapshot-scene'));
+assert.ok(home.includes('north-point-snapshot-scene-desktop.avif'));
+assert.ok(home.includes('north-point-snapshot-scene-tablet.avif'));
+assert.ok(home.includes('north-point-snapshot-scene-mobile.avif'));
+assert.ok(home.includes('snapshot-composite'));
+assert.doesNotMatch(home, /visual-proof-pair|north-point-assessment-|north-point-plan-/);
 
 assert.match(js, /distance > window\.innerHeight \* 1\.35/);
 assert.match(js, /history\.pushState/);
@@ -35,14 +37,12 @@ assert.match(js, /Secure human verification could not start in this browser or o
 assert.match(snapshotDoc, /trycloudflare\.com/);
 assert.match(snapshotDoc, /must not be addressed by weakening the production hostname\s+restriction/);
 
-assert.match(css, /\.visual-proof-pair\s*\{[\s\S]*?grid-template-columns:\s*repeat\(2,/);
-assert.match(css, /\.snapshot-document-page--primary\s*\{[\s\S]*?width:\s*96%/);
-assert.match(css, /\.snapshot-document-page--secondary\s*\{[\s\S]*?position:\s*absolute/);
+assert.match(css, /\.snapshot-composite\s*\{[\s\S]*?aspect-ratio:\s*4\s*\/\s*5/);
 assert.match(css, /section\[id\],[\s\S]*scroll-margin-top:\s*92px/);
 assert.match(css, /\.snapshot-page \.field-error\s*\{[\s\S]*?min-height:/);
 assert.match(css, /\.legal-content\s*\{[\s\S]*?780px/);
 
-const stageStart = home.indexOf('<div class="eastland-visual-stage"');
+const stageStart = home.indexOf('<div class="eastland-device-stage"');
 const stageEnd = home.indexOf('<div class="eastland-journey"', stageStart);
 const stage = home.slice(stageStart, stageEnd);
 assert.ok(stage.includes('eastland-website-desktop-live'));
