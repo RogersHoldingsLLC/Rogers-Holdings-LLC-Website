@@ -3051,41 +3051,91 @@ h3 { letter-spacing: -.015em; }
 }
 
 /* Eastland four-device proof row: MacBook → monitor → iPad → iPhone. */
+.phase3-snapshot-proof {
+  position: relative;
+  min-width: 0;
+  margin: 0;
+  padding: clamp(10px, 1vw, 16px);
+  border: 1px solid rgba(212,179,106,.55);
+  background: rgba(252,251,248,.94);
+  box-shadow: 0 26px 54px rgba(12,14,13,.24), 0 1px 0 rgba(255,255,255,.85) inset;
+  transform: rotate(1.2deg);
+}
+.phase3-snapshot-proof::before {
+  position: absolute;
+  inset: 7px;
+  border: 1px solid rgba(95,93,87,.16);
+  content: "";
+  pointer-events: none;
+}
+.phase3-snapshot-proof picture,
+.phase3-snapshot-proof img { display: block; width: 100%; height: auto; }
+.phase3-snapshot-proof img { aspect-ratio: 832 / 980; object-fit: cover; }
+.phase3-snapshot-proof figcaption {
+  position: relative;
+  padding: 12px 4px 2px;
+  color: var(--color-text-secondary);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+@media (min-width: 961px) {
+  .phase3-method-sequence { display: block; }
+  .phase3-method-sequence-heading {
+    display: grid;
+    grid-template-columns: minmax(220px, .7fr) minmax(0, 1.3fr);
+    gap: clamp(28px, 4vw, 58px);
+    align-items: end;
+    margin-bottom: 22px;
+  }
+  .phase3-method-sequence-heading > p:last-child { max-width: none; }
+}
+
 .eastland-visual-stage {
   display: grid;
-  grid-template-columns: minmax(0, 1.38fr) minmax(0, .92fr) minmax(104px, .55fr) minmax(92px, .42fr);
+  grid-template-columns: minmax(0, 1.48fr) minmax(0, .98fr) minmax(116px, .58fr) minmax(96px, .44fr);
   align-items: end;
   gap: clamp(8px, 1.15vw, 18px);
   min-height: 0;
   margin: 42px 0 30px;
+  perspective: 1600px;
 }
 .eastland-laptop-mockup,
 .eastland-monitor-mockup,
 .eastland-ipad-mockup,
 .eastland-iphone-mockup { position: relative; top: auto; right: auto; bottom: auto; left: auto; width: 100%; margin: 0; transform: none; }
-.eastland-laptop-mockup { z-index: 1; }
-.eastland-monitor-mockup { z-index: 1; padding-bottom: 18px; }
-.eastland-ipad-mockup { z-index: 2; padding-bottom: 10px; }
-.eastland-iphone-mockup { z-index: 3; margin-left: -12px; padding: 7px; border-width: 4px; border-radius: 24px; }
-.eastland-laptop-screen { border-width: 9px; border-bottom-width: 12px; border-radius: 12px 12px 6px 6px; }
-.eastland-laptop-base { height: 14px; }
+.eastland-laptop-mockup { z-index: 1; transform: rotateY(-2deg); transform-origin: center bottom; }
+.eastland-monitor-mockup { z-index: 1; padding-bottom: 18px; transform: translateY(-4px) rotateY(1deg); transform-origin: center bottom; }
+.eastland-ipad-mockup { z-index: 2; padding-bottom: 10px; transform: translateY(-1px) rotateY(-3deg); transform-origin: center bottom; }
+.eastland-iphone-mockup { z-index: 3; margin-left: -12px; padding: 7px; border-width: 4px; border-radius: 24px; transform: translateY(-2px) rotate(1.5deg) rotateY(-3deg); transform-origin: center bottom; }
+.eastland-laptop-screen { border-width: 10px; border-bottom-width: 13px; border-radius: 14px 14px 7px 7px; box-shadow: 0 30px 54px rgba(36,36,33,.27), 0 3px 0 rgba(255,255,255,.3) inset, 0 0 0 1px rgba(0,0,0,.35); }
+.eastland-laptop-base { height: 16px; box-shadow: 0 14px 22px rgba(36,36,33,.22), 0 1px 0 rgba(255,255,255,.6) inset; }
 .eastland-laptop-screen picture,
 .eastland-laptop-screen picture img,
 .eastland-monitor-screen picture,
 .eastland-monitor-screen picture img,
 .eastland-ipad-screen picture,
 .eastland-ipad-screen picture img { display: block; width: 100%; height: 100%; }
-.eastland-monitor-screen { position: relative; overflow: hidden; aspect-ratio: 16 / 9; border: 7px solid #b9bab4; border-radius: 10px; background: #181a18; box-shadow: 0 20px 36px rgba(36,36,33,.2), 0 2px 0 rgba(255,255,255,.75) inset; }
+.eastland-monitor-screen { position: relative; overflow: hidden; aspect-ratio: 16 / 10; border: 8px solid #b9bab4; border-radius: 12px; background: #181a18; box-shadow: 0 24px 42px rgba(36,36,33,.24), 0 2px 0 rgba(255,255,255,.75) inset, 0 0 0 1px rgba(44,45,41,.45); }
 .eastland-monitor-screen img { object-fit: cover; object-position: center; }
 .eastland-monitor-stand { position: relative; width: 28%; height: 24px; margin: 0 auto; background: linear-gradient(90deg, #9a9b96, #d2d2cb 46%, #999a94); clip-path: polygon(30% 0, 70% 0, 88% 74%, 100% 100%, 0 100%, 12% 74%); }
 .eastland-monitor-stand span { position: absolute; right: -80%; bottom: -7px; left: -80%; height: 6px; border-radius: 50%; background: #8c8e88; box-shadow: 0 5px 8px rgba(36,36,33,.18); }
-.eastland-ipad-mockup { padding: 7px; border: 4px solid #777a78; border-radius: 17px; background: #aeb0ab; box-shadow: 0 20px 38px rgba(36,36,33,.22), 0 0 0 2px rgba(255,255,255,.48) inset; }
+.eastland-ipad-mockup { padding: 8px; border: 4px solid #777a78; border-radius: 19px; background: linear-gradient(145deg, #c5c7c1, #898c87); box-shadow: 0 24px 42px rgba(36,36,33,.24), 0 0 0 2px rgba(255,255,255,.48) inset, 0 0 0 1px rgba(35,36,34,.4); }
 .eastland-ipad-screen { position: relative; overflow: hidden; aspect-ratio: 4 / 3; border-radius: 9px; background: #f7f6f2; }
 .eastland-ipad-screen img { object-fit: contain; object-position: center; }
 .eastland-ipad-camera { position: absolute; z-index: 2; top: 4px; left: 50%; width: 5px; height: 5px; border-radius: 50%; background: #383a39; transform: translateX(-50%); }
-.eastland-iphone-screen { aspect-ratio: 944 / 2048; }
+.eastland-iphone-screen { aspect-ratio: 944 / 2048; box-shadow: 0 0 0 1px rgba(255,255,255,.16) inset; }
 .eastland-iphone-screen img { object-fit: cover; }
 .eastland-context-proofs { display: none; }
+
+@media (min-width: 961px) {
+  .eastland-laptop-screen picture img { object-position: center; }
+  .eastland-monitor-screen picture img { object-fit: contain; background: #fff; }
+  .eastland-ipad-screen picture img { object-fit: contain; background: #f7f6f2; }
+}
 
 @media (max-width: 960px) {
   .eastland-visual-stage { grid-template-columns: minmax(0, 1.32fr) minmax(0, .9fr) minmax(82px, .54fr) minmax(70px, .43fr); gap: 7px; }
@@ -3093,6 +3143,7 @@ h3 { letter-spacing: -.015em; }
 }
 
 @media (max-width: 680px) {
+  .phase3-snapshot-proof { transform: none; }
   .eastland-visual-stage { display: grid; grid-template-columns: 1fr 1fr; align-items: end; gap: 14px; margin-top: 30px; }
   .eastland-laptop-mockup { grid-column: 1 / -1; width: 100%; }
   .eastland-monitor-mockup { grid-column: 1 / 2; width: 100%; padding-bottom: 0; }

@@ -27,6 +27,13 @@ assert.ok(html.includes('previously relied on Facebook as its primary online pre
 assert.ok(html.includes('Visitors now have a clearer mobile path to essential information, ministries, and contact.'));
 assert.ok(html.includes('eastland-laptop-mockup') && html.includes('eastland-iphone-mockup'));
 assert.ok(html.includes('eastland-monitor-mockup') && html.includes('eastland-ipad-mockup'));
+assert.ok(html.includes('phase3-snapshot-proof'));
+assert.ok(html.includes('north-point-assessment-briefing-1200.avif'));
+assert.ok(html.includes('Illustrative sanitized Business Snapshot executive briefing'));
+assert.doesNotMatch(html, /phase3-snapshot-report/);
+assert.match(css, /phase3-method-sequence\s*\{[^}]*display:\s*block/s);
+assert.match(css, /eastland-visual-stage\s*\{[^}]*grid-template-columns:/s);
+assert.match(css, /eastland-monitor-screen[^}]*aspect-ratio:\s*16\s*\/\s*10/s);
 assert.ok(html.includes('eastland-google-business-profile.jpg') && html.includes('eastland-tablet-home.jpg'));
 assert.ok(!html.includes('eastland-context-proofs') && !html.includes('eastland-proof-grid'));
 assert.ok(html.includes('eastland-before-callout'));
