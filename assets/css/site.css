@@ -401,6 +401,50 @@ h3 { margin-bottom: 12px; font-size: 20px; line-height: 1.25; }
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
 
+/* Eastland visual proof: real captures in restrained device/browser frames. */
+.phase3-case > .container { display: flex; flex-direction: column; }
+.phase3-case-heading { order: 1; }
+.eastland-visual-stage { order: 2; }
+.eastland-context-proofs { order: 3; }
+.eastland-journey { order: 4; }
+.phase3-case-layout--details { display: block; order: 5; }
+.eastland-visual-stage { position: relative; min-height: clamp(430px, 47vw, 650px); margin: 42px 0 30px; }
+.eastland-laptop-mockup { position: absolute; z-index: 1; top: 0; left: 0; width: min(86%, 980px); }
+.eastland-laptop-screen { position: relative; overflow: hidden; aspect-ratio: 16 / 9; border: 13px solid #242522; border-bottom-width: 17px; border-radius: 17px 17px 9px 9px; background: #151614; box-shadow: 0 28px 52px rgba(36,36,33,.22), 0 3px 0 rgba(255,255,255,.22) inset; }
+.eastland-laptop-screen img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.eastland-laptop-screen picture, .eastland-iphone-screen picture, .eastland-browser-shell picture { display: block; width: 100%; height: 100%; }
+.eastland-browser-chrome { position: absolute; z-index: 1; top: 0; right: 0; left: 0; display: flex; align-items: center; gap: 6px; height: 25px; padding: 0 10px; background: #242522; color: rgba(255,255,255,.68); font-size: 9px; letter-spacing: .03em; }
+.eastland-browser-chrome i, .eastland-browser-toolbar i { display: block; width: 6px; height: 6px; border-radius: 50%; background: #c7c4ba; }
+.eastland-browser-chrome i:first-child, .eastland-browser-toolbar i:first-child { background: #d7a13d; }
+.eastland-browser-chrome span { margin-left: 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.eastland-laptop-base { position: relative; width: 108%; height: 20px; margin-left: -4%; border-radius: 0 0 18px 18px; background: linear-gradient(#bab9b2, #7f807b); box-shadow: 0 12px 18px rgba(36,36,33,.18); clip-path: polygon(3% 0, 97% 0, 100% 60%, 92% 100%, 8% 100%, 0 60%); }
+.eastland-laptop-base span { display: block; width: 23%; height: 4px; margin: 0 auto; border-radius: 0 0 5px 5px; background: #6f706a; }
+.eastland-iphone-mockup { position: absolute; z-index: 2; right: 7%; bottom: 0; width: clamp(190px, 23vw, 290px); padding: 11px; border: 5px solid #191a19; border-radius: 35px; background: #2d2f2c; box-shadow: 0 30px 54px rgba(36,36,33,.28), 0 0 0 2px rgba(255,255,255,.18) inset; transform: rotate(2deg); }
+.eastland-iphone-screen { position: relative; overflow: hidden; aspect-ratio: 944 / 1300; border-radius: 23px; background: #092542; }
+.eastland-iphone-screen img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.eastland-iphone-speaker { position: absolute; z-index: 3; top: 7px; left: 50%; width: 31%; height: 9px; border-radius: 0 0 9px 9px; background: #0b0c0b; transform: translateX(-50%); }
+.eastland-context-proofs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; margin: 6px 0 30px; }
+.eastland-browser-proof { margin: 0; min-width: 0; padding: 9px; border: 1px solid var(--color-border); background: #eeece6; box-shadow: 0 18px 34px rgba(36,36,33,.09); }
+.eastland-browser-shell { overflow: hidden; border: 1px solid #393a36; border-radius: 8px; background: #1b1d1b; }
+.eastland-browser-toolbar { display: flex; align-items: center; gap: 6px; height: 27px; padding: 0 10px; background: #292b28; color: rgba(255,255,255,.65); font-size: 9px; }
+.eastland-browser-toolbar span { margin-left: 5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.eastland-browser-shell img { display: block; width: 100%; height: auto; aspect-ratio: 1250 / 470; object-fit: cover; object-position: center; }
+.eastland-browser-proof:last-child .eastland-browser-shell img { aspect-ratio: 1500 / 700; }
+
+@media (max-width: 960px) {
+  .eastland-visual-stage { min-height: 510px; }
+  .eastland-laptop-mockup { width: 92%; }
+  .eastland-iphone-mockup { right: 4%; width: clamp(180px, 25vw, 250px); }
+}
+
+@media (max-width: 680px) {
+  .eastland-visual-stage { min-height: 0; margin-top: 30px; }
+  .eastland-laptop-mockup { position: relative; width: 100%; }
+  .eastland-iphone-mockup { position: relative; right: auto; bottom: auto; width: min(52vw, 225px); margin: -86px 7% 0 auto; }
+  .eastland-context-proofs { grid-template-columns: 1fr; gap: 16px; }
+  .eastland-browser-proof { padding: 7px; }
+}
+
 /* Business Snapshot — premium customer experience */
 .snapshot-page {
   --snapshot-night: #12130f;

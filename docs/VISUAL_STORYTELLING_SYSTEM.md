@@ -13,6 +13,8 @@ This phase uses supplied Rogers Holdings deliverables and approved Eastland Firs
 
 The homepage presents four assessment views (cover, executive briefing, key findings, roadmap), four improvement-plan views (cover, deliverables, timeline, next steps), and a factual Eastland journey from Facebook presence through search/profile discovery to an owned website experience.
 
+Eastland website captures are presented in CSS-only MacBook and iPhone frames, with the real Facebook and Google Business Profile captures shown in restrained browser shells. The frames add context and hierarchy; they do not recreate or redraw the captured interfaces.
+
 The Business Optimization Platform is mentioned only as Rogers Holdings' internal system for organizing evidence, priorities, and next actions. Its interface is not a public proof asset.
 
 All proof images use intrinsic dimensions, responsive `picture` sources, lazy loading below the fold, and stable aspect ratios to prevent layout shift.
