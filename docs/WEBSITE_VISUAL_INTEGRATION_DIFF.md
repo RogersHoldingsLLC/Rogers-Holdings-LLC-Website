@@ -37,3 +37,12 @@ The approved visual release was ported section-by-section onto `origin/main` at 
 - Navigation destinations and hash behavior
 - Favicons, social image, `robots.txt`, `sitemap.xml`, `CNAME`, and Search Console verification
 - Deployment configuration and production state
+
+## Final target-matching rebuild scope
+
+- Rebuilt only the problem, method, capabilities, and Eastland case-study presentation.
+- Added CSS-only line marks, fine gold dividers, alternating warm surfaces, and editorial spacing; no new imagery or copy was introduced.
+- Reworked the approved Eastland devices into realistic aluminum-style laptop, all-in-one desktop, tablet, and phone forms on one shared plane.
+- Added Safari-style chrome to the phone so all four visible screens carry consistent browser framing.
+- Preserved all 37 approved runtime proof references and every protected operational path.
+- Updated the three existing integration screenshots for 1440px, 768px, and 390px review.

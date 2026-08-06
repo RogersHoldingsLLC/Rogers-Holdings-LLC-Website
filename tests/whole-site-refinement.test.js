@@ -18,7 +18,7 @@ for (const [name, html] of [['homepage', home], ['Business Snapshot', snapshot],
   assert.match(html, /site\.js\?v=whole-site-refinement-1/);
 }
 
-assert.match(home, /site\.css\?v=website-visual-integration-1/);
+assert.match(home, /site\.css\?v=target-matching-rebuild-1/);
 assert.match(snapshot, /site\.css\?v=whole-site-refinement-1/);
 assert.match(privacy, /site\.css\?v=whole-site-refinement-1/);
 

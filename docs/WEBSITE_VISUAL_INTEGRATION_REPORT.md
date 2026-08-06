@@ -111,3 +111,7 @@ Screenshots were captured with reduced-motion enabled after scroll-loading lazy 
 ## Production status
 
 Production was not touched. Nothing was pushed, merged, deployed, or written to `origin/main`.
+
+## Reference-directed target rebuild
+
+The final pass treats the approved premium direction image as the composition target. The problem, method, and capabilities sections were rebuilt as a publication-like sequence with four-column rhythm where space permits, restrained line marks, fine gold rules, warm paper surfaces, stronger type hierarchy, and expanded vertical breathing room without changing their copy. The Eastland case-study brief now uses substantially more whitespace, finer borders, a quieter text-link CTA, and clearer executive grouping. Its approved screenshots are presented as an uncropped product family with a front-left MacBook-style device, rear-center and largest iMac-style display, front-right iPad-style device, and far-right iPhone-style device; every screen includes restrained Safari-style browser chrome. Desktop, tablet, and mobile captures confirm clean reflow, no horizontal overflow, no broken images, visible focus treatment, and reduced-motion compatibility.
