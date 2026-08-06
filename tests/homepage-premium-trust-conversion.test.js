@@ -45,7 +45,8 @@ assert.match(html, /src="assets\/images\/brand\/rh-executive-materials-01-768\.j
 
 assert.match(css, /\.home-page\.menu-open \.site-header[\s\S]*?backdrop-filter: none/);
 assert.match(css, /\.home-page \.primary-nav\.is-open[\s\S]*?min-height: calc\(100dvh - 72px\)/);
-assert.match(css, /\.phase3-capability-groups \.phase3-capability-cluster article:hover[\s\S]*?transform: none/);
+assert.match(css, /Homepage primary and secondary composition — canonical reference-match system/);
+assert.match(css, /\.homepage-value-strip \.phase3-problem-list[\s\S]*?grid-template-columns: repeat\(4/);
 assert.match(css, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.phase3-platform-cta[\s\S]*?transition: none/);
 assert.match(script, /if \('IntersectionObserver' in window && !reduceMotion\.matches\)/);
 assert.match(script, /if \(parallaxScenes\.length && !reduceMotion\.matches\)/);

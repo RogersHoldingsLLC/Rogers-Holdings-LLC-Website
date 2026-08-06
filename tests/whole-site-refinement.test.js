@@ -22,11 +22,10 @@ assert.match(home, /site\.css\?v=target-matching-rebuild-1/);
 assert.match(snapshot, /site\.css\?v=whole-site-refinement-1/);
 assert.match(privacy, /site\.css\?v=whole-site-refinement-1/);
 
-assert.ok(home.includes('phase3-snapshot-scene'));
-assert.ok(home.includes('north-point-snapshot-scene-desktop.avif'));
-assert.ok(home.includes('north-point-snapshot-scene-tablet.avif'));
-assert.ok(home.includes('north-point-snapshot-scene-mobile.avif'));
-assert.ok(home.includes('snapshot-composite'));
+assert.ok(home.includes('homepage-hero-media'));
+assert.ok(home.includes('executive-snapshot-hero-desktop.avif'));
+assert.ok(home.includes('executive-snapshot-hero-tablet.avif'));
+assert.ok(home.includes('executive-snapshot-hero-mobile.avif'));
 assert.doesNotMatch(home, /visual-proof-pair|north-point-assessment-|north-point-plan-/);
 
 assert.match(js, /distance > window\.innerHeight \* 1\.35/);
@@ -37,19 +36,18 @@ assert.match(js, /Secure human verification could not start in this browser or o
 assert.match(snapshotDoc, /trycloudflare\.com/);
 assert.match(snapshotDoc, /must not be addressed by weakening the production hostname\s+restriction/);
 
-assert.match(css, /\.snapshot-composite\s*\{[\s\S]*?aspect-ratio:\s*4\s*\/\s*5/);
-assert.match(css, /section\[id\],[\s\S]*scroll-margin-top:\s*92px/);
+assert.match(css, /\.homepage-hero-media img\s*\{[\s\S]*?object-fit:\s*cover/);
+assert.match(css, /\.home-page section\[id\]\s*\{[^}]*scroll-margin-top:\s*92px/);
 assert.match(css, /\.snapshot-page \.field-error\s*\{[\s\S]*?min-height:/);
 assert.match(css, /\.legal-content\s*\{[\s\S]*?780px/);
 
-const stageStart = home.indexOf('<div class="eastland-device-stage"');
-const stageEnd = home.indexOf('<div class="eastland-journey"', stageStart);
-const stage = home.slice(stageStart, stageEnd);
-assert.ok(stage.includes('eastland-website-desktop-live'));
-assert.ok(stage.includes('eastland-google-business-profile'));
-assert.ok(stage.includes('eastland-website-tablet-live'));
-assert.ok(stage.includes('eastland-website-mobile-safari'));
-assert.doesNotMatch(stage, /facebook/i);
+const showcaseStart = home.indexOf('<picture class="homepage-eastland-picture"');
+const showcaseEnd = home.indexOf('</picture>', showcaseStart);
+const showcase = home.slice(showcaseStart, showcaseEnd);
+assert.ok(showcase.includes('eastland-product-family-desktop'));
+assert.ok(showcase.includes('eastland-product-family-tablet'));
+assert.ok(showcase.includes('eastland-product-family-mobile'));
+assert.doesNotMatch(showcase, /facebook/i);
 
 assert.doesNotMatch(home + snapshot + privacy, /localhost|workers\.dev|preview_url|TURNSTILE_SECRET_KEY/i);
 
