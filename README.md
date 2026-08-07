@@ -46,6 +46,19 @@ The Phase 1 homepage organizes the company's services beneath Business Optimizat
 
 Homepage assessment CTAs lead to the Business Snapshot intake page.
 
+## Naming standard v1.0
+
+Production-facing language uses these customer journey terms:
+
+`Free Business Snapshot` → `Executive Brief` → `Discovery Conversation` →
+`Digital Business Assessment` → `Improvement Plan` →
+`Implementation Services` → `Ongoing Optimization`
+
+`Business Snapshot` is the product name. `Free Business Snapshot` and
+`Get Your Free Business Snapshot` are the approved marketing offer and call to
+action. `Website Audit Tool API` is internal-only and must not be presented as
+the customer offer.
+
 ## Business Snapshot lead delivery
 
 The approved production architecture uses an isolated Cloudflare Worker gateway
@@ -54,11 +67,12 @@ validates the public request, enforces origin, rate-limit, honeypot, and
 Turnstile controls, authenticates privately to the production receiver, and
 returns a deliberately narrow public response.
 
-The website remains disconnected while
-`data-endpoint-configured="false"`. In that state it makes no intake request,
-keeps the prepared-email fallback visible, and never shows online confirmation.
-The tracked Turnstile value is an inactive public-site-key placeholder until a
-separately approved production configuration step.
+The production website posts to
+`https://intake.rogersholdingsllc.com/api/business-snapshot` with
+`data-endpoint-configured="true"` and the approved public Turnstile site key.
+The prepared-email path remains available when secure online delivery cannot be
+completed, and the browser shows confirmation only after validating the narrow
+production response contract.
 
 Receiver endpoints, shared credentials, Turnstile secrets, deployment
 credentials, account identifiers, and BOP configuration must remain outside
@@ -83,10 +97,9 @@ An accepted public response must contain `ok: true`, `environment: production`,
 the exact submitted `requestId`, and Boolean `retry`. No prospect identifier or
 private receiver value is returned to the browser.
 
-Activation requires separate approval for DNS and nameserver migration,
-Cloudflare custom-domain and Turnstile configuration, the final website flag,
-and the first controlled production submission. Rollback removes the Worker
-custom-domain mapping first and restores the endpoint-disabled website state.
+Future gateway, DNS, Turnstile, endpoint, or receiver changes require separate
+production review. Rollback must preserve the current public contract and avoid
+exposing receiver credentials or private response data.
 
 ## Business Snapshot release
 

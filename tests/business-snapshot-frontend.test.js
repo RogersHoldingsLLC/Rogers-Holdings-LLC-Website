@@ -4,7 +4,10 @@ const path = require('node:path');
 
 const ROOT = path.resolve(__dirname, '..');
 const html = fs.readFileSync(path.join(ROOT, 'business-snapshot/index.html'), 'utf8');
+const homepage = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+const privacy = fs.readFileSync(path.join(ROOT, 'privacy/index.html'), 'utf8');
 const source = fs.readFileSync(path.join(ROOT, 'assets/js/site.js'), 'utf8');
+const productionLanguage = [homepage, html, privacy, source].join('\n');
 
 const noopClassList = { add() {}, remove() {}, toggle() {}, contains() { return false; } };
 global.document = {
@@ -63,6 +66,46 @@ assert.match(html, /data-expired-callback="businessSnapshotTurnstileExpired"/);
 assert.match(html, /data-timeout-callback="businessSnapshotTurnstileTimeout"/);
 assert.match(html, /site\.css\?v=whole-site-refinement-1/);
 assert.match(html, /site\.js\?v=whole-site-refinement-1/);
+
+const canonicalJourney = [
+  'Free Business Snapshot',
+  'Executive Brief',
+  'Discovery Conversation',
+  'Digital Business Assessment',
+  'Improvement Plan',
+  'Implementation Services',
+  'Ongoing Optimization'
+];
+
+let previousJourneyPosition = -1;
+for (const term of canonicalJourney) {
+  assert.match(productionLanguage, new RegExp(term));
+  const journeyPosition = homepage.indexOf(term, previousJourneyPosition + 1);
+  assert.ok(journeyPosition > previousJourneyPosition, `${term} must appear in canonical journey order`);
+  previousJourneyPosition = journeyPosition;
+}
+
+assert.match(html, /<title>Free Business Snapshot \| Rogers Holdings LLC<\/title>/);
+assert.match(html, /Get Your Free Business Snapshot/);
+assert.match(source, /const defaultSubmitLabel = 'Get Your Free Business Snapshot';/);
+assert.doesNotMatch(productionLanguage, /\b(?:Request (?:Your|My)|Start Your) Business Snapshot\b/);
+
+for (const retiredTerm of [
+  'Executive Snapshot',
+  'Digital Opportunity Snapshot',
+  'Website Audit',
+  'Audit Report',
+  'Proposal',
+  'Rogers Holdings OS'
+]) {
+  assert.doesNotMatch(productionLanguage, new RegExp(retiredTerm, 'i'));
+}
+
+assert.match(privacy, /operational metadata/);
+assert.match(privacy, /Do not submit passwords, payment information/);
+assert.match(privacy, /Security incidents/);
+assert.match(privacy, /delete or de-identify/);
+assert.match(privacy, /separate optional consent/);
 
 const disabledForm = {
   dataset: { endpointConfigured: 'false' },

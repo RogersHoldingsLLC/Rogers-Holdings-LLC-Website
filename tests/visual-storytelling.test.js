@@ -18,7 +18,7 @@ for (const base of requiredBases) {
   }
 }
 
-assert.ok(html.includes('Inside a Business Assessment'));
+assert.ok(html.includes('Inside a Digital Business Assessment'));
 assert.ok(html.includes('From assessment to action'));
 assert.ok(html.includes('Illustrative example using fictional business information'));
 assert.ok(html.includes('Behind every assessment is Rogers Holdings’ internal Business Optimization Platform'));
@@ -42,7 +42,7 @@ assert.doesNotMatch(html, /Rogers Holdings gave our church|Draft testimonial cop
 assert.ok(html.includes('phase3-snapshot-proof'));
 assert.ok(html.includes('north-point-assessment-briefing-1200.avif'));
 assert.ok(html.includes('north-point-assessment-findings-1200.avif'));
-assert.ok(html.includes('Sample Executive Snapshot'));
+assert.ok(html.includes('Sample Executive Brief'));
 assert.ok(html.includes('snapshot-document-page--primary'));
 assert.ok(html.includes('snapshot-document-page--secondary'));
 assert.doesNotMatch(html, /phase3-snapshot-report/);

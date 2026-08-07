@@ -14,12 +14,14 @@ const snapshotDoc = read('docs/BUSINESS_SNAPSHOT_PREMIUM_EXPERIENCE.md');
 const labels = ['Approach', 'Process', 'Capabilities', 'Our Work', 'About', 'Contact'];
 for (const [name, html] of [['homepage', home], ['Business Snapshot', snapshot], ['Privacy', privacy]]) {
   for (const label of labels) assert.ok(html.includes(`>${label}</a>`), `${name} missing ${label}`);
-  assert.ok(html.includes('Request Your Business Snapshot'), `${name} missing normalized CTA`);
+  assert.ok(html.includes('>Business Snapshot</a>'), `${name} missing product navigation label`);
   assert.match(html, /site\.css\?v=whole-site-refinement-1/);
   assert.match(html, /site\.js\?v=whole-site-refinement-1/);
 }
 
-assert.ok(home.includes('Sample Executive Snapshot'));
+assert.ok(home.includes('Get Your Free Business Snapshot'));
+assert.ok(snapshot.includes('Get Your Free Business Snapshot'));
+assert.ok(home.includes('Sample Executive Brief'));
 assert.ok(home.includes('north-point-assessment-briefing-1200.avif'));
 assert.ok(home.includes('north-point-assessment-findings-1200.avif'));
 assert.ok(home.includes('snapshot-document-page--primary'));
