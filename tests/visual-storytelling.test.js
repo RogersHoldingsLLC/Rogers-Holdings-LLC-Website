@@ -6,15 +6,17 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const css = fs.readFileSync(path.join(root, 'assets/css/site.css'), 'utf8');
+const photographicStandard = fs.readFileSync(path.join(root, 'docs/design-source/ROGERS_HOLDINGS_CLIENT_WORK_PHOTOGRAPHIC_STANDARD.md'), 'utf8');
 const homepageAssets = path.join(root, 'assets/images/homepage');
+const eastlandReference = path.join(root, 'docs/design-reference/eastland-client-work-FINAL-REFERENCE.png');
 
 const families = [
   ['executive-snapshot-hero', 'desktop', 2560, 960],
   ['executive-snapshot-hero', 'tablet', 1600, 1200],
   ['executive-snapshot-hero', 'mobile', 960, 1280],
-  ['eastland-product-family', 'desktop', 2400, 1200],
-  ['eastland-product-family', 'tablet', 1600, 1200],
-  ['eastland-product-family', 'mobile', 960, 1200]
+  ['eastland-product-family', 'desktop', 2400, 1244],
+  ['eastland-product-family', 'tablet', 1600, 957],
+  ['eastland-product-family', 'mobile', 960, 757]
 ];
 
 const files = fs.readdirSync(homepageAssets).sort();
@@ -44,8 +46,8 @@ for (const [markup, family] of [[hero, 'executive-snapshot-hero'], [eastland, 'e
 }
 
 assert.match(hero, /width="2560" height="960" loading="eager" fetchpriority="high" decoding="async"/);
-assert.match(eastland, /width="2400" height="1200" loading="lazy" decoding="async"/);
-assert.match(eastland, /alt="Eastland First Church of God website shown across desktop, laptop, tablet, and phone"/);
+assert.match(eastland, /width="2400" height="1244" loading="lazy" decoding="async"/);
+assert.match(eastland, /alt="Eastland First Church of God client-work presentation across desktop, laptop, tablet, and phone displays on a warm executive desk, with the digital discovery journey below"/);
 assert.ok(html.includes('Fictional sample shown for demonstration. North Point Fitness is fictional.'));
 
 for (const [family, viewport, width, height] of families) {
@@ -57,12 +59,10 @@ const sectionOrder = [
   'class="hero phase3-hero"',
   'class="homepage-value-strip"',
   'class="homepage-eastland-showcase"',
-  'class="homepage-proof-statement"',
   'class="section phase3-problem"',
   'class="section phase3-method"',
   'class="section phase3-capabilities"',
   'class="section phase3-platform"',
-  'class="section phase3-case"',
   'class="section phase3-owner"',
   'class="section phase3-principles"',
   'class="section phase3-final-cta"'
@@ -73,14 +73,36 @@ assert.deepEqual(sectionOrder, [...sectionOrder].sort((a, b) => a - b), 'homepag
 for (const copy of [
   'Where improvement begins', 'Assess, Prioritize, Improve methodology',
   'Inspect, Understand, Prioritize, Implement, Optimize supporting sequence',
-  'Business Optimization Platform', 'previously relied on Facebook as its primary online presence',
-  'Facebook community', 'Google Search', 'Google Business Profile', 'Official website',
+  'Business Optimization Platform', 'Facebook was the primary online presence, with no dedicated website',
+  'The Digital Discovery Journey', 'Discover', 'Audit', 'Strategy', 'Build', 'Optimize', 'Grow',
   'Owner-led by design', 'Why Rogers Holdings', 'A clear place to begin'
 ]) assert.ok(html.includes(copy), `missing preserved secondary content: ${copy}`);
 
 assert.ok(html.includes('Visitors now have a clearer mobile path to essential information, ministries, and contact.'));
+assert.doesNotMatch(html + css, /eastland-case-intro|eastland-before-callout|Before Rogers Holdings/);
+for (const fact of ['fragmented and difficult to find', 'limiting search visibility', 'service times, ministries, messages, giving, directions, and contact']) {
+  assert.ok(html.includes(fact), `missing consolidated Eastland challenge fact: ${fact}`);
+}
 assert.doesNotMatch(html + css, /eastland-device-stage|eastland-device-screen|eastland-device--|eastland-browser-bar|eastland-laptop-base|eastland-monitor-stand/);
-assert.doesNotMatch(html, /north-point-snapshot-scene-|assets\/images\/proof\/eastland-website/);
+assert.doesNotMatch(html, /north-point-snapshot-scene-/);
+assert.doesNotMatch(html, /phase3-case-client|phase3-case-logo|eastland-project-logo\.jpg|<span>Status<\/span>|<span>Location<\/span>|<span>Project<\/span>/);
+
+const workspaceStart = html.indexOf('<figure class="eastland-workspace"');
+const workspaceEnd = html.indexOf('</figure>', workspaceStart);
+const workspace = html.slice(workspaceStart, workspaceEnd);
+assert.doesNotMatch(workspace + css, /eastland-screen--|class="eastland-screen"/, 'runtime screen overlays must remain retired');
+const eastlandReferenceHash = crypto.createHash('sha256').update(fs.readFileSync(eastlandReference)).digest('hex');
+assert.equal(eastlandReferenceHash, '516d0b764d82f2ac1b451ca0194602da2abe7e3e57ea94d9218d1dde693acb62', 'authoritative Eastland reference changed');
+assert.match(html, /class="eastland-discovery sr-only"/, 'the image-baked journey must not be duplicated visually');
+assert.match(css, /\.eastland-project-links \{[\s\S]*position: absolute;/, 'functional Eastland links must overlay their image-baked labels');
+assert.match(photographicStandard, /Runtime screenshot overlays are prohibited/);
+assert.match(photographicStandard, /Client evidence must never be generated/);
+
+assert.match(html, /href="https:\/\/www\.eastlandfirstchurchofgod\.com" target="_blank" rel="noopener noreferrer">.*View Live Website/);
+assert.match(html, /href="https:\/\/www\.google\.com\/maps\/search\/\?api=1&amp;query=Eastland\+First\+Church\+of\+God%2C\+1706\+Old\+Owingsville\+Rd%2C\+Mt\+Sterling%2C\+KY\+40353" target="_blank" rel="noopener noreferrer">.*View Google Listing/);
+assert.equal((html.match(/class="eastland-evidence-icon"/g) || []).length, 4, 'Eastland evidence band must use four decorative circular icons');
+assert.equal((html.match(/class="eastland-link-icon"/g) || []).length, 0, 'Eastland project links must use the reference editorial treatment');
+assert.equal((html.match(/role="listitem"/g) || []).length, 6, 'Eastland journey must contain six reference stages');
 assert.match(css, /Homepage primary and secondary composition — canonical reference-match system/);
 assert.doesNotMatch(html, /Rogers Holdings gave our church|Draft testimonial copy/);
 assert.doesNotMatch(html, /BOP interface|Family Vault|workers\.dev|localhost|staging/i);
