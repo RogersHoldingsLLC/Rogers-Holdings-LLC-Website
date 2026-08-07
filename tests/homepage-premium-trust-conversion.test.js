@@ -7,14 +7,15 @@ const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 const css = fs.readFileSync(path.join(ROOT, 'assets/css/site.css'), 'utf8');
 const script = fs.readFileSync(path.join(ROOT, 'assets/js/site.js'), 'utf8');
 
-const requestLabel = 'Request Your Business Snapshot';
-assert.equal((html.match(new RegExp(requestLabel, 'g')) || []).length, 4);
-assert.equal((html.match(/Complimentary written review · Human-reviewed · Typically within three business days/g) || []).length, 2);
+const primaryCta = 'Get Your Free Business Snapshot';
+assert.equal((html.match(new RegExp(primaryCta, 'g')) || []).length, 3);
+assert.equal((html.match(/Complimentary written review · Human-reviewed · Typically within three business days/g) || []).length, 1);
+assert.equal((html.match(/Free · Human-reviewed · Typically within three business days/g) || []).length, 1);
 
 assert.match(html, /<section class="section phase3-method" id="process">/);
 assert.doesNotMatch(html, /<section class="section phase3-process"/);
 assert.match(html, /aria-label="Assess, Prioritize, Improve methodology"/);
-assert.match(html, /aria-label="Inspect, Understand, Prioritize, Implement, Optimize supporting sequence"/);
+assert.match(html, /aria-label="Free Business Snapshot through Ongoing Optimization customer journey"/);
 
 for (const heading of [
   'Visibility &amp; Customer Experience',
@@ -36,7 +37,7 @@ for (const capability of [
 
 assert.match(html, /Used internally to organize evidence and priorities\. Clients receive clear findings and next actions—not another platform to manage\./);
 assert.match(html, /Visitors now have a clearer mobile path to essential information, ministries, and contact\./);
-assert.match(html, /href="business-snapshot\/" data-report-link>Request Your Business Snapshot/);
+assert.match(html, /href="business-snapshot\/" data-report-link>Get Your Free Business Snapshot/);
 
 assert.match(html, /<picture>/);
 assert.match(html, /rh-executive-materials-01-480\.avif 480w/);
