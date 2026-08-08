@@ -653,7 +653,7 @@ if (leadForm) {
     if (!isConfigured) {
       showDeliveryStatus({
         heading: 'Your request is ready to send.',
-        message: 'Business Snapshot requests are temporarily unavailable while we complete a system update. Please check back shortly.',
+        message: 'Secure online delivery is still being connected, so this form has not been submitted. Open the prepared email, review it, and send it to Rogers Holdings.',
         request
       });
       trackBusinessSnapshotEvent('business_snapshot_email_prepared');
