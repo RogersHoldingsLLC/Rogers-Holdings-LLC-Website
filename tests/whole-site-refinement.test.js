@@ -23,9 +23,9 @@ assert.match(snapshot, /site\.css\?v=whole-site-refinement-1/);
 assert.match(privacy, /site\.css\?v=whole-site-refinement-1/);
 
 assert.ok(home.includes('homepage-hero-media'));
-assert.ok(home.includes('executive-snapshot-hero-desktop.avif'));
-assert.ok(home.includes('executive-snapshot-hero-tablet.avif'));
-assert.ok(home.includes('executive-snapshot-hero-mobile.avif'));
+assert.ok(home.includes('homepage-hero-v2-desktop.avif'));
+assert.ok(home.includes('homepage-hero-v2-tablet.avif'));
+assert.ok(home.includes('homepage-hero-v2-mobile.avif'));
 assert.doesNotMatch(home, /visual-proof-pair|north-point-assessment-|north-point-plan-/);
 
 assert.match(js, /distance > window\.innerHeight \* 1\.35/);

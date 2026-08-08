@@ -14,13 +14,17 @@ const families = [
   ['executive-snapshot-hero', 'desktop', 2560, 960],
   ['executive-snapshot-hero', 'tablet', 1600, 1200],
   ['executive-snapshot-hero', 'mobile', 960, 1280],
+  ['homepage-hero-v2', 'desktop', 1536, 1024],
+  ['homepage-hero-v2', 'tablet', 1600, 1200],
+  ['homepage-hero-v2', 'mobile', 960, 1280],
   ['eastland-product-family', 'desktop', 2400, 1244],
   ['eastland-product-family', 'tablet', 1600, 957],
   ['eastland-product-family', 'mobile', 960, 757]
 ];
 
 const files = fs.readdirSync(homepageAssets).sort();
-assert.equal(files.length, 18, 'homepage production directory must contain exactly 18 derivatives');
+const productionFiles = files.filter((file) => !file.startsWith('homepage-hero-v2-desktop-proof.'));
+assert.equal(productionFiles.length, 27, 'homepage production directory must contain exactly 27 production derivatives including final Hero V2 responsive assets');
 for (const [family, viewport] of families) {
   for (const extension of ['avif', 'webp', 'jpg']) {
     const asset = `${family}-${viewport}.${extension}`;
@@ -36,24 +40,27 @@ const eastlandStart = html.indexOf('<picture class="homepage-eastland-picture"')
 const eastlandEnd = html.indexOf('</picture>', eastlandStart);
 const eastland = html.slice(eastlandStart, eastlandEnd);
 
-for (const [markup, family] of [[hero, 'executive-snapshot-hero'], [eastland, 'eastland-product-family']]) {
-  for (const viewport of ['mobile', 'tablet', 'desktop']) {
-    const avif = markup.indexOf(`${family}-${viewport}.avif`);
-    const webp = markup.indexOf(`${family}-${viewport}.webp`);
-    const jpg = markup.indexOf(`${family}-${viewport}.jpg`);
-    assert.ok(avif >= 0 && webp > avif && jpg > webp, `${family} ${viewport} sources must be ordered AVIF, WebP, JPG`);
-  }
+for (const [markup, family, viewport] of [
+  [hero, 'homepage-hero-v2', 'mobile'],
+  [hero, 'homepage-hero-v2', 'tablet'],
+  [hero, 'homepage-hero-v2', 'desktop'],
+  [eastland, 'eastland-product-family', 'mobile'],
+  [eastland, 'eastland-product-family', 'tablet'],
+  [eastland, 'eastland-product-family', 'desktop']
+]) {
+  const avif = markup.indexOf(`${family}-${viewport}.avif`);
+  const webp = markup.indexOf(`${family}-${viewport}.webp`);
+  const jpg = markup.indexOf(`${family}-${viewport}.jpg`);
+  assert.ok(avif >= 0 && webp > avif && jpg > webp, `${family} ${viewport} sources must be ordered AVIF, WebP, JPG`);
 }
 
-assert.match(hero, /width="2560" height="960" loading="eager" fetchpriority="high" decoding="async"/);
+assert.match(hero, /media="\(min-width: 1101px\)" type="image\/avif" srcset="assets\/images\/homepage\/homepage-hero-v2-desktop\.avif"/);
+assert.match(hero, /width="1536" height="1024" loading="eager" fetchpriority="high" decoding="async"/);
 assert.match(eastland, /width="2400" height="1244" loading="lazy" decoding="async"/);
 assert.match(eastland, /alt="Eastland First Church of God client-work presentation across desktop, laptop, tablet, and phone displays on a warm executive desk, with the digital discovery journey below"/);
 assert.ok(html.includes('Fictional sample shown for demonstration. North Point Fitness is fictional.'));
 
-for (const [family, viewport, width, height] of families) {
-  assert.ok(html.includes(`${family}-${viewport}.avif`));
-  assert.ok(width > 0 && height > 0);
-}
+for (const [, , width, height] of families) assert.ok(width > 0 && height > 0);
 
 const sectionOrder = [
   'class="hero phase3-hero"',
