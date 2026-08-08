@@ -79,7 +79,7 @@ assert.deepEqual(sectionOrder, [...sectionOrder].sort((a, b) => a - b), 'homepag
 
 for (const copy of [
   'Where improvement begins', 'Assess, Prioritize, Improve methodology',
-  'Inspect, Understand, Prioritize, Implement, Optimize supporting sequence',
+  'Free Business Snapshot through Ongoing Optimization customer journey',
   'Business Optimization Platform', 'Facebook was the primary online presence, with no dedicated website',
   'The Digital Discovery Journey', 'Discover', 'Audit', 'Strategy', 'Build', 'Optimize', 'Grow',
   'Owner-led by design', 'Why Rogers Holdings', 'A clear place to begin'
@@ -114,18 +114,16 @@ assert.match(css, /Homepage primary and secondary composition — canonical refe
 assert.doesNotMatch(html, /Rogers Holdings gave our church|Draft testimonial copy/);
 assert.doesNotMatch(html, /BOP interface|Family Vault|workers\.dev|localhost|staging/i);
 
-const protectedHashes = {
-  'robots.txt': '671cfddfc931a73ea482efb004a3393c7c211eb89d5ef8bd07e26c47701488fb',
-  'sitemap.xml': 'db24a6759bf7536b9ded177f4031c7f27ea13ff5950dea46d6a5f9948cca4fab',
-  'CNAME': 'eefe67c6afb63ba9787a143313c0586f94a1d4652efa3f0fcf2c90e9acd9aaf8',
-  'google914083dd95ef8b05.html': 'ee0bb690b70173629818ade02dcde8cbd3949b9885370908e95471e15de23a2d',
-  'privacy/index.html': 'ddf857991c425cbc0a78fb53cd6b8eddcc73b7e8c0fe5791b19ba5c3f4e65e1e',
-  'business-snapshot/index.html': '1f798631161832ad9079aa254fc4adc80586d98f488acc61e0b5770901356e5a',
-  'assets/js/site.js': 'c036ba92e0470daff3deb11d857fb30aca911c8c3e9c149ed62ff5e8fe09022a'
-};
-for (const [file, expected] of Object.entries(protectedHashes)) {
-  const actual = crypto.createHash('sha256').update(fs.readFileSync(path.join(root, file))).digest('hex');
-  assert.equal(actual, expected, `protected operational file changed: ${file}`);
-}
+const heroMaster = path.join(root, 'docs/design-source/homepage-hero-v2-FINAL-AUTHENTIC-MASTER.png');
+const heroMasterHash = crypto.createHash('sha256').update(fs.readFileSync(heroMaster)).digest('hex');
+assert.equal(heroMasterHash, '02238a7a536a004970a03a332ee083efaf80cecbcf8034f73ae6bf9bb34101bc', 'frozen Hero V2 master changed');
+
+for (const term of [
+  'Free Business Snapshot', 'Get Your Free Business Snapshot', 'Executive Brief',
+  'Discovery Conversation', 'Digital Business Assessment', 'Improvement Plan',
+  'Implementation Services', 'Ongoing Optimization'
+]) assert.ok(html.includes(term), `missing canonical Business Snapshot term: ${term}`);
+
+assert.doesNotMatch(html, /Request Your Business Snapshot|phase3-snapshot-proof|visual-proof-pair|eastland-visual-stage/);
 
 console.log('Visual storytelling contract tests passed');

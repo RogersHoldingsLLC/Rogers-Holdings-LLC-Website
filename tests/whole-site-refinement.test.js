@@ -14,7 +14,7 @@ const snapshotDoc = read('docs/BUSINESS_SNAPSHOT_PREMIUM_EXPERIENCE.md');
 const labels = ['Approach', 'Process', 'Capabilities', 'Our Work', 'About', 'Contact'];
 for (const [name, html] of [['homepage', home], ['Business Snapshot', snapshot], ['Privacy', privacy]]) {
   for (const label of labels) assert.ok(html.includes(`>${label}</a>`), `${name} missing ${label}`);
-  assert.ok(html.includes('Request Your Business Snapshot'), `${name} missing normalized CTA`);
+  assert.ok(html.includes('>Business Snapshot</a>'), `${name} missing product navigation label`);
   assert.match(html, /site\.js\?v=whole-site-refinement-1/);
 }
 
@@ -22,11 +22,24 @@ assert.match(home, /site\.css\?v=target-matching-rebuild-1/);
 assert.match(snapshot, /site\.css\?v=whole-site-refinement-1/);
 assert.match(privacy, /site\.css\?v=whole-site-refinement-1/);
 
+assert.ok(home.includes('Get Your Free Business Snapshot'));
+assert.ok(snapshot.includes('Get Your Free Business Snapshot'));
 assert.ok(home.includes('homepage-hero-media'));
-assert.ok(home.includes('homepage-hero-v2-desktop.avif'));
-assert.ok(home.includes('homepage-hero-v2-tablet.avif'));
-assert.ok(home.includes('homepage-hero-v2-mobile.avif'));
-assert.doesNotMatch(home, /visual-proof-pair|north-point-assessment-|north-point-plan-/);
+for (const viewport of ['desktop', 'tablet', 'mobile']) assert.ok(home.includes(`homepage-hero-v2-${viewport}.avif`));
+assert.doesNotMatch(home, /visual-proof-pair|north-point-assessment-|north-point-plan-|phase3-snapshot-proof/);
+
+for (const term of ['Free Business Snapshot', 'Executive Brief', 'Discovery Conversation', 'Digital Business Assessment', 'Improvement Plan', 'Implementation Services', 'Ongoing Optimization']) {
+  assert.ok(home.includes(term), `homepage missing canonical journey term: ${term}`);
+}
+
+assert.match(snapshot, /action="https:\/\/intake\.rogersholdingsllc\.com\/api\/business-snapshot"/);
+assert.match(snapshot, /data-endpoint-configured="true"/);
+assert.match(snapshot, /data-turnstile-widget/);
+assert.match(snapshot, /name="consent"[^>]*value="business-snapshot-contact-consent-v1"/);
+assert.match(snapshot, /name="company"[^>]*tabindex="-1"/);
+assert.match(js, /result\.environment === 'production'/);
+assert.match(js, /result\.requestId === requestId/);
+assert.match(js, /typeof result\.retry === 'boolean'/);
 
 assert.match(js, /distance > window\.innerHeight \* 1\.35/);
 assert.match(js, /history\.pushState/);

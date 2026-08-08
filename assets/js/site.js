@@ -410,9 +410,7 @@ if (leadForm) {
   const turnstileStatus = leadForm.querySelector('[data-turnstile-status]');
   const configuredEndpoint = leadForm.getAttribute('action')?.trim();
   const isConfigured = businessSnapshotEndpointIsConfigured(leadForm);
-  const defaultSubmitLabel = isConfigured
-    ? 'Request My Business Snapshot'
-    : 'Prepare My Snapshot Request';
+  const defaultSubmitLabel = 'Get Your Free Business Snapshot';
   const requestId = crypto.randomUUID();
   const journey = createBusinessSnapshotJourneyTracker();
   const reportRuntimeError = createBusinessSnapshotRuntimeErrorReporter();
