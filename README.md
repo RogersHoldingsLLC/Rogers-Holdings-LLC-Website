@@ -2,6 +2,10 @@
 
 The public website for Rogers Holdings LLC. The site positions Rogers Holdings as a business optimization partner for small and growing service businesses.
 
+## Authoritative homepage production baseline
+
+The human-approved and production-approved homepage baseline is commit `22efc3e` (`22efc3e6866af0c1544cb27918a45dce4b3eb79c`). Preserve that baseline unless a future scope explicitly authorizes a change. The final freeze record is `docs/design-source/HOMEPAGE_FINAL_PRODUCTION_BASELINE_22EFC3E.md`.
+
 ## Architecture
 
 The production site is intentionally framework-free and is hosted through GitHub Pages.
