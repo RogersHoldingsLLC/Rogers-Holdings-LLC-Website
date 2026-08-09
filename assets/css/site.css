@@ -1166,7 +1166,7 @@ h3 { letter-spacing: -.015em; }
 .phase3-capabilities .phase3-editorial-header > div { padding-left: 14px; }
 .phase3-method .phase3-editorial-header::after,
 .phase3-capabilities .phase3-editorial-header::after {
-  top: 0;
+  top: 34px;
   bottom: auto;
   width: 1px;
   height: 72px;
