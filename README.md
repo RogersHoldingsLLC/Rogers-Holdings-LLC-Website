@@ -189,6 +189,10 @@ The executive visual system turns the approved Executive Materials scene into a 
 
 This refinement preserves the approved homepage visual system while improving mobile navigation reliability, Business Snapshot clarity, methodology rhythm, capability grouping, platform positioning, and featured-project specificity. It also replaces the large executive-materials download with responsive AVIF, WebP, and JPEG sources while retaining lazy loading and fixed image dimensions.
 
+## Business Snapshot hero reuse and conversion pass
+
+The Business Snapshot page now reuses the approved responsive Homepage Hero V2.1 photography behind conversion-focused HTML copy, followed by a compact three-step Executive Brief process and the existing production form. The form contract, validation, consent, Turnstile, delivery behavior, analytics, navigation, footer, and metadata remain unchanged.
+
 ## Release checks
 
 Before publishing a homepage change:
