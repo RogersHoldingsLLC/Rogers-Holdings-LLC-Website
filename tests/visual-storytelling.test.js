@@ -87,7 +87,7 @@ for (const copy of [
   'Free Business Snapshot through Ongoing Optimization customer journey',
   'Business Optimization Platform', 'Facebook was the primary online presence, with no dedicated website',
   'The Digital Discovery Journey', 'Discover', 'Audit', 'Strategy', 'Build', 'Optimize', 'Grow',
-  'Owner-led by design', 'Why Rogers Holdings', 'A clear place to begin'
+  'Owner-led by design', 'Why Rogers Holdings', 'A simple place to start'
 ]) assert.ok(html.includes(copy), `missing preserved secondary content: ${copy}`);
 
 assert.doesNotMatch(html, /class="section phase3-problem"|class="section phase3-principles"/);
