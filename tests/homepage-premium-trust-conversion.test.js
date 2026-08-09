@@ -17,6 +17,7 @@ assert.match(html, /class="phase3-method-sequence" id="process"/);
 assert.doesNotMatch(html, /<section class="section phase3-process"/);
 assert.match(html, /aria-label="Assess, Prioritize, Improve methodology"/);
 assert.match(html, /aria-label="Free Business Snapshot through Ongoing Optimization customer journey"/);
+assert.equal((html.match(/class="phase3-process-substage"/g) || []).length, 2);
 
 for (const heading of [
   'I need more customers',
@@ -39,8 +40,12 @@ for (const capability of [
   assert.match(html, new RegExp(capability));
 }
 
-assert.match(html, /We use our own Business Optimization Platform to keep what we find, what matters, and what needs to happen next connected throughout the work/);
+for (const band of ['Customer growth', 'Time + organization', 'Direction + technology']) {
+  assert.ok(html.includes(band));
+}
+assert.match(html, /Our internal platform keeps evidence, findings, priorities, and implementation connected throughout the work/);
 assert.match(html, /We manage the system\. You get clear recommendations and next steps—not another platform to learn\./);
+assert.doesNotMatch(html, /class="phase3-platform-cta"/);
 assert.match(html, /Visitors now have a clearer mobile path to essential information, ministries, and contact\./);
 assert.match(html, /href="business-snapshot\/" data-report-link>Get Your Free Business Snapshot/);
 

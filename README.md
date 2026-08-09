@@ -177,6 +177,10 @@ The first homepage compression pass consolidates recurring-friction positioning,
 
 The second homepage compression pass preserves the approved information architecture and copy while recomposing the post-Eastland method and capabilities areas into denser editorial systems. The method introduction and three-step framework now share one aligned composition with a connected customer journey, while the six capabilities form a compact grouped matrix with responsive paired cards on mobile.
 
+## Homepage repetition cleanup and visual differentiation
+
+The repetition cleanup assigns each recurring idea to one clear section, turns the client journey into a responsive roadmap/stepper, distinguishes the continuous Assess–Prioritize–Improve method from that journey, groups six needs into three outcome bands, keeps founder accountability visually connected to the portrait, and tightens the final conversion section. The approved Hero V2.1, Eastland presentation, Business Snapshot experience, workflow visual, navigation, footer, metadata, analytics, and production integrations remain unchanged.
+
 ## Desktop owner presentation
 
 The desktop owner section gives the framed landscape image greater presence in its left column and aligns it with the main headline, while preserving the approved presentation at tablet and mobile widths.
