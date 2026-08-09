@@ -25,7 +25,7 @@ assert.match(privacy, /site\.css\?v=whole-site-refinement-1/);
 assert.ok(home.includes('Get Your Free Business Snapshot'));
 assert.ok(snapshot.includes('Get Your Free Business Snapshot'));
 assert.ok(home.includes('homepage-hero-media'));
-for (const viewport of ['desktop', 'tablet', 'mobile']) assert.ok(home.includes(`homepage-hero-v2-${viewport}.avif`));
+for (const viewport of ['desktop', 'tablet', 'mobile']) assert.ok(home.includes(`homepage-hero-v2.1-${viewport}.avif`));
 assert.doesNotMatch(home, /visual-proof-pair|north-point-assessment-|north-point-plan-|phase3-snapshot-proof/);
 
 for (const term of ['Free Business Snapshot', 'Executive Brief', 'Discovery Conversation', 'Digital Business Assessment', 'Improvement Plan', 'Implementation Services', 'Ongoing Optimization']) {
