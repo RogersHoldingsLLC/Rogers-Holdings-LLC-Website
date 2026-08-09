@@ -12,7 +12,8 @@ assert.equal((html.match(new RegExp(primaryCta, 'g')) || []).length, 3);
 assert.equal((html.match(/Complimentary written review · Human-reviewed · Typically within three business days/g) || []).length, 1);
 assert.equal((html.match(/Free · Human-reviewed · Typically within three business days/g) || []).length, 1);
 
-assert.match(html, /<section class="section phase3-method" id="process">/);
+assert.match(html, /<section class="section phase3-method" id="approach"/);
+assert.match(html, /class="phase3-method-sequence" id="process"/);
 assert.doesNotMatch(html, /<section class="section phase3-process"/);
 assert.match(html, /aria-label="Assess, Prioritize, Improve methodology"/);
 assert.match(html, /aria-label="Free Business Snapshot through Ongoing Optimization customer journey"/);
@@ -35,14 +36,14 @@ for (const capability of [
   assert.match(html, new RegExp(`<h4>${capability}</h4>`));
 }
 
-assert.match(html, /Used internally to organize evidence and priorities\. Clients receive clear findings and next actions—not another platform to manage\./);
+assert.match(html, /Rogers Holdings maintains evidence, findings, priorities, and implementation continuity internally/);
+assert.match(html, /Clients receive clear findings and next actions; they do not need another platform to manage\./);
 assert.match(html, /Visitors now have a clearer mobile path to essential information, ministries, and contact\./);
 assert.match(html, /href="business-snapshot\/" data-report-link>Get Your Free Business Snapshot/);
 
-assert.match(html, /<picture>/);
-assert.match(html, /rh-executive-materials-01-480\.avif 480w/);
-assert.match(html, /rh-executive-materials-01-768\.webp 768w/);
-assert.match(html, /src="assets\/images\/brand\/rh-executive-materials-01-768\.jpg" width="768" height="512" loading="lazy"/);
+assert.match(html, /class="phase3-founder-portrait"/);
+assert.match(html, /src="docs\/design-reference\/founder\/brian-keith-rogers-headshot-original\.png" width="1122" height="1402" loading="lazy"/);
+assert.match(html, /<strong>Brian Keith Rogers<\/strong><span>Founder, Rogers Holdings LLC<\/span>/);
 
 assert.match(css, /\.home-page\.menu-open \.site-header[\s\S]*?backdrop-filter: none/);
 assert.match(css, /\.home-page \.primary-nav\.is-open[\s\S]*?min-height: calc\(100dvh - 72px\)/);

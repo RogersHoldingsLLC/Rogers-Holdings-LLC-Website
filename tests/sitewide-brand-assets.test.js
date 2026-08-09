@@ -1,4 +1,5 @@
 const assert = require('node:assert/strict');
+const crypto = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
 
@@ -14,14 +15,13 @@ assert.match(snapshot, /<footer class="[^"]*site-footer[^"]*">[\s\S]*?rogers-hol
 assert.match(privacy, /<footer class="[^"]*site-footer[^"]*">[\s\S]*?rogers-holdings-logo-reversed\.png/);
 assert.doesNotMatch(snapshot, /<footer[\s\S]*?rogers-holdings-logo\.png/);
 assert.doesNotMatch(privacy, /<footer[\s\S]*?rogers-holdings-logo\.png/);
-assert.equal((homepage.match(/rh-executive-materials-01-480\.avif/g) || []).length, 1);
-assert.equal((homepage.match(/rh-executive-materials-01-768\.avif/g) || []).length, 1);
-assert.equal((homepage.match(/rh-executive-materials-01-480\.webp/g) || []).length, 1);
-assert.equal((homepage.match(/rh-executive-materials-01-768\.webp/g) || []).length, 1);
-assert.match(homepage, /src="assets\/images\/brand\/rh-executive-materials-01-768\.jpg" width="768" height="512" loading="lazy"/);
-assert.match(homepage, /sizes="\(max-width: 680px\)[^"]+620px/);
-assert.match(css, /grid-template-columns: minmax\(420px, \.95fr\) minmax\(0, 1\.05fr\)/);
-assert.match(css, /\.phase3-owner figure \{[\s\S]*?max-width: 620px/);
+assert.equal((homepage.match(/rh-executive-materials-01-/g) || []).length, 0);
+assert.equal((homepage.match(/brian-keith-rogers-headshot-original\.png/g) || []).length, 1);
+assert.match(homepage, /width="1122" height="1402" loading="lazy"/);
+assert.match(css, /grid-template-columns: minmax\(380px, \.84fr\) minmax\(0, 1\.16fr\)/);
+assert.match(css, /\.phase3-founder-portrait-frame[\s\S]*?aspect-ratio: 4 \/ 5/);
+const founderSource = fs.readFileSync(path.join(ROOT, 'docs/design-reference/founder/brian-keith-rogers-headshot-original.png'));
+assert.equal(crypto.createHash('sha256').update(founderSource).digest('hex'), '9bb3f69903b49705abeb212f88bde0ad5200ee5cf60de289e2698a77c467c979');
 assert.match(visualSystem, /Light backgrounds use/);
 assert.match(visualSystem, /Dark or black backgrounds use/);
 

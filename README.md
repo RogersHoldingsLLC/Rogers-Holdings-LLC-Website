@@ -169,6 +169,14 @@ Phase 3.7 strengthens the approved CSS-only material system so its archival pape
 
 The laptop space-efficiency pass preserves the approved Phase 3.7 visual direction while making the homepage hero content-driven and introducing a reusable responsive spacing scale for section rhythm, content relationships, panel rows, and composition gaps. It reduces unnecessary vertical space on common laptop screens without changing homepage copy, structure, typography sizes, material treatments, or mobile navigation behavior.
 
+## Homepage compression pass 1
+
+The first homepage compression pass consolidates recurring-friction positioning, the Assess/Prioritize/Improve working method, and the seven-term customer journey into one composition; tightens the six capability descriptions and internal Business Optimization Platform explanation; and combines owner-led accountability with four engagement principles. The approved Hero V2.1, Eastland presentation, conversion paths, navigation, and footer remain unchanged.
+
+## Homepage compression pass 2
+
+The second homepage compression pass preserves the approved information architecture and copy while recomposing the post-Eastland method and capabilities areas into denser editorial systems. The method introduction and three-step framework now share one aligned composition with a connected customer journey, while the six capabilities form a compact grouped matrix with responsive paired cards on mobile.
+
 ## Desktop owner presentation
 
 The desktop owner section gives the framed landscape image greater presence in its left column and aligns it with the main headline, while preserving the approved presentation at tablet and mobile widths.

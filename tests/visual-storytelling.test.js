@@ -73,24 +73,24 @@ const sectionOrder = [
   'class="hero phase3-hero"',
   'class="homepage-value-strip"',
   'class="homepage-eastland-showcase"',
-  'class="section phase3-problem"',
   'class="section phase3-method"',
   'class="section phase3-capabilities"',
   'class="section phase3-platform"',
   'class="section phase3-owner"',
-  'class="section phase3-principles"',
   'class="section phase3-final-cta"'
 ].map((marker) => html.indexOf(marker));
 assert.ok(sectionOrder.every((position) => position >= 0));
 assert.deepEqual(sectionOrder, [...sectionOrder].sort((a, b) => a - b), 'homepage sections must follow the approved primary and secondary order');
 
 for (const copy of [
-  'Where improvement begins', 'Assess, Prioritize, Improve methodology',
+  'How Rogers Holdings works', 'Assess, Prioritize, Improve methodology',
   'Free Business Snapshot through Ongoing Optimization customer journey',
   'Business Optimization Platform', 'Facebook was the primary online presence, with no dedicated website',
   'The Digital Discovery Journey', 'Discover', 'Audit', 'Strategy', 'Build', 'Optimize', 'Grow',
   'Owner-led by design', 'Why Rogers Holdings', 'A clear place to begin'
 ]) assert.ok(html.includes(copy), `missing preserved secondary content: ${copy}`);
+
+assert.doesNotMatch(html, /class="section phase3-problem"|class="section phase3-principles"/);
 
 assert.ok(html.includes('Visitors now have a clearer mobile path to essential information, ministries, and contact.'));
 assert.doesNotMatch(html + css, /eastland-case-intro|eastland-before-callout|Before Rogers Holdings/);
