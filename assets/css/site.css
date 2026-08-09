@@ -1163,11 +1163,12 @@ h3 { letter-spacing: -.015em; }
   border-bottom: 0;
 }
 .phase3-method .phase3-editorial-header > div,
-.phase3-capabilities .phase3-editorial-header > div { padding-left: 14px; }
+.phase3-capabilities .phase3-editorial-header > div { padding-left: 0; }
 .phase3-method .phase3-editorial-header::after,
 .phase3-capabilities .phase3-editorial-header::after {
   top: 34px;
   bottom: auto;
+  left: -20px;
   width: 1px;
   height: 72px;
   background: var(--color-gold);
@@ -1208,19 +1209,19 @@ h3 { letter-spacing: -.015em; }
 .phase3-process-sequence h4 { margin: 0 0 4px; color: var(--color-champagne); font-family: var(--sans); font-size: 9px; letter-spacing: .07em; text-transform: uppercase; }
 
 .phase3-capabilities > .container { display: grid; grid-template-columns: minmax(300px, .72fr) minmax(0, 1.58fr); gap: clamp(44px, 5vw, 72px); align-items: start; }
-.phase3-capability-groups { display: grid; gap: 14px; margin-top: 0; }
-.phase3-capability-band { display: grid; grid-template-columns: minmax(132px, .28fr) minmax(0, 1fr); border: 1px solid var(--color-border); background: rgba(245, 241, 232, .34); }
-.phase3-capability-band > h3 { padding: 24px 20px; margin: 0; border-right: 1px solid rgba(169, 123, 39, .24); background: rgba(169, 123, 39, .08); color: #71531f; font-family: var(--sans); font-size: 10px; font-weight: 800; letter-spacing: .11em; line-height: 1.5; text-transform: uppercase; }
-.phase3-capability-band > div { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.phase3-capability-card { min-width: 0; padding: clamp(18px, 1.8vw, 24px); }
-.phase3-capability-card + .phase3-capability-card { border-left: 1px solid var(--color-border); }
+.phase3-capability-groups { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 0; }
+.phase3-capability-band { display: grid; grid-template-rows: auto 1fr; min-width: 0; border: 1px solid var(--color-border); background: rgba(245, 241, 232, .34); }
+.phase3-capability-band > h3 { padding: 18px 20px; margin: 0; border-bottom: 1px solid rgba(169, 123, 39, .24); background: rgba(169, 123, 39, .08); color: #71531f; font-family: var(--sans); font-size: 10px; font-weight: 800; letter-spacing: .11em; line-height: 1.5; text-transform: uppercase; }
+.phase3-capability-band > div { display: grid; grid-template-rows: repeat(2, minmax(0, 1fr)); }
+.phase3-capability-card { min-width: 0; padding: clamp(18px, 1.8vw, 24px); padding-inline: 18px; }
+.phase3-capability-card + .phase3-capability-card { border-top: 1px solid var(--color-border); }
 .phase3-capability-card > span { color: var(--color-gold-hover); font-size: 9px; font-weight: 800; letter-spacing: .12em; }
 .phase3-capability-card h4 { margin: 10px 0 7px; font-family: var(--serif); font-size: clamp(19px, 1.45vw, 23px); font-weight: 500; line-height: 1.12; }
 .phase3-capability-card p { margin: 0; color: var(--color-text-secondary); font-size: 12px; line-height: 1.5; }
 .phase3-capability-card small { display: block; margin-top: 13px; color: #71531f; font-size: 9px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
-.capability-flow { display: flex; min-height: 44px; margin-top: 14px; align-items: center; flex-wrap: wrap; gap: 5px; }
-.capability-flow b { padding: 6px 8px; border: 1px solid rgba(169, 123, 39, .27); background: rgba(255, 255, 255, .72); font-size: 9px; letter-spacing: .02em; }
-.capability-flow i { color: var(--color-gold-hover); font-size: 12px; font-style: normal; }
+.capability-flow { display: flex; min-height: 44px; margin-top: 14px; align-items: center; flex-wrap: nowrap; gap: 1px; }
+.capability-flow b { padding: 4px 2px; border: 1px solid rgba(169, 123, 39, .27); background: rgba(255, 255, 255, .72); font-size: 7px; letter-spacing: 0; white-space: nowrap; }
+.capability-flow i { flex: 0 0 auto; color: var(--color-gold-hover); font-size: 9px; font-style: normal; }
 
 .phase3-platform { overflow: hidden; background: #1d201c; color: var(--color-text-reversed); }
 .phase3-platform-layout { display: grid; grid-template-columns: minmax(0, .85fr) minmax(420px, 1.15fr); gap: clamp(54px, 8vw, 108px); align-items: center; }
@@ -1329,10 +1330,11 @@ h3 { letter-spacing: -.015em; }
   .phase3-method .phase3-editorial-header > div,
   .phase3-capabilities .phase3-editorial-header > div { padding-left: 0; }
   .phase3-method .phase3-editorial-header::after,
-  .phase3-capabilities .phase3-editorial-header::after { top: auto; bottom: -1px; width: 72px; height: 1px; }
+  .phase3-capabilities .phase3-editorial-header::after { top: auto; bottom: -1px; left: 0; width: 72px; height: 1px; }
   .phase3-method .phase3-editorial-header > p,
   .phase3-capabilities .phase3-editorial-header > p { max-width: 58ch; }
   .phase3-method-grid { max-width: 760px; }
+  .phase3-capability-groups { grid-template-columns: 1fr; }
   .phase3-method-sequence { padding: 30px clamp(24px, 5vw, 38px); }
   .phase3-process-sequence { display: block; margin-top: 26px; }
   .phase3-process-sequence::before { top: 5px; right: auto; bottom: 5px; left: 7px; width: 1px; height: auto; background: linear-gradient(180deg, rgba(212, 179, 106, .36), var(--color-champagne), rgba(212, 179, 106, .36)); }
@@ -1401,12 +1403,11 @@ h3 { letter-spacing: -.015em; }
   .phase3-process-sequence li::before { top: 3px; left: 2px; }
   .phase3-process-sequence h3 { margin: 0 0 5px; }
   .phase3-process-substage { margin-top: 12px; }
-  .phase3-capability-band { grid-template-columns: 1fr; }
   .phase3-capability-band > h3 { padding: 11px 15px; border-right: 0; border-bottom: 1px solid rgba(169, 123, 39, .24); }
-  .phase3-capability-band > div { grid-template-columns: 1fr; }
-  .phase3-capability-card + .phase3-capability-card { border-top: 1px solid var(--color-border); border-left: 0; }
   .phase3-capability-card { padding: 12px 16px; }
-  .capability-flow { min-height: 36px; margin-top: 8px; }
+  .capability-flow { min-height: 36px; margin-top: 8px; flex-wrap: wrap; gap: 5px; }
+  .capability-flow b { padding: 6px 8px; font-size: 9px; letter-spacing: .02em; }
+  .capability-flow i { font-size: 12px; }
   .phase3-capability-card small { margin-top: 8px; }
   .phase3-workflow ol { padding-inline: 18px; }
   .phase3-owner-layout { grid-template-columns: 1fr; gap: 26px; }
