@@ -6,27 +6,57 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Rogers Holdings Email Signature</title>
 <style>
+  *{box-sizing:border-box}
   body{margin:0;background:#f6f4ef;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#191c19;}
   .shell{max-width:440px;margin:0 auto;padding:28px 20px 40px;}
   .eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9a7438;margin-bottom:8px;}
   h1{font-size:24px;line-height:1.15;margin:0 0 8px;color:#161816;}
   .intro{font-size:14px;line-height:1.5;color:#626762;margin:0 0 20px;}
   .card{background:#fff;border:1px solid #e5dfd3;border-radius:16px;padding:20px;box-shadow:0 10px 30px rgba(23,25,22,.06);}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;}
+  .field{display:flex;flex-direction:column;gap:6px;}
+  .field.full{grid-column:1/-1;}
+  label{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#777b76;}
+  input{width:100%;border:1px solid #d8d2c7;border-radius:10px;background:#fbfaf7;color:#191c19;padding:11px 12px;font:500 14px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;outline:none;}
+  input:focus{border-color:#b78a3e;box-shadow:0 0 0 3px rgba(183,138,62,.12);}
+  .preview-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9a7438;margin:4px 0 10px;}
   .signature-wrap{overflow-x:auto;padding:4px 0;}
   .copy-button{appearance:none;border:0;border-radius:12px;background:#171916;color:#fff;font:700 15px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;width:100%;padding:15px 18px;margin-top:18px;cursor:pointer;}
   .copy-button:active{transform:translateY(1px);}
+  .reset-button{appearance:none;border:1px solid #d8d2c7;border-radius:12px;background:#fff;color:#4f544f;font:600 13px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;width:100%;padding:12px 16px;margin-top:9px;cursor:pointer;}
   .status{min-height:20px;margin:10px 2px 0;font-size:13px;line-height:1.4;color:#626762;}
   .steps{margin:20px 0 0;padding:0 0 0 20px;color:#4f544f;font-size:14px;line-height:1.55;}
   .steps li+li{margin-top:6px;}
+  @media(max-width:420px){.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}}
 </style>
 </head>
 <body>
 <main class="shell">
-  <div class="eyebrow">Apple Mail Signature</div>
-  <h1>Rogers Holdings LLC</h1>
-  <p class="intro">Tap the button below to copy the complete formatted signature, then paste it into the Rogers Holdings signature field in Apple Mail settings.</p>
+  <div class="eyebrow">Rogers Holdings Signature Builder</div>
+  <h1>Create an email signature</h1>
+  <p class="intro">Edit the fields below. The Rogers Holdings branding and format stay consistent while the signature updates automatically.</p>
 
   <section class="card">
+    <div class="form-grid" aria-label="Signature details">
+      <div class="field full">
+        <label for="nameInput">Name</label>
+        <input id="nameInput" type="text" value="Brian Keith Rogers" autocomplete="name">
+      </div>
+      <div class="field full">
+        <label for="titleInput">Title</label>
+        <input id="titleInput" type="text" value="Founder" autocomplete="organization-title">
+      </div>
+      <div class="field">
+        <label for="phoneInput">Phone</label>
+        <input id="phoneInput" type="tel" value="859-404-7300" autocomplete="tel">
+      </div>
+      <div class="field">
+        <label for="emailInput">Email</label>
+        <input id="emailInput" type="email" value="briankeith@rogersholdingsllc.com" autocomplete="email">
+      </div>
+    </div>
+
+    <div class="preview-label">Preview</div>
     <div class="signature-wrap">
       <div id="signature">
         <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;width:100%;max-width:360px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#191c19;">
@@ -35,11 +65,11 @@
               <img src="https://rogersholdingsllc.com/assets/images/brand/rogers-holdings-logo.png" width="60" height="60" alt="Rogers Holdings LLC" style="display:block;width:60px;height:60px;border:0;outline:none;text-decoration:none;">
             </td>
             <td style="vertical-align:middle;padding:0 0 0 12px;border-left:1px solid #b78a3e;">
-              <div style="font-size:16px;line-height:19px;font-weight:700;color:#161816;">Brian Keith Rogers</div>
-              <div style="margin-top:1px;font-size:10px;line-height:14px;font-weight:700;color:#9a7438;letter-spacing:.8px;text-transform:uppercase;">Founder</div>
+              <div id="sigName" style="font-size:16px;line-height:19px;font-weight:700;color:#161816;">Brian Keith Rogers</div>
+              <div id="sigTitle" style="margin-top:1px;font-size:10px;line-height:14px;font-weight:700;color:#9a7438;letter-spacing:.8px;text-transform:uppercase;">Founder</div>
               <div style="font-size:11px;line-height:15px;font-weight:600;color:#303330;">Rogers Holdings LLC</div>
-              <div style="margin-top:5px;font-size:10.5px;line-height:15px;color:#666b66;"><a href="tel:+18594047300" style="color:#666b66;text-decoration:none;">859-404-7300</a><span style="color:#b7b9b7;"> · </span><a href="https://www.rogersholdingsllc.com" style="color:#8f692f;text-decoration:none;font-weight:600;">rogersholdingsllc.com</a></div>
-              <div style="font-size:10.5px;line-height:15px;"><a href="mailto:briankeith@rogersholdingsllc.com" style="color:#666b66;text-decoration:none;">briankeith@rogersholdingsllc.com</a></div>
+              <div style="margin-top:5px;font-size:10.5px;line-height:15px;color:#666b66;"><a id="sigPhone" href="tel:+18594047300" style="color:#666b66;text-decoration:none;">859-404-7300</a><span style="color:#b7b9b7;"> · </span><a href="https://www.rogersholdingsllc.com" style="color:#8f692f;text-decoration:none;font-weight:600;">rogersholdingsllc.com</a></div>
+              <div style="font-size:10.5px;line-height:15px;"><a id="sigEmail" href="mailto:briankeith@rogersholdingsllc.com" style="color:#666b66;text-decoration:none;">briankeith@rogersholdingsllc.com</a></div>
             </td>
           </tr>
           <tr>
@@ -50,32 +80,95 @@
     </div>
 
     <button class="copy-button" id="copySignature" type="button">Copy Email Signature</button>
+    <button class="reset-button" id="resetSignature" type="button">Reset to Brian's Signature</button>
     <div class="status" id="copyStatus" aria-live="polite"></div>
   </section>
 
   <ol class="steps">
+    <li>Edit the name, title, phone, and email.</li>
     <li>Tap <strong>Copy Email Signature</strong>.</li>
     <li>Open <strong>Settings → Apps → Mail → Signature</strong>.</li>
-    <li>Paste into the Rogers Holdings LLC signature field.</li>
+    <li>Paste into the appropriate signature field.</li>
     <li>If iOS changes the formatting, immediately use <strong>Undo Change Attributes</strong>.</li>
   </ol>
 </main>
 
 <script>
 (function(){
-  const button = document.getElementById('copySignature');
-  const status = document.getElementById('copyStatus');
   const signature = document.getElementById('signature');
+  const button = document.getElementById('copySignature');
+  const reset = document.getElementById('resetSignature');
+  const status = document.getElementById('copyStatus');
 
-  function absoluteHtml(){
+  const fields = {
+    name: document.getElementById('nameInput'),
+    title: document.getElementById('titleInput'),
+    phone: document.getElementById('phoneInput'),
+    email: document.getElementById('emailInput')
+  };
+
+  const output = {
+    name: document.getElementById('sigName'),
+    title: document.getElementById('sigTitle'),
+    phone: document.getElementById('sigPhone'),
+    email: document.getElementById('sigEmail')
+  };
+
+  function cleanPhoneForHref(value){
+    const digits = value.replace(/\D/g,'');
+    if(digits.length === 10) return '+1' + digits;
+    if(digits.length === 11 && digits.startsWith('1')) return '+' + digits;
+    return '+' + digits;
+  }
+
+  function updatePreview(){
+    const name = fields.name.value.trim() || 'Name';
+    const title = fields.title.value.trim() || 'Title';
+    const phone = fields.phone.value.trim() || 'Phone';
+    const email = fields.email.value.trim() || 'Email';
+
+    output.name.textContent = name;
+    output.title.textContent = title;
+    output.phone.textContent = phone;
+    output.phone.href = 'tel:' + cleanPhoneForHref(phone);
+    output.email.textContent = email;
+    output.email.href = 'mailto:' + email;
+    status.textContent = '';
+  }
+
+  Object.values(fields).forEach(field => field.addEventListener('input', updatePreview));
+
+  reset.addEventListener('click', function(){
+    fields.name.value = 'Brian Keith Rogers';
+    fields.title.value = 'Founder';
+    fields.phone.value = '859-404-7300';
+    fields.email.value = 'briankeith@rogersholdingsllc.com';
+    updatePreview();
+    status.textContent = "Reset to Brian's signature.";
+  });
+
+  function signatureHtml(){
     const clone = signature.cloneNode(true);
     clone.removeAttribute('id');
+    clone.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
     return clone.innerHTML;
   }
 
+  function signaturePlain(){
+    return [
+      fields.name.value.trim(),
+      fields.title.value.trim(),
+      'Rogers Holdings LLC',
+      fields.phone.value.trim() + ' · rogersholdingsllc.com',
+      fields.email.value.trim(),
+      'Better systems. Clearer decisions. Stronger businesses.'
+    ].filter(Boolean).join('\n');
+  }
+
   button.addEventListener('click', async function(){
-    const html = absoluteHtml();
-    const plain = 'Brian Keith Rogers\nFounder\nRogers Holdings LLC\n859-404-7300 · rogersholdingsllc.com\nbriankeith@rogersholdingsllc.com\nBetter systems. Clearer decisions. Stronger businesses.';
+    updatePreview();
+    const html = signatureHtml();
+    const plain = signaturePlain();
 
     try {
       if (navigator.clipboard && window.ClipboardItem) {
@@ -99,6 +192,8 @@
       status.textContent = 'Your browser blocked one-tap rich copy. Tap Copy from the selection menu, then paste into Mail.';
     }
   });
+
+  updatePreview();
 })();
 </script>
 </body>
