@@ -12,7 +12,12 @@
   .eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9a7438;margin-bottom:8px;}
   h1{font-size:24px;line-height:1.15;margin:0 0 8px;color:#161816;}
   .intro{font-size:14px;line-height:1.5;color:#626762;margin:0 0 20px;}
+  .mode-switch{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 16px;}
+  .mode-button{appearance:none;border:1px solid #d8d2c7;border-radius:12px;background:#fff;color:#4f544f;font:700 13px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;padding:12px 10px;cursor:pointer;}
+  .mode-button[aria-pressed="true"]{background:#171916;border-color:#171916;color:#fff;}
   .card{background:#fff;border:1px solid #e5dfd3;border-radius:16px;padding:20px;box-shadow:0 10px 30px rgba(23,25,22,.06);}
+  .mode-note{border:1px solid #ece5da;border-radius:12px;background:#fbfaf7;color:#626762;font-size:13px;line-height:1.45;margin:0 0 18px;padding:12px;}
+  .mode-note strong{color:#191c19;}
   .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;}
   .field{display:flex;flex-direction:column;gap:6px;}
   .field.full{grid-column:1/-1;}
@@ -27,6 +32,7 @@
   .status{min-height:20px;margin:10px 2px 0;font-size:13px;line-height:1.4;color:#626762;}
   .steps{margin:20px 0 0;padding:0 0 0 20px;color:#4f544f;font-size:14px;line-height:1.55;}
   .steps li+li{margin-top:6px;}
+  .steps[hidden]{display:none;}
   @media(max-width:420px){.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}}
 </style>
 </head>
@@ -36,7 +42,14 @@
   <h1>Create an email signature</h1>
   <p class="intro">Edit the fields below. The Rogers Holdings branding and format stay consistent while the signature updates automatically.</p>
 
+  <div class="mode-switch" aria-label="Signature install mode">
+    <button class="mode-button" id="appleMode" type="button" aria-pressed="true">Apple Mail</button>
+    <button class="mode-button" id="gmailMode" type="button" aria-pressed="false">Gmail</button>
+  </div>
+
   <section class="card">
+    <p class="mode-note" id="modeNote"><strong>Apple Mail mode:</strong> copies the current rich signature for Apple Mail signature settings and keeps the existing iPhone/Mail paste workflow.</p>
+
     <div class="form-grid" aria-label="Signature details">
       <div class="field full">
         <label for="nameInput">Name</label>
@@ -84,12 +97,20 @@
     <div class="status" id="copyStatus" aria-live="polite"></div>
   </section>
 
-  <ol class="steps">
+  <ol class="steps" id="appleSteps">
     <li>Edit the name, title, phone, and email.</li>
     <li>Tap <strong>Copy Email Signature</strong>.</li>
     <li>Open <strong>Settings → Apps → Mail → Signature</strong>.</li>
     <li>Paste into the appropriate signature field.</li>
     <li>If iOS changes the formatting, immediately use <strong>Undo Change Attributes</strong>.</li>
+  </ol>
+
+  <ol class="steps" id="gmailSteps" hidden>
+    <li>Edit the name, title, phone, and email.</li>
+    <li>Tap <strong>Copy for Gmail</strong>.</li>
+    <li>Open Gmail on the web, then go to <strong>Settings → See all settings → General → Signature</strong>.</li>
+    <li>Create or select the Rogers Holdings signature.</li>
+    <li>Paste into Gmail's rich signature editor and save changes.</li>
   </ol>
 </main>
 
@@ -99,6 +120,12 @@
   const button = document.getElementById('copySignature');
   const reset = document.getElementById('resetSignature');
   const status = document.getElementById('copyStatus');
+  const modeNote = document.getElementById('modeNote');
+  const appleMode = document.getElementById('appleMode');
+  const gmailMode = document.getElementById('gmailMode');
+  const appleSteps = document.getElementById('appleSteps');
+  const gmailSteps = document.getElementById('gmailSteps');
+  let installMode = 'apple';
 
   const fields = {
     name: document.getElementById('nameInput'),
@@ -137,6 +164,23 @@
   }
 
   Object.values(fields).forEach(field => field.addEventListener('input', updatePreview));
+
+  function setInstallMode(mode){
+    installMode = mode;
+    const isGmail = mode === 'gmail';
+    appleMode.setAttribute('aria-pressed', String(!isGmail));
+    gmailMode.setAttribute('aria-pressed', String(isGmail));
+    appleSteps.hidden = isGmail;
+    gmailSteps.hidden = !isGmail;
+    button.textContent = isGmail ? 'Copy for Gmail' : 'Copy Email Signature';
+    modeNote.innerHTML = isGmail
+      ? '<strong>Gmail mode:</strong> copies the same premium Rogers Holdings signature as rich HTML for Gmail web signature settings.'
+      : '<strong>Apple Mail mode:</strong> copies the current rich signature for Apple Mail signature settings and keeps the existing iPhone/Mail paste workflow.';
+    status.textContent = '';
+  }
+
+  appleMode.addEventListener('click', function(){ setInstallMode('apple'); });
+  gmailMode.addEventListener('click', function(){ setInstallMode('gmail'); });
 
   reset.addEventListener('click', function(){
     fields.name.value = 'Brian Keith Rogers';
@@ -177,9 +221,11 @@
           'text/plain': new Blob([plain], {type:'text/plain'})
         });
         await navigator.clipboard.write([item]);
-        status.textContent = 'Copied. Paste it into Apple Mail → Signature.';
+        status.textContent = installMode === 'gmail'
+          ? 'Copied for Gmail. Paste it into Gmail web → Settings → Signature.'
+          : 'Copied. Paste it into Apple Mail → Signature.';
         button.textContent = 'Copied ✓';
-        setTimeout(()=>{ button.textContent = 'Copy Email Signature'; }, 1800);
+        setTimeout(()=>{ button.textContent = installMode === 'gmail' ? 'Copy for Gmail' : 'Copy Email Signature'; }, 1800);
         return;
       }
       throw new Error('Rich clipboard unavailable');
@@ -189,7 +235,9 @@
       const selection = window.getSelection();
       selection.removeAllRanges();
       selection.addRange(range);
-      status.textContent = 'Your browser blocked one-tap rich copy. Tap Copy from the selection menu, then paste into Mail.';
+      status.textContent = installMode === 'gmail'
+        ? 'Your browser blocked one-tap rich copy. Use the selection menu to copy, then paste into Gmail web signature settings.'
+        : 'Your browser blocked one-tap rich copy. Tap Copy from the selection menu, then paste into Mail.';
     }
   });
 
