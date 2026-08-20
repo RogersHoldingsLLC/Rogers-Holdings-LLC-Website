@@ -205,6 +205,7 @@ document.querySelectorAll('[data-current-year]').forEach((element) => {
 
 const BUSINESS_SNAPSHOT_ENDPOINT = 'https://intake.rogersholdingsllc.com/api/business-snapshot';
 const BUSINESS_SNAPSHOT_TIMEOUT_MS = 40000;
+const BUSINESS_SNAPSHOT_UNAVAILABLE_MESSAGE = 'Secure submission is temporarily unavailable. Your answers have not been sent. Please try again or contact Rogers Holdings directly.';
 const BUSINESS_SNAPSHOT_FAILURE_CATEGORIES = new Set([
   'user_validation',
   'turnstile_missing',
@@ -244,7 +245,7 @@ const businessSnapshotFailureMessages = {
   turnstile_error: 'Secure human verification could not start in this browser or on this preview address. Refresh the page, or use the email and phone options below.',
   turnstile_expired: 'Human verification expired. Complete the fresh check and try again.',
   turnstile_timeout: 'Human verification timed out. Complete the fresh check and try again.',
-  retryable_service: 'The secure service is temporarily unavailable. Try again shortly or use the prepared email below.',
+  retryable_service: BUSINESS_SNAPSHOT_UNAVAILABLE_MESSAGE,
   ambiguous_timeout: 'We could not confirm whether your request was received. Wait a moment, then retry; this page will reuse the same request identity.',
   ambiguous_network: 'We could not confirm whether your request was received. Check your connection, then retry; this page will reuse the same request identity.',
   ambiguous_response: 'We could not confirm the request status. Wait a moment, then retry or use the prepared email below.',
@@ -435,7 +436,10 @@ if (leadForm) {
   }
 
   if (!isConfigured) {
-    if (deliveryNote) deliveryNote.hidden = false;
+    if (deliveryNote) {
+      deliveryNote.textContent = BUSINESS_SNAPSHOT_UNAVAILABLE_MESSAGE;
+      deliveryNote.hidden = false;
+    }
     if (turnstileShell) turnstileShell.hidden = true;
     setSubmitLabel(defaultSubmitLabel);
   } else if (deliveryNote) {
@@ -652,8 +656,8 @@ if (leadForm) {
 
     if (!isConfigured) {
       showDeliveryStatus({
-        heading: 'Your request is ready to send.',
-        message: 'Secure online delivery is still being connected, so this form has not been submitted. Open the prepared email, review it, and send it to Rogers Holdings.',
+        heading: 'Your request was not sent.',
+        message: BUSINESS_SNAPSHOT_UNAVAILABLE_MESSAGE,
         request
       });
       trackBusinessSnapshotEvent('business_snapshot_email_prepared');

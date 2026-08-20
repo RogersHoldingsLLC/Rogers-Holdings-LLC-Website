@@ -66,6 +66,11 @@ assert.match(html, /data-expired-callback="businessSnapshotTurnstileExpired"/);
 assert.match(html, /data-timeout-callback="businessSnapshotTurnstileTimeout"/);
 assert.match(html, /site\.css\?v=whole-site-refinement-1/);
 assert.match(html, /site\.js\?v=whole-site-refinement-1/);
+assert.match(html, /<p class="delivery-note" data-delivery-note hidden><\/p>/);
+assert.doesNotMatch(html, /secure submission endpoint is not connected yet/i);
+assert.doesNotMatch(html, /Secure submission is temporarily unavailable/);
+assert.match(source, /const BUSINESS_SNAPSHOT_UNAVAILABLE_MESSAGE = 'Secure submission is temporarily unavailable\. Your answers have not been sent\. Please try again or contact Rogers Holdings directly\.';/);
+assert.match(source, /retryable_service: BUSINESS_SNAPSHOT_UNAVAILABLE_MESSAGE/);
 
 const canonicalJourney = [
   'Free Business Snapshot',
