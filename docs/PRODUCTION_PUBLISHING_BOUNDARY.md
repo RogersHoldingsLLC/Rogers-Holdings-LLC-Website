@@ -77,7 +77,13 @@ The only `docs/` file in production is the exact founder image referenced by `in
 
 ## Workflow design
 
-`.github/workflows/deploy-pages.yml` runs on a push to `main` or manual dispatch. The build job checks out source, selects Node.js 24, runs the complete test suite, rebuilds `_site/`, configures Pages metadata, and uploads only `_site/`. It has `contents: read` and `pages: read` permissions.
+### Read-only pull-request validation
+
+`.github/workflows/validate-public-site.yml` runs only for pull requests targeting `main`. It checks out the proposed source, selects Node.js 24 without automatic package-manager caching, runs the complete test suite, and builds `_site/`. It has only `contents: read`, uses PR-specific concurrency that cancels superseded validation runs, and has no environment, Pages permissions, artifact upload, or deployment step.
+
+### Main-only production build and deployment
+
+`.github/workflows/deploy-pages.yml` runs on a push to `main` or manual dispatch. The build job checks out source, selects Node.js 24, runs the complete test suite, rebuilds `_site/`, configures Pages metadata, and uploads only `_site/`. It has `contents: read` and `pages: read` permissions. Pull requests cannot trigger this production workflow.
 
 The separate deploy job needs the successful build, uses the `github-pages` environment, and has only `pages: write` and `id-token: write`. It uses the uploaded artifact with no branch-directory fallback. The workflow does not enable Pages or modify repository settings.
 

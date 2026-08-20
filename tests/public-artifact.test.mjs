@@ -109,4 +109,23 @@ assert.match(workflow, /environment:\s*\n\s+name: github-pages/);
 assert.match(workflow, /path: _site/);
 assert.doesNotMatch(workflow, /enablement:\s*true|write-all|contents: write/);
 
+const validationWorkflow = fs.readFileSync(
+  path.join(REPOSITORY_ROOT, '.github/workflows/validate-public-site.yml'),
+  'utf8'
+);
+assert.match(validationWorkflow, /pull_request:\s*\n\s+branches: \[main\]/);
+assert.match(validationWorkflow, /permissions:\s*\n\s+contents: read/);
+assert.match(validationWorkflow, /actions\/checkout@v6/);
+assert.match(validationWorkflow, /actions\/setup-node@v7/);
+assert.match(validationWorkflow, /node-version: 24/);
+assert.match(validationWorkflow, /package-manager-cache: false/);
+assert.match(validationWorkflow, /run: npm test/);
+assert.match(validationWorkflow, /run: npm run build:public/);
+assert.match(validationWorkflow, /group: validate-public-site-\$\{\{ github\.event\.pull_request\.number \}\}/);
+assert.match(validationWorkflow, /cancel-in-progress: true/);
+assert.doesNotMatch(
+  validationWorkflow,
+  /pages: write|id-token: write|configure-pages|upload-pages-artifact|deploy-pages/
+);
+
 console.log(`Public artifact boundary tests passed (${PUBLIC_MANIFEST.length} files).`);
