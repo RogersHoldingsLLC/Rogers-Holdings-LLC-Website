@@ -56,10 +56,19 @@ for (const requiredFile of [
   'favicon.png',
   'apple-touch-icon.png',
   'brand-card.jpeg',
+  'assets/css/digital-business-card.css',
   'assets/images/brand/rogers-holdings-logo.png',
   'assets/images/brand/rogers-holdings-logo-reversed.png',
+  'assets/images/digital-business-card/brian-keith-rogers.jpg',
+  'assets/js/digital-business-card.js',
+  'brian/brian-keith-rogers.vcf',
+  'brian/index.html',
   'docs/design-reference/founder/brian-keith-rogers-headshot-original.png'
 ]) assert.ok(firstBuild.includes(requiredFile), `required public file is missing: ${requiredFile}`);
+
+const brianPage = fs.readFileSync(path.join(REPOSITORY_ROOT, 'brian/index.html'), 'utf8');
+assert.match(brianPage, /<link rel="canonical" href="https:\/\/rogersholdingsllc\.com\/brian\/">/);
+assert.match(brianPage, /href="brian-keith-rogers\.vcf" download/);
 
 const firstHashes = artifactHashes();
 const secondBuild = buildPublicArtifact();
