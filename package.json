@@ -1,8 +1,9 @@
 {
   "scripts": {
     "build:public": "node scripts/build-public-site.mjs",
-    "test": "npm run test:business-snapshot-frontend && npm run test:homepage-premium-trust-conversion && npm run test:sitewide-brand-assets && npm run test:visual-storytelling && npm run test:whole-site-refinement && npm run test:public-artifact",
+    "test": "npm run test:business-snapshot-frontend && npm run test:digital-business-card && npm run test:homepage-premium-trust-conversion && npm run test:sitewide-brand-assets && npm run test:visual-storytelling && npm run test:whole-site-refinement && npm run test:public-artifact",
     "test:business-snapshot-frontend": "node tests/business-snapshot-frontend.test.js",
+    "test:digital-business-card": "node tests/digital-business-card.test.mjs",
     "test:homepage-premium-trust-conversion": "node tests/homepage-premium-trust-conversion.test.js",
     "test:public-artifact": "node tests/public-artifact.test.mjs",
     "test:sitewide-brand-assets": "node tests/sitewide-brand-assets.test.js",
