@@ -73,6 +73,12 @@ for (const requiredLine of [
   'END:VCARD'
 ]) assert.ok(vcard.split('\r\n').includes(requiredLine), `vCard is missing: ${requiredLine}`);
 
+const unfoldedVcardLines = vcard.replace(/\r\n[ \t]/g, '').split('\r\n');
+const photoProperty = unfoldedVcardLines.find((line) => line.startsWith('PHOTO;ENCODING=b;TYPE=JPEG:'));
+assert.ok(photoProperty, 'vCard must include an embedded JPEG contact photo');
+const embeddedPhoto = Buffer.from(photoProperty.slice(photoProperty.indexOf(':') + 1), 'base64');
+assert.deepEqual(embeddedPhoto, headshot, 'embedded vCard photo must match the digital-card headshot');
+
 function jpegDimensions(bytes) {
   assert.equal(bytes.readUInt16BE(0), 0xffd8, 'headshot must be a JPEG');
   let offset = 2;
