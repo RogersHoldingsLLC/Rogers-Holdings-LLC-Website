@@ -11,6 +11,24 @@ const privacy = read('privacy/index.html');
 const css = read('assets/css/site.css');
 const visualSystem = read('docs/EXECUTIVE_VISUAL_SYSTEM.md');
 
+const jsonLdSource = homepage.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
+assert.ok(jsonLdSource, 'homepage must include JSON-LD');
+const jsonLd = JSON.parse(jsonLdSource);
+const organization = jsonLd['@graph'].find((entry) => entry['@id'] === 'https://rogersholdingsllc.com/#organization');
+const founder = jsonLd['@graph'].find((entry) => entry['@id'] === 'https://rogersholdingsllc.com/#brian-keith-rogers');
+assert.equal(organization.legalName, 'Rogers Holdings LLC');
+assert.equal(organization.alternateName, 'Rogers Holdings');
+assert.equal(organization.logo.url, 'https://rogersholdingsllc.com/assets/images/brand/rogers-holdings-logo.png');
+assert.deepEqual(organization.founder, { '@id': 'https://rogersholdingsllc.com/#brian-keith-rogers' });
+assert.deepEqual(organization.knowsAbout, [
+  'Business optimization', 'Digital optimization', 'Website development',
+  'Google Workspace', 'Workflow automation', 'Artificial intelligence',
+  'Operational consulting'
+]);
+assert.equal(founder.name, 'Brian Keith Rogers');
+assert.equal(founder.jobTitle, 'Founder');
+assert.deepEqual(founder.worksFor, { '@id': 'https://rogersholdingsllc.com/#organization' });
+
 assert.match(snapshot, /<footer class="[^"]*site-footer[^"]*">[\s\S]*?rogers-holdings-logo-reversed\.png/);
 assert.match(privacy, /<footer class="[^"]*site-footer[^"]*">[\s\S]*?rogers-holdings-logo-reversed\.png/);
 assert.doesNotMatch(snapshot, /<footer[\s\S]*?rogers-holdings-logo\.png/);
