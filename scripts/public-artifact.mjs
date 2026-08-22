@@ -32,6 +32,8 @@ export const PUBLIC_MANIFEST = Object.freeze([
   'assets/images/homepage/homepage-hero-v2.2-tablet.avif',
   'assets/images/homepage/homepage-hero-v2.2-tablet.jpg',
   'assets/images/homepage/homepage-hero-v2.2-tablet.webp',
+  'assets/images/social/business-snapshot-share.jpg',
+  'assets/images/social/rogers-holdings-home-share.jpg',
   'assets/js/digital-business-card.js',
   'assets/js/site.js',
   'brand-card.jpeg',

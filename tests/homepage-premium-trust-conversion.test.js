@@ -18,6 +18,10 @@ assert.doesNotMatch(html, /<section class="section phase3-process"/);
 assert.match(html, /aria-label="Assess, Prioritize, Improve methodology"/);
 assert.match(html, /aria-label="Free Business Snapshot through Ongoing Optimization customer journey"/);
 assert.equal((html.match(/class="phase3-process-substage"/g) || []).length, 2);
+assert.match(html, /id="business-friction-heading">Does any of this sound familiar\?<\/h2>/);
+const journeyStart = html.indexOf('<ol class="phase3-process-sequence"');
+const journeyEnd = html.indexOf('</ol>', journeyStart);
+assert.equal((html.slice(journeyStart, journeyEnd).match(/<li data-reveal>/g) || []).length, 5);
 
 for (const heading of [
   'I need more customers',
@@ -43,21 +47,30 @@ for (const capability of [
 for (const band of ['Customer growth', 'Time + organization', 'Direction + technology']) {
   assert.ok(html.includes(band));
 }
-assert.match(html, /Our internal platform keeps evidence, findings, priorities, and implementation connected throughout the work/);
-assert.match(html, /We manage the system\. You get clear recommendations and next steps—not another platform to learn\./);
-assert.doesNotMatch(html, /class="phase3-platform-cta"/);
-assert.match(html, /Visitors now have a clearer mobile path to essential information, ministries, and contact\./);
+assert.doesNotMatch(html, /Business Optimization Platform|class="section phase3-platform"/);
+assert.match(html, /Selected Client Work/);
+assert.match(html, /See the process in practice\./);
+assert.match(html, /From a Facebook-first presence to a clear digital front door\./);
+assert.match(html, /Eastland now has an owned digital front door that is easier to find, easier to use, and easier to maintain\./);
 assert.match(html, /href="business-snapshot\/" data-report-link>Request Your Free Business Snapshot/);
 
 assert.match(html, /class="phase3-founder-portrait"/);
-assert.match(html, /src="docs\/design-reference\/founder\/brian-keith-rogers-headshot-original\.png" width="1122" height="1402" loading="lazy"/);
+assert.match(html, /src="assets\/images\/digital-business-card\/brian-keith-rogers\.jpg" width="576" height="720" loading="lazy"/);
 assert.match(html, /<strong>Brian Keith Rogers<\/strong><span>Founder, Rogers Holdings LLC<\/span>/);
+assert.match(html, /Christ-like service\. Honest guidance\. Personal accountability\./);
+assert.match(html, /My faith shapes how I do business: tell the truth, serve people well, keep my word, and steward every resource responsibly\./);
+for (const commitment of ['Lead with integrity', 'Serve before selling', 'Own the work', 'Practice good stewardship']) {
+  assert.match(html, new RegExp(commitment));
+}
 
 assert.match(css, /\.home-page\.menu-open \.site-header[\s\S]*?backdrop-filter: none/);
 assert.match(css, /\.home-page \.primary-nav\.is-open[\s\S]*?min-height: calc\(100dvh - 72px\)/);
 assert.match(css, /Homepage primary and secondary composition — canonical reference-match system/);
 assert.match(css, /\.homepage-value-strip \.phase3-problem-list[\s\S]*?grid-template-columns: repeat\(4/);
-assert.match(css, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.phase3-platform-cta[\s\S]*?transition: none/);
+assert.match(css, /\.eastland-story-timeline[\s\S]*?grid-template-columns: repeat\(4/);
+assert.match(css, /\.eastland-showcase-intro > \.eyebrow[\s\S]*?font-size: clamp\(14px/);
+assert.match(css, /@supports \(content-visibility: auto\)/);
+assert.match(html, /rel="preload" as="image" href="assets\/images\/homepage\/homepage-hero-v2\.2-desktop\.avif"/);
 assert.match(script, /if \('IntersectionObserver' in window && !reduceMotion\.matches\)/);
 assert.match(script, /if \(parallaxScenes\.length && !reduceMotion\.matches\)/);
 

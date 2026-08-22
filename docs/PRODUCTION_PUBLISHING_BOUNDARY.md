@@ -2,6 +2,8 @@
 
 Prepared: 2026-08-20
 
+Current manifest verified: 2026-08-22
+
 ## Architecture
 
 Production is assembled into ignored directory `_site/` by `scripts/build-public-site.mjs`. The builder copies individual regular files from a fixed allowlist; it never copies a directory wholesale and never moves or deletes source files.
@@ -20,14 +22,16 @@ Moving internal utilities and operational documentation into a private repositor
 
 ## Exact public manifest
 
-The artifact contains exactly 34 files:
+The artifact contains exactly 41 files:
 
 ```text
 CNAME
 apple-touch-icon.png
+assets/css/digital-business-card.css
 assets/css/site.css
 assets/images/brand/rogers-holdings-logo-reversed.png
 assets/images/brand/rogers-holdings-logo.png
+assets/images/digital-business-card/brian-keith-rogers.jpg
 assets/images/homepage/eastland-product-family-desktop.avif
 assets/images/homepage/eastland-product-family-desktop.jpg
 assets/images/homepage/eastland-product-family-desktop.webp
@@ -37,17 +41,22 @@ assets/images/homepage/eastland-product-family-mobile.webp
 assets/images/homepage/eastland-product-family-tablet.avif
 assets/images/homepage/eastland-product-family-tablet.jpg
 assets/images/homepage/eastland-product-family-tablet.webp
-assets/images/homepage/homepage-hero-v2.1-desktop.avif
-assets/images/homepage/homepage-hero-v2.1-desktop.jpg
-assets/images/homepage/homepage-hero-v2.1-desktop.webp
-assets/images/homepage/homepage-hero-v2.1-mobile.avif
-assets/images/homepage/homepage-hero-v2.1-mobile.jpg
-assets/images/homepage/homepage-hero-v2.1-mobile.webp
-assets/images/homepage/homepage-hero-v2.1-tablet.avif
-assets/images/homepage/homepage-hero-v2.1-tablet.jpg
-assets/images/homepage/homepage-hero-v2.1-tablet.webp
+assets/images/homepage/homepage-hero-v2.2-desktop.avif
+assets/images/homepage/homepage-hero-v2.2-desktop.jpg
+assets/images/homepage/homepage-hero-v2.2-desktop.webp
+assets/images/homepage/homepage-hero-v2.2-mobile.avif
+assets/images/homepage/homepage-hero-v2.2-mobile.jpg
+assets/images/homepage/homepage-hero-v2.2-mobile.webp
+assets/images/homepage/homepage-hero-v2.2-tablet.avif
+assets/images/homepage/homepage-hero-v2.2-tablet.jpg
+assets/images/homepage/homepage-hero-v2.2-tablet.webp
+assets/images/social/business-snapshot-share.jpg
+assets/images/social/rogers-holdings-home-share.jpg
+assets/js/digital-business-card.js
 assets/js/site.js
 brand-card.jpeg
+brian/brian-keith-rogers.vcf
+brian/index.html
 business-snapshot/index.html
 docs/design-reference/founder/brian-keith-rogers-headshot-original.png
 favicon.ico
@@ -92,7 +101,7 @@ The separate deploy job needs the successful build, uses the `github-pages` envi
 No step below was performed during implementation.
 
 1. Commit and push the approved feature branch without merging it into `main`.
-2. Review the complete feature branch, generated 34-file artifact, and workflow, then prepare the merge without completing it.
+2. Review the complete feature branch, generated 41-file artifact, and workflow, then prepare the merge without completing it.
 3. In repository **Settings → Environments**, configure the required branch and reviewer protection rules for the `github-pages` environment.
 4. Confirm the existing custom domain and HTTPS settings in **Settings → Pages** before changing anything.
 5. In **Settings → Pages → Build and deployment**, change **Source** from **Deploy from a branch** to **GitHub Actions** before merging the feature branch.
@@ -105,12 +114,12 @@ The `CNAME` file in the uploaded artifact preserves that artifact file; it does 
 ## Production verification checklist
 
 - Workflow build and boundary tests passed.
-- Uploaded artifact reports exactly 34 files.
+- Uploaded artifact reports exactly 41 files.
 - Deployment environment is `github-pages` and the reported URL is `https://rogersholdingsllc.com/`.
 - `CNAME` is retained and the custom domain remains verified with HTTPS enforced.
 - Homepage, Business Snapshot, and Privacy return HTTP 200 at their exact canonical URLs.
 - `robots.txt`, `sitemap.xml`, and `google914083dd95ef8b05.html` return HTTP 200.
-- Favicons, Apple icon, social card, both visible logos, responsive Hero/Eastland media, CSS, JS, and founder image load successfully.
+- Favicons, Apple icon, both social cards, both visible logos, responsive Hero/Eastland media, CSS, JS, and founder image load successfully.
 - Homepage and Business Snapshot remain visually unchanged at desktop and mobile sizes.
 - Business Snapshot endpoint, Turnstile, validation, consent, success, and retry behavior remain unchanged.
 - No console/runtime errors, failed local assets, or horizontal overflow appear.
