@@ -56,6 +56,8 @@ for (const requiredFile of [
   'favicon.png',
   'apple-touch-icon.png',
   'brand-card.jpeg',
+  'assets/images/social/business-snapshot-share.jpg',
+  'assets/images/social/rogers-holdings-home-share.jpg',
   'assets/css/digital-business-card.css',
   'assets/images/brand/rogers-holdings-logo.png',
   'assets/images/brand/rogers-holdings-logo-reversed.png',
