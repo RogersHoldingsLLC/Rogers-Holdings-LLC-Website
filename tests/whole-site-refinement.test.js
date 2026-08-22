@@ -22,8 +22,9 @@ assert.match(home, /site\.css\?v=target-matching-rebuild-1/);
 assert.match(snapshot, /site\.css\?v=whole-site-refinement-1/);
 assert.match(privacy, /site\.css\?v=whole-site-refinement-1/);
 
-assert.ok(home.includes('Get Your Free Business Snapshot'));
-assert.ok(snapshot.includes('Get Your Free Business Snapshot'));
+assert.ok(home.includes('Request Your Free Business Snapshot'));
+assert.ok(snapshot.includes('Request Your Free Business Snapshot'));
+assert.ok(snapshot.includes('Request My Free Business Snapshot'));
 assert.ok(home.includes('homepage-hero-media'));
 for (const viewport of ['desktop', 'tablet', 'mobile']) assert.ok(home.includes(`homepage-hero-v2.1-${viewport}.avif`));
 assert.doesNotMatch(home, /visual-proof-pair|north-point-assessment-|north-point-plan-|phase3-snapshot-proof/);
