@@ -9,6 +9,8 @@ const css = fs.readFileSync(path.join(root, 'assets/css/site.css'), 'utf8');
 const visualFirstWorkflow = fs.readFileSync(path.join(root, 'docs/ROGERS_HOLDINGS_VISUAL_FIRST_WORKFLOW.md'), 'utf8');
 const eastlandFreeze = fs.readFileSync(path.join(root, 'docs/design-source/EASTLAND_FINAL_APPROVED_FREEZE.md'), 'utf8');
 const homepageHeroFreeze = fs.readFileSync(path.join(root, 'docs/design-source/HOMEPAGE_HERO_V2_FINAL_APPROVED_FREEZE.md'), 'utf8');
+const homepageHeroV22Refresh = fs.readFileSync(path.join(root, 'docs/design-source/HOMEPAGE_HERO_V2_2_EXECUTIVE_BRIEF_REFRESH.md'), 'utf8');
+const homepageHeroV22Source = path.join(root, 'docs/design-reference/homepage-hero-v2.2/Executive Brief - North Point Fitness.pdf');
 const homepageAssets = path.join(root, 'assets/images/homepage');
 const eastlandReference = path.join(root, 'docs/design-reference/eastland-client-work-FINAL-REFERENCE.png');
 
@@ -22,6 +24,9 @@ const families = [
   ['homepage-hero-v2.1', 'desktop', 1536, 1024],
   ['homepage-hero-v2.1', 'tablet', 1600, 1200],
   ['homepage-hero-v2.1', 'mobile', 960, 1280],
+  ['homepage-hero-v2.2', 'desktop', 1536, 1024],
+  ['homepage-hero-v2.2', 'tablet', 1600, 1200],
+  ['homepage-hero-v2.2', 'mobile', 960, 1280],
   ['eastland-product-family', 'desktop', 2400, 1244],
   ['eastland-product-family', 'tablet', 1600, 957],
   ['eastland-product-family', 'mobile', 960, 757]
@@ -31,7 +36,7 @@ const files = fs.readdirSync(homepageAssets).sort();
 const productionFiles = files.filter((file) =>
   !file.startsWith('homepage-hero-v2-desktop-proof.')
 );
-assert.equal(productionFiles.length, 36, 'homepage production directory must contain exactly 36 production derivatives including preserved Hero V2 and final Hero V2.1 responsive assets');
+assert.equal(productionFiles.length, 45, 'homepage production directory must contain exactly 45 production derivatives including preserved Hero V2, Hero V2.1, and current Hero V2.2 responsive assets');
 for (const [family, viewport] of families) {
   for (const extension of ['avif', 'webp', 'jpg']) {
     const asset = `${family}-${viewport}.${extension}`;
@@ -48,9 +53,9 @@ const eastlandEnd = html.indexOf('</picture>', eastlandStart);
 const eastland = html.slice(eastlandStart, eastlandEnd);
 
 for (const [markup, family, viewport] of [
-  [hero, 'homepage-hero-v2.1', 'mobile'],
-  [hero, 'homepage-hero-v2.1', 'tablet'],
-  [hero, 'homepage-hero-v2.1', 'desktop'],
+  [hero, 'homepage-hero-v2.2', 'mobile'],
+  [hero, 'homepage-hero-v2.2', 'tablet'],
+  [hero, 'homepage-hero-v2.2', 'desktop'],
   [eastland, 'eastland-product-family', 'mobile'],
   [eastland, 'eastland-product-family', 'tablet'],
   [eastland, 'eastland-product-family', 'desktop']
@@ -61,7 +66,7 @@ for (const [markup, family, viewport] of [
   assert.ok(avif >= 0 && webp > avif && jpg > webp, `${family} ${viewport} sources must be ordered AVIF, WebP, JPG`);
 }
 
-assert.match(hero, /media="\(min-width: 1101px\)" type="image\/avif" srcset="assets\/images\/homepage\/homepage-hero-v2\.1-desktop\.avif"/);
+assert.match(hero, /media="\(min-width: 1101px\)" type="image\/avif" srcset="assets\/images\/homepage\/homepage-hero-v2\.2-desktop\.avif"/);
 assert.match(hero, /width="1536" height="1024" loading="eager" fetchpriority="high" decoding="async"/);
 assert.match(eastland, /width="2400" height="1244" loading="lazy" decoding="async"/);
 assert.match(eastland, /alt="Eastland First Church of God client-work presentation across desktop, laptop, tablet, and phone displays on a warm executive desk, with the digital discovery journey below"/);
@@ -119,6 +124,12 @@ assert.match(eastlandFreeze, /The image carries the approved visual presentation
 assert.match(homepageHeroFreeze, /approved photographic master contains the authentic page 1 of the Rogers Holdings Executive Brief/);
 assert.match(homepageHeroFreeze, /Production derivatives/);
 assert.match(homepageHeroFreeze, /DO NOT REGENERATE, RECONSTRUCT, RECOMPOSE, OR EDIT THIS VISUAL/);
+
+const homepageHeroV22SourceHash = crypto.createHash('sha256').update(fs.readFileSync(homepageHeroV22Source)).digest('hex');
+assert.equal(homepageHeroV22SourceHash, '08c20db2826dfb06cdbd5b52d5ec49e2915d072c90e8e746919f57089ea3a4cb', 'Hero V2.2 Executive Brief source changed');
+assert.match(homepageHeroV22Refresh, /North Point Fitness/);
+assert.match(homepageHeroV22Refresh, /website-only fictional sample/);
+assert.match(homepageHeroV22Refresh, /preserves the Hero V2\.1 composition/);
 
 assert.match(html, /href="https:\/\/www\.eastlandfirstchurchofgod\.com" target="_blank" rel="noopener noreferrer">.*View Live Website/);
 assert.match(html, /href="https:\/\/www\.google\.com\/maps\/search\/\?api=1&amp;query=Eastland\+First\+Church\+of\+God%2C\+1706\+Old\+Owingsville\+Rd%2C\+Mt\+Sterling%2C\+KY\+40353" target="_blank" rel="noopener noreferrer">.*View Google Listing/);
