@@ -6,13 +6,13 @@ GET YOUR FREE BUSINESS SNAPSHOT
 
 SEE HOW WE CAN HELP
 
-## Leads are getting missed
+## Are leads slipping through the cracks?
 
-## Too much time is wasted
+## Are repetitive tasks wasting your time?
 
-## Information is scattered
+## Is important information scattered?
 
-## Your systems aren’t helping enough
+## Are your systems working hard enough?
 
 ## Eastland First Church of God
 
