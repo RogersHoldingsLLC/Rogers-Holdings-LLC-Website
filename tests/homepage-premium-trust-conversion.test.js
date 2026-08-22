@@ -18,6 +18,7 @@ assert.doesNotMatch(html, /<section class="section phase3-process"/);
 assert.match(html, /aria-label="Assess, Prioritize, Improve methodology"/);
 assert.match(html, /aria-label="Free Business Snapshot through Ongoing Optimization customer journey"/);
 assert.equal((html.match(/class="phase3-process-substage"/g) || []).length, 2);
+assert.match(html, /<h2>Start free\.<\/h2><p class="phase3-method-sequence-subtitle">Continue with paid support only when it makes sense\.<\/p>/);
 assert.match(html, /id="business-friction-heading">Does any of this sound familiar\?<\/h2>/);
 assert.match(html, /Good systems should make business easier—not harder\./);
 const journeyStart = html.indexOf('<ol class="phase3-process-sequence"');
@@ -86,6 +87,8 @@ assert.match(css, /@media \(min-width: 1600px\)[\s\S]*?\.home-page \{ --containe
 assert.match(css, /\.phase3-capabilities > \.container \{ display: block; \}/);
 assert.match(css, /\.phase3-capabilities \.phase3-editorial-header[\s\S]*?text-align: center;/);
 assert.match(css, /\.phase3-capabilities \.phase3-editorial-header h2[\s\S]*?white-space: nowrap;/);
+assert.match(css, /\.phase3-method-sequence-heading \{ text-align: center; \}/);
+assert.match(css, /\.phase3-method-sequence-heading h2[\s\S]*?max-width: none;[\s\S]*?white-space: nowrap;/);
 assert.match(css, /@media \(min-width: 1101px\) and \(max-height: 820px\)[\s\S]*?\.phase3-hero-layout \{ padding-block: 108px 46px; \}/);
 assert.match(css, /@media \(min-width: 961px\) and \(max-width: 1100px\) and \(orientation: landscape\)/);
 assert.match(css, /@media \(min-width: 2201px\)[\s\S]*?\.eastland-workspace \{ max-width: 2200px/);

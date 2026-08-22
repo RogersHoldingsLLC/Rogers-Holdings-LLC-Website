@@ -1233,7 +1233,9 @@ h3 { letter-spacing: -.015em; }
 .phase3-method-grid h3 { margin: 13px 0 7px; font-family: var(--serif); font-size: clamp(28px, 2.4vw, 35px); font-weight: 500; }
 .phase3-method-grid p { margin: 0; color: var(--color-text-secondary); font-size: 14px; line-height: 1.7; }
 .phase3-method-sequence { grid-column: 1 / -1; margin-top: clamp(24px, 3vw, 38px); padding: clamp(28px, 3vw, 40px); border: 1px solid rgba(36, 36, 33, .15); background: #20231f; color: var(--color-text-reversed); scroll-margin-top: 92px; }
-.phase3-method-sequence-heading h2 { max-width: 22ch; margin: 6px 0 0; font-size: clamp(27px, 2.5vw, 36px); }
+.phase3-method-sequence-heading { text-align: center; }
+.phase3-method-sequence-heading h2 { max-width: none; margin: 8px 0 0; font-size: clamp(38px, 4vw, 56px); line-height: 1; white-space: nowrap; }
+.phase3-method-sequence-subtitle { max-width: 54ch; margin: 14px auto 0; color: rgba(252, 251, 248, .7); font-size: 16px; line-height: 1.55; }
 .phase3-process-sequence { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(12px, 1.8vw, 25px); padding: 0; margin: 30px 0 0; list-style: none; }
 .phase3-process-sequence::before { position: absolute; top: 15px; right: 7%; left: 7%; height: 1px; background: linear-gradient(90deg, rgba(212, 179, 106, .36), var(--color-champagne), rgba(212, 179, 106, .36)); content: ""; }
 .phase3-process-sequence li { position: relative; min-width: 0; padding: 39px 4px 0; }
@@ -1431,6 +1433,8 @@ h3 { letter-spacing: -.015em; }
   .phase3-method-grid h3 { margin-top: 5px; }
   .phase3-method-grid span { position: absolute; top: 25px; left: 21px; }
   .phase3-method-sequence { padding: 25px 20px; }
+  .phase3-method-sequence-heading h2 { font-size: 34px; }
+  .phase3-method-sequence-subtitle { max-width: 32ch; margin-top: 11px; font-size: 14px; }
   .phase3-process-sequence li { display: block; min-height: 0; padding: 0 0 26px 34px; }
   .phase3-process-sequence li > span { top: 2px; left: 17px; }
   .phase3-process-sequence li::before { top: 3px; left: 2px; }
