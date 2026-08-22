@@ -1056,7 +1056,9 @@ h3 { letter-spacing: -.015em; }
 
 .homepage-value-heading { padding-block: clamp(58px, 5.5vw, 82px) clamp(38px, 3.8vw, 54px); }
 .homepage-value-heading .eyebrow { margin-bottom: 15px; }
-.homepage-value-heading h2 { max-width: 12ch; margin: 0; font-size: clamp(42px, 4.2vw, 62px); line-height: 1; }
+.homepage-value-title-row { display: grid; align-items: center; grid-template-columns: max-content minmax(220px, 1fr); gap: clamp(28px, 4.5vw, 72px); }
+.homepage-value-heading h2 { max-width: none; margin: 0; font-size: clamp(42px, 4.2vw, 62px); line-height: 1; white-space: nowrap; }
+.homepage-value-title-row > p { max-width: 42ch; margin: 0; justify-self: center; color: var(--color-text-secondary); font-size: 15px; line-height: 1.55; }
 
 .homepage-value-strip .phase3-problem-list {
   display: grid;
@@ -1083,15 +1085,14 @@ h3 { letter-spacing: -.015em; }
 
 .eastland-showcase-intro {
   display: grid;
-  padding-block: clamp(70px, 6.5vw, 104px);
-  align-items: end;
-  grid-template-columns: minmax(180px, .45fr) minmax(0, 1fr);
-  gap: clamp(42px, 7vw, 112px);
+  padding-block: clamp(30px, 3.5vw, 50px);
+  align-items: center;
+  grid-template-columns: max-content minmax(220px, 1fr);
+  gap: clamp(28px, 5vw, 80px);
 }
 
-.eastland-showcase-intro > .eyebrow { align-self: start; margin-top: 15px; font-size: clamp(14px, 1.15vw, 17px); letter-spacing: .12em; }
-.eastland-showcase-intro h2 { max-width: 11ch; margin: 0; font-size: clamp(48px, 5vw, 76px); line-height: .98; }
-.eastland-showcase-intro div > p { max-width: 58ch; margin: 24px 0 0; color: var(--color-text-secondary); font-size: 17px; line-height: 1.7; }
+.eastland-showcase-intro h2 { max-width: none; margin: 0; font-size: clamp(38px, 3.3vw, 52px); line-height: 1; white-space: nowrap; }
+.eastland-showcase-intro > p { max-width: 43ch; margin: 0; justify-self: center; color: var(--color-text-secondary); font-size: 15px; line-height: 1.55; }
 
 .eastland-portfolio-hero {
   position: relative;
@@ -1105,6 +1106,20 @@ h3 { letter-spacing: -.015em; }
 .homepage-eastland-picture { display: block; width: 100%; aspect-ratio: 2400 / 1244; margin-left: 0; }
 .homepage-eastland-picture img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
+.eastland-project-links {
+  position: absolute;
+  z-index: 4;
+  top: 33.33%;
+  left: 4.73%;
+  display: grid;
+  width: 11.48%;
+  margin: 0;
+  grid-auto-rows: 44px;
+}
+
+.eastland-project-links a { display: block; min-width: 100%; min-height: 44px; border-radius: 2px; }
+.eastland-project-links a:focus-visible { outline: 2px solid var(--color-champagne); outline-offset: 2px; background: rgba(20, 15, 9, .16); }
+
 .motion-ready .eastland-workspace.reveal-item { transform: scale(.985); transition-duration: .85s; }
 .motion-ready .eastland-workspace.reveal-item.is-visible { transform: scale(1); }
 
@@ -1115,14 +1130,10 @@ h3 { letter-spacing: -.015em; }
 }
 
 .eastland-project-story { padding-block: clamp(72px, 6.5vw, 104px); }
-.eastland-project-heading { display: grid; padding-bottom: clamp(48px, 5vw, 72px); border-bottom: 1px solid rgba(112, 87, 44, .24); grid-template-columns: minmax(0, 1.15fr) minmax(320px, .72fr); gap: clamp(48px, 8vw, 120px); }
-.eastland-project-heading h2 { max-width: 14ch; margin: 16px 0 0; font-size: clamp(42px, 4.2vw, 64px); line-height: 1; }
+.eastland-project-heading { display: block; padding-bottom: clamp(48px, 5vw, 72px); border-bottom: 1px solid rgba(112, 87, 44, .24); }
+.eastland-project-heading h2 { max-width: none; margin: 16px 0 0; font-size: clamp(42px, 4.2vw, 64px); line-height: 1; text-wrap: balance; }
 .eastland-project-heading > div:last-child { padding-top: 27px; }
-.eastland-project-heading > div:last-child > p { max-width: 49ch; margin: 0; color: var(--color-text-secondary); font-size: 16px; line-height: 1.72; }
-.eastland-project-actions { display: flex; margin-top: 28px; flex-wrap: wrap; gap: 14px 28px; }
-.eastland-project-actions a { min-height: 44px; padding-block: 12px 8px; border-bottom: 1px solid rgba(123, 83, 21, .5); color: #68450e; font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
-.eastland-project-actions a:hover,
-.eastland-project-actions a:focus-visible { color: #9b6819; border-color: currentColor; }
+.eastland-project-heading > div:last-child > p { max-width: 70ch; margin: 0; color: var(--color-text-secondary); font-size: 16px; line-height: 1.72; }
 
 .eastland-story-timeline { position: relative; display: grid; padding: 0; margin: 58px 0 0; list-style: none; grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .eastland-story-timeline::before { position: absolute; top: 6px; right: 0; left: 0; height: 1px; background: linear-gradient(90deg, #a97b27, rgba(169, 123, 39, .2)); content: ""; }
@@ -1321,7 +1332,12 @@ h3 { letter-spacing: -.015em; }
   .phase3-hero-copy { max-width: 600px; }
   .home-page .phase3-hero h1 { font-size: clamp(54px, 6.5vw, 70px); }
   .home-page .phase3-hero .hero-lede { max-width: 520px; }
+  .homepage-value-title-row,
+  .eastland-showcase-intro { grid-template-columns: 1fr; gap: 12px; }
+  .homepage-value-title-row > p,
+  .eastland-showcase-intro > p { justify-self: start; }
   .homepage-eastland-picture { aspect-ratio: 1600 / 957; }
+  .eastland-project-links { left: 5.45%; width: max(13.25%, 180px); }
 }
 
 @media (max-width: 960px) {
@@ -1358,9 +1374,6 @@ h3 { letter-spacing: -.015em; }
   .phase3-owner-layout { grid-template-columns: minmax(220px, .58fr) minmax(0, 1.42fr); gap: clamp(34px, 5vw, 54px); align-items: start; }
   .phase3-owner figure { width: 100%; max-width: 320px; }
   .phase3-founder-portrait-frame { aspect-ratio: 4 / 5; }
-  .eastland-showcase-intro,
-  .eastland-project-heading { grid-template-columns: 1fr; gap: 24px; }
-  .eastland-showcase-intro > .eyebrow { margin-top: 0; }
   .eastland-project-heading > div:last-child { padding-top: 0; }
   .eastland-story-timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 42px 30px; }
   .eastland-story-timeline::before { display: none; }
@@ -1391,18 +1404,17 @@ h3 { letter-spacing: -.015em; }
   .homepage-value-strip article + article { border-top: 1px solid rgba(169, 123, 39, .24); border-left: 0; }
   .homepage-value-strip article { padding-inline: 2px; }
   .homepage-value-heading { padding-block: 44px 32px; }
-  .homepage-value-heading h2 { font-size: clamp(36px, 10.5vw, 44px); }
-  .eastland-showcase-intro { padding-block: 48px; }
-  .eastland-showcase-intro > .eyebrow { font-size: 13px; }
-  .eastland-showcase-intro h2 { font-size: clamp(38px, 11vw, 46px); }
-  .eastland-showcase-intro div > p { margin-top: 18px; font-size: 15px; }
+  .homepage-value-heading h2 { font-size: 27px; white-space: nowrap; }
+  .eastland-showcase-intro { padding-block: 28px; }
+  .eastland-showcase-intro h2 { font-size: 27px; }
+  .homepage-value-title-row > p,
+  .eastland-showcase-intro > p { font-size: 13px; }
   .eastland-portfolio-hero { padding-block: 12px; }
+  .eastland-project-links { left: 7.18%; width: max(17.45%, 150px); }
   .eastland-project-story { padding-block: 52px; }
   .eastland-project-heading { padding-bottom: 36px; }
   .eastland-project-heading h2 { font-size: clamp(36px, 10vw, 44px); }
   .eastland-project-heading > div:last-child > p { font-size: 15px; }
-  .eastland-project-actions { display: grid; margin-top: 22px; gap: 4px; }
-  .eastland-project-actions a { width: fit-content; }
   .eastland-story-timeline { display: block; margin-top: 40px; }
   .eastland-story-timeline::before { top: 5px; bottom: 6px; left: 6px; display: block; width: 1px; height: auto; background: linear-gradient(180deg, #a97b27, rgba(169, 123, 39, .2)); }
   .eastland-story-timeline li { padding: 0 0 34px 34px; border-top: 0; }
@@ -1453,8 +1465,99 @@ h3 { letter-spacing: -.015em; }
   .homepage-hero-media img { top: 586px; height: calc(100% - 586px); }
   .phase3-hero-layout { padding-block: 90px 370px; }
   .home-page .phase3-hero h1 { font-size: 36px; }
+  .homepage-value-heading h2 { font-size: 23px; }
   .capability-flow { gap: 4px; }
   .capability-flow b { padding-inline: 6px; }
+}
+
+/* Homepage responsive viewport calibration. */
+@media (min-width: 1600px) {
+  .home-page { --container: 1440px; }
+  .home-page .nav-shell { width: min(1440px, calc(100% - 80px)); }
+  .phase3-hero-layout { grid-template-columns: minmax(0, 720px) 1fr; }
+  .home-page .phase3-hero h1 { max-width: 760px; font-size: 88px; }
+  .home-page .phase3-hero .hero-lede { max-width: 680px; font-size: 19px; }
+  .homepage-value-strip p { font-size: 15px; }
+  .phase3-method > .container,
+  .phase3-capabilities > .container { grid-template-columns: minmax(340px, .68fr) minmax(0, 1.82fr); gap: 72px; }
+  .phase3-capability-card { padding: 22px; }
+  .phase3-capability-card h4 { font-size: 24px; }
+  .phase3-owner-layout { grid-template-columns: minmax(430px, .78fr) minmax(0, 1.22fr); }
+  .phase3-founder-portrait { max-width: 520px; }
+}
+
+@media (min-width: 961px) and (max-width: 1599px) {
+  .phase3-capabilities > .container { grid-template-columns: 1fr; gap: 34px; }
+  .phase3-capabilities .phase3-editorial-header {
+    padding: 0 0 30px;
+    border-right: 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .phase3-capabilities .phase3-editorial-header::after {
+    top: auto;
+    bottom: -1px;
+    left: 0;
+    width: 72px;
+    height: 1px;
+  }
+  .phase3-capabilities .phase3-editorial-header h2 { max-width: 15ch; }
+  .phase3-capability-groups { width: 100%; }
+  .phase3-capability-card { padding: 22px; }
+  .phase3-capability-card h4 { font-size: 24px; }
+}
+
+@media (min-width: 961px) and (max-width: 1199px) {
+  .phase3-method > .container { grid-template-columns: 1fr; gap: 30px; }
+  .phase3-method .phase3-editorial-header {
+    padding: 0 0 30px;
+    border-right: 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .phase3-method .phase3-editorial-header::after {
+    top: auto;
+    bottom: -1px;
+    left: 0;
+    width: 72px;
+    height: 1px;
+  }
+  .phase3-method .phase3-editorial-header h2 { max-width: 15ch; }
+  .phase3-method-grid { width: 100%; max-width: none; }
+}
+
+@media (min-width: 1101px) and (max-height: 820px) {
+  .home-page .phase3-hero { min-height: 100svh; }
+  .phase3-hero-layout { padding-block: 108px 46px; }
+  .home-page .phase3-hero h1 { max-width: 600px; margin-bottom: 20px; font-size: 64px; }
+  .home-page .phase3-hero .hero-lede { max-width: 580px; font-size: 16px; line-height: 1.55; }
+  .home-page .phase3-hero .button-row { margin-top: 22px; }
+  .home-page .phase3-hero .button { min-height: 50px; }
+  .phase3-hero-note { margin-top: 12px; font-size: 10px; }
+  .homepage-hero-media figcaption { bottom: 10px; }
+}
+
+@media (min-width: 961px) and (max-width: 1100px) and (orientation: landscape) {
+  .home-page .phase3-hero { min-height: max(720px, 100svh); }
+  .homepage-hero-media img { top: 0; height: 100%; object-position: right center; }
+  .homepage-hero-media::after {
+    background:
+      linear-gradient(90deg, rgba(11, 12, 10, .96) 0%, rgba(11, 12, 10, .84) 42%, rgba(11, 12, 10, .42) 62%, rgba(11, 12, 10, .08) 100%),
+      linear-gradient(180deg, rgba(8, 9, 8, .22), transparent 38%, rgba(8, 9, 8, .18));
+  }
+  .phase3-hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 570px) 1fr;
+    min-height: inherit;
+    padding-block: 112px 48px;
+  }
+  .phase3-hero-copy { max-width: 570px; }
+  .home-page .phase3-hero h1 { max-width: 540px; margin-bottom: 20px; font-size: 54px; }
+  .home-page .phase3-hero .hero-lede { max-width: 510px; font-size: 16px; line-height: 1.55; }
+  .home-page .phase3-hero .button-row { margin-top: 22px; }
+  .phase3-hero-note { margin-top: 12px; font-size: 10px; }
+}
+
+@media (min-width: 2201px) {
+  .eastland-workspace { max-width: 2200px; margin-inline: auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {
