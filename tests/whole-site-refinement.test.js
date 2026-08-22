@@ -51,6 +51,8 @@ assert.match(snapshotDoc, /trycloudflare\.com/);
 assert.match(snapshotDoc, /must not be addressed by weakening the production hostname\s+restriction/);
 
 assert.match(css, /\.homepage-hero-media img\s*\{[\s\S]*?object-fit:\s*cover/);
+assert.match(css, /\.home-page \.phase3-hero::before\s*\{[^}]*display:\s*none/);
+assert.match(css, /@media \(min-width:\s*1101px\)\s*\{\s*\.homepage-hero-media img\s*\{[^}]*left:\s*auto;[^}]*width:\s*92%/);
 assert.match(css, /\.home-page section\[id\]\s*\{[^}]*scroll-margin-top:\s*92px/);
 assert.match(css, /\.snapshot-page \.field-error\s*\{[\s\S]*?min-height:/);
 assert.match(css, /\.legal-content\s*\{[\s\S]*?780px/);
@@ -60,7 +62,7 @@ const showcaseEnd = home.indexOf('</picture>', showcaseStart);
 const showcase = home.slice(showcaseStart, showcaseEnd);
 assert.ok(showcase.includes('eastland-product-family-desktop'));
 assert.ok(showcase.includes('eastland-product-family-tablet'));
-assert.ok(showcase.includes('eastland-product-family-mobile'));
+assert.doesNotMatch(showcase, /eastland-product-family-mobile/);
 assert.doesNotMatch(showcase, /facebook/i);
 
 assert.doesNotMatch(home + snapshot + privacy, /localhost|workers\.dev|preview_url|TURNSTILE_SECRET_KEY/i);

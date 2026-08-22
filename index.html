@@ -42,6 +42,9 @@
   <link rel="icon" type="image/png" sizes="1024x1024" href="apple-touch-icon.png?v=7">
   <link rel="shortcut icon" href="favicon.ico?v=7">
   <link rel="apple-touch-icon" href="apple-touch-icon.png?v=7">
+  <link rel="preload" as="image" href="assets/images/homepage/homepage-hero-v2.2-mobile.avif" type="image/avif" media="(max-width: 680px)" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/images/homepage/homepage-hero-v2.2-tablet.avif" type="image/avif" media="(min-width: 681px) and (max-width: 1100px)" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/images/homepage/homepage-hero-v2.2-desktop.avif" type="image/avif" media="(min-width: 1101px)" fetchpriority="high">
   <link rel="stylesheet" href="assets/css/site.css?v=target-matching-rebuild-1">
   <script type="application/ld+json">
   {
@@ -129,8 +132,8 @@
       <nav class="primary-nav" id="primary-navigation" aria-label="Primary navigation" data-navigation>
         <a href="#approach">Approach</a>
         <a href="#process">Process</a>
-        <a href="#capabilities">Capabilities</a>
         <a href="#work">Our Work</a>
+        <a href="#capabilities">Capabilities</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
         <a href="business-snapshot/" class="nav-cta" data-report-link>Business Snapshot</a>
@@ -168,58 +171,16 @@
       </div>
     </section>
 
-    <section class="homepage-value-strip" aria-label="Common business friction">
-      <div class="container phase3-problem-list" data-reveal>
-        <article><span>01</span><div><h2>Are leads slipping through the cracks?</h2><p>Some inquiries never get followed up with.</p></div></article>
-        <article><span>02</span><div><h2>Are repetitive tasks wasting your time?</h2><p>Work is being repeated or done manually when it doesn’t need to be.</p></div></article>
-        <article><span>03</span><div><h2>Is important information scattered?</h2><p>Important emails, files, spreadsheets, tasks, and information are hard to keep organized.</p></div></article>
-        <article><span>04</span><div><h2>Are your systems working hard enough?</h2><p>Your website, software, or processes aren’t working as well as they should.</p></div></article>
+    <section class="homepage-value-strip" aria-labelledby="business-friction-heading">
+      <div class="container homepage-value-heading" data-reveal>
+        <p class="eyebrow">Common business friction</p>
+        <h2 id="business-friction-heading">Does any of this sound familiar?</h2>
       </div>
-    </section>
-
-    <section class="homepage-eastland-showcase" id="work" aria-labelledby="eastland-client-work-heading">
-      <div class="eastland-portfolio-hero">
-        <p class="sr-only">Selected Client Work</p>
-        <h2 class="sr-only" id="eastland-client-work-heading">Eastland First Church of God</h2>
-        <p class="sr-only">A clearer digital front door that brings service information, ministries, messages, giving, directions, and contact into one owned experience.</p>
-        <figure class="eastland-workspace">
-          <picture class="homepage-eastland-picture">
-          <source media="(max-width: 680px)" type="image/avif" srcset="assets/images/homepage/eastland-product-family-mobile.avif">
-          <source media="(max-width: 680px)" type="image/webp" srcset="assets/images/homepage/eastland-product-family-mobile.webp">
-          <source media="(max-width: 680px)" srcset="assets/images/homepage/eastland-product-family-mobile.jpg">
-          <source media="(max-width: 1100px)" type="image/avif" srcset="assets/images/homepage/eastland-product-family-tablet.avif">
-          <source media="(max-width: 1100px)" type="image/webp" srcset="assets/images/homepage/eastland-product-family-tablet.webp">
-          <source media="(max-width: 1100px)" srcset="assets/images/homepage/eastland-product-family-tablet.jpg">
-          <source type="image/avif" srcset="assets/images/homepage/eastland-product-family-desktop.avif">
-          <source type="image/webp" srcset="assets/images/homepage/eastland-product-family-desktop.webp">
-            <img src="assets/images/homepage/eastland-product-family-desktop.jpg" width="2400" height="1244" loading="lazy" decoding="async" alt="Eastland First Church of God client-work presentation across desktop, laptop, tablet, and phone displays on a warm executive desk, with the digital discovery journey below">
-          </picture>
-        </figure>
-        <nav class="eastland-project-links" aria-label="Eastland project links">
-          <a href="https://www.eastlandfirstchurchofgod.com" target="_blank" rel="noopener noreferrer"><span class="sr-only">View Live Website (opens in a new tab)</span></a>
-          <a href="https://www.google.com/maps/search/?api=1&amp;query=Eastland+First+Church+of+God%2C+1706+Old+Owingsville+Rd%2C+Mt+Sterling%2C+KY+40353" target="_blank" rel="noopener noreferrer"><span class="sr-only">View Google Listing (opens in a new tab)</span></a>
-        </nav>
-        <div class="eastland-discovery sr-only">
-          <p class="eyebrow eyebrow-light">The Digital Discovery Journey</p>
-          <div class="eastland-journey" aria-label="Rogers Holdings digital discovery journey" role="list">
-            <div role="listitem"><span aria-hidden="true"></span><strong>Discover</strong><small>We learn your mission and goals.</small></div>
-            <div role="listitem"><span aria-hidden="true"></span><strong>Audit</strong><small>We analyze your current digital presence.</small></div>
-            <div role="listitem"><span aria-hidden="true"></span><strong>Strategy</strong><small>We create a clear plan to improve visibility.</small></div>
-            <div role="listitem"><span aria-hidden="true"></span><strong>Build</strong><small>We design and develop your digital experience.</small></div>
-            <div role="listitem"><span aria-hidden="true"></span><strong>Optimize</strong><small>We refine for performance, SEO, and mobile.</small></div>
-            <div role="listitem"><span aria-hidden="true"></span><strong>Grow</strong><small>We help you reach more people and make impact.</small></div>
-          </div>
-        </div>
-      </div>
-      <div class="eastland-portfolio-evidence">
-        <div class="container">
-          <div class="eastland-outcome-grid" data-reveal>
-            <article><div class="eastland-outcome-heading"><span class="eastland-evidence-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9.8 9a2.4 2.4 0 1 1 3.6 2.1c-.9.5-1.4 1.1-1.4 2.1M12 17h.01"/></svg></span><h3>Challenge</h3></div><p>Facebook was the primary online presence, with no dedicated website. Visitor information—including service times, ministries, messages, giving, directions, and contact—was fragmented and difficult to find, limiting search visibility and a centralized path forward.</p></article>
-            <article><div class="eastland-outcome-heading"><span class="eastland-evidence-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="5.5"/><path d="m15 15 5 5"/></svg></span><h3>Assessment</h3></div><p>We identified opportunities in mobile usability, visitor information, content structure, search foundations, and community engagement.</p></article>
-            <article><div class="eastland-outcome-heading"><span class="eastland-evidence-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 12 4 4 8-9"/></svg></span><h3>Solution</h3></div><p>We delivered a modern mobile-first website with clearer navigation, organized ministries, visitor information, social integration, and a stronger search foundation.</p></article>
-            <article><div class="eastland-outcome-heading"><span class="eastland-evidence-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M5 20c.8-4 3.1-6 7-6s6.2 2 7 6"/></svg></span><h3>Outcome</h3></div><p>Visitors now have a clearer mobile path to essential information, ministries, and contact.</p></article>
-          </div>
-        </div>
+      <div class="container phase3-problem-list">
+        <article data-reveal><span>01</span><div><h3>Are leads slipping through the cracks?</h3><p>Some inquiries never get followed up with.</p></div></article>
+        <article data-reveal><span>02</span><div><h3>Are repetitive tasks wasting your time?</h3><p>Work is being repeated or done manually when it doesn’t need to be.</p></div></article>
+        <article data-reveal><span>03</span><div><h3>Is important information scattered?</h3><p>Important emails, files, spreadsheets, tasks, and information are hard to keep organized.</p></div></article>
+        <article data-reveal><span>04</span><div><h3>Are your systems working hard enough?</h3><p>Your website, software, or processes aren’t working as well as they should.</p></div></article>
       </div>
     </section>
 
@@ -233,16 +194,61 @@
           <li data-reveal><span>02</span><h3>Prioritize</h3><p>Decide what will make the biggest difference first.</p></li>
           <li data-reveal><span>03</span><h3>Improve</h3><p>Fix, build, automate, or organize what needs to work better.</p></li>
         </ol>
-        <div class="phase3-method-sequence" id="process" data-reveal>
-          <div class="phase3-method-sequence-heading">
+        <div class="phase3-method-sequence" id="process">
+          <div class="phase3-method-sequence-heading" data-reveal>
             <div><p class="eyebrow">What happens after your Business Snapshot</p><h2>Start free. Continue with paid support only when it makes sense.</h2></div>
           </div>
           <ol class="phase3-process-sequence" aria-label="Free Business Snapshot through Ongoing Optimization customer journey">
-            <li><span>01</span><h3>Free Business Snapshot</h3><p>Share what isn’t working for a focused initial review.</p><div class="phase3-process-substage"><h4>Executive Brief</h4><p>Receive the clearest visible issue, what deserves attention first, a practical next step, and plain-English reasoning.</p></div></li>
-            <li><span>02</span><h3>Discovery Conversation</h3><p>Discuss the Executive Brief and decide whether further work makes sense.</p></li>
-            <li><span>03</span><h3>Digital Business Assessment</h3><p>Take a deeper look at the relevant website, workflows, tools, and operating information.</p></li>
-            <li><span>04</span><h3>Improvement Plan</h3><p>Turn the findings into prioritized recommendations and an order for implementation.</p><div class="phase3-process-substage"><h4>Implementation Services</h4><p>Fix, build, automate, or organize the agreed priorities.</p></div></li>
-            <li><span>05</span><h3>Ongoing Optimization</h3><p>Review results and improve systems as the business changes.</p></li>
+            <li data-reveal><span>01</span><h3>Free Business Snapshot</h3><p>Share what isn’t working for a focused initial review.</p><div class="phase3-process-substage"><h4>Executive Brief</h4><p>Receive the clearest visible issue, what deserves attention first, a practical next step, and plain-English reasoning.</p></div></li>
+            <li data-reveal><span>02</span><h3>Discovery Conversation</h3><p>Discuss the Executive Brief and decide whether further work makes sense.</p></li>
+            <li data-reveal><span>03</span><h3>Digital Business Assessment</h3><p>Take a deeper look at the relevant website, workflows, tools, and operating information.</p></li>
+            <li data-reveal><span>04</span><h3>Improvement Plan</h3><p>Turn the findings into prioritized recommendations and an order for implementation.</p><div class="phase3-process-substage"><h4>Implementation Services</h4><p>Fix, build, automate, or organize the agreed priorities.</p></div></li>
+            <li data-reveal><span>05</span><h3>Ongoing Optimization</h3><p>Review results and improve systems as the business changes.</p></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="homepage-eastland-showcase" id="work" aria-labelledby="eastland-client-work-heading">
+      <div class="container eastland-showcase-intro" data-reveal>
+        <p class="eyebrow">Selected Client Work</p>
+        <div>
+          <h2 id="eastland-client-work-heading">See the process in practice.</h2>
+          <p>A real example of how assessment, prioritization, and implementation become a practical business improvement.</p>
+        </div>
+      </div>
+      <div class="eastland-portfolio-hero">
+        <figure class="eastland-workspace" data-reveal>
+          <picture class="homepage-eastland-picture">
+            <source media="(max-width: 1100px)" type="image/avif" srcset="assets/images/homepage/eastland-product-family-tablet.avif">
+            <source media="(max-width: 1100px)" type="image/webp" srcset="assets/images/homepage/eastland-product-family-tablet.webp">
+            <source media="(max-width: 1100px)" srcset="assets/images/homepage/eastland-product-family-tablet.jpg">
+            <source type="image/avif" srcset="assets/images/homepage/eastland-product-family-desktop.avif">
+            <source type="image/webp" srcset="assets/images/homepage/eastland-product-family-desktop.webp">
+            <img src="assets/images/homepage/eastland-product-family-desktop.jpg" width="2400" height="1244" loading="lazy" decoding="async" alt="Complete Eastland First Church of God client-work presentation across desktop, laptop, tablet, and phone displays on a warm executive desk">
+          </picture>
+        </figure>
+      </div>
+      <div class="eastland-portfolio-evidence">
+        <div class="container eastland-project-story">
+          <header class="eastland-project-heading" data-reveal>
+            <div>
+              <p class="eyebrow">Eastland First Church of God</p>
+              <h2>From a Facebook-first presence to a clear digital front door.</h2>
+            </div>
+            <div>
+              <p>Eastland needed one owned place where visitors could find service times, ministries, messages, giving, directions, and contact information.</p>
+              <nav class="eastland-project-actions" aria-label="Eastland project links">
+                <a href="https://www.eastlandfirstchurchofgod.com" target="_blank" rel="noopener noreferrer">View Live Website <span aria-hidden="true">↗</span></a>
+                <a href="https://www.google.com/maps/search/?api=1&amp;query=Eastland+First+Church+of+God%2C+1706+Old+Owingsville+Rd%2C+Mt+Sterling%2C+KY+40353" target="_blank" rel="noopener noreferrer">View Google Listing <span aria-hidden="true">↗</span></a>
+              </nav>
+            </div>
+          </header>
+          <ol class="eastland-story-timeline" aria-label="Eastland project story">
+            <li data-reveal><span>01</span><h3>Challenge</h3><p>Facebook was the primary online presence. Important visitor information was fragmented and difficult to find.</p></li>
+            <li data-reveal><span>02</span><h3>Assessment</h3><p>We mapped the visitor journey and identified gaps in mobile usability, information structure, search visibility, and engagement.</p></li>
+            <li data-reveal><span>03</span><h3>Improvement</h3><p>We built a mobile-first website that organized essential information and created clearer paths to visit, watch, give, and connect.</p></li>
+            <li data-reveal><span>04</span><h3>Result</h3><p>Eastland now has an owned digital front door that is easier to find, easier to use, and easier to maintain.</p></li>
           </ol>
         </div>
       </div>
@@ -261,36 +267,15 @@
       </div>
     </section>
 
-    <section class="section phase3-platform" aria-labelledby="platform-heading">
-      <div class="container phase3-platform-layout">
-        <div class="phase3-platform-copy" data-reveal>
-          <p class="eyebrow eyebrow-light">Business Optimization Platform</p>
-          <h2 id="platform-heading">Good recommendations are useless if nothing happens next.</h2>
-          <p>Our internal platform keeps evidence, findings, priorities, and implementation connected throughout the work.</p>
-          <p class="phase3-platform-clarification">We manage the system. You get clear recommendations and next steps—not another platform to learn.</p>
-        </div>
-        <div class="phase3-workflow" aria-label="Illustrative Business Optimization Platform workflow" data-reveal>
-          <div class="phase3-workflow-top"><span>Business Optimization Platform</span><small>Illustrative workflow</small></div>
-          <ol>
-            <li><span>01</span><div><strong>Evidence</strong><small>Capture the source and business context.</small></div></li>
-            <li><span>02</span><div><strong>Findings</strong><small>Document what is limiting performance.</small></div></li>
-            <li><span>03</span><div><strong>Priorities</strong><small>Evaluate impact, urgency, and effort.</small></div></li>
-            <li><span>04</span><div><strong>Implementation</strong><small>Build the practical next improvement.</small></div></li>
-          </ol>
-          <div class="phase3-workflow-result"><span>Working output</span><strong>Clear actions, documented over time.</strong></div>
-        </div>
-      </div>
-    </section>
-
     <section class="section phase3-owner" id="about">
       <div class="container phase3-owner-layout">
         <figure class="phase3-founder-portrait" data-reveal>
           <div class="phase3-founder-portrait-frame">
-            <img src="docs/design-reference/founder/brian-keith-rogers-headshot-original.png" width="1122" height="1402" loading="lazy" decoding="async" alt="Brian Keith Rogers, founder of Rogers Holdings LLC">
+            <img src="assets/images/digital-business-card/brian-keith-rogers.jpg" width="576" height="720" loading="lazy" decoding="async" alt="Brian Keith Rogers, founder of Rogers Holdings LLC">
           </div>
           <figcaption><strong>Brian Keith Rogers</strong><span>Founder, Rogers Holdings LLC</span></figcaption>
         </figure>
-        <div data-reveal><p class="eyebrow">Owner-led by design</p><h2>Direct accountability from assessment through implementation.</h2><p class="phase3-owner-lede">When you work with Rogers Holdings, you work directly with the person responsible for understanding the problem, recommending the solution, and helping put it in place.</p><ol class="phase3-owner-principles" aria-label="Why Rogers Holdings"><li><span>01</span><strong>Business value before technology</strong><p>Use technology because it solves a problem—not because it’s new.</p></li><li><span>02</span><strong>Clarity and practical guidance</strong><p>Every recommendation comes with plain-English reasoning.</p></li><li><span>03</span><strong>Implementation with direct accountability</strong><p>The same owner who recommends the work remains accountable for helping deliver it.</p></li><li><span>04</span><strong>Built for the long term</strong><p>Create systems that continue helping the business after the project ends.</p></li></ol></div>
+        <div data-reveal><p class="eyebrow">Faith-led. Owner accountable.</p><h2>Christ-like service. Honest guidance. Personal accountability.</h2><p class="phase3-owner-lede">My faith shapes how I do business: tell the truth, serve people well, keep my word, and steward every resource responsibly. When you work with Rogers Holdings, you work directly with me from the first assessment through implementation.</p><ol class="phase3-owner-principles" aria-label="My commitment to every client"><li><span>01</span><strong>Lead with integrity</strong><p>I will be honest about what I see, what I recommend, and what I can deliver.</p></li><li><span>02</span><strong>Serve before selling</strong><p>I will recommend only work that solves a real problem and creates practical value.</p></li><li><span>03</span><strong>Own the work</strong><p>I remain directly accountable for the quality, communication, and follow-through.</p></li><li><span>04</span><strong>Practice good stewardship</strong><p>I build solutions meant to use time, money, and technology wisely for the long term.</p></li></ol></div>
       </div>
     </section>
 
@@ -305,7 +290,7 @@
   <footer class="site-footer phase3-footer">
     <div class="container phase3-footer-layout">
       <div class="footer-brand"><a class="brand-lockup brand-lockup-light" href="#top" aria-label="Rogers Holdings LLC home"><img src="assets/images/brand/rogers-holdings-logo-reversed.png" width="52" height="52" alt=""><span>Rogers Holdings <small>LLC</small></span></a><p>Kentucky-based, family-owned, and focused on practical business improvement.</p></div>
-      <div><h2>Explore &amp; contact</h2><nav aria-label="Footer navigation"><a href="#approach">Approach</a><a href="#process">Process</a><a href="#capabilities">Capabilities</a><a href="#work">Our Work</a><a href="#about">About</a><a href="#contact">Contact</a><a href="business-snapshot/">Business Snapshot</a><a href="privacy/">Privacy</a></nav><address><a href="mailto:briankeith@rogersholdingsllc.com">briankeith@rogersholdingsllc.com</a><a href="tel:+18594047300">859-404-7300</a><span>Kentucky · Serving businesses across the U.S.</span></address></div>
+      <div><h2>Explore &amp; contact</h2><nav aria-label="Footer navigation"><a href="#approach">Approach</a><a href="#process">Process</a><a href="#work">Our Work</a><a href="#capabilities">Capabilities</a><a href="#about">About</a><a href="#contact">Contact</a><a href="business-snapshot/">Business Snapshot</a><a href="privacy/">Privacy</a></nav><address><a href="mailto:briankeith@rogersholdingsllc.com">briankeith@rogersholdingsllc.com</a><a href="tel:+18594047300">859-404-7300</a><span>Kentucky · Serving businesses across the U.S.</span></address></div>
     </div>
     <div class="container footer-bottom"><span>© <span data-current-year>2026</span> Rogers Holdings LLC</span><span>Privately held · Family operated</span></div>
   </footer>

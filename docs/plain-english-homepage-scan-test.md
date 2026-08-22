@@ -6,6 +6,10 @@ REQUEST YOUR FREE BUSINESS SNAPSHOT
 
 SEE HOW WE CAN HELP
 
+COMMON BUSINESS FRICTION
+
+## Does any of this sound familiar?
+
 ## Are leads slipping through the cracks?
 
 ## Are repetitive tasks wasting your time?
@@ -13,16 +17,6 @@ SEE HOW WE CAN HELP
 ## Is important information scattered?
 
 ## Are your systems working hard enough?
-
-## Eastland First Church of God
-
-### Challenge
-
-### Assessment
-
-### Solution
-
-### Outcome
 
 HOW ROGERS HOLDINGS WORKS
 
@@ -48,6 +42,22 @@ WHAT HAPPENS AFTER YOUR BUSINESS SNAPSHOT
 
 ### Ongoing Optimization
 
+SELECTED CLIENT WORK
+
+## See the process in practice.
+
+EASTLAND FIRST CHURCH OF GOD
+
+## From a Facebook-first presence to a clear digital front door.
+
+### Challenge
+
+### Assessment
+
+### Improvement
+
+### Result
+
 HOW WE CAN HELP
 
 ## What can we help you fix?
@@ -64,23 +74,17 @@ HOW WE CAN HELP
 
 ### I know something isn’t working, but I’m not sure what
 
-BUSINESS OPTIMIZATION PLATFORM
+FAITH-LED. OWNER ACCOUNTABLE.
 
-## Good recommendations are useless if nothing happens next.
+## Christ-like service. Honest guidance. Personal accountability.
 
-START WITH A FREE BUSINESS SNAPSHOT
+LEAD WITH INTEGRITY
 
-OWNER-LED BY DESIGN
+SERVE BEFORE SELLING
 
-## Direct accountability from assessment through implementation.
+OWN THE WORK
 
-BUSINESS VALUE BEFORE TECHNOLOGY
-
-CLARITY AND PRACTICAL GUIDANCE
-
-IMPLEMENTATION WITH DIRECT ACCOUNTABILITY
-
-BUILT FOR THE LONG TERM
+PRACTICE GOOD STEWARDSHIP
 
 A SIMPLE PLACE TO START
 

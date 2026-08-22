@@ -34,12 +34,14 @@ assert.match(privacy, /<footer class="[^"]*site-footer[^"]*">[\s\S]*?rogers-hold
 assert.doesNotMatch(snapshot, /<footer[\s\S]*?rogers-holdings-logo\.png/);
 assert.doesNotMatch(privacy, /<footer[\s\S]*?rogers-holdings-logo\.png/);
 assert.equal((homepage.match(/rh-executive-materials-01-/g) || []).length, 0);
-assert.equal((homepage.match(/brian-keith-rogers-headshot-original\.png/g) || []).length, 1);
-assert.match(homepage, /width="1122" height="1402" loading="lazy"/);
+assert.equal((homepage.match(/assets\/images\/digital-business-card\/brian-keith-rogers\.jpg/g) || []).length, 1);
+assert.match(homepage, /width="576" height="720" loading="lazy"/);
 assert.match(css, /grid-template-columns: minmax\(380px, \.84fr\) minmax\(0, 1\.16fr\)/);
 assert.match(css, /\.phase3-founder-portrait-frame[\s\S]*?aspect-ratio: 4 \/ 5/);
 const founderSource = fs.readFileSync(path.join(ROOT, 'docs/design-reference/founder/brian-keith-rogers-headshot-original.png'));
 assert.equal(crypto.createHash('sha256').update(founderSource).digest('hex'), '9bb3f69903b49705abeb212f88bde0ad5200ee5cf60de289e2698a77c467c979');
+const optimizedFounderPortrait = fs.statSync(path.join(ROOT, 'assets/images/digital-business-card/brian-keith-rogers.jpg'));
+assert.ok(optimizedFounderPortrait.size < 100_000, 'homepage founder portrait must remain below 100 KB');
 assert.match(visualSystem, /Light backgrounds use/);
 assert.match(visualSystem, /Dark or black backgrounds use/);
 
