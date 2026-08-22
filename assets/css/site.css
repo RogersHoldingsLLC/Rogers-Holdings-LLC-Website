@@ -1054,11 +1054,11 @@ h3 { letter-spacing: -.015em; }
   background: #fbfaf6;
 }
 
-.homepage-value-heading { padding-block: clamp(58px, 5.5vw, 82px) clamp(38px, 3.8vw, 54px); }
+.homepage-value-heading { padding-block: clamp(58px, 5.5vw, 82px) clamp(38px, 3.8vw, 54px); text-align: center; }
 .homepage-value-heading .eyebrow { margin-bottom: 15px; }
-.homepage-value-title-row { display: grid; align-items: center; grid-template-columns: max-content minmax(220px, 1fr); gap: clamp(28px, 4.5vw, 72px); }
+.homepage-value-title-row { display: block; }
 .homepage-value-heading h2 { max-width: none; margin: 0; font-size: clamp(42px, 4.2vw, 62px); line-height: 1; white-space: nowrap; }
-.homepage-value-title-row > p { max-width: 42ch; margin: 0; justify-self: center; color: var(--color-text-secondary); font-size: 15px; line-height: 1.55; }
+.homepage-value-heading .homepage-value-title-row > p { max-width: 52ch; margin: 16px auto 0; color: var(--color-text-secondary); font-size: 15px; line-height: 1.55; }
 
 .homepage-value-strip .phase3-problem-list {
   display: grid;
@@ -1084,15 +1084,13 @@ h3 { letter-spacing: -.015em; }
 }
 
 .eastland-showcase-intro {
-  display: grid;
+  display: block;
   padding-block: clamp(30px, 3.5vw, 50px);
-  align-items: center;
-  grid-template-columns: max-content minmax(220px, 1fr);
-  gap: clamp(28px, 5vw, 80px);
+  text-align: center;
 }
 
 .eastland-showcase-intro h2 { max-width: none; margin: 0; font-size: clamp(38px, 3.3vw, 52px); line-height: 1; white-space: nowrap; }
-.eastland-showcase-intro > p { max-width: 43ch; margin: 0; justify-self: center; color: var(--color-text-secondary); font-size: 15px; line-height: 1.55; }
+.eastland-showcase-intro > p { max-width: 52ch; margin: 14px auto 0; color: var(--color-text-secondary); font-size: 15px; line-height: 1.55; }
 
 .eastland-portfolio-hero {
   position: relative;
@@ -1197,17 +1195,14 @@ h3 { letter-spacing: -.015em; }
   gap: clamp(44px, 5vw, 72px);
   align-items: stretch;
 }
-.phase3-method .phase3-editorial-header,
-.phase3-capabilities .phase3-editorial-header {
+.phase3-method .phase3-editorial-header {
   display: block;
   padding: 0 clamp(34px, 3vw, 48px) 0 0;
   border-right: 1px solid var(--color-border);
   border-bottom: 0;
 }
-.phase3-method .phase3-editorial-header > div,
-.phase3-capabilities .phase3-editorial-header > div { padding-left: 0; }
-.phase3-method .phase3-editorial-header::after,
-.phase3-capabilities .phase3-editorial-header::after {
+.phase3-method .phase3-editorial-header > div { padding-left: 0; }
+.phase3-method .phase3-editorial-header::after {
   top: 34px;
   bottom: auto;
   left: -20px;
@@ -1215,10 +1210,8 @@ h3 { letter-spacing: -.015em; }
   height: 72px;
   background: var(--color-gold);
 }
-.phase3-method .phase3-editorial-header h2,
-.phase3-capabilities .phase3-editorial-header h2 { max-width: 12ch; font-size: clamp(38px, 3.5vw, 52px); }
-.phase3-method .phase3-editorial-header > p,
-.phase3-capabilities .phase3-editorial-header > p { margin-top: 24px; font-size: 14px; line-height: 1.65; }
+.phase3-method .phase3-editorial-header h2 { max-width: 12ch; font-size: clamp(38px, 3.5vw, 52px); }
+.phase3-method .phase3-editorial-header > p { margin-top: 24px; font-size: 14px; line-height: 1.65; }
 .phase3-method .phase3-editorial-header { align-self: center; }
 
 .phase3-method-grid {
@@ -1250,7 +1243,17 @@ h3 { letter-spacing: -.015em; }
 .phase3-process-substage { margin-top: 15px; padding: 11px 12px; border-left: 2px solid var(--color-champagne); background: rgba(252, 251, 248, .07); }
 .phase3-process-sequence h4 { margin: 0 0 4px; color: var(--color-champagne); font-family: var(--sans); font-size: 9px; letter-spacing: .07em; text-transform: uppercase; }
 
-.phase3-capabilities > .container { display: grid; grid-template-columns: minmax(300px, .72fr) minmax(0, 1.58fr); gap: clamp(44px, 5vw, 72px); align-items: start; }
+.phase3-capabilities > .container { display: block; }
+.phase3-capabilities .phase3-editorial-header {
+  display: block;
+  padding: 0 0 28px;
+  margin-bottom: 34px;
+  border-bottom: 1px solid var(--color-border);
+  text-align: center;
+}
+.phase3-capabilities .phase3-editorial-header > div { padding-left: 0; }
+.phase3-capabilities .phase3-editorial-header::after { bottom: -1px; left: 50%; transform: translateX(-50%); }
+.phase3-capabilities .phase3-editorial-header h2 { max-width: none; font-size: clamp(38px, 3.5vw, 52px); white-space: nowrap; }
 .phase3-capability-groups { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 0; }
 .phase3-capability-band { display: grid; grid-template-rows: auto 1fr; min-width: 0; border: 1px solid var(--color-border); background: rgba(245, 241, 232, .34); }
 .phase3-capability-band > h3 { padding: 18px 20px; margin: 0; border-bottom: 1px solid rgba(169, 123, 39, .24); background: rgba(169, 123, 39, .08); color: #71531f; font-family: var(--sans); font-size: 10px; font-weight: 800; letter-spacing: .11em; line-height: 1.5; text-transform: uppercase; }
@@ -1279,7 +1282,8 @@ h3 { letter-spacing: -.015em; }
 .executive-scene__media picture { display: block; }
 .executive-scene__image { width: 100%; height: auto; }
 .executive-scene__caption { padding: 12px 4px 0; color: var(--color-text-secondary); font-size: 10px; text-transform: uppercase; }
-.phase3-owner h2 { font-size: clamp(40px, 4vw, 58px); }
+.phase3-owner h2 { max-width: none; font-size: clamp(37px, 3.2vw, 47px); }
+.phase3-owner h2 span { display: block; white-space: nowrap; }
 .phase3-owner-lede { color: var(--color-text-secondary); font-size: 17px; }
 .phase3-owner-principles { padding: 7px 0 0; margin: 26px 0 0; border-top: 1px solid var(--color-border); list-style: none; }
 .phase3-owner-principles li { display: grid; grid-template-columns: 34px minmax(155px, .72fr) minmax(0, 1fr); gap: 14px; min-width: 0; padding: 13px 0; align-items: baseline; border-bottom: 1px solid var(--color-border); }
@@ -1332,10 +1336,6 @@ h3 { letter-spacing: -.015em; }
   .phase3-hero-copy { max-width: 600px; }
   .home-page .phase3-hero h1 { font-size: clamp(54px, 6.5vw, 70px); }
   .home-page .phase3-hero .hero-lede { max-width: 520px; }
-  .homepage-value-title-row,
-  .eastland-showcase-intro { grid-template-columns: 1fr; gap: 12px; }
-  .homepage-value-title-row > p,
-  .eastland-showcase-intro > p { justify-self: start; }
   .homepage-eastland-picture { aspect-ratio: 1600 / 957; }
   .eastland-project-links { left: 5.45%; width: max(13.25%, 180px); }
 }
@@ -1352,14 +1352,10 @@ h3 { letter-spacing: -.015em; }
   .phase3-cta-layout { grid-template-columns: 1fr; }
   .phase3-method > .container,
   .phase3-capabilities > .container { grid-template-columns: 1fr; }
-  .phase3-method .phase3-editorial-header,
-  .phase3-capabilities .phase3-editorial-header { padding: 0 0 28px; border-right: 0; border-bottom: 1px solid var(--color-border); }
-  .phase3-method .phase3-editorial-header > div,
-  .phase3-capabilities .phase3-editorial-header > div { padding-left: 0; }
-  .phase3-method .phase3-editorial-header::after,
-  .phase3-capabilities .phase3-editorial-header::after { top: auto; bottom: -1px; left: 0; width: 72px; height: 1px; }
-  .phase3-method .phase3-editorial-header > p,
-  .phase3-capabilities .phase3-editorial-header > p { max-width: 58ch; }
+  .phase3-method .phase3-editorial-header { padding: 0 0 28px; border-right: 0; border-bottom: 1px solid var(--color-border); }
+  .phase3-method .phase3-editorial-header > div { padding-left: 0; }
+  .phase3-method .phase3-editorial-header::after { top: auto; bottom: -1px; left: 0; width: 72px; height: 1px; }
+  .phase3-method .phase3-editorial-header > p { max-width: 58ch; }
   .phase3-method-grid { max-width: 760px; }
   .phase3-capability-groups { grid-template-columns: 1fr; }
   .phase3-method-sequence { padding: 30px clamp(24px, 5vw, 38px); }
@@ -1423,12 +1419,11 @@ h3 { letter-spacing: -.015em; }
   .eastland-story-timeline h3 { margin-top: 8px; }
   .phase3-method > .container,
   .phase3-capabilities > .container { gap: 28px; }
-  .phase3-method .phase3-editorial-header,
-  .phase3-capabilities .phase3-editorial-header { padding-bottom: 24px; }
-  .phase3-method .phase3-editorial-header h2,
-  .phase3-capabilities .phase3-editorial-header h2 { font-size: clamp(34px, 10vw, 42px); }
-  .phase3-method .phase3-editorial-header > p,
-  .phase3-capabilities .phase3-editorial-header > p { margin-top: 18px; }
+  .phase3-method .phase3-editorial-header { padding-bottom: 24px; }
+  .phase3-method .phase3-editorial-header h2 { font-size: clamp(34px, 10vw, 42px); }
+  .phase3-method .phase3-editorial-header > p { margin-top: 18px; }
+  .phase3-capabilities .phase3-editorial-header { padding-bottom: 22px; margin-bottom: 24px; }
+  .phase3-capabilities .phase3-editorial-header h2 { font-size: 28px; }
   .phase3-method-grid { grid-template-columns: 1fr; margin-top: 0; border-radius: 22px; }
   .phase3-method-grid li { padding: 18px 22px 18px 54px; }
   .phase3-method-grid li + li::before { top: -8px; left: 26px; width: 16px; height: 16px; transform: rotate(135deg); }
@@ -1449,6 +1444,7 @@ h3 { letter-spacing: -.015em; }
   .phase3-capability-card small { margin-top: 8px; }
   .phase3-owner-layout { grid-template-columns: 1fr; gap: 26px; }
   .phase3-owner figure { width: min(62vw, 230px); }
+  .phase3-owner h2 { font-size: 31px; }
   .phase3-founder-portrait-frame { padding: 6px; }
   .phase3-founder-portrait figcaption { grid-template-columns: 1fr; gap: 2px; padding-top: 11px; }
   .phase3-owner-principles li { grid-template-columns: 28px 1fr; gap: 10px; padding: 11px 0; }
@@ -1465,7 +1461,10 @@ h3 { letter-spacing: -.015em; }
   .homepage-hero-media img { top: 586px; height: calc(100% - 586px); }
   .phase3-hero-layout { padding-block: 90px 370px; }
   .home-page .phase3-hero h1 { font-size: 36px; }
-  .homepage-value-heading h2 { font-size: 23px; }
+  .homepage-value-heading h2,
+  .eastland-showcase-intro h2 { font-size: 22px; }
+  .phase3-capabilities .phase3-editorial-header h2 { font-size: 24px; }
+  .phase3-owner h2 { font-size: 28px; }
   .capability-flow { gap: 4px; }
   .capability-flow b { padding-inline: 6px; }
 }
@@ -1487,20 +1486,6 @@ h3 { letter-spacing: -.015em; }
 }
 
 @media (min-width: 961px) and (max-width: 1599px) {
-  .phase3-capabilities > .container { grid-template-columns: 1fr; gap: 34px; }
-  .phase3-capabilities .phase3-editorial-header {
-    padding: 0 0 30px;
-    border-right: 0;
-    border-bottom: 1px solid var(--color-border);
-  }
-  .phase3-capabilities .phase3-editorial-header::after {
-    top: auto;
-    bottom: -1px;
-    left: 0;
-    width: 72px;
-    height: 1px;
-  }
-  .phase3-capabilities .phase3-editorial-header h2 { max-width: 15ch; }
   .phase3-capability-groups { width: 100%; }
   .phase3-capability-card { padding: 22px; }
   .phase3-capability-card h4 { font-size: 24px; }
