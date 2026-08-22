@@ -7,10 +7,10 @@ const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 const css = fs.readFileSync(path.join(ROOT, 'assets/css/site.css'), 'utf8');
 const script = fs.readFileSync(path.join(ROOT, 'assets/js/site.js'), 'utf8');
 
-const primaryCta = 'Get Your Free Business Snapshot';
+const primaryCta = 'Request Your Free Business Snapshot';
 assert.equal((html.match(new RegExp(primaryCta, 'g')) || []).length, 2);
-assert.equal((html.match(/Complimentary written review · Human-reviewed · Typically within three business days/g) || []).length, 1);
-assert.equal((html.match(/Free · Human-reviewed · Typically within 3 business days · No sales call required/g) || []).length, 1);
+assert.equal((html.match(/<p class="phase3-hero-note">Free Business Snapshot · Human-reviewed · Executive Brief typically within three business days<\/p>/g) || []).length, 1);
+assert.equal((html.match(/<p class="phase3-cta-assurance">Free Business Snapshot · Human-reviewed · Executive Brief typically within three business days · No sales call required<\/p>/g) || []).length, 1);
 
 assert.match(html, /<section class="section phase3-method" id="approach"/);
 assert.match(html, /class="phase3-method-sequence" id="process"/);
@@ -47,7 +47,7 @@ assert.match(html, /Our internal platform keeps evidence, findings, priorities, 
 assert.match(html, /We manage the system\. You get clear recommendations and next steps—not another platform to learn\./);
 assert.doesNotMatch(html, /class="phase3-platform-cta"/);
 assert.match(html, /Visitors now have a clearer mobile path to essential information, ministries, and contact\./);
-assert.match(html, /href="business-snapshot\/" data-report-link>Get Your Free Business Snapshot/);
+assert.match(html, /href="business-snapshot\/" data-report-link>Request Your Free Business Snapshot/);
 
 assert.match(html, /class="phase3-founder-portrait"/);
 assert.match(html, /src="docs\/design-reference\/founder\/brian-keith-rogers-headshot-original\.png" width="1122" height="1402" loading="lazy"/);

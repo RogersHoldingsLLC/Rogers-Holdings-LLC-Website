@@ -134,7 +134,7 @@ const heroMasterHash = crypto.createHash('sha256').update(fs.readFileSync(heroMa
 assert.equal(heroMasterHash, '02238a7a536a004970a03a332ee083efaf80cecbcf8034f73ae6bf9bb34101bc', 'frozen Hero V2 master changed');
 
 for (const term of [
-  'Free Business Snapshot', 'Get Your Free Business Snapshot', 'Executive Brief',
+  'Free Business Snapshot', 'Request Your Free Business Snapshot', 'Executive Brief',
   'Discovery Conversation', 'Digital Business Assessment', 'Improvement Plan',
   'Implementation Services', 'Ongoing Optimization'
 ]) assert.ok(html.includes(term), `missing canonical Business Snapshot term: ${term}`);

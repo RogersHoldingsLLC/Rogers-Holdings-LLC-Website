@@ -91,8 +91,10 @@ for (const term of canonicalJourney) {
 }
 
 assert.match(html, /<title>Free Business Snapshot \| Rogers Holdings LLC<\/title>/);
-assert.match(html, /Get Your Free Business Snapshot/);
-assert.match(source, /const defaultSubmitLabel = 'Get Your Free Business Snapshot';/);
+assert.match(html, /Request Your Free Business Snapshot/);
+assert.match(html, /Request My Free Business Snapshot/);
+assert.match(source, /const defaultSubmitLabel = 'Request My Free Business Snapshot';/);
+assert.doesNotMatch(productionLanguage, /Get Your Free Business Snapshot|Start Your Free Business Snapshot/);
 assert.doesNotMatch(productionLanguage, /\b(?:Request (?:Your|My)|Start Your) Business Snapshot\b/);
 
 for (const retiredTerm of [

@@ -2,7 +2,7 @@ BUSINESS OPTIMIZATION FOR SMALL AND GROWING BUSINESSES
 
 # Find what holds your business back. Improve what matters.
 
-GET YOUR FREE BUSINESS SNAPSHOT
+REQUEST YOUR FREE BUSINESS SNAPSHOT
 
 SEE HOW WE CAN HELP
 
@@ -34,9 +34,9 @@ HOW ROGERS HOLDINGS WORKS
 
 ### Improve
 
-WHAT HAPPENS NEXT
+WHAT HAPPENS AFTER YOUR BUSINESS SNAPSHOT
 
-## Start small. Go further only when it makes sense.
+## Start free. Continue with paid support only when it makes sense.
 
 ### Free Business Snapshot
 
@@ -86,6 +86,6 @@ A SIMPLE PLACE TO START
 
 ## Not sure what your business needs? Start there.
 
-GET YOUR FREE BUSINESS SNAPSHOT
+REQUEST YOUR FREE BUSINESS SNAPSHOT
 
 ## Explore & contact
