@@ -89,7 +89,7 @@ assert.deepEqual(sectionOrder, [...sectionOrder].sort((a, b) => a - b), 'homepag
 for (const copy of [
   'How Rogers Holdings works', 'Assess, Prioritize, Improve methodology',
   'Free Business Snapshot through Ongoing Optimization customer journey',
-  'Selected Client Work', 'See the process in practice.',
+  'See our work in action.', 'Eastland First Church of God',
   'From a Facebook-first presence to a clear digital front door.',
   'Facebook was the primary online presence.', 'Eastland project story',
   'Faith-led. Owner accountable.', 'My commitment to every client', 'A simple place to start'
@@ -115,6 +115,7 @@ const eastlandReferenceHash = crypto.createHash('sha256').update(fs.readFileSync
 assert.equal(eastlandReferenceHash, '516d0b764d82f2ac1b451ca0194602da2abe7e3e57ea94d9218d1dde693acb62', 'authoritative Eastland reference changed');
 assert.match(html, /class="container eastland-showcase-intro"/);
 assert.match(html, /media="\(max-width: 1100px\)" type="image\/avif" srcset="assets\/images\/homepage\/eastland-product-family-tablet\.avif"/);
+assert.match(css, /\.eastland-project-links \{[\s\S]*position: absolute;/, 'functional Eastland links must overlay their image-baked labels');
 assert.match(html, /class="eastland-project-heading"/);
 assert.match(html, /class="eastland-story-timeline" aria-label="Eastland project story"/);
 assert.match(css, /\.eastland-story-timeline\s*\{[\s\S]*grid-template-columns: repeat\(4/);
