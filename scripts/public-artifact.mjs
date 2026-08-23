@@ -51,6 +51,7 @@ export const PUBLIC_MANIFEST = Object.freeze([
   'brian/index.html',
   'business-snapshot/index.html',
   'docs/design-reference/founder/brian-keith-rogers-headshot-original.png',
+  'email-signature/index.html',
   'favicon.ico',
   'favicon.png',
   'google914083dd95ef8b05.html',
