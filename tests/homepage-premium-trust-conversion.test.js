@@ -58,6 +58,19 @@ assert.match(html, /class="eastland-project-links" aria-label="Eastland project 
 assert.doesNotMatch(html, /class="eastland-project-actions"/);
 assert.match(html, /From a Facebook-first presence to a clear digital front door\./);
 assert.match(html, /Eastland now has an owned digital front door that is easier to find, easier to use, and easier to maintain\./);
+assert.match(html, /class="homepage-venture-showcase" id="ventures" aria-labelledby="hew-venture-heading"/);
+assert.match(html, /<p class="eyebrow eyebrow-light">Rogers Holdings Venture<\/p>/);
+assert.match(html, /<h2 id="hew-venture-heading">HEW Gates &amp; Garage<\/h2>/);
+assert.match(html, /<p class="hew-venture-company">A Rogers Holdings LLC company\.<\/p>/);
+assert.match(html, /href="https:\/\/rogersholdingsllc\.com\/hew-gates-garage\/" target="_blank" rel="noopener noreferrer">View Live Site/);
+for (const capability of ['Standalone identity', 'Mobile lead generation', 'Local discovery', 'Static delivery', 'Email inquiry flow']) {
+  assert.ok(html.includes(capability), `missing HEW venture capability: ${capability}`);
+}
+const hewStart = html.indexOf('<section class="homepage-venture-showcase"');
+const hewEnd = html.indexOf('</section>', hewStart);
+const hewVenture = html.slice(hewStart, hewEnd);
+assert.doesNotMatch(hewVenture, /client project|client work|testimonial|customers served|leads generated/i);
+assert.match(css, /\.hew-venture-build \{[\s\S]*?grid-template-columns: repeat\(5/);
 assert.match(html, /href="business-snapshot\/" data-report-link>Request Your Free Business Snapshot/);
 
 assert.match(html, /class="phase3-founder-portrait"/);

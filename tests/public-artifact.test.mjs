@@ -58,6 +58,7 @@ for (const requiredFile of [
   'brand-card.jpeg',
   'assets/images/social/business-snapshot-share.jpg',
   'assets/images/social/rogers-holdings-home-share.jpg',
+  'assets/images/hew-gates-garage/hew-portfolio-preview.jpg',
   'assets/css/digital-business-card.css',
   'assets/images/brand/rogers-holdings-logo.png',
   'assets/images/brand/rogers-holdings-logo-reversed.png',
