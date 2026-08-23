@@ -1,0 +1,709 @@
+:root {
+  color-scheme: light;
+  --bg: #f4f6f7;
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --ink: #172027;
+  --muted: #58636a;
+  --line: rgba(23, 32, 39, 0.14);
+  --line-strong: rgba(23, 32, 39, 0.24);
+  --orange: #f25b0c;
+  --orange-light: #b94000;
+  --steel: #3f4a51;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(23, 32, 39, 0.012) 0,
+    rgba(23, 32, 39, 0.012) 1px,
+    transparent 1px,
+    transparent 6px
+  );
+  color: var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.55;
+}
+
+a { color: inherit; }
+
+::selection {
+  background: var(--orange);
+  color: #160b03;
+}
+
+.skip-link {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 30;
+  padding: 0.7rem 1rem;
+  background: var(--ink);
+  color: #ffffff;
+  transform: translateY(-160%);
+}
+
+.skip-link:focus { transform: translateY(0); }
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  min-height: 4.5rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2rem);
+  padding: 0.55rem clamp(1rem, 4vw, 3rem);
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 28px rgba(23, 32, 39, 0.07);
+  backdrop-filter: blur(16px);
+}
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.brand-link img {
+  width: auto;
+  height: 3.4rem;
+  display: block;
+  filter: drop-shadow(0 5px 10px rgba(23, 32, 39, 0.11));
+}
+
+.header-parent {
+  margin: 0;
+  padding-left: clamp(1rem, 3vw, 2rem);
+  border-left: 1px solid var(--line-strong);
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.site-header nav,
+.button-row,
+address,
+footer {
+  display: flex;
+  align-items: center;
+}
+
+.site-header nav { gap: 0.35rem; }
+
+.site-header nav a {
+  min-height: 2.6rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 0.8rem;
+  color: var(--steel);
+  font-size: 0.88rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.site-header nav a:hover,
+.site-header nav a:focus-visible {
+  color: var(--ink);
+  background: rgba(23, 32, 39, 0.06);
+}
+
+.site-header .nav-cta {
+  margin-left: 0.25rem;
+  border: 1px solid var(--orange);
+  color: var(--ink);
+}
+
+.site-header .nav-cta:hover,
+.site-header .nav-cta:focus-visible {
+  background: var(--orange);
+  color: #160b03;
+}
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.99) 0%,
+      rgba(255, 255, 255, 0.96) 34%,
+      rgba(255, 255, 255, 0.78) 51%,
+      rgba(255, 255, 255, 0.08) 76%
+    ),
+    url("../images/hew-gates-garage/hew-farm-gate-garage-hero.jpg") center right / cover no-repeat;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  z-index: -1;
+  background: var(--orange);
+}
+
+.hero::after {
+  content: none;
+}
+
+.hero-inner {
+  width: min(1180px, calc(100% - 2rem));
+  min-height: min(620px, calc(100svh - 4.5rem));
+  display: flex;
+  align-items: center;
+  margin-inline: auto;
+  padding: clamp(3.5rem, 8vw, 6rem) 0;
+}
+
+.hero-copy {
+  width: min(47rem, 100%);
+  padding-left: clamp(1.15rem, 2.5vw, 2rem);
+  border-left: 4px solid var(--orange);
+}
+
+.hero-copy > * {
+  animation: hero-rise 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-copy > :nth-child(2) { animation-delay: 70ms; }
+.hero-copy > :nth-child(3) { animation-delay: 140ms; }
+.hero-copy > :nth-child(4) { animation-delay: 210ms; }
+.hero-copy > :nth-child(5) { animation-delay: 280ms; }
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  color: var(--orange-light);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+h1, h2, h3, p { margin-top: 0; }
+
+h1 {
+  max-width: 12ch;
+  margin-bottom: 1.15rem;
+  font-size: clamp(2.8rem, 5vw, 4.6rem);
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+
+h2 {
+  margin-bottom: 1rem;
+  font-size: clamp(2rem, 4vw, 3.55rem);
+  line-height: 1.02;
+  letter-spacing: 0;
+}
+
+h3 {
+  margin-bottom: 0.65rem;
+  font-size: 1.28rem;
+  line-height: 1.2;
+}
+
+.hero-lede {
+  max-width: 39rem;
+  color: #404b52;
+  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+}
+
+.hero-promise {
+  max-width: 36rem;
+  margin-bottom: 0.8rem;
+  color: var(--ink);
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  font-weight: 850;
+}
+
+.button-row {
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.6rem;
+}
+
+.button {
+  min-height: 3.2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.15rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  font-weight: 850;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.button:hover { transform: translateY(-2px); }
+
+.primary {
+  background: var(--orange);
+  color: #160b03;
+  border: 1px solid transparent;
+  box-shadow: 0 12px 28px rgba(242, 91, 12, 0.22);
+}
+
+.primary::after {
+  content: "\2192";
+  margin-left: 0.65rem;
+  font-size: 1.1rem;
+}
+
+.secondary {
+  border: 1px solid var(--line-strong);
+  background: #ffffff;
+  color: var(--ink);
+}
+
+.trust-strip,
+.section,
+footer {
+  width: min(1120px, calc(100% - 2rem));
+  margin-inline: auto;
+}
+
+.services,
+.process-band,
+.lead-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 680px;
+}
+
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 520ms ease var(--reveal-delay, 0ms),
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
+}
+
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.trust-strip {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: -2.25rem;
+  border: 1px solid var(--line-strong);
+  border-top: 4px solid var(--orange);
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 20px 45px rgba(23, 32, 39, 0.12);
+}
+
+.trust-strip div {
+  min-height: 7.5rem;
+  padding: 1.35rem;
+}
+
+.trust-strip div + div { border-left: 1px solid var(--line); }
+
+.trust-strip strong,
+.trust-strip span,
+address a,
+footer span {
+  display: block;
+}
+
+.trust-strip strong {
+  margin-bottom: 0.35rem;
+  color: var(--ink);
+  font-size: 1rem;
+}
+
+.trust-strip span,
+.card-grid p,
+.process li p,
+.lead-panel p,
+.form-note,
+footer span,
+.section-heading > p:last-child {
+  color: var(--muted);
+}
+
+.section { padding-top: clamp(4.5rem, 9vw, 7.5rem); }
+
+.section-heading {
+  max-width: 48rem;
+  margin-bottom: 2rem;
+}
+
+.section-heading > p:last-child {
+  max-width: 42rem;
+  margin-bottom: 0;
+  font-size: 1.05rem;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.card-grid article {
+  min-height: 16rem;
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--ink);
+  border-radius: 0.25rem;
+  background: linear-gradient(180deg, #ffffff, #f5f7f8);
+  box-shadow: 0 16px 35px rgba(23, 32, 39, 0.08);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.card-grid article:hover {
+  border-top-color: var(--orange);
+  box-shadow: 0 22px 42px rgba(23, 32, 39, 0.13);
+  transform: translateY(-4px);
+}
+
+.card-grid article > span {
+  display: inline-block;
+  margin-bottom: 2.6rem;
+  color: var(--orange-light);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.safety-note {
+  margin: 1rem 0 0;
+  padding: 1rem 1.1rem;
+  border-left: 3px solid var(--orange);
+  background: rgba(242, 91, 12, 0.08);
+  color: #6e2a06;
+}
+
+.process-band {
+  margin-top: clamp(4.5rem, 9vw, 7.5rem);
+  border-top: 4px solid var(--orange);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.022) 0,
+      rgba(255, 255, 255, 0.022) 1px,
+      transparent 1px,
+      transparent 8px
+    ),
+    #202a31;
+  color: #ffffff;
+}
+
+.process-band .section {
+  padding-top: clamp(4rem, 8vw, 6.5rem);
+  padding-bottom: clamp(4rem, 8vw, 6.5rem);
+}
+
+.process-band .eyebrow,
+.process-band .process li > span {
+  color: #ff8a4c;
+}
+
+.process-band .process li p {
+  color: #c7cfd4;
+}
+
+.process ol {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  list-style: none;
+}
+
+.process li {
+  min-height: 12rem;
+  padding: 1.5rem;
+}
+
+.process li + li { border-left: 1px solid rgba(255, 255, 255, 0.15); }
+
+.process li > span {
+  display: block;
+  margin-bottom: 2.2rem;
+  color: var(--orange-light);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.process strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.lead-panel {
+  display: grid;
+  grid-template-columns: minmax(15rem, 0.78fr) minmax(0, 1.22fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border-top: 4px solid var(--orange);
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+  background: var(--surface-raised);
+  box-shadow: 0 24px 55px rgba(23, 32, 39, 0.13);
+}
+
+address {
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 1.4rem;
+  font-style: normal;
+  font-weight: 800;
+}
+
+address a { color: var(--orange-light); }
+
+.lead-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.field {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.field-full,
+.form-button,
+.form-note { grid-column: 1 / -1; }
+
+label {
+  color: var(--ink);
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+label span { color: var(--orange-light); }
+
+input,
+select,
+textarea {
+  width: 100%;
+  min-height: 3.1rem;
+  padding: 0.82rem 0.9rem;
+  border: 1px solid rgba(23, 32, 39, 0.25);
+  border-radius: 0.25rem;
+  background: #ffffff;
+  color: var(--ink);
+  font: inherit;
+  box-shadow: inset 0 1px 2px rgba(23, 32, 39, 0.04);
+}
+
+textarea { resize: vertical; }
+
+input:focus,
+select:focus,
+textarea:focus,
+.button:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(255, 154, 95, 0.48);
+  outline-offset: 2px;
+}
+
+.form-button { border: 0; }
+
+.form-note {
+  margin: 0;
+  font-size: 0.88rem;
+}
+
+footer {
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: clamp(4.5rem, 9vw, 7.5rem);
+  padding: 2rem 0;
+  border-top: 1px solid var(--line);
+}
+
+footer a {
+  color: var(--orange-light);
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+@media (max-width: 900px) {
+  .site-header { grid-template-columns: auto 1fr; }
+
+  .header-parent {
+    justify-self: end;
+    text-align: right;
+  }
+
+  .site-header nav {
+    grid-column: 1 / -1;
+    justify-content: flex-end;
+    margin-top: -0.25rem;
+  }
+
+  .hero-inner { min-height: auto; }
+
+  .hero {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.98) 0%,
+        rgba(255, 255, 255, 0.94) 56%,
+        rgba(255, 255, 255, 0.48) 100%
+      ),
+      url("../images/hew-gates-garage/hew-farm-gate-garage-hero-1000.jpg") 65% center / cover no-repeat;
+  }
+
+  .trust-strip,
+  .card-grid,
+  .process ol,
+  .lead-panel { grid-template-columns: 1fr; }
+
+  .trust-strip div,
+  .card-grid article,
+  .process li { min-height: auto; }
+
+  .trust-strip div + div,
+  .process li + li {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .process li + li {
+    border-top-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .lead-form { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 620px) {
+  .site-header {
+    min-height: 4.2rem;
+    grid-template-columns: 1fr auto;
+    padding-block: 0.45rem;
+  }
+
+  .brand-link img {
+    width: auto;
+    height: 3.1rem;
+  }
+
+  .header-parent { display: none; }
+
+  .site-header nav {
+    width: auto;
+    grid-column: auto;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .site-header nav a {
+    flex: 0 0 auto;
+    min-height: 2.35rem;
+    padding: 0.45rem 0.65rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+
+  .site-header nav a:not(.nav-cta) { display: none; }
+
+  .site-header .nav-cta { margin-left: 0; }
+
+  .hero-inner {
+    width: min(100% - 1.25rem, 1180px);
+    padding-block: 3.25rem 4.5rem;
+  }
+
+  .hero {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.98) 0%,
+        rgba(255, 255, 255, 0.94) 64%,
+        rgba(255, 255, 255, 0.66) 100%
+      ),
+      url("../images/hew-gates-garage/hew-farm-gate-garage-hero-1000.jpg") 62% center / cover no-repeat;
+  }
+
+  .hero-copy {
+    padding-left: 1rem;
+    border-left-width: 3px;
+  }
+
+  h1 {
+    max-width: 13ch;
+    font-size: clamp(2.55rem, 11vw, 3.5rem);
+  }
+
+  .button-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .button { width: 100%; }
+
+  .trust-strip,
+  .section,
+  footer { width: min(100% - 1.25rem, 1120px); }
+
+  .trust-strip { margin-top: -1.25rem; }
+
+  .card-grid article > span,
+  .process li > span { margin-bottom: 1.25rem; }
+
+  .lead-panel { padding: 1.25rem; }
+
+  footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .hero-copy > * { animation: none; }
+
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .button,
+  .card-grid article { transition: none; }
+}
