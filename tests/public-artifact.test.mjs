@@ -33,7 +33,6 @@ for (const relativePath of PUBLIC_MANIFEST) {
 for (const excludedPrefix of [
   'tests/',
   'production-gateway/',
-  'email-signature/',
   'portfolio-assets/',
   'scripts/',
   '.github/'
@@ -66,12 +65,23 @@ for (const requiredFile of [
   'assets/js/digital-business-card.js',
   'brian/brian-keith-rogers.vcf',
   'brian/index.html',
-  'docs/design-reference/founder/brian-keith-rogers-headshot-original.png'
+  'docs/design-reference/founder/brian-keith-rogers-headshot-original.png',
+  'email-signature/index.html'
 ]) assert.ok(firstBuild.includes(requiredFile), `required public file is missing: ${requiredFile}`);
 
 const brianPage = fs.readFileSync(path.join(REPOSITORY_ROOT, 'brian/index.html'), 'utf8');
 assert.match(brianPage, /<link rel="canonical" href="https:\/\/rogersholdingsllc\.com\/brian\/">/);
 assert.match(brianPage, /href="brian-keith-rogers\.vcf" download/);
+
+const emailSignaturePage = fs.readFileSync(
+  path.join(REPOSITORY_ROOT, 'email-signature/index.html'),
+  'utf8'
+);
+assert.match(emailSignaturePage, /<meta name="robots" content="noindex,nofollow">/);
+assert.match(emailSignaturePage, />Apple Mail<\/button>/);
+assert.match(emailSignaturePage, />Gmail<\/button>/);
+assert.match(emailSignaturePage, /function formatPhoneNumber\(value\)/);
+assert.match(emailSignaturePage, /'text\/html': new Blob\(\[html\]/);
 
 const firstHashes = artifactHashes();
 const secondBuild = buildPublicArtifact();
