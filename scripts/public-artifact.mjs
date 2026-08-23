@@ -40,6 +40,7 @@ export const PUBLIC_MANIFEST = Object.freeze([
   'assets/images/hew-gates-garage/hew-favicon.svg',
   'assets/images/hew-gates-garage/hew-gates-garage-logo-v2-600.png',
   'assets/images/hew-gates-garage/hew-gates-garage-logo-v2.png',
+  'assets/images/hew-gates-garage/hew-portfolio-preview.jpg',
   'assets/images/social/business-snapshot-share.jpg',
   'assets/images/social/rogers-holdings-home-share.jpg',
   'assets/js/digital-business-card.js',
