@@ -1171,12 +1171,10 @@ h3 { letter-spacing: -.015em; }
   display: flex;
   padding-block: clamp(36px, 3.5vw, 50px) clamp(22px, 2.2vw, 30px);
   align-items: center;
-  justify-content: space-between;
   border-bottom: 1px solid rgba(212, 179, 106, .24);
 }
 
 .hew-venture-masthead .eyebrow { margin: 0; letter-spacing: 0; }
-.hew-venture-company { margin: 0; color: var(--color-champagne); font-size: 11px; font-weight: 800; letter-spacing: 0; text-transform: uppercase; }
 
 .hew-venture-intro {
   display: grid;
@@ -1186,13 +1184,11 @@ h3 { letter-spacing: -.015em; }
   align-items: center;
 }
 
-.hew-venture-identity h2 { max-width: 11ch; margin: 0; font-size: clamp(58px, 6vw, 88px); line-height: .91; letter-spacing: 0; }
-.hew-venture-identity h2 span { display: block; }
+.hew-venture-identity h2 { max-width: none; margin: 0; font-size: clamp(48px, 4.3vw, 68px); line-height: .95; letter-spacing: 0; white-space: nowrap; }
 .hew-venture-identity > p { max-width: 50ch; margin: 28px 0 0; color: rgba(252, 251, 248, .72); font-size: 17px; line-height: 1.7; }
 .hew-venture-identity .button { margin-top: 32px; letter-spacing: 0; }
 .hew-venture-summary { display: grid; justify-items: end; }
-.hew-venture-summary > p { max-width: 46ch; margin: 26px 0 0; color: rgba(252, 251, 248, .64); font-size: 14px; line-height: 1.68; }
-.hew-venture-summary > p strong { color: var(--color-text-reversed); font-weight: 700; }
+.hew-venture-logo-company { margin: 24px 0 0; color: var(--color-champagne); font-size: 11px; font-weight: 800; letter-spacing: 0; text-transform: uppercase; }
 .hew-venture-logo-plate { position: relative; width: min(430px, 100%); padding: clamp(24px, 3vw, 38px); border: 1px solid rgba(212, 179, 106, .4); border-top: 3px solid var(--hew-orange); background: #f8f6f1; box-shadow: 18px 18px 0 rgba(232, 91, 18, .08), 0 28px 70px rgba(0, 0, 0, .3); }
 .hew-venture-logo-plate::after { position: absolute; right: -1px; bottom: -1px; width: 54px; height: 54px; border-right: 1px solid rgba(232, 91, 18, .72); border-bottom: 1px solid rgba(232, 91, 18, .72); content: ""; }
 .hew-venture-logo-plate img { width: 100%; height: auto; }
@@ -1467,8 +1463,7 @@ h3 { letter-spacing: -.015em; }
   .eastland-story-timeline li::before { top: -7px; }
   .hew-venture-intro { grid-template-columns: 1fr; gap: 48px; align-items: start; }
   .hew-venture-identity { max-width: 700px; }
-  .hew-venture-summary { max-width: 760px; grid-template-columns: minmax(280px, 360px) minmax(0, 1fr); gap: 34px; align-items: center; justify-items: start; }
-  .hew-venture-summary > p { margin-top: 0; }
+  .hew-venture-summary { max-width: 430px; justify-items: start; }
   .hew-venture-build { gap: 38px 34px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .hew-venture-build::before { display: none; }
   .hew-venture-build li { padding: 30px 0 0; border-top: 1px solid rgba(112, 87, 44, .24); }
@@ -1517,14 +1512,13 @@ h3 { letter-spacing: -.015em; }
   .eastland-story-timeline h3 { margin-top: 8px; }
   .hew-venture-stage::before { left: 18px; }
   .hew-venture-masthead { display: block; padding-block: 30px 20px; }
-  .hew-venture-company { margin-top: 10px; font-size: 10px; }
   .hew-venture-intro { gap: 42px; padding-block: 44px 24px; }
-  .hew-venture-identity h2 { font-size: clamp(46px, 14vw, 58px); }
+  .hew-venture-identity h2 { font-size: clamp(44px, 13vw, 56px); white-space: normal; }
   .hew-venture-identity > p { margin-top: 22px; font-size: 15px; }
   .hew-venture-identity .button { width: 100%; margin-top: 24px; }
   .hew-venture-summary { display: block; max-width: none; }
   .hew-venture-logo-plate { width: 100%; padding: 22px; box-shadow: 10px 10px 0 rgba(232, 91, 18, .08), 0 22px 54px rgba(0, 0, 0, .3); }
-  .hew-venture-summary > p { margin-top: 22px; font-size: 14px; }
+  .hew-venture-logo-company { margin-top: 22px; font-size: 10px; }
   .hew-venture-preview { width: calc(100% - 32px); transform: translateY(32px); }
   .hew-venture-preview-bar { min-height: 42px; }
   .hew-venture-preview-bar span:last-child { display: none; }
