@@ -77,6 +77,10 @@ const hewVenture = html.slice(hewStart, hewEnd);
 assert.doesNotMatch(hewVenture, /client project|client work|testimonial|customers served|leads generated/i);
 assert.match(css, /\.hew-venture-build \{[\s\S]*?grid-template-columns: repeat\(5/);
 assert.match(css, /\.hew-venture-preview > a:focus-visible \{ outline: 3px solid var\(--color-champagne\)/);
+assert.match(css, /\.hew-venture-intro \{[\s\S]*?grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/);
+assert.match(css, /\.hew-venture-identity \{ text-align: center; \}/);
+assert.match(css, /\.hew-venture-summary \{ display: grid; justify-items: center; text-align: center; \}/);
+assert.match(css, /\.hew-venture-identity \{ max-width: 700px; margin-inline: auto; \}/);
 assert.match(css, /\.home-page \.homepage-venture-showcase,/);
 assert.match(html, /href="business-snapshot\/" data-report-link>Request Your Free Business Snapshot/);
 
