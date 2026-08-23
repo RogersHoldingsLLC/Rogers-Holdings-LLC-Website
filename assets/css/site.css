@@ -1178,16 +1178,17 @@ h3 { letter-spacing: -.015em; }
 
 .hew-venture-intro {
   display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(360px, .92fr);
-  gap: clamp(64px, 8vw, 124px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(56px, 6.5vw, 100px);
   padding-block: clamp(58px, 5.5vw, 82px) clamp(48px, 4.5vw, 68px);
   align-items: center;
 }
 
-.hew-venture-identity h2 { max-width: none; margin: 0; font-size: clamp(48px, 4.3vw, 68px); line-height: .95; letter-spacing: 0; white-space: nowrap; }
-.hew-venture-identity > p { max-width: 50ch; margin: 28px 0 0; color: rgba(252, 251, 248, .72); font-size: 17px; line-height: 1.7; }
+.hew-venture-identity { text-align: center; }
+.hew-venture-identity h2 { max-width: none; margin: 0; font-size: clamp(48px, 3.8vw, 64px); line-height: .95; letter-spacing: 0; white-space: nowrap; }
+.hew-venture-identity > p { max-width: 50ch; margin: 28px auto 0; color: rgba(252, 251, 248, .72); font-size: 17px; line-height: 1.7; }
 .hew-venture-identity .button { margin-top: 32px; letter-spacing: 0; }
-.hew-venture-summary { display: grid; justify-items: end; }
+.hew-venture-summary { display: grid; justify-items: center; text-align: center; }
 .hew-venture-logo-company { margin: 24px 0 0; color: var(--color-champagne); font-size: 11px; font-weight: 800; letter-spacing: 0; text-transform: uppercase; }
 .hew-venture-logo-plate { position: relative; width: min(430px, 100%); padding: clamp(24px, 3vw, 38px); border: 1px solid rgba(212, 179, 106, .4); border-top: 3px solid var(--hew-orange); background: #f8f6f1; box-shadow: 18px 18px 0 rgba(232, 91, 18, .08), 0 28px 70px rgba(0, 0, 0, .3); }
 .hew-venture-logo-plate::after { position: absolute; right: -1px; bottom: -1px; width: 54px; height: 54px; border-right: 1px solid rgba(232, 91, 18, .72); border-bottom: 1px solid rgba(232, 91, 18, .72); content: ""; }
@@ -1462,8 +1463,8 @@ h3 { letter-spacing: -.015em; }
   .eastland-story-timeline li { padding-top: 30px; border-top: 1px solid rgba(112, 87, 44, .24); }
   .eastland-story-timeline li::before { top: -7px; }
   .hew-venture-intro { grid-template-columns: 1fr; gap: 48px; align-items: start; }
-  .hew-venture-identity { max-width: 700px; }
-  .hew-venture-summary { max-width: 430px; justify-items: start; }
+  .hew-venture-identity { max-width: 700px; margin-inline: auto; }
+  .hew-venture-summary { max-width: 430px; margin-inline: auto; }
   .hew-venture-build { gap: 38px 34px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .hew-venture-build::before { display: none; }
   .hew-venture-build li { padding: 30px 0 0; border-top: 1px solid rgba(112, 87, 44, .24); }
