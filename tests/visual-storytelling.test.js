@@ -148,7 +148,7 @@ const eastlandStory = html.slice(storyStart, storyEnd);
 assert.equal((eastlandStory.match(/<li data-reveal>/g) || []).length, 4, 'Eastland project story must contain four visible timeline steps');
 assert.equal((html.match(/class="eastland-link-icon"/g) || []).length, 0, 'Eastland project links must use the reference editorial treatment');
 assert.match(html, /src="assets\/images\/hew-gates-garage\/hew-gates-garage-logo-v2-600\.png" width="600" height="300" loading="lazy" decoding="async" alt="HEW Gates &amp; Garage logo"/);
-assert.match(html, /src="assets\/images\/hew-gates-garage\/hew-portfolio-preview\.jpg" width="1152" height="720" loading="lazy" decoding="async"/);
+assert.match(html, /src="assets\/images\/hew-gates-garage\/hew-portfolio-preview\.jpg" width="1600" height="1000" loading="lazy" decoding="async"/);
 assert.equal((html.match(/class="hew-venture-build"/g) || []).length, 1, 'HEW must use one concise venture case study');
 const hewPreview = path.join(root, 'assets/images/hew-gates-garage/hew-portfolio-preview.jpg');
 assert.ok(fs.statSync(hewPreview).size > 0, 'HEW live-page preview must not be empty');

@@ -1142,53 +1142,90 @@ h3 { letter-spacing: -.015em; }
 .eastland-story-timeline p { max-width: 34ch; margin: 0; color: var(--color-text-secondary); font-size: 14px; line-height: 1.66; }
 
 .homepage-venture-showcase {
+  --hew-orange: #e85b12;
   overflow: hidden;
   border-top: 1px solid rgba(212, 179, 106, .34);
-  background: #11110f;
+  background: #f4eee4;
   color: var(--color-text-reversed);
 }
 
-.hew-venture-intro {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(340px, .9fr);
-  gap: clamp(54px, 7vw, 104px);
-  padding-block: clamp(74px, 7vw, 108px) clamp(50px, 5vw, 72px);
-  align-items: end;
+.hew-venture-stage {
+  position: relative;
+  background:
+    linear-gradient(115deg, rgba(232, 91, 18, .055), transparent 32%),
+    #11110f;
 }
 
-.hew-venture-intro h2 { max-width: none; margin: 0; font-size: clamp(52px, 5.2vw, 76px); line-height: 1; letter-spacing: 0; }
-.hew-venture-intro .eyebrow,
-.hew-venture-story .eyebrow { letter-spacing: 0; }
-.hew-venture-company { margin: 18px 0 0; color: var(--color-champagne); font-size: 12px; font-weight: 800; letter-spacing: 0; text-transform: uppercase; }
-.hew-venture-summary { display: grid; justify-items: start; }
-.hew-venture-summary > p { max-width: 48ch; margin: 24px 0 0; color: rgba(252, 251, 248, .72); font-size: 16px; line-height: 1.7; }
-.hew-venture-summary .button { margin-top: 28px; letter-spacing: 0; }
-.hew-venture-logo-plate { width: min(250px, 66%); padding: 10px 14px; border: 1px solid rgba(212, 179, 106, .44); background: #fff; box-shadow: 12px 12px 0 rgba(169, 123, 39, .1); }
+.hew-venture-stage::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: max(24px, calc((100vw - var(--container)) / 2));
+  width: 1px;
+  background: rgba(212, 179, 106, .12);
+  content: "";
+}
+
+.hew-venture-masthead {
+  position: relative;
+  display: flex;
+  padding-block: clamp(36px, 3.5vw, 50px) clamp(22px, 2.2vw, 30px);
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(212, 179, 106, .24);
+}
+
+.hew-venture-masthead .eyebrow { margin: 0; letter-spacing: 0; }
+.hew-venture-company { margin: 0; color: var(--color-champagne); font-size: 11px; font-weight: 800; letter-spacing: 0; text-transform: uppercase; }
+
+.hew-venture-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, .92fr);
+  gap: clamp(64px, 8vw, 124px);
+  padding-block: clamp(58px, 5.5vw, 82px) clamp(48px, 4.5vw, 68px);
+  align-items: center;
+}
+
+.hew-venture-identity h2 { max-width: 11ch; margin: 0; font-size: clamp(58px, 6vw, 88px); line-height: .91; letter-spacing: 0; }
+.hew-venture-identity h2 span { display: block; }
+.hew-venture-identity > p { max-width: 50ch; margin: 28px 0 0; color: rgba(252, 251, 248, .72); font-size: 17px; line-height: 1.7; }
+.hew-venture-identity .button { margin-top: 32px; letter-spacing: 0; }
+.hew-venture-summary { display: grid; justify-items: end; }
+.hew-venture-summary > p { max-width: 46ch; margin: 26px 0 0; color: rgba(252, 251, 248, .64); font-size: 14px; line-height: 1.68; }
+.hew-venture-summary > p strong { color: var(--color-text-reversed); font-weight: 700; }
+.hew-venture-logo-plate { position: relative; width: min(430px, 100%); padding: clamp(24px, 3vw, 38px); border: 1px solid rgba(212, 179, 106, .4); border-top: 3px solid var(--hew-orange); background: #f8f6f1; box-shadow: 18px 18px 0 rgba(232, 91, 18, .08), 0 28px 70px rgba(0, 0, 0, .3); }
+.hew-venture-logo-plate::after { position: absolute; right: -1px; bottom: -1px; width: 54px; height: 54px; border-right: 1px solid rgba(232, 91, 18, .72); border-bottom: 1px solid rgba(232, 91, 18, .72); content: ""; }
 .hew-venture-logo-plate img { width: 100%; height: auto; }
 
-.hew-venture-preview { padding-bottom: clamp(74px, 7vw, 108px); }
-.hew-venture-preview figure { position: relative; margin: 0; overflow: hidden; border: 1px solid rgba(212, 179, 106, .42); background: #fff; box-shadow: 0 34px 90px rgba(0, 0, 0, .38); }
-.hew-venture-preview img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; }
-.hew-venture-preview figcaption { position: absolute; right: 16px; bottom: 14px; padding: 7px 10px; background: rgba(17, 17, 15, .88); color: rgba(252, 251, 248, .76); font-size: 9px; font-weight: 800; letter-spacing: 0; text-transform: uppercase; }
+.hew-venture-preview { position: relative; z-index: 2; padding-bottom: 0; transform: translateY(clamp(46px, 4.5vw, 68px)); }
+.hew-venture-preview > a { display: block; color: inherit; }
+.hew-venture-preview > a:focus-visible { outline: 3px solid var(--color-champagne); outline-offset: 5px; }
+.hew-venture-preview figure { position: relative; margin: 0; overflow: hidden; border: 1px solid rgba(212, 179, 106, .5); background: #f8f6f1; box-shadow: 0 40px 100px rgba(0, 0, 0, .42); }
+.hew-venture-preview-bar { display: flex; min-height: 48px; padding: 0 clamp(18px, 2vw, 28px); align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(112, 87, 44, .2); background: #f2ede4; color: #5f5a51; font-size: 9px; font-weight: 800; text-transform: uppercase; }
+.hew-venture-preview-bar span:first-child { color: #a54816; }
+.hew-venture-preview-bar span:first-child::before { display: inline-block; width: 7px; height: 7px; margin-right: 9px; border-radius: 50%; background: var(--hew-orange); box-shadow: 0 0 0 4px rgba(232, 91, 18, .12); content: ""; }
+.hew-venture-preview img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; }
+.hew-venture-preview figcaption { display: flex; min-height: 58px; padding: 0 clamp(18px, 2vw, 28px); align-items: center; justify-content: space-between; border-top: 1px solid rgba(112, 87, 44, .18); background: #f8f6f1; color: #6b655c; font-size: 9px; font-weight: 800; text-transform: uppercase; }
+.hew-venture-preview figcaption strong { color: #242421; font-size: 10px; }
 
 .hew-venture-evidence {
-  background:
-    radial-gradient(circle at 86% 12%, rgba(255, 255, 255, .7), transparent 28%),
-    linear-gradient(180deg, #f7f2e9, #eee5d8 72%, #f8f5ee);
+  padding-top: clamp(46px, 4.5vw, 68px);
+  background: linear-gradient(180deg, #f4eee4, #eee5d8 74%, #f8f5ee);
   color: var(--color-text);
 }
 
 .hew-venture-story { padding-block: clamp(72px, 6.5vw, 104px); }
-.hew-venture-story-heading { display: grid; grid-template-columns: minmax(0, 1.18fr) minmax(300px, .82fr); gap: clamp(48px, 7vw, 96px); padding-bottom: clamp(44px, 4vw, 62px); align-items: end; border-bottom: 1px solid rgba(112, 87, 44, .24); }
-.hew-venture-story-heading h3 { max-width: 16ch; margin: 14px 0 0; font-family: var(--serif); font-size: clamp(40px, 4vw, 60px); font-weight: 500; line-height: 1; letter-spacing: 0; }
-.hew-venture-story-heading > p { max-width: 56ch; margin: 0; color: var(--color-text-secondary); font-size: 16px; line-height: 1.72; }
+.hew-venture-story .eyebrow { letter-spacing: 0; }
+.hew-venture-story-heading { display: block; padding-bottom: clamp(44px, 4vw, 62px); border-bottom: 1px solid rgba(112, 87, 44, .24); text-align: center; }
+.hew-venture-story-heading h3 { max-width: none; margin: 14px 0 0; font-family: var(--serif); font-size: clamp(40px, 4.2vw, 62px); font-weight: 500; line-height: 1; letter-spacing: 0; white-space: nowrap; }
+.hew-venture-story-heading > p { max-width: 72ch; margin: 22px auto 0; color: var(--color-text-secondary); font-size: 16px; line-height: 1.72; }
 
-.hew-venture-build { display: grid; padding: 0; margin: 0; list-style: none; grid-template-columns: repeat(5, minmax(0, 1fr)); }
-.hew-venture-build li { min-width: 0; padding: clamp(34px, 3vw, 46px) clamp(18px, 2vw, 28px) 0; }
-.hew-venture-build li:first-child { padding-left: 0; }
-.hew-venture-build li + li { border-left: 1px solid rgba(112, 87, 44, .18); }
+.hew-venture-build { position: relative; display: grid; padding: 0; margin: clamp(50px, 5vw, 70px) 0 0; list-style: none; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.hew-venture-build::before { position: absolute; top: 6px; right: 0; left: 0; height: 1px; background: linear-gradient(90deg, var(--hew-orange), #a97b27 70%, rgba(169, 123, 39, .2)); content: ""; }
+.hew-venture-build li { position: relative; min-width: 0; padding: 40px clamp(22px, 2.3vw, 34px) 0 0; }
+.hew-venture-build li::before { position: absolute; top: 0; left: 0; width: 13px; height: 13px; border: 3px solid #f3eadc; border-radius: 50%; background: var(--hew-orange); box-shadow: 0 0 0 1px var(--hew-orange); content: ""; }
 .hew-venture-build span { color: #8a5d19; font-size: 10px; font-weight: 800; letter-spacing: 0; }
-.hew-venture-build h4 { margin: 16px 0 10px; font-family: var(--serif); font-size: clamp(22px, 1.8vw, 28px); font-weight: 500; line-height: 1.08; letter-spacing: 0; }
+.hew-venture-build h4 { margin: 13px 0 10px; font-family: var(--serif); font-size: clamp(22px, 1.8vw, 28px); font-weight: 500; line-height: 1.08; letter-spacing: 0; }
 .hew-venture-build p { margin: 0; color: var(--color-text-secondary); font-size: 13px; line-height: 1.62; }
 .home-page .phase3-problem,
 .home-page .phase3-method,
@@ -1211,6 +1248,7 @@ h3 { letter-spacing: -.015em; }
 @supports (content-visibility: auto) {
   .home-page .phase3-method,
   .home-page .homepage-eastland-showcase,
+  .home-page .homepage-venture-showcase,
   .home-page .phase3-capabilities,
   .home-page .phase3-owner,
   .home-page .phase3-final-cta {
@@ -1427,14 +1465,14 @@ h3 { letter-spacing: -.015em; }
   .eastland-story-timeline::before { display: none; }
   .eastland-story-timeline li { padding-top: 30px; border-top: 1px solid rgba(112, 87, 44, .24); }
   .eastland-story-timeline li::before { top: -7px; }
-  .hew-venture-intro { grid-template-columns: 1fr; align-items: start; }
-  .hew-venture-summary { max-width: 640px; }
-  .hew-venture-story-heading { grid-template-columns: 1fr; gap: 24px; align-items: start; }
-  .hew-venture-build { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .hew-venture-build li { padding-left: 0; }
-  .hew-venture-build li + li { border-left: 0; }
-  .hew-venture-build li:nth-child(even) { padding-left: 26px; border-left: 1px solid rgba(112, 87, 44, .18); }
-  .hew-venture-build li:nth-child(n+3) { border-top: 1px solid rgba(112, 87, 44, .18); }
+  .hew-venture-intro { grid-template-columns: 1fr; gap: 48px; align-items: start; }
+  .hew-venture-identity { max-width: 700px; }
+  .hew-venture-summary { max-width: 760px; grid-template-columns: minmax(280px, 360px) minmax(0, 1fr); gap: 34px; align-items: center; justify-items: start; }
+  .hew-venture-summary > p { margin-top: 0; }
+  .hew-venture-build { gap: 38px 34px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hew-venture-build::before { display: none; }
+  .hew-venture-build li { padding: 30px 0 0; border-top: 1px solid rgba(112, 87, 44, .24); }
+  .hew-venture-build li::before { top: -7px; }
 }
 
 @media (max-width: 680px) {
@@ -1477,22 +1515,31 @@ h3 { letter-spacing: -.015em; }
   .eastland-story-timeline li::before { top: 1px; left: 0; }
   .eastland-story-timeline li:last-child { padding-bottom: 0; }
   .eastland-story-timeline h3 { margin-top: 8px; }
-  .hew-venture-intro { gap: 34px; padding-block: 54px 40px; }
-  .hew-venture-intro h2 { font-size: 43px; }
-  .hew-venture-company { margin-top: 13px; font-size: 10px; }
-  .hew-venture-logo-plate { width: min(220px, 72%); }
-  .hew-venture-summary > p { margin-top: 20px; font-size: 15px; }
-  .hew-venture-summary .button { width: 100%; margin-top: 22px; }
-  .hew-venture-preview { width: calc(100% - 32px); padding-bottom: 54px; }
-  .hew-venture-preview figcaption { right: 8px; bottom: 8px; }
-  .hew-venture-story { padding-block: 54px; }
+  .hew-venture-stage::before { left: 18px; }
+  .hew-venture-masthead { display: block; padding-block: 30px 20px; }
+  .hew-venture-company { margin-top: 10px; font-size: 10px; }
+  .hew-venture-intro { gap: 42px; padding-block: 44px 24px; }
+  .hew-venture-identity h2 { font-size: clamp(46px, 14vw, 58px); }
+  .hew-venture-identity > p { margin-top: 22px; font-size: 15px; }
+  .hew-venture-identity .button { width: 100%; margin-top: 24px; }
+  .hew-venture-summary { display: block; max-width: none; }
+  .hew-venture-logo-plate { width: 100%; padding: 22px; box-shadow: 10px 10px 0 rgba(232, 91, 18, .08), 0 22px 54px rgba(0, 0, 0, .3); }
+  .hew-venture-summary > p { margin-top: 22px; font-size: 14px; }
+  .hew-venture-preview { width: calc(100% - 32px); transform: translateY(32px); }
+  .hew-venture-preview-bar { min-height: 42px; }
+  .hew-venture-preview-bar span:last-child { display: none; }
+  .hew-venture-preview figcaption { min-height: 50px; gap: 12px; }
+  .hew-venture-preview figcaption strong { text-align: right; }
+  .hew-venture-evidence { padding-top: 32px; }
+  .hew-venture-story { padding-block: 58px; }
   .hew-venture-story-heading { padding-bottom: 34px; }
-  .hew-venture-story-heading h3 { font-size: 38px; }
+  .hew-venture-story-heading h3 { font-size: 38px; white-space: normal; }
   .hew-venture-story-heading > p { font-size: 15px; }
-  .hew-venture-build { display: block; }
+  .hew-venture-build { display: block; margin-top: 42px; }
+  .hew-venture-build::before { top: 5px; bottom: 5px; left: 6px; display: block; width: 1px; height: auto; background: linear-gradient(180deg, var(--hew-orange), #a97b27 70%, rgba(169, 123, 39, .2)); }
   .hew-venture-build li,
-  .hew-venture-build li:nth-child(even) { padding: 26px 0; border-top: 1px solid rgba(112, 87, 44, .18); border-left: 0; }
-  .hew-venture-build li:first-child { border-top: 0; }
+  .hew-venture-build li:nth-child(even) { padding: 0 0 34px 34px; border-top: 0; }
+  .hew-venture-build li::before { top: 1px; left: 0; }
   .hew-venture-build li:last-child { padding-bottom: 0; }
   .hew-venture-build h4 { margin-top: 8px; font-size: 27px; }
   .phase3-method > .container,
