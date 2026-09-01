@@ -33,13 +33,23 @@ for (const relativePath of PUBLIC_MANIFEST) {
 for (const excludedPrefix of [
   'tests/',
   'production-gateway/',
+  'hew-gates-garage/',
+  'assets/images/hew-gates-garage/',
   'portfolio-assets/',
   'scripts/',
   '.github/'
 ]) {
   assert.equal(firstBuild.some((entry) => entry.startsWith(excludedPrefix)), false, `${excludedPrefix} must be excluded`);
 }
-for (const excludedFile of ['README.md', 'AGENTS.md', 'package.json', 'favicon.svg', 'Profile Logo.png']) {
+for (const excludedFile of [
+  'README.md',
+  'AGENTS.md',
+  'package.json',
+  'favicon.svg',
+  'Profile Logo.png',
+  'assets/css/hew-gates-garage.css',
+  'assets/js/hew-gates-garage.js'
+]) {
   assert.equal(firstBuild.includes(excludedFile), false, `${excludedFile} must be excluded`);
 }
 const publicDocs = firstBuild.filter((entry) => entry.startsWith('docs/'));
@@ -57,7 +67,6 @@ for (const requiredFile of [
   'brand-card.jpeg',
   'assets/images/social/business-snapshot-share.jpg',
   'assets/images/social/rogers-holdings-home-share.jpg',
-  'assets/images/hew-gates-garage/hew-portfolio-preview.jpg',
   'assets/css/digital-business-card.css',
   'assets/images/brand/rogers-holdings-logo.png',
   'assets/images/brand/rogers-holdings-logo-reversed.png',
@@ -65,9 +74,28 @@ for (const requiredFile of [
   'assets/js/digital-business-card.js',
   'brian/brian-keith-rogers.vcf',
   'brian/index.html',
+  'business-snapshot/index.html',
   'docs/design-reference/founder/brian-keith-rogers-headshot-original.png',
   'email-signature/index.html'
 ]) assert.ok(firstBuild.includes(requiredFile), `required public file is missing: ${requiredFile}`);
+
+for (const dormantHewSource of [
+  'hew-gates-garage/index.html',
+  'assets/css/hew-gates-garage.css',
+  'assets/js/hew-gates-garage.js',
+  'assets/images/hew-gates-garage/hew-portfolio-preview.jpg'
+]) {
+  assert.ok(fs.existsSync(path.join(REPOSITORY_ROOT, dormantHewSource)), `dormant HEW source is missing: ${dormantHewSource}`);
+}
+
+const publicHewPattern = /\bHEW\b|Gates?\s*(?:&|&amp;)\s*Garage|hew-gates-garage/i;
+for (const relativePath of firstBuild.filter((entry) => /\.(?:css|html|js|txt|vcf|xml)$/i.test(entry))) {
+  const publicText = fs.readFileSync(path.join(OUTPUT_ROOT, relativePath), 'utf8');
+  assert.doesNotMatch(publicText, publicHewPattern, `public HEW reference found in ${relativePath}`);
+}
+assert.equal(firstBuild.includes('hew-gates-garage/index.html'), false);
+assert.doesNotMatch(fs.readFileSync(path.join(OUTPUT_ROOT, 'sitemap.xml'), 'utf8'), publicHewPattern);
+assert.doesNotMatch(fs.readFileSync(path.join(OUTPUT_ROOT, 'index.html'), 'utf8'), publicHewPattern);
 
 const brianPage = fs.readFileSync(path.join(REPOSITORY_ROOT, 'brian/index.html'), 'utf8');
 assert.match(brianPage, /<link rel="canonical" href="https:\/\/rogersholdingsllc\.com\/brian\/">/);
