@@ -77,6 +77,7 @@ for (const [, , width, height] of families) assert.ok(width > 0 && height > 0);
 const sectionOrder = [
   'class="hero phase3-hero"',
   'class="homepage-value-strip"',
+  'class="section phase3-snapshot"',
   'class="section phase3-method"',
   'class="homepage-eastland-showcase"',
   'class="section phase3-capabilities"',
@@ -88,12 +89,21 @@ assert.deepEqual(sectionOrder, [...sectionOrder].sort((a, b) => a - b), 'homepag
 
 for (const copy of [
   'How Rogers Holdings works', 'Assess, Prioritize, Improve methodology',
-  'Free Business Snapshot through Ongoing Optimization customer journey',
+  'A practical place to start',
+  'Get a clear outside view before spending money on the wrong fix.',
+  'The clearest visible issue', 'What deserves attention first',
+  'A practical recommended next step, with plain-English reasoning',
   'See our work in action.', 'Eastland First Church of God',
   'From a Facebook-first presence to a clear digital front door.',
   'Facebook was the primary online presence.', 'Eastland project story',
   'Faith-led. Owner accountable.', 'My commitment to every client', 'A simple place to start'
 ]) assert.ok(html.includes(copy), `missing preserved secondary content: ${copy}`);
+
+const renderedHomepage = html.slice(html.indexOf('<body'));
+for (const retiredJourneyLabel of [
+  'Discovery Conversation', 'Digital Business Assessment', 'Improvement Plan',
+  'Implementation Services', 'Ongoing Optimization'
+]) assert.doesNotMatch(renderedHomepage, new RegExp(retiredJourneyLabel));
 
 assert.doesNotMatch(html, /class="section phase3-problem"|class="section phase3-principles"/);
 assert.doesNotMatch(html, /Business Optimization Platform|class="section phase3-platform"/);

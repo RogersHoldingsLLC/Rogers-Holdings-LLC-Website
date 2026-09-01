@@ -201,6 +201,10 @@ This refinement preserves the approved homepage visual system while improving mo
 
 The Business Snapshot page now reuses the approved responsive Homepage Hero V2.1 photography behind conversion-focused HTML copy, followed by a compact three-step Executive Brief process and the existing production form. The form contract, validation, consent, Turnstile, delivery behavior, analytics, navigation, footer, and metadata remain unchanged.
 
+## Homepage conversion compression
+
+This incremental homepage pass clarifies the hero’s business-optimization positioning and replaces the expanded customer journey with one compact Free Business Snapshot section placed before the Assess–Prioritize–Improve method. It preserves the established visual system, Eastland presentation, conversion routes, structured data, integrations, and dormant HEW source.
+
 ## Release checks
 
 Before publishing a homepage change:

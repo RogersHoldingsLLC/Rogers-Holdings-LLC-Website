@@ -82,13 +82,17 @@ const canonicalJourney = [
   'Ongoing Optimization'
 ];
 
-let previousJourneyPosition = -1;
+const homepageHead = homepage.slice(0, homepage.indexOf('</head>'));
+const homepageBody = homepage.slice(homepage.indexOf('<body'));
 for (const term of canonicalJourney) {
   assert.match(productionLanguage, new RegExp(term));
-  const journeyPosition = homepage.indexOf(term, previousJourneyPosition + 1);
-  assert.ok(journeyPosition > previousJourneyPosition, `${term} must appear in canonical journey order`);
-  previousJourneyPosition = journeyPosition;
+  assert.match(homepageHead, new RegExp(term), `${term} must remain in homepage service metadata`);
 }
+for (const retiredJourneyLabel of canonicalJourney.slice(2)) {
+  assert.doesNotMatch(homepageBody, new RegExp(retiredJourneyLabel), `${retiredJourneyLabel} must not be rendered on the homepage`);
+}
+assert.match(homepageBody, /id="process"/);
+assert.match(homepageBody, /href="business-snapshot\/" data-report-link>Request Your Free Business Snapshot<\/a>/);
 
 assert.match(html, /<title>Free Business Snapshot \| Rogers Holdings LLC<\/title>/);
 assert.match(html, /Request Your Free Business Snapshot/);
