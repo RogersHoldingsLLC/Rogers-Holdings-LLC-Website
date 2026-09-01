@@ -58,30 +58,9 @@ assert.match(html, /class="eastland-project-links" aria-label="Eastland project 
 assert.doesNotMatch(html, /class="eastland-project-actions"/);
 assert.match(html, /From a Facebook-first presence to a clear digital front door\./);
 assert.match(html, /Eastland now has an owned digital front door that is easier to find, easier to use, and easier to maintain\./);
-assert.match(html, /class="homepage-venture-showcase" id="ventures" aria-labelledby="hew-venture-heading"/);
-assert.match(html, /<p class="eyebrow eyebrow-light">Rogers Holdings Venture<\/p>/);
-assert.match(html, /class="container hew-venture-masthead" data-reveal/);
-assert.match(html, /<h2 id="hew-venture-heading">HEW Gates &amp; Garage<\/h2>/);
-assert.match(html, /<p class="hew-venture-logo-company">A Rogers Holdings LLC company\.<\/p>/);
-assert.equal((html.match(/A Rogers Holdings LLC company\./g) || []).length, 1, 'HEW ownership label must appear once');
-assert.doesNotMatch(html, /Built by Rogers Holdings\.|local-search foundation, and inquiry workflow working as one system/);
-assert.match(html, /href="https:\/\/rogersholdingsllc\.com\/hew-gates-garage\/" target="_blank" rel="noopener noreferrer">View Live Site/);
-assert.match(html, /class="hew-venture-preview-bar" aria-hidden="true"/);
-assert.match(html, /aria-label="View the live HEW Gates and Garage site in a new tab"/);
-for (const capability of ['Standalone identity', 'Mobile lead generation', 'Local discovery', 'Static delivery', 'Email inquiry flow']) {
-  assert.ok(html.includes(capability), `missing HEW venture capability: ${capability}`);
-}
-const hewStart = html.indexOf('<section class="homepage-venture-showcase"');
-const hewEnd = html.indexOf('</section>', hewStart);
-const hewVenture = html.slice(hewStart, hewEnd);
-assert.doesNotMatch(hewVenture, /client project|client work|testimonial|customers served|leads generated/i);
-assert.match(css, /\.hew-venture-build \{[\s\S]*?grid-template-columns: repeat\(5/);
-assert.match(css, /\.hew-venture-preview > a:focus-visible \{ outline: 3px solid var\(--color-champagne\)/);
-assert.match(css, /\.hew-venture-intro \{[\s\S]*?grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/);
-assert.match(css, /\.hew-venture-identity \{ text-align: center; \}/);
-assert.match(css, /\.hew-venture-summary \{ display: grid; justify-items: center; text-align: center; \}/);
-assert.match(css, /\.hew-venture-identity \{ max-width: 700px; margin-inline: auto; \}/);
-assert.match(css, /\.home-page \.homepage-venture-showcase,/);
+const publicHewPattern = /\bHEW\b|Gates?\s*(?:&|&amp;)\s*Garage|hew-gates-garage|hew-venture|homepage-venture-showcase/i;
+assert.doesNotMatch(html, publicHewPattern);
+assert.doesNotMatch(css, publicHewPattern);
 assert.match(html, /href="business-snapshot\/" data-report-link>Request Your Free Business Snapshot/);
 
 assert.match(html, /class="phase3-founder-portrait"/);

@@ -1141,89 +1141,6 @@ h3 { letter-spacing: -.015em; }
 .eastland-story-timeline h3 { margin: 12px 0 10px; font-family: var(--serif); font-size: clamp(27px, 2.3vw, 34px); font-weight: 500; }
 .eastland-story-timeline p { max-width: 34ch; margin: 0; color: var(--color-text-secondary); font-size: 14px; line-height: 1.66; }
 
-.homepage-venture-showcase {
-  --hew-orange: #e85b12;
-  overflow: hidden;
-  border-top: 1px solid rgba(212, 179, 106, .34);
-  background: #f4eee4;
-  color: var(--color-text-reversed);
-}
-
-.hew-venture-stage {
-  position: relative;
-  background:
-    linear-gradient(115deg, rgba(232, 91, 18, .055), transparent 32%),
-    #11110f;
-}
-
-.hew-venture-stage::before {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: max(24px, calc((100vw - var(--container)) / 2));
-  width: 1px;
-  background: rgba(212, 179, 106, .12);
-  content: "";
-}
-
-.hew-venture-masthead {
-  position: relative;
-  display: flex;
-  padding-block: clamp(36px, 3.5vw, 50px) clamp(22px, 2.2vw, 30px);
-  align-items: center;
-  border-bottom: 1px solid rgba(212, 179, 106, .24);
-}
-
-.hew-venture-masthead .eyebrow { margin: 0; letter-spacing: 0; }
-
-.hew-venture-intro {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(56px, 6.5vw, 100px);
-  padding-block: clamp(58px, 5.5vw, 82px) clamp(48px, 4.5vw, 68px);
-  align-items: center;
-}
-
-.hew-venture-identity { text-align: center; }
-.hew-venture-identity h2 { max-width: none; margin: 0; font-size: clamp(48px, 3.8vw, 64px); line-height: .95; letter-spacing: 0; white-space: nowrap; }
-.hew-venture-identity > p { max-width: 50ch; margin: 28px auto 0; color: rgba(252, 251, 248, .72); font-size: 17px; line-height: 1.7; }
-.hew-venture-identity .button { margin-top: 32px; letter-spacing: 0; }
-.hew-venture-summary { display: grid; justify-items: center; text-align: center; }
-.hew-venture-logo-company { margin: 24px 0 0; color: var(--color-champagne); font-size: 11px; font-weight: 800; letter-spacing: 0; text-transform: uppercase; }
-.hew-venture-logo-plate { position: relative; width: min(430px, 100%); padding: clamp(24px, 3vw, 38px); border: 1px solid rgba(212, 179, 106, .4); border-top: 3px solid var(--hew-orange); background: #f8f6f1; box-shadow: 18px 18px 0 rgba(232, 91, 18, .08), 0 28px 70px rgba(0, 0, 0, .3); }
-.hew-venture-logo-plate::after { position: absolute; right: -1px; bottom: -1px; width: 54px; height: 54px; border-right: 1px solid rgba(232, 91, 18, .72); border-bottom: 1px solid rgba(232, 91, 18, .72); content: ""; }
-.hew-venture-logo-plate img { width: 100%; height: auto; }
-
-.hew-venture-preview { position: relative; z-index: 2; padding-bottom: 0; transform: translateY(clamp(46px, 4.5vw, 68px)); }
-.hew-venture-preview > a { display: block; color: inherit; }
-.hew-venture-preview > a:focus-visible { outline: 3px solid var(--color-champagne); outline-offset: 5px; }
-.hew-venture-preview figure { position: relative; margin: 0; overflow: hidden; border: 1px solid rgba(212, 179, 106, .5); background: #f8f6f1; box-shadow: 0 40px 100px rgba(0, 0, 0, .42); }
-.hew-venture-preview-bar { display: flex; min-height: 48px; padding: 0 clamp(18px, 2vw, 28px); align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(112, 87, 44, .2); background: #f2ede4; color: #5f5a51; font-size: 9px; font-weight: 800; text-transform: uppercase; }
-.hew-venture-preview-bar span:first-child { color: #a54816; }
-.hew-venture-preview-bar span:first-child::before { display: inline-block; width: 7px; height: 7px; margin-right: 9px; border-radius: 50%; background: var(--hew-orange); box-shadow: 0 0 0 4px rgba(232, 91, 18, .12); content: ""; }
-.hew-venture-preview img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; }
-.hew-venture-preview figcaption { display: flex; min-height: 58px; padding: 0 clamp(18px, 2vw, 28px); align-items: center; justify-content: space-between; border-top: 1px solid rgba(112, 87, 44, .18); background: #f8f6f1; color: #6b655c; font-size: 9px; font-weight: 800; text-transform: uppercase; }
-.hew-venture-preview figcaption strong { color: #242421; font-size: 10px; }
-
-.hew-venture-evidence {
-  padding-top: clamp(46px, 4.5vw, 68px);
-  background: linear-gradient(180deg, #f4eee4, #eee5d8 74%, #f8f5ee);
-  color: var(--color-text);
-}
-
-.hew-venture-story { padding-block: clamp(72px, 6.5vw, 104px); }
-.hew-venture-story .eyebrow { letter-spacing: 0; }
-.hew-venture-story-heading { display: block; padding-bottom: clamp(44px, 4vw, 62px); border-bottom: 1px solid rgba(112, 87, 44, .24); text-align: center; }
-.hew-venture-story-heading h3 { max-width: none; margin: 14px 0 0; font-family: var(--serif); font-size: clamp(40px, 4.2vw, 62px); font-weight: 500; line-height: 1; letter-spacing: 0; white-space: nowrap; }
-.hew-venture-story-heading > p { max-width: 72ch; margin: 22px auto 0; color: var(--color-text-secondary); font-size: 16px; line-height: 1.72; }
-
-.hew-venture-build { position: relative; display: grid; padding: 0; margin: clamp(50px, 5vw, 70px) 0 0; list-style: none; grid-template-columns: repeat(5, minmax(0, 1fr)); }
-.hew-venture-build::before { position: absolute; top: 6px; right: 0; left: 0; height: 1px; background: linear-gradient(90deg, var(--hew-orange), #a97b27 70%, rgba(169, 123, 39, .2)); content: ""; }
-.hew-venture-build li { position: relative; min-width: 0; padding: 40px clamp(22px, 2.3vw, 34px) 0 0; }
-.hew-venture-build li::before { position: absolute; top: 0; left: 0; width: 13px; height: 13px; border: 3px solid #f3eadc; border-radius: 50%; background: var(--hew-orange); box-shadow: 0 0 0 1px var(--hew-orange); content: ""; }
-.hew-venture-build span { color: #8a5d19; font-size: 10px; font-weight: 800; letter-spacing: 0; }
-.hew-venture-build h4 { margin: 13px 0 10px; font-family: var(--serif); font-size: clamp(22px, 1.8vw, 28px); font-weight: 500; line-height: 1.08; letter-spacing: 0; }
-.hew-venture-build p { margin: 0; color: var(--color-text-secondary); font-size: 13px; line-height: 1.62; }
 .home-page .phase3-problem,
 .home-page .phase3-method,
 .home-page .phase3-capabilities,
@@ -1245,7 +1162,6 @@ h3 { letter-spacing: -.015em; }
 @supports (content-visibility: auto) {
   .home-page .phase3-method,
   .home-page .homepage-eastland-showcase,
-  .home-page .homepage-venture-showcase,
   .home-page .phase3-capabilities,
   .home-page .phase3-owner,
   .home-page .phase3-final-cta {
@@ -1462,13 +1378,6 @@ h3 { letter-spacing: -.015em; }
   .eastland-story-timeline::before { display: none; }
   .eastland-story-timeline li { padding-top: 30px; border-top: 1px solid rgba(112, 87, 44, .24); }
   .eastland-story-timeline li::before { top: -7px; }
-  .hew-venture-intro { grid-template-columns: 1fr; gap: 48px; align-items: start; }
-  .hew-venture-identity { max-width: 700px; margin-inline: auto; }
-  .hew-venture-summary { max-width: 430px; margin-inline: auto; }
-  .hew-venture-build { gap: 38px 34px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .hew-venture-build::before { display: none; }
-  .hew-venture-build li { padding: 30px 0 0; border-top: 1px solid rgba(112, 87, 44, .24); }
-  .hew-venture-build li::before { top: -7px; }
 }
 
 @media (max-width: 680px) {
@@ -1511,32 +1420,6 @@ h3 { letter-spacing: -.015em; }
   .eastland-story-timeline li::before { top: 1px; left: 0; }
   .eastland-story-timeline li:last-child { padding-bottom: 0; }
   .eastland-story-timeline h3 { margin-top: 8px; }
-  .hew-venture-stage::before { left: 18px; }
-  .hew-venture-masthead { display: block; padding-block: 30px 20px; }
-  .hew-venture-intro { gap: 42px; padding-block: 44px 24px; }
-  .hew-venture-identity h2 { font-size: clamp(44px, 13vw, 56px); white-space: normal; }
-  .hew-venture-identity > p { margin-top: 22px; font-size: 15px; }
-  .hew-venture-identity .button { width: 100%; margin-top: 24px; }
-  .hew-venture-summary { display: block; max-width: none; }
-  .hew-venture-logo-plate { width: 100%; padding: 22px; box-shadow: 10px 10px 0 rgba(232, 91, 18, .08), 0 22px 54px rgba(0, 0, 0, .3); }
-  .hew-venture-logo-company { margin-top: 22px; font-size: 10px; }
-  .hew-venture-preview { width: calc(100% - 32px); transform: translateY(32px); }
-  .hew-venture-preview-bar { min-height: 42px; }
-  .hew-venture-preview-bar span:last-child { display: none; }
-  .hew-venture-preview figcaption { min-height: 50px; gap: 12px; }
-  .hew-venture-preview figcaption strong { text-align: right; }
-  .hew-venture-evidence { padding-top: 32px; }
-  .hew-venture-story { padding-block: 58px; }
-  .hew-venture-story-heading { padding-bottom: 34px; }
-  .hew-venture-story-heading h3 { font-size: 38px; white-space: normal; }
-  .hew-venture-story-heading > p { font-size: 15px; }
-  .hew-venture-build { display: block; margin-top: 42px; }
-  .hew-venture-build::before { top: 5px; bottom: 5px; left: 6px; display: block; width: 1px; height: auto; background: linear-gradient(180deg, var(--hew-orange), #a97b27 70%, rgba(169, 123, 39, .2)); }
-  .hew-venture-build li,
-  .hew-venture-build li:nth-child(even) { padding: 0 0 34px 34px; border-top: 0; }
-  .hew-venture-build li::before { top: 1px; left: 0; }
-  .hew-venture-build li:last-child { padding-bottom: 0; }
-  .hew-venture-build h4 { margin-top: 8px; font-size: 27px; }
   .phase3-method > .container,
   .phase3-capabilities > .container { gap: 28px; }
   .phase3-method .phase3-editorial-header { padding-bottom: 24px; }

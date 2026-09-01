@@ -79,7 +79,6 @@ const sectionOrder = [
   'class="homepage-value-strip"',
   'class="section phase3-method"',
   'class="homepage-eastland-showcase"',
-  'class="homepage-venture-showcase"',
   'class="section phase3-capabilities"',
   'class="section phase3-owner"',
   'class="section phase3-final-cta"'
@@ -93,13 +92,12 @@ for (const copy of [
   'See our work in action.', 'Eastland First Church of God',
   'From a Facebook-first presence to a clear digital front door.',
   'Facebook was the primary online presence.', 'Eastland project story',
-  'Rogers Holdings Venture', 'A Rogers Holdings LLC company.',
-  'One service brand. One clear customer path.', 'HEW Gates and Garage venture case study',
   'Faith-led. Owner accountable.', 'My commitment to every client', 'A simple place to start'
 ]) assert.ok(html.includes(copy), `missing preserved secondary content: ${copy}`);
 
 assert.doesNotMatch(html, /class="section phase3-problem"|class="section phase3-principles"/);
 assert.doesNotMatch(html, /Business Optimization Platform|class="section phase3-platform"/);
+assert.doesNotMatch(html + css, /\bHEW\b|Gates?\s*(?:&|&amp;)\s*Garage|hew-gates-garage|hew-venture|homepage-venture-showcase/i);
 
 assert.ok(html.includes('Eastland now has an owned digital front door that is easier to find, easier to use, and easier to maintain.'));
 assert.doesNotMatch(html + css, /eastland-case-intro|eastland-before-callout|Before Rogers Holdings/);
@@ -147,12 +145,6 @@ const storyEnd = html.indexOf('</ol>', storyStart);
 const eastlandStory = html.slice(storyStart, storyEnd);
 assert.equal((eastlandStory.match(/<li data-reveal>/g) || []).length, 4, 'Eastland project story must contain four visible timeline steps');
 assert.equal((html.match(/class="eastland-link-icon"/g) || []).length, 0, 'Eastland project links must use the reference editorial treatment');
-assert.match(html, /src="assets\/images\/hew-gates-garage\/hew-gates-garage-logo-v2-600\.png" width="600" height="300" loading="lazy" decoding="async" alt="HEW Gates &amp; Garage logo"/);
-assert.match(html, /src="assets\/images\/hew-gates-garage\/hew-portfolio-preview\.jpg" width="1600" height="1000" loading="lazy" decoding="async"/);
-assert.equal((html.match(/class="hew-venture-build"/g) || []).length, 1, 'HEW must use one concise venture case study');
-const hewPreview = path.join(root, 'assets/images/hew-gates-garage/hew-portfolio-preview.jpg');
-assert.ok(fs.statSync(hewPreview).size > 0, 'HEW live-page preview must not be empty');
-assert.ok(fs.statSync(hewPreview).size < 200_000, 'HEW live-page preview must remain below 200 KB');
 assert.match(css, /Homepage primary and secondary composition — canonical reference-match system/);
 assert.doesNotMatch(html, /Rogers Holdings gave our church|Draft testimonial copy/);
 assert.doesNotMatch(html, /BOP interface|Family Vault|workers\.dev|localhost|staging/i);
