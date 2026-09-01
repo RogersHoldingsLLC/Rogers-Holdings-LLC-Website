@@ -29,9 +29,16 @@ assert.ok(home.includes('homepage-hero-media'));
 for (const viewport of ['desktop', 'tablet', 'mobile']) assert.ok(home.includes(`homepage-hero-v2.2-${viewport}.avif`));
 assert.doesNotMatch(home, /visual-proof-pair|north-point-assessment-|north-point-plan-|phase3-snapshot-proof/);
 
+const homepageHead = home.slice(0, home.indexOf('</head>'));
+const homepageBody = home.slice(home.indexOf('<body'));
 for (const term of ['Free Business Snapshot', 'Executive Brief', 'Discovery Conversation', 'Digital Business Assessment', 'Improvement Plan', 'Implementation Services', 'Ongoing Optimization']) {
-  assert.ok(home.includes(term), `homepage missing canonical journey term: ${term}`);
+  assert.ok(homepageHead.includes(term), `homepage structured data missing canonical service term: ${term}`);
 }
+for (const retiredJourneyLabel of ['Discovery Conversation', 'Digital Business Assessment', 'Improvement Plan', 'Implementation Services', 'Ongoing Optimization']) {
+  assert.ok(!homepageBody.includes(retiredJourneyLabel), `homepage must not render expanded journey label: ${retiredJourneyLabel}`);
+}
+assert.ok(homepageBody.includes('Get a clear outside view before spending money on the wrong fix.'));
+assert.ok(homepageBody.includes('A practical recommended next step, with plain-English reasoning'));
 
 assert.match(snapshot, /action="https:\/\/intake\.rogersholdingsllc\.com\/api\/business-snapshot"/);
 assert.match(snapshot, /data-endpoint-configured="true"/);

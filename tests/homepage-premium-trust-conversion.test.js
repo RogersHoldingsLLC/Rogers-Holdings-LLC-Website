@@ -8,22 +8,48 @@ const css = fs.readFileSync(path.join(ROOT, 'assets/css/site.css'), 'utf8');
 const script = fs.readFileSync(path.join(ROOT, 'assets/js/site.js'), 'utf8');
 
 const primaryCta = 'Request Your Free Business Snapshot';
-assert.equal((html.match(new RegExp(primaryCta, 'g')) || []).length, 2);
+assert.equal((html.match(new RegExp(primaryCta, 'g')) || []).length, 3);
 assert.equal((html.match(/<p class="phase3-hero-note">Free Business Snapshot · Human-reviewed · Executive Brief typically within three business days<\/p>/g) || []).length, 1);
 assert.equal((html.match(/<p class="phase3-cta-assurance">Free Business Snapshot · Human-reviewed · Executive Brief typically within three business days · No sales call required<\/p>/g) || []).length, 1);
+assert.ok(html.includes('Rogers Holdings helps small and growing businesses work smarter by improving the websites, workflows, automation, practical AI use, and business systems behind everyday work. The goal is simple: clearer customer paths, less wasted time, better organization, and a business that is easier to run.'));
 
 assert.match(html, /<section class="section phase3-method" id="approach"/);
-assert.match(html, /class="phase3-method-sequence" id="process"/);
-assert.doesNotMatch(html, /<section class="section phase3-process"/);
+assert.match(html, /<section class="section phase3-snapshot" id="process"/);
 assert.match(html, /aria-label="Assess, Prioritize, Improve methodology"/);
-assert.match(html, /aria-label="Free Business Snapshot through Ongoing Optimization customer journey"/);
-assert.equal((html.match(/class="phase3-process-substage"/g) || []).length, 2);
-assert.match(html, /<h2>Start free\.<\/h2><p class="phase3-method-sequence-subtitle">Continue with paid support only when it makes sense\.<\/p>/);
+assert.ok(html.includes('A practical place to start'));
+assert.ok(html.includes('Get a clear outside view before spending money on the wrong fix.'));
+assert.ok(html.includes('Tell us what is not working. Rogers Holdings will review the challenge and visible evidence, then typically within three business days send a concise, human-reviewed Executive Brief.'));
+for (const deliverable of [
+  'The clearest visible issue',
+  'What deserves attention first',
+  'A practical recommended next step, with plain-English reasoning'
+]) assert.ok(html.includes(deliverable), `missing compact Snapshot deliverable: ${deliverable}`);
+const snapshotStart = html.indexOf('<section class="section phase3-snapshot"');
+const snapshotEnd = html.indexOf('</section>', snapshotStart);
+const snapshotSection = html.slice(snapshotStart, snapshotEnd);
+assert.match(snapshotSection, /href="business-snapshot\/" data-report-link>Request Your Free Business Snapshot<\/a>/);
+assert.ok(snapshotSection.includes('No sales call required. Use the brief on your own or continue only if further help makes sense.'));
 assert.match(html, /id="business-friction-heading">Does any of this sound familiar\?<\/h2>/);
 assert.match(html, /Good systems should make business easier—not harder\./);
-const journeyStart = html.indexOf('<ol class="phase3-process-sequence"');
-const journeyEnd = html.indexOf('</ol>', journeyStart);
-assert.equal((html.slice(journeyStart, journeyEnd).match(/<li data-reveal>/g) || []).length, 5);
+const body = html.slice(html.indexOf('<body'));
+for (const retiredJourneyLabel of [
+  'Discovery Conversation',
+  'Digital Business Assessment',
+  'Improvement Plan',
+  'Implementation Services',
+  'Ongoing Optimization'
+]) assert.doesNotMatch(body, new RegExp(retiredJourneyLabel), `${retiredJourneyLabel} must not be rendered on the homepage`);
+assert.doesNotMatch(body, /phase3-method-sequence|phase3-process-sequence|phase3-process-substage/);
+
+const sectionOrder = [
+  'class="homepage-value-strip"',
+  'class="section phase3-snapshot"',
+  'class="section phase3-method"',
+  'class="homepage-eastland-showcase"',
+  'class="section phase3-capabilities"'
+].map((marker) => html.indexOf(marker));
+assert.ok(sectionOrder.every((position) => position >= 0));
+assert.deepEqual(sectionOrder, [...sectionOrder].sort((a, b) => a - b));
 
 for (const heading of [
   'I need more customers',
@@ -90,8 +116,9 @@ assert.match(css, /@media \(min-width: 1600px\)[\s\S]*?\.home-page \{ --containe
 assert.match(css, /\.phase3-capabilities > \.container \{ display: block; \}/);
 assert.match(css, /\.phase3-capabilities \.phase3-editorial-header[\s\S]*?text-align: center;/);
 assert.match(css, /\.phase3-capabilities \.phase3-editorial-header h2[\s\S]*?white-space: nowrap;/);
-assert.match(css, /\.phase3-method-sequence-heading \{ text-align: center; \}/);
-assert.match(css, /\.phase3-method-sequence-heading h2[\s\S]*?max-width: none;[\s\S]*?white-space: nowrap;/);
+assert.match(css, /\.phase3-snapshot-layout[\s\S]*?grid-template-columns:/);
+assert.match(css, /\.phase3-snapshot-deliverables[\s\S]*?list-style: none;/);
+assert.doesNotMatch(css, /phase3-method-sequence|phase3-process-sequence|phase3-process-substage/);
 assert.match(css, /@media \(min-width: 1101px\) and \(max-height: 820px\)[\s\S]*?\.phase3-hero-layout \{ padding-block: 108px 46px; \}/);
 assert.match(css, /@media \(min-width: 961px\) and \(max-width: 1100px\) and \(orientation: landscape\)/);
 assert.match(css, /@media \(min-width: 2201px\)[\s\S]*?\.eastland-workspace \{ max-width: 2200px/);
