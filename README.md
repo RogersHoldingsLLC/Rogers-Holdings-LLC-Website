@@ -205,6 +205,10 @@ The Business Snapshot page now reuses the approved responsive Homepage Hero V2.1
 
 This incremental homepage pass clarifies the hero’s business-optimization positioning and replaces the expanded customer journey with one compact Free Business Snapshot section placed before the Assess–Prioritize–Improve method. It preserves the established visual system, Eastland presentation, conversion routes, structured data, integrations, and dormant HEW source.
 
+## Business Snapshot form clarity
+
+This accessibility-focused copy pass clarifies required fields, email guidance, challenge guidance, and consent scope while preserving the established form structure and submission contract.
+
 ## Release checks
 
 Before publishing a homepage change:
