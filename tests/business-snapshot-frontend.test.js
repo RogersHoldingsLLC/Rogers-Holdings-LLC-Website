@@ -9,6 +9,86 @@ const privacy = fs.readFileSync(path.join(ROOT, 'privacy/index.html'), 'utf8');
 const source = fs.readFileSync(path.join(ROOT, 'assets/js/site.js'), 'utf8');
 const productionLanguage = [homepage, html, privacy, source].join('\n');
 
+function getAttribute(tag, name) {
+  const match = tag.match(new RegExp(`\\b${name}="([^"]*)"`, 'i'));
+  return match ? match[1] : null;
+}
+
+function hasAttribute(tag, name) {
+  return new RegExp(`(?:^|\\s)${name}(?:\\s|=|>|$)`, 'i').test(tag);
+}
+
+function descriptionIds(tag) {
+  return (getAttribute(tag, 'aria-describedby') || '').split(/\s+/).filter(Boolean);
+}
+
+const formStart = html.indexOf('<form class="lead-form"');
+const formEnd = html.indexOf('</form>', formStart);
+assert.ok(formStart >= 0 && formEnd > formStart, 'Business Snapshot form markup must be present');
+const formMarkup = html.slice(formStart, formEnd + '</form>'.length);
+const visibleFormText = formMarkup
+  .replace(/<script\b[\s\S]*?<\/script>/gi, ' ')
+  .replace(/<style\b[\s\S]*?<\/style>/gi, ' ')
+  .replace(/<[^>]+>/g, ' ')
+  .replace(/\s+/g, ' ')
+  .trim();
+
+const fieldContract = [...formMarkup.matchAll(/<(input|textarea)\b[^>]*>/gi)].map((match) => ({
+  tag: match[1].toLowerCase(),
+  id: getAttribute(match[0], 'id'),
+  name: getAttribute(match[0], 'name'),
+  type: getAttribute(match[0], 'type'),
+  required: hasAttribute(match[0], 'required')
+}));
+
+assert.deepEqual(fieldContract, [
+  { tag: 'input', id: 'full-name', name: 'fullName', type: 'text', required: true },
+  { tag: 'input', id: 'business-name', name: 'businessName', type: 'text', required: true },
+  { tag: 'input', id: 'email', name: 'email', type: 'email', required: true },
+  { tag: 'input', id: 'phone', name: 'phone', type: 'tel', required: false },
+  { tag: 'input', id: 'website', name: 'website', type: 'url', required: false },
+  { tag: 'textarea', id: 'challenge', name: 'primaryChallenge', type: null, required: true },
+  { tag: 'input', id: 'consent', name: 'consent', type: 'checkbox', required: true },
+  { tag: 'input', id: 'company', name: 'company', type: 'text', required: false }
+]);
+
+const emailInput = formMarkup.match(/<input\b[^>]*\bid="email"[^>]*>/i)?.[0] || '';
+const challengeTextarea = formMarkup.match(/<textarea\b[^>]*\bid="challenge"[^>]*>/i)?.[0] || '';
+const consentInput = formMarkup.match(/<input\b[^>]*\bid="consent"[^>]*>/i)?.[0] || '';
+
+for (const fieldId of ['full-name', 'business-name', 'email', 'phone', 'website', 'challenge', 'consent']) {
+  assert.match(formMarkup, new RegExp(`<label\\b[^>]*\\bfor="${fieldId}"`, 'i'));
+}
+assert.match(
+  html,
+  /Only the essentials\. Fields marked\s*<span aria-hidden="true">\*<\/span>\s*<span class="sr-only">with an asterisk<\/span>\s*are required\./
+);
+assert.match(visibleFormText, /Email address/);
+assert.doesNotMatch(visibleFormText, /Work email/);
+assert.equal(getAttribute(emailInput, 'placeholder'), 'you@example.com');
+assert.match(visibleFormText, /A business or personal email is fine\./);
+assert.ok(descriptionIds(emailInput).includes('email-hint'));
+assert.equal(getAttribute(emailInput, 'data-description-id'), 'email-hint');
+assert.match(formMarkup, /id="email-hint"[^>]*>A business or personal email is fine\.<\/span>/);
+assert.match(visibleFormText, /02 About the challenge/);
+assert.doesNotMatch(visibleFormText, /The decision in front of you/);
+assert.match(visibleFormText, /Business website \(optional\)/);
+assert.match(visibleFormText, /Include the full URL if your website is relevant to the challenge\./);
+assert.match(visibleFormText, /A few sentences are enough\. Tell us what is happening now, what you want to improve, and anything you have already tried\. Do not include passwords or sensitive personal information\./);
+assert.ok(descriptionIds(challengeTextarea).includes('challenge-hint'));
+assert.ok(descriptionIds(challengeTextarea).includes('challenge-count'));
+assert.deepEqual(
+  (getAttribute(challengeTextarea, 'data-description-id') || '').split(/\s+/),
+  ['challenge-hint', 'challenge-count']
+);
+assert.equal(getAttribute(challengeTextarea, 'maxlength'), '2000');
+assert.match(visibleFormText, /This permission applies only to your Snapshot request\. It does not subscribe you to marketing\./);
+assert.ok(descriptionIds(consentInput).includes('consent-hint'));
+assert.equal(getAttribute(consentInput, 'value'), 'business-snapshot-contact-consent-v1');
+assert.equal(hasAttribute(consentInput, 'required'), true);
+assert.match(formMarkup, /<div class="honeypot-field" aria-hidden="true">[\s\S]*?<input\b[^>]*\bid="company"[^>]*\btabindex="-1"/);
+assert.match(formMarkup, /<button\b[^>]*type="submit"[^>]*>[\s\S]*?Request My Free Business Snapshot[\s\S]*?<\/button>/);
+
 const noopClassList = { add() {}, remove() {}, toggle() {}, contains() { return false; } };
 global.document = {
   activeElement: null,

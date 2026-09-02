@@ -173,7 +173,7 @@
           <div class="form-heading">
             <p class="eyebrow">Free Business Snapshot</p>
             <h2 id="snapshot-section-heading">Tell us what needs to work better.</h2>
-            <p>Only the essentials. Required fields are marked <span aria-hidden="true">*</span><span class="sr-only">with an asterisk</span>.</p>
+            <p>Only the essentials. Fields marked <span aria-hidden="true">*</span><span class="sr-only">with an asterisk</span> are required.</p>
           </div>
           <form class="lead-form" action="https://intake.rogersholdingsllc.com/api/business-snapshot" method="post" data-lead-form data-endpoint-configured="true" novalidate>
             <fieldset class="form-group">
@@ -190,8 +190,9 @@
                 <span class="field-error" id="business-name-error"></span>
               </div>
               <div class="field">
-                <label for="email">Work email <span aria-hidden="true">*</span></label>
-                <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="254" placeholder="you@company.com" data-validate>
+                <label for="email">Email address <span aria-hidden="true">*</span></label>
+                <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="254" placeholder="you@example.com" aria-describedby="email-hint" data-description-id="email-hint" data-validate>
+                <span class="field-hint" id="email-hint">A business or personal email is fine.</span>
                 <span class="field-error" id="email-error"></span>
               </div>
               <div class="field">
@@ -202,10 +203,10 @@
               </div>
             </fieldset>
             <fieldset class="form-group">
-              <legend><span>02</span> The decision in front of you</legend>
+              <legend><span>02</span> About the challenge</legend>
               <div class="form-grid">
               <div class="field field-full">
-                <label for="website">Website <span class="optional-label">(optional)</span></label>
+                <label for="website">Business website <span class="optional-label">(optional)</span></label>
                 <input id="website" name="website" type="url" autocomplete="url" inputmode="url" placeholder="https://example.com" maxlength="2048" aria-describedby="website-hint" data-description-id="website-hint" data-validate>
                 <span class="field-hint" id="website-hint">Include the full URL if your website is relevant to the challenge.</span>
                 <span class="field-error" id="website-error"></span>
@@ -213,16 +214,17 @@
               <div class="field field-full">
                 <label for="challenge">What needs to work better? <span aria-hidden="true">*</span></label>
                 <textarea id="challenge" name="primaryChallenge" required minlength="20" maxlength="2000" rows="6" placeholder="What is happening now, who does it affect, and what would a better outcome look like?" aria-describedby="challenge-hint challenge-count" data-description-id="challenge-hint challenge-count" data-validate></textarea>
-                <span class="field-meta"><span class="field-hint" id="challenge-hint">Be specific, but do not include passwords or sensitive personal information.</span><span class="character-count" id="challenge-count" data-character-count>0 / 2,000</span></span>
+                <span class="field-meta"><span class="field-hint" id="challenge-hint">A few sentences are enough. Tell us what is happening now, what you want to improve, and anything you have already tried. Do not include passwords or sensitive personal information.</span><span class="character-count" id="challenge-count" data-character-count>0 / 2,000</span></span>
                 <span class="field-error" id="challenge-error"></span>
               </div>
               </div>
             </fieldset>
             <div class="consent-field">
-              <input id="consent" name="consent" type="checkbox" value="business-snapshot-contact-consent-v1" required data-validate>
+              <input id="consent" name="consent" type="checkbox" value="business-snapshot-contact-consent-v1" required aria-describedby="consent-hint" data-description-id="consent-hint" data-validate>
               <label for="consent">I agree that Rogers Holdings may use this information to review my Business Snapshot request, prepare my Executive Brief, and contact me about it. See the <a href="../privacy/">Privacy Policy</a>. <span aria-hidden="true">*</span></label>
               <span class="field-error" id="consent-error"></span>
             </div>
+            <p class="field-hint" id="consent-hint">This permission applies only to your Snapshot request. It does not subscribe you to marketing.</p>
             <div class="turnstile-shell" data-turnstile-shell hidden>
               <div data-turnstile-widget data-sitekey="0x4AAAAAAEFhF9RRNG4A4T1Q" data-action="business_snapshot" data-callback="businessSnapshotTurnstileSuccess" data-error-callback="businessSnapshotTurnstileError" data-expired-callback="businessSnapshotTurnstileExpired" data-timeout-callback="businessSnapshotTurnstileTimeout"></div>
               <p class="turnstile-status" data-turnstile-status role="status" aria-live="polite" tabindex="-1" hidden></p>
