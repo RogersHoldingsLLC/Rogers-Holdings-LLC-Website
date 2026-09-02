@@ -209,6 +209,10 @@ This incremental homepage pass clarifies the hero’s business-optimization posi
 
 This accessibility-focused copy pass clarifies required fields, email guidance, challenge guidance, and consent scope while preserving the established form structure and submission contract.
 
+## Eastland live proof
+
+This focused credibility pass adds an owner-authorized live-project proof block to the existing Eastland case study and replaces unsupported comparative-result language with an objective description of the current public website.
+
 ## Release checks
 
 Before publishing a homepage change:

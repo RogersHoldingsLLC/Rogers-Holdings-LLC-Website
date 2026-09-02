@@ -80,10 +80,13 @@ assert.doesNotMatch(html, /Business Optimization Platform|class="section phase3-
 assert.match(html, /<h2 id="eastland-client-work-heading">See our work in action\.<\/h2>/);
 assert.match(html, /A real problem\. A practical fix\. A better way forward\./);
 assert.doesNotMatch(html, /<h2 id="eastland-client-work-heading">Selected Client Work<\/h2>/);
-assert.match(html, /class="eastland-project-links" aria-label="Eastland project links"/);
+assert.match(html, /class="eastland-live-proof__links" aria-label="Eastland project links"/);
 assert.doesNotMatch(html, /class="eastland-project-actions"/);
 assert.match(html, /From a Facebook-first presence to a clear digital front door\./);
-assert.match(html, /Eastland now has an owned digital front door that is easier to find, easier to use, and easier to maintain\./);
+assert.match(html, /Current public experience: A responsive website with clear paths to service information, visit planning, ministries, messages, directions, and contact details\./);
+assert.doesNotMatch(body, /easier to find, easier to use, and easier to maintain|free of charge|home church/i);
+assert.ok(html.indexOf(primaryCta) < html.indexOf('See the work on the live site'), 'Free Business Snapshot must remain the primary homepage offer');
+assert.match(html, /class="button button-dark" href="https:\/\/www\.eastlandfirstchurchofgod\.com"/, 'Eastland live proof must remain visually secondary to the Snapshot offer');
 const publicHewPattern = /\bHEW\b|Gates?\s*(?:&|&amp;)\s*Garage|hew-gates-garage|hew-venture|homepage-venture-showcase/i;
 assert.doesNotMatch(html, publicHewPattern);
 assert.doesNotMatch(css, publicHewPattern);
@@ -108,7 +111,7 @@ assert.match(css, /@media \(max-width: 360px\)[\s\S]*?\.eastland-showcase-intro 
 assert.match(css, /\.homepage-value-strip \.phase3-problem-list[\s\S]*?grid-template-columns: repeat\(4/);
 assert.match(css, /\.eastland-story-timeline[\s\S]*?grid-template-columns: repeat\(4/);
 assert.match(css, /\.eastland-showcase-intro[\s\S]*?padding-block: clamp\(30px, 3\.5vw, 50px\)/);
-assert.match(css, /\.eastland-project-links \{[\s\S]*?position: absolute;/);
+assert.match(css, /\.eastland-live-proof\s*\{[\s\S]*?grid-template-columns:/);
 assert.match(css, /\.eastland-project-heading h2 \{ max-width: none;/);
 assert.match(css, /@supports \(content-visibility: auto\)/);
 assert.match(css, /Homepage responsive viewport calibration/);

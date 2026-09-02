@@ -109,7 +109,8 @@ assert.doesNotMatch(html, /class="section phase3-problem"|class="section phase3-
 assert.doesNotMatch(html, /Business Optimization Platform|class="section phase3-platform"/);
 assert.doesNotMatch(html + css, /\bHEW\b|Gates?\s*(?:&|&amp;)\s*Garage|hew-gates-garage|hew-venture|homepage-venture-showcase/i);
 
-assert.ok(html.includes('Eastland now has an owned digital front door that is easier to find, easier to use, and easier to maintain.'));
+assert.ok(html.includes('Current public experience: A responsive website with clear paths to service information, visit planning, ministries, messages, directions, and contact details.'));
+assert.doesNotMatch(renderedHomepage, /easier to find, easier to use, and easier to maintain/i);
 assert.doesNotMatch(html + css, /eastland-case-intro|eastland-before-callout|Before Rogers Holdings/);
 for (const fact of ['fragmented and difficult to find', 'search visibility', 'service times, ministries, messages, giving, directions, and contact']) {
   assert.ok(html.includes(fact), `missing consolidated Eastland challenge fact: ${fact}`);
@@ -126,7 +127,7 @@ const eastlandReferenceHash = crypto.createHash('sha256').update(fs.readFileSync
 assert.equal(eastlandReferenceHash, '516d0b764d82f2ac1b451ca0194602da2abe7e3e57ea94d9218d1dde693acb62', 'authoritative Eastland reference changed');
 assert.match(html, /class="container eastland-showcase-intro"/);
 assert.match(html, /media="\(max-width: 1100px\)" type="image\/avif" srcset="assets\/images\/homepage\/eastland-product-family-tablet\.avif"/);
-assert.match(css, /\.eastland-project-links \{[\s\S]*position: absolute;/, 'functional Eastland links must overlay their image-baked labels');
+assert.match(css, /\.eastland-live-proof\s*\{[\s\S]*grid-template-columns:/, 'live-proof block must have a responsive layout');
 assert.match(html, /class="eastland-project-heading"/);
 assert.match(html, /class="eastland-story-timeline" aria-label="Eastland project story"/);
 assert.match(css, /\.eastland-story-timeline\s*\{[\s\S]*grid-template-columns: repeat\(4/);
@@ -147,7 +148,7 @@ assert.match(homepageHeroV22Refresh, /North Point Fitness/);
 assert.match(homepageHeroV22Refresh, /website-only fictional sample/);
 assert.match(homepageHeroV22Refresh, /preserves the Hero V2\.1 composition/);
 
-assert.match(html, /href="https:\/\/www\.eastlandfirstchurchofgod\.com" target="_blank" rel="noopener noreferrer">.*View Live Website/);
+assert.match(html, /href="https:\/\/www\.eastlandfirstchurchofgod\.com" target="_blank" rel="noopener noreferrer">View the Live Eastland Website/);
 assert.match(html, /href="https:\/\/www\.google\.com\/maps\/search\/\?api=1&amp;query=Eastland\+First\+Church\+of\+God%2C\+1706\+Old\+Owingsville\+Rd%2C\+Mt\+Sterling%2C\+KY\+40353" target="_blank" rel="noopener noreferrer">.*View Google Listing/);
 assert.equal((html.match(/class="eastland-story-timeline"/g) || []).length, 1, 'Eastland must use one connected project story');
 const storyStart = html.indexOf('<ol class="eastland-story-timeline"');
@@ -155,6 +156,18 @@ const storyEnd = html.indexOf('</ol>', storyStart);
 const eastlandStory = html.slice(storyStart, storyEnd);
 assert.equal((eastlandStory.match(/<li data-reveal>/g) || []).length, 4, 'Eastland project story must contain four visible timeline steps');
 assert.equal((html.match(/class="eastland-link-icon"/g) || []).length, 0, 'Eastland project links must use the reference editorial treatment');
+const proofStart = html.indexOf('<section class="eastland-live-proof"');
+const proofEnd = html.indexOf('</section>', proofStart);
+const eastlandProof = html.slice(proofStart, proofEnd);
+assert.ok(proofStart > storyEnd, 'live proof must follow the Eastland project story');
+for (const approvedProofCopy of [
+  'See the work on the live site',
+  'Rogers Holdings helped Eastland First Church of God establish its Google Business Profile, built its current custom website, and continues to maintain and update the site.',
+  'The public website works across phone and desktop screens and brings service times, visit information, ministries, messages, directions, and contact details together in one experience.',
+  'Presented as a current project example—not a testimonial or a claim about attendance, engagement, donations, or other outcomes.'
+]) assert.ok(eastlandProof.includes(approvedProofCopy), `missing approved Eastland live-proof copy: ${approvedProofCopy}`);
+assert.doesNotMatch(eastlandProof, /<blockquote|<q\b|endors(?:e|ed|ement)|verified by Eastland|\b\d+(?:\.\d+)?%/i);
+assert.doesNotMatch(renderedHomepage, /free of charge|home church/i);
 assert.match(css, /Homepage primary and secondary composition — canonical reference-match system/);
 assert.doesNotMatch(html, /Rogers Holdings gave our church|Draft testimonial copy/);
 assert.doesNotMatch(html, /BOP interface|Family Vault|workers\.dev|localhost|staging/i);
