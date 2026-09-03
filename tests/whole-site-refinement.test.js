@@ -27,7 +27,13 @@ assert.ok(snapshot.includes('Request Your Free Business Snapshot'));
 assert.ok(snapshot.includes('Request My Free Business Snapshot'));
 assert.ok(home.includes('homepage-hero-media'));
 for (const viewport of ['desktop', 'tablet', 'mobile']) assert.ok(home.includes(`homepage-hero-v2.2-${viewport}.avif`));
+assert.ok(home.includes('Illustrative Executive Brief sample — North Point Fitness is a fictional business. Shown to demonstrate the format and level of detail.'));
 assert.doesNotMatch(home, /visual-proof-pair|north-point-assessment-|north-point-plan-|phase3-snapshot-proof/);
+assert.doesNotMatch(snapshot, /homepage-hero-v2\.2|north-point-|<picture class="snapshot-hero__media"/);
+assert.match(snapshot, /Tell us what isn’t working\. Get a clear next step\./);
+assert.match(snapshot, /class="snapshot-summary"/);
+assert.doesNotMatch(snapshot, /snapshot-value-strip|snapshot-hero-secondary/);
+assert.match(snapshot, /<\/section>\s*<section class="section intake-section" aria-labelledby="snapshot-section-heading">/);
 
 const homepageHead = home.slice(0, home.indexOf('</head>'));
 const homepageBody = home.slice(home.indexOf('<body'));

@@ -217,6 +217,10 @@ This focused credibility pass adds an owner-authorized live-project proof block 
 
 This focused transparency pass strengthens the visible fictional-sample disclosure for the North Point Fitness Executive Brief while preserving the approved sample, hero imagery, Snapshot offer, and page structure.
 
+## Business Snapshot simplified experience
+
+This focused conversion redesign gives the Business Snapshot page a compact text-first hero, one primary call to action, and a concise HTML Executive Brief summary immediately followed by the unchanged production form. It removes the duplicated document presentation and repetitive pre-form explanation while preserving the homepage sample, metadata, analytics, submission contract, success state, and public-artifact boundary.
+
 ## Release checks
 
 Before publishing a homepage change:

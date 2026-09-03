@@ -33,6 +33,53 @@ const visibleFormText = formMarkup
   .replace(/\s+/g, ' ')
   .trim();
 
+const heroStart = html.indexOf('<section class="intake-hero snapshot-hero">');
+const heroEnd = html.indexOf('<section class="section intake-section"', heroStart);
+assert.ok(heroStart >= 0 && heroEnd > heroStart, 'compact Snapshot hero must precede the form section');
+const heroMarkup = html.slice(heroStart, heroEnd);
+const preFieldMarkup = html.slice(html.indexOf('<main'), html.indexOf('<label for="full-name">') + '<label for="full-name">'.length);
+const preFieldWords = preFieldMarkup
+  .replace(/<script\b[\s\S]*?<\/script>/gi, ' ')
+  .replace(/<style\b[\s\S]*?<\/style>/gi, ' ')
+  .replace(/<[^>]+>/g, ' ')
+  .replace(/&[a-z0-9#]+;/gi, ' ')
+  .match(/[A-Za-z0-9]+(?:[’'-][A-Za-z0-9]+)*/g) || [];
+const approvedHeroCopy = {
+  eyebrow: 'Free Business Snapshot',
+  heading: 'Tell us what isn’t working. Get a clear next step.',
+  lede: 'Describe the challenge. Rogers Holdings will review your information and visible public evidence, then typically within three business days send a concise, human-reviewed Executive Brief.',
+  cta: 'Request Your Free Business Snapshot',
+  trust: 'Free <span aria-hidden="true">·</span> Human-reviewed by Brian Rogers <span aria-hidden="true">·</span> Typically within three business days'
+};
+for (const copy of Object.values(approvedHeroCopy)) {
+  assert.ok(heroMarkup.includes(copy), `Snapshot hero missing approved copy: ${copy}`);
+}
+assert.equal((heroMarkup.match(/<a\b[^>]*class="[^"]*\bbutton\b[^"]*"[^>]*>/g) || []).length, 1);
+assert.match(heroMarkup, /<a class="button button-gold" href="#snapshot-form">Request Your Free Business Snapshot/);
+assert.doesNotMatch(heroMarkup, /snapshot-hero-secondary|See What the Executive Brief Includes/);
+assert.doesNotMatch(heroMarkup, /<picture\b|<img\b|homepage-hero-v2\.2|north-point-|mockup/i);
+assert.match(heroMarkup, /<section class="snapshot-summary" id="snapshot-deliverable" aria-labelledby="snapshot-deliverable-heading"/);
+assert.match(heroMarkup, /<h2 id="snapshot-deliverable-heading">Your Executive Brief<\/h2>/);
+for (const deliverable of [
+  'The clearest visible issue',
+  'What deserves attention first',
+  'A practical recommended next step, with plain-English reasoning'
+]) {
+  assert.equal(heroMarkup.split(deliverable).length - 1, 1, `${deliverable} must appear once before the form`);
+}
+assert.equal(heroMarkup.split('Focused initial review—not a full audit or consulting engagement.').length - 1, 1);
+assert.doesNotMatch(html, /snapshot-value-strip|This is a focused initial review/);
+assert.match(html, /<\/section>\s*<section class="section intake-section" aria-labelledby="snapshot-section-heading">/);
+assert.ok(preFieldWords.length <= 120, `pre-field content must remain at most 120 words; found ${preFieldWords.length}`);
+assert.doesNotMatch(heroMarkup, /testimonial|endorsement|guarantee|\b\d+(?:\.\d+)?%/i);
+
+for (const viewport of ['desktop', 'tablet', 'mobile']) {
+  assert.ok(homepage.includes(`homepage-hero-v2.2-${viewport}.avif`));
+  assert.ok(homepage.includes(`homepage-hero-v2.2-${viewport}.webp`));
+  assert.ok(homepage.includes(`homepage-hero-v2.2-${viewport}.jpg`));
+}
+assert.ok(homepage.includes('Illustrative Executive Brief sample — North Point Fitness is a fictional business. Shown to demonstrate the format and level of detail.'));
+
 const fieldContract = [...formMarkup.matchAll(/<(input|textarea)\b[^>]*>/gi)].map((match) => ({
   tag: match[1].toLowerCase(),
   id: getAttribute(match[0], 'id'),
@@ -55,6 +102,30 @@ assert.deepEqual(fieldContract, [
 const emailInput = formMarkup.match(/<input\b[^>]*\bid="email"[^>]*>/i)?.[0] || '';
 const challengeTextarea = formMarkup.match(/<textarea\b[^>]*\bid="challenge"[^>]*>/i)?.[0] || '';
 const consentInput = formMarkup.match(/<input\b[^>]*\bid="consent"[^>]*>/i)?.[0] || '';
+
+const detailedFieldContract = [...formMarkup.matchAll(/<(input|textarea)\b[^>]*>/gi)].map((match) => ({
+  id: getAttribute(match[0], 'id'),
+  name: getAttribute(match[0], 'name'),
+  type: getAttribute(match[0], 'type'),
+  required: hasAttribute(match[0], 'required'),
+  autocomplete: getAttribute(match[0], 'autocomplete'),
+  inputmode: getAttribute(match[0], 'inputmode'),
+  minlength: getAttribute(match[0], 'minlength'),
+  maxlength: getAttribute(match[0], 'maxlength'),
+  value: getAttribute(match[0], 'value'),
+  tabindex: getAttribute(match[0], 'tabindex'),
+  describedby: getAttribute(match[0], 'aria-describedby')
+}));
+assert.deepEqual(detailedFieldContract, [
+  { id: 'full-name', name: 'fullName', type: 'text', required: true, autocomplete: 'name', inputmode: null, minlength: null, maxlength: '120', value: null, tabindex: null, describedby: null },
+  { id: 'business-name', name: 'businessName', type: 'text', required: true, autocomplete: 'organization', inputmode: null, minlength: null, maxlength: '140', value: null, tabindex: null, describedby: null },
+  { id: 'email', name: 'email', type: 'email', required: true, autocomplete: 'email', inputmode: 'email', minlength: null, maxlength: '254', value: null, tabindex: null, describedby: 'email-hint' },
+  { id: 'phone', name: 'phone', type: 'tel', required: false, autocomplete: 'tel', inputmode: 'tel', minlength: null, maxlength: '30', value: null, tabindex: null, describedby: null },
+  { id: 'website', name: 'website', type: 'url', required: false, autocomplete: 'url', inputmode: 'url', minlength: null, maxlength: '2048', value: null, tabindex: null, describedby: 'website-hint' },
+  { id: 'challenge', name: 'primaryChallenge', type: null, required: true, autocomplete: null, inputmode: null, minlength: '20', maxlength: '2000', value: null, tabindex: null, describedby: 'challenge-hint challenge-count' },
+  { id: 'consent', name: 'consent', type: 'checkbox', required: true, autocomplete: null, inputmode: null, minlength: null, maxlength: null, value: 'business-snapshot-contact-consent-v1', tabindex: null, describedby: 'consent-hint' },
+  { id: 'company', name: 'company', type: 'text', required: false, autocomplete: 'off', inputmode: null, minlength: null, maxlength: null, value: '', tabindex: '-1', describedby: null }
+]);
 
 for (const fieldId of ['full-name', 'business-name', 'email', 'phone', 'website', 'challenge', 'consent']) {
   assert.match(formMarkup, new RegExp(`<label\\b[^>]*\\bfor="${fieldId}"`, 'i'));
@@ -88,6 +159,15 @@ assert.equal(getAttribute(consentInput, 'value'), 'business-snapshot-contact-con
 assert.equal(hasAttribute(consentInput, 'required'), true);
 assert.match(formMarkup, /<div class="honeypot-field" aria-hidden="true">[\s\S]*?<input\b[^>]*\bid="company"[^>]*\btabindex="-1"/);
 assert.match(formMarkup, /<button\b[^>]*type="submit"[^>]*>[\s\S]*?Request My Free Business Snapshot[\s\S]*?<\/button>/);
+assert.match(html, /class="form-progress"[\s\S]*?role="progressbar"[\s\S]*?aria-valuenow="0"/);
+assert.match(formMarkup, /<p class="delivery-note" data-delivery-note hidden><\/p>/);
+assert.match(formMarkup, /<div class="form-status" data-form-status role="status" aria-live="polite" tabindex="-1" hidden><\/div>/);
+assert.match(formMarkup, /class="turnstile-shell"[\s\S]*?data-callback="businessSnapshotTurnstileSuccess"/);
+assert.match(formMarkup, /class="submission-loader"[\s\S]*?Securing your request/);
+assert.match(html, /class="submission-confirmation" data-submission-confirmation hidden[\s\S]*?id="confirmation-heading"/);
+assert.match(html, />Schedule a Discovery Conversation<\/a>/);
+assert.match(formMarkup, /href="mailto:briankeith@rogersholdingsllc\.com\?subject=Business%20Snapshot%20Request"/);
+assert.match(formMarkup, /href="tel:\+18594047300">859-404-7300<\/a>/);
 
 const noopClassList = { add() {}, remove() {}, toggle() {}, contains() { return false; } };
 global.document = {
