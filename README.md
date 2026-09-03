@@ -221,6 +221,10 @@ This focused transparency pass strengthens the visible fictional-sample disclosu
 
 This focused conversion redesign gives the Business Snapshot page a compact text-first hero, one primary call to action, and a concise HTML Executive Brief summary immediately followed by the unchanged production form. It removes the duplicated document presentation and repetitive pre-form explanation while preserving the homepage sample, metadata, analytics, submission contract, success state, and public-artifact boundary.
 
+## Homepage Executive Brief image clarity
+
+This asset-quality pass rebuilds the existing North Point Fitness document plane from the unchanged approved PDF, preserving the homepage hero composition, crop, copy, disclosure, responsive behavior, and production filenames while improving heading, rule, and page-edge resolution and reducing image payload.
+
 ## Release checks
 
 Before publishing a homepage change:

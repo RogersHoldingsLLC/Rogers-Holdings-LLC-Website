@@ -14,6 +14,41 @@ const homepageHeroV22Source = path.join(root, 'docs/design-reference/homepage-he
 const homepageAssets = path.join(root, 'assets/images/homepage');
 const eastlandReference = path.join(root, 'docs/design-reference/eastland-client-work-FINAL-REFERENCE.png');
 
+function imageDimensions(filePath) {
+  const bytes = fs.readFileSync(filePath);
+  const extension = path.extname(filePath).toLowerCase();
+  if (extension === '.avif') {
+    const ispe = bytes.indexOf(Buffer.from('ispe'));
+    assert.ok(ispe >= 0, `AVIF dimensions missing from ${filePath}`);
+    return [bytes.readUInt32BE(ispe + 8), bytes.readUInt32BE(ispe + 12)];
+  }
+  if (extension === '.webp') {
+    assert.equal(bytes.toString('ascii', 0, 4), 'RIFF');
+    assert.equal(bytes.toString('ascii', 8, 12), 'WEBP');
+    const chunk = bytes.toString('ascii', 12, 16);
+    if (chunk === 'VP8 ') return [bytes.readUInt16LE(26) & 0x3fff, bytes.readUInt16LE(28) & 0x3fff];
+    if (chunk === 'VP8X') return [bytes.readUIntLE(24, 3) + 1, bytes.readUIntLE(27, 3) + 1];
+    if (chunk === 'VP8L') {
+      const packed = bytes.readUInt32LE(21);
+      return [(packed & 0x3fff) + 1, ((packed >>> 14) & 0x3fff) + 1];
+    }
+    assert.fail(`Unsupported WebP header in ${filePath}`);
+  }
+  if (extension === '.jpg') {
+    let offset = 2;
+    const sofMarkers = new Set([0xc0, 0xc1, 0xc2, 0xc3, 0xc5, 0xc6, 0xc7, 0xc9, 0xca, 0xcb, 0xcd, 0xce, 0xcf]);
+    while (offset + 9 < bytes.length) {
+      if (bytes[offset] !== 0xff) { offset += 1; continue; }
+      const marker = bytes[offset + 1];
+      if (sofMarkers.has(marker)) return [bytes.readUInt16BE(offset + 7), bytes.readUInt16BE(offset + 5)];
+      if (marker === 0xd8 || marker === 0xd9) { offset += 2; continue; }
+      offset += 2 + bytes.readUInt16BE(offset + 2);
+    }
+    assert.fail(`JPEG dimensions missing from ${filePath}`);
+  }
+  assert.fail(`Unsupported image format: ${filePath}`);
+}
+
 const families = [
   ['executive-snapshot-hero', 'desktop', 2560, 960],
   ['executive-snapshot-hero', 'tablet', 1600, 1200],
@@ -42,6 +77,18 @@ for (const [family, viewport] of families) {
     const asset = `${family}-${viewport}.${extension}`;
     assert.ok(files.includes(asset), `missing homepage production derivative: ${asset}`);
     assert.ok(fs.statSync(path.join(homepageAssets, asset)).size > 0, `${asset} must not be empty`);
+  }
+}
+
+const heroV22Dimensions = {
+  desktop: [3840, 2560],
+  tablet: [1600, 1200],
+  mobile: [960, 1280]
+};
+for (const [viewport, expectedDimensions] of Object.entries(heroV22Dimensions)) {
+  for (const extension of ['avif', 'webp', 'jpg']) {
+    const asset = path.join(homepageAssets, `homepage-hero-v2.2-${viewport}.${extension}`);
+    assert.deepEqual(imageDimensions(asset), expectedDimensions, `unexpected V2.2 ${viewport} ${extension} dimensions`);
   }
 }
 
