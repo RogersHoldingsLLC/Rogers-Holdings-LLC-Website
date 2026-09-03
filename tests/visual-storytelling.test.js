@@ -48,6 +48,7 @@ for (const [family, viewport] of families) {
 const heroStart = html.indexOf('<figure class="homepage-hero-media"');
 const heroEnd = html.indexOf('</figure>', heroStart);
 const hero = html.slice(heroStart, heroEnd);
+const approvedSampleDisclosure = 'Illustrative Executive Brief sample — North Point Fitness is a fictional business. Shown to demonstrate the format and level of detail.';
 const eastlandStart = html.indexOf('<picture class="homepage-eastland-picture"');
 const eastlandEnd = html.indexOf('</picture>', eastlandStart);
 const eastland = html.slice(eastlandStart, eastlandEnd);
@@ -67,11 +68,23 @@ for (const [markup, family, viewport] of [
 
 assert.match(hero, /media="\(min-width: 1101px\)" type="image\/avif" srcset="assets\/images\/homepage\/homepage-hero-v2\.2-desktop\.avif"/);
 assert.match(hero, /width="1536" height="1024" loading="eager" fetchpriority="high" decoding="async"/);
+assert.equal(html.split(approvedSampleDisclosure).length - 1, 1, 'the approved sample disclosure must render exactly once');
+assert.ok(hero.includes(approvedSampleDisclosure), 'the approved sample disclosure must remain visibly connected to the hero sample');
+assert.ok(hero.includes('Illustrative Executive Brief sample'));
+assert.ok(hero.includes('North Point Fitness is a fictional business'));
+assert.ok(hero.includes('Shown to demonstrate the format and level of detail'));
+assert.doesNotMatch(html, /Fictional sample shown for demonstration\. North Point Fitness is fictional\./);
+assert.match(hero, /<figure class="homepage-hero-media" aria-labelledby="snapshot-sample-note">/);
+assert.equal((html.match(/id="snapshot-sample-note"/g) || []).length, 1, 'the sample disclosure ID must remain unique');
+const sampleCaption = hero.match(/<figcaption\b[\s\S]*?<\/figcaption>/)?.[0] || '';
+assert.match(sampleCaption, /id="snapshot-sample-note"/);
+assert.doesNotMatch(sampleCaption, /\baria-hidden\b|\bhidden\b|class="[^"]*\bsr-only\b/);
+assert.doesNotMatch(sampleCaption, /real client|testimonial|endorsement|customer (?:result|outcome)|\b\d+(?:\.\d+)?%/i);
+assert.match(css, /\.homepage-hero-media figcaption\s*\{[\s\S]*?background: var\(--color-dark\);[\s\S]*?color: var\(--color-text-reversed\);[\s\S]*?font-size: 13px;/);
+assert.match(css, /@media \(max-width: 680px\)[\s\S]*?\.homepage-hero-media figcaption \{[^}]*font-size: 12px;/);
 assert.doesNotMatch(eastland, /eastland-product-family-mobile/, 'Eastland must avoid the aggressive mobile crop');
 assert.match(eastland, /width="2400" height="1244" loading="lazy" decoding="async"/);
 assert.match(eastland, /alt="Complete Eastland First Church of God client-work presentation across desktop, laptop, tablet, and phone displays on a warm executive desk"/);
-assert.ok(html.includes('Fictional sample shown for demonstration. North Point Fitness is fictional.'));
-
 for (const [, , width, height] of families) assert.ok(width > 0 && height > 0);
 
 const sectionOrder = [

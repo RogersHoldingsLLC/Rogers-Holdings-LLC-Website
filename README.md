@@ -213,6 +213,10 @@ This accessibility-focused copy pass clarifies required fields, email guidance, 
 
 This focused credibility pass adds an owner-authorized live-project proof block to the existing Eastland case study and replaces unsupported comparative-result language with an objective description of the current public website.
 
+## Executive Brief sample disclosure
+
+This focused transparency pass strengthens the visible fictional-sample disclosure for the North Point Fitness Executive Brief while preserving the approved sample, hero imagery, Snapshot offer, and page structure.
+
 ## Release checks
 
 Before publishing a homepage change:
