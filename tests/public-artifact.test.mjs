@@ -23,12 +23,59 @@ function artifactHashes() {
 }
 
 validateSourceBoundary();
+assert.equal(PUBLIC_MANIFEST.length, 42, 'public artifact must contain exactly 42 allowlisted files');
 const firstBuild = buildPublicArtifact();
 assert.deepEqual(firstBuild, PUBLIC_MANIFEST);
 
 for (const relativePath of PUBLIC_MANIFEST) {
   assert.ok(fs.existsSync(path.join(OUTPUT_ROOT, relativePath)), `missing artifact file: ${relativePath}`);
 }
+
+const publicTextFiles = firstBuild.filter((entry) => /\.(?:css|html|js|txt|vcf|xml)$/i.test(entry));
+const publicText = publicTextFiles
+  .map((relativePath) => fs.readFileSync(path.join(OUTPUT_ROOT, relativePath), 'utf8'))
+  .join('\n');
+assert.doesNotMatch(publicText, /859-404-7300|\+1-859-404-7300|\+18594047300|8594047300|404-7300|4047300/i);
+assert.doesNotMatch(publicText, /call or text/i);
+
+const publicSmsFiles = publicTextFiles.filter((relativePath) => (
+  /sms:/i.test(fs.readFileSync(path.join(OUTPUT_ROOT, relativePath), 'utf8'))
+));
+assert.deepEqual(publicSmsFiles, ['brian/index.html'], 'only the digital business card may contain an SMS action');
+assert.equal((publicText.match(/sms:/gi) ?? []).length, 1, 'public artifact must contain exactly one SMS URI');
+
+const homepage = fs.readFileSync(path.join(OUTPUT_ROOT, 'index.html'), 'utf8');
+assert.match(homepage, /href="tel:\+18594044351">859-404-4351<\/a>/);
+const homepageJsonLd = homepage.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+assert.ok(homepageJsonLd, 'homepage structured data is required');
+const homepageGraph = JSON.parse(homepageJsonLd[1])['@graph'];
+const organization = homepageGraph.find((node) => node['@type'] === 'Organization');
+assert.equal(organization.telephone, '+18594044351');
+assert.equal(organization.contactPoint[0].telephone, '+18594044351');
+
+const snapshotPage = fs.readFileSync(path.join(OUTPUT_ROOT, 'business-snapshot/index.html'), 'utf8');
+assert.match(snapshotPage, /or call <a href="tel:\+18594044351">859-404-4351<\/a>/);
+
+const emailSignature = fs.readFileSync(path.join(OUTPUT_ROOT, 'email-signature/index.html'), 'utf8');
+assert.match(emailSignature, /id="phoneInput"[^>]*value="859-404-4351"/);
+assert.match(emailSignature, /id="sigPhone" href="tel:\+18594044351"[^>]*>859-404-4351<\/a>/);
+assert.match(emailSignature, /fields\.phone\.value = '859-404-4351'/);
+
+const vcard = fs.readFileSync(path.join(OUTPUT_ROOT, 'brian/brian-keith-rogers.vcf'), 'utf8');
+assert.ok(vcard.split('\r\n').includes('TEL;TYPE=CELL,VOICE:+18594044351'));
+
+const digitalCard = fs.readFileSync(path.join(OUTPUT_ROOT, 'brian/index.html'), 'utf8');
+assert.match(digitalCard, /href="tel:\+18594044351"/);
+assert.match(digitalCard, /href="sms:\+18594044351" aria-label="Text Brian Keith Rogers at 859-404-4351"/);
+assert.equal((digitalCard.match(/href="sms:/gi) ?? []).length, 1, 'digital card must contain exactly one SMS action');
+assert.match(digitalCard, />859-404-4351<\/a>/);
+
+const dormantHew = fs.readFileSync(path.join(REPOSITORY_ROOT, 'hew-gates-garage/index.html'), 'utf8');
+assert.match(dormantHew, /href="tel:\+18594044351">(?:Call )?859-404-4351<\/a>/);
+assert.doesNotMatch(dormantHew, /859-404-7300|\+1-859-404-7300|\+18594047300/);
+assert.equal(firstBuild.includes('hew-gates-garage/index.html'), false);
+assert.ok(firstBuild.includes('business-snapshot/index.html'));
+assert.ok(firstBuild.includes('email-signature/index.html'));
 
 for (const excludedPrefix of [
   'tests/',

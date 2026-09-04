@@ -18,7 +18,7 @@ for (const content of [
   'Brian Keith Rogers',
   'Founder · Rogers Holdings LLC',
   'briankeith@rogersholdingsllc.com',
-  '859-404-7300',
+  '859-404-4351',
   'I help small and growing businesses use better websites, automation, AI, and practical systems to save time and grow.'
 ]) assert.ok(html.includes(content), `card is missing locked content: ${content}`);
 
@@ -27,8 +27,10 @@ for (const action of ['Save Contact', 'Call', 'Text', 'Email', 'Visit Website', 
 }
 
 assert.match(html, /href="brian-keith-rogers\.vcf" download/);
-assert.match(html, /href="tel:\+18594047300"/);
-assert.match(html, /href="sms:\+18594047300"/);
+assert.match(html, /<a class="action" href="tel:\+18594044351">[\s\S]*?<span>Call<\/span>[\s\S]*?<\/a>/);
+assert.match(html, /<a class="action" href="sms:\+18594044351" aria-label="Text Brian Keith Rogers at 859-404-4351">[\s\S]*?<span>Text<\/span>[\s\S]*?<\/a>/);
+assert.match(html, /href="tel:\+18594044351"[\s\S]*href="sms:\+18594044351"[\s\S]*href="mailto:briankeith@rogersholdingsllc\.com"/);
+assert.doesNotMatch(html, /tel:\+18594047300|sms:\+18594047300/i);
 assert.match(html, /href="mailto:briankeith@rogersholdingsllc\.com"/);
 assert.match(html, /href="https:\/\/rogersholdingsllc\.com\/"/);
 assert.match(html, /<button class="action" type="button" data-share>/);
@@ -47,7 +49,7 @@ assert.equal(person['@type'], 'Person');
 assert.equal(person.name, 'Brian Keith Rogers');
 assert.equal(person.jobTitle, 'Founder');
 assert.equal(person.email, 'mailto:briankeith@rogersholdingsllc.com');
-assert.equal(person.telephone, '+1-859-404-7300');
+assert.equal(person.telephone, '+18594044351');
 assert.equal(person.worksFor.name, 'Rogers Holdings LLC');
 
 assert.match(css, /:focus-visible/);
@@ -68,7 +70,7 @@ for (const requiredLine of [
   'ORG:Rogers Holdings LLC',
   'TITLE:Founder',
   'EMAIL;TYPE=INTERNET,WORK:briankeith@rogersholdingsllc.com',
-  'TEL;TYPE=CELL,VOICE:+18594047300',
+  'TEL;TYPE=CELL,VOICE:+18594044351',
   'URL:https://rogersholdingsllc.com/',
   'END:VCARD'
 ]) assert.ok(vcard.split('\r\n').includes(requiredLine), `vCard is missing: ${requiredLine}`);
