@@ -167,7 +167,7 @@ assert.match(formMarkup, /class="submission-loader"[\s\S]*?Securing your request
 assert.match(html, /class="submission-confirmation" data-submission-confirmation hidden[\s\S]*?id="confirmation-heading"/);
 assert.match(html, />Schedule a Discovery Conversation<\/a>/);
 assert.match(formMarkup, /href="mailto:briankeith@rogersholdingsllc\.com\?subject=Business%20Snapshot%20Request"/);
-assert.match(formMarkup, /href="tel:\+18594047300">859-404-7300<\/a>/);
+assert.match(formMarkup, /href="tel:\+18594044351">859-404-4351<\/a>/);
 
 const noopClassList = { add() {}, remove() {}, toggle() {}, contains() { return false; } };
 global.document = {
