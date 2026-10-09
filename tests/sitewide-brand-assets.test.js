@@ -9,6 +9,7 @@ const homepage = read('index.html');
 const snapshot = read('business-snapshot/index.html');
 const brian = read('brian/index.html');
 const privacy = read('privacy/index.html');
+const repair = read('spreadsheet-repair/index.html');
 const sitemap = read('sitemap.xml');
 const css = read('assets/css/site.css');
 const visualSystem = read('docs/EXECUTIVE_VISUAL_SYSTEM.md');
@@ -40,7 +41,7 @@ const snapshotService = snapshotJsonLd['@graph'].find((entry) => entry['@id'] ==
 assert.equal(snapshotService.name, 'Free Business Snapshot');
 assert.equal(snapshotService.provider['@id'], 'https://rogersholdingsllc.com/#organization');
 
-const marketablePages = [homepage, snapshot, privacy];
+const marketablePages = [homepage, snapshot, privacy, repair];
 for (const page of marketablePages) {
   assert.match(page, /<meta property="og:locale" content="en_US">/);
   assert.match(page, /<meta property="og:image:secure_url" content="https:\/\/rogersholdingsllc\.com\/assets\/images\/social\//);
@@ -56,9 +57,9 @@ for (const page of marketablePages) {
 }
 assert.match(homepage, /rogers-holdings-home-share\.jpg/);
 assert.match(snapshot, /business-snapshot-share\.jpg/);
-assert.doesNotMatch(homepage + snapshot + brian + privacy, /brand-card\.jpeg/);
+assert.doesNotMatch(homepage + snapshot + brian + privacy + repair, /brand-card\.jpeg/);
 
-for (const page of [homepage, snapshot, brian, privacy]) {
+for (const page of [homepage, snapshot, brian, privacy, repair]) {
   assert.match(page, /<link rel="icon" type="image\/png" sizes="64x64" href="\/favicon\.png">/);
   assert.match(page, /<link rel="shortcut icon" href="\/favicon\.ico">/);
   assert.match(page, /<link rel="apple-touch-icon" sizes="180x180" href="\/apple-touch-icon\.png">/);
@@ -103,7 +104,8 @@ for (const asset of [
 }
 
 assert.doesNotMatch(sitemap, /<priority>|<changefreq>/);
-assert.match(sitemap, /<loc>https:\/\/rogersholdingsllc\.com\/<\/loc>\s*<lastmod>2026-08-22<\/lastmod>/);
+assert.match(sitemap, /<loc>https:\/\/rogersholdingsllc\.com\/<\/loc>\s*<lastmod>2026-10-08<\/lastmod>/);
+assert.match(sitemap, /<loc>https:\/\/rogersholdingsllc\.com\/spreadsheet-repair\/<\/loc>\s*<lastmod>2026-10-08<\/lastmod>/);
 assert.match(sitemap, /<loc>https:\/\/rogersholdingsllc\.com\/business-snapshot\/<\/loc>\s*<lastmod>2026-08-22<\/lastmod>/);
 
 assert.match(snapshot, /<footer class="[^"]*site-footer[^"]*">[\s\S]*?rogers-holdings-logo-reversed\.png/);

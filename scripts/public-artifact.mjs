@@ -48,7 +48,8 @@ export const PUBLIC_MANIFEST = Object.freeze([
   'index.html',
   'privacy/index.html',
   'robots.txt',
-  'sitemap.xml'
+  'sitemap.xml',
+  'spreadsheet-repair/index.html'
 ].sort());
 
 const MANIFEST_SET = new Set(PUBLIC_MANIFEST);

@@ -23,7 +23,7 @@ function artifactHashes() {
 }
 
 validateSourceBoundary();
-assert.equal(PUBLIC_MANIFEST.length, 42, 'public artifact must contain exactly 42 allowlisted files');
+assert.equal(PUBLIC_MANIFEST.length, 43, 'public artifact must contain exactly 43 allowlisted files');
 const firstBuild = buildPublicArtifact();
 assert.deepEqual(firstBuild, PUBLIC_MANIFEST);
 
@@ -52,6 +52,15 @@ const homepageGraph = JSON.parse(homepageJsonLd[1])['@graph'];
 const organization = homepageGraph.find((node) => node['@type'] === 'Organization');
 assert.equal(organization.telephone, '+18594044351');
 assert.equal(organization.contactPoint[0].telephone, '+18594044351');
+
+const repairPage = fs.readFileSync(path.join(OUTPUT_ROOT, 'spreadsheet-repair/index.html'), 'utf8');
+assert.match(repairPage, /<link rel="canonical" href="https:\/\/rogersholdingsllc\.com\/spreadsheet-repair\/">/);
+assert.match(homepage, /href="spreadsheet-repair\/">View Spreadsheet Repair details &amp; terms/);
+assert.match(repairPage, /<h1 id="repair-service-heading">Excel &amp; Google Sheets Repair<\/h1>/);
+assert.match(repairPage, /href="mailto:briankeith@rogersholdingsllc\.com\?subject=[^"]+">Email About a Spreadsheet Repair<\/a>/);
+assert.doesNotMatch(repairPage, /<form\b|<input\b|<iframe\b|\sdownload(?:=|>|\s)/i);
+assert.equal(firstBuild.some((entry) => entry.startsWith('docs/review/')), false);
+assert.equal(firstBuild.includes('docs/SPREADSHEET_REPAIR_LOCAL_REVIEW.md'), false);
 
 const snapshotPage = fs.readFileSync(path.join(OUTPUT_ROOT, 'business-snapshot/index.html'), 'utf8');
 assert.match(snapshotPage, /or call <a href="tel:\+18594044351">859-404-4351<\/a>/);
@@ -107,6 +116,7 @@ for (const requiredFile of [
   'CNAME',
   'robots.txt',
   'sitemap.xml',
+  'spreadsheet-repair/index.html',
   'google914083dd95ef8b05.html',
   'favicon.ico',
   'favicon.png',
