@@ -69,9 +69,11 @@ const families = [
 
 const files = fs.readdirSync(homepageAssets).sort();
 const productionFiles = files.filter((file) =>
-  !file.startsWith('homepage-hero-v2-desktop-proof.')
+  !file.startsWith('homepage-hero-v2-desktop-proof.') && file !== 'brian-smiling-portrait.png'
 );
-assert.equal(productionFiles.length, 45, 'homepage production directory must contain exactly 45 production derivatives including preserved Hero V2, Hero V2.1, and current Hero V2.2 responsive assets');
+assert.equal(productionFiles.length, 46, 'homepage production directory must contain exactly 45 preserved production derivatives and the approved smiling founder portrait');
+assert.ok(productionFiles.includes('brian-smiling-portrait.webp'));
+assert.deepEqual(imageDimensions(path.join(homepageAssets, 'brian-smiling-portrait.webp')), [1040, 1300]);
 for (const [family, viewport] of families) {
   for (const extension of ['avif', 'webp', 'jpg']) {
     const asset = `${family}-${viewport}.${extension}`;

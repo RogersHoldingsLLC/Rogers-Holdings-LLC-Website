@@ -225,6 +225,15 @@ This focused conversion redesign gives the Business Snapshot page a compact text
 
 This asset-quality pass rebuilds the existing North Point Fitness document plane from the unchanged approved PDF, preserving the homepage hero composition, crop, copy, disclosure, responsive behavior, and production filenames while improving heading, rule, and page-edge resolution and reducing image payload.
 
+## Approved smiling founder portrait
+
+The homepage founder portrait uses a 1040×1300 WebP derived from Brian’s
+approved smiling PNG through proportional resizing and compression only.
+The 97,798-byte image retains the existing frame and lazy loading, with the
+homepage’s below-100-KB image limit enforced. The full-resolution supplied PNG
+is preserved locally and excluded from the public build.
+The digital business card and its embedded vCard photo retain their existing asset.
+
 ## Release checks
 
 Before publishing a homepage change:

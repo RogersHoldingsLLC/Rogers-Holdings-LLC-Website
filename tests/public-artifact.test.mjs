@@ -23,7 +23,7 @@ function artifactHashes() {
 }
 
 validateSourceBoundary();
-assert.equal(PUBLIC_MANIFEST.length, 43, 'public artifact must contain exactly 43 allowlisted files');
+assert.equal(PUBLIC_MANIFEST.length, 44, 'public artifact must contain exactly 44 allowlisted files');
 const firstBuild = buildPublicArtifact();
 assert.deepEqual(firstBuild, PUBLIC_MANIFEST);
 
@@ -61,6 +61,7 @@ assert.match(repairPage, /href="mailto:briankeith@rogersholdingsllc\.com\?subjec
 assert.doesNotMatch(repairPage, /<form\b|<input\b|<iframe\b|\sdownload(?:=|>|\s)/i);
 assert.equal(firstBuild.some((entry) => entry.startsWith('docs/review/')), false);
 assert.equal(firstBuild.includes('docs/SPREADSHEET_REPAIR_LOCAL_REVIEW.md'), false);
+assert.equal(firstBuild.includes('assets/images/homepage/brian-smiling-portrait.png'), false, 'full-resolution smiling portrait must stay outside the public build');
 
 const snapshotPage = fs.readFileSync(path.join(OUTPUT_ROOT, 'business-snapshot/index.html'), 'utf8');
 assert.match(snapshotPage, /or call <a href="tel:\+18594044351">859-404-4351<\/a>/);
@@ -128,6 +129,7 @@ for (const requiredFile of [
   'assets/images/brand/rogers-holdings-logo.png',
   'assets/images/brand/rogers-holdings-logo-reversed.png',
   'assets/images/digital-business-card/brian-keith-rogers.jpg',
+  'assets/images/homepage/brian-smiling-portrait.webp',
   'assets/js/digital-business-card.js',
   'brian/brian-keith-rogers.vcf',
   'brian/index.html',

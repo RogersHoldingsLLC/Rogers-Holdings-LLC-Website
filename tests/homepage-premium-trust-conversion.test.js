@@ -93,7 +93,7 @@ assert.doesNotMatch(css, publicHewPattern);
 assert.match(html, /href="business-snapshot\/" data-report-link>Request Your Free Business Snapshot/);
 
 assert.match(html, /class="phase3-founder-portrait"/);
-assert.match(html, /src="assets\/images\/digital-business-card\/brian-keith-rogers\.jpg" width="576" height="720" loading="lazy"/);
+assert.match(html, /src="assets\/images\/homepage\/brian-smiling-portrait\.webp" width="1040" height="1300" loading="lazy"/);
 assert.match(html, /<strong>Brian Keith Rogers<\/strong><span>Founder, Rogers Holdings LLC<\/span>/);
 assert.match(html, /<h2><span>Christ-like service\.<\/span><span>Honest guidance\.<\/span><span>Personal accountability\.<\/span><\/h2>/);
 assert.match(html, /My faith shapes how I do business: tell the truth, serve people well, keep my word, and steward every resource responsibly\./);
