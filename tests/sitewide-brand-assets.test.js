@@ -113,14 +113,19 @@ assert.match(privacy, /<footer class="[^"]*site-footer[^"]*">[\s\S]*?rogers-hold
 assert.doesNotMatch(snapshot, /<footer[\s\S]*?rogers-holdings-logo\.png/);
 assert.doesNotMatch(privacy, /<footer[\s\S]*?rogers-holdings-logo\.png/);
 assert.equal((homepage.match(/rh-executive-materials-01-/g) || []).length, 0);
-assert.equal((homepage.match(/assets\/images\/digital-business-card\/brian-keith-rogers\.jpg/g) || []).length, 1);
-assert.match(homepage, /width="576" height="720" loading="lazy"/);
+assert.equal((homepage.match(/assets\/images\/homepage\/brian-smiling-portrait\.webp/g) || []).length, 1);
+assert.match(homepage, /width="1040" height="1300" loading="lazy"/);
 assert.match(css, /grid-template-columns: minmax\(380px, \.84fr\) minmax\(0, 1\.16fr\)/);
 assert.match(css, /\.phase3-founder-portrait-frame[\s\S]*?aspect-ratio: 4 \/ 5/);
 const founderSource = fs.readFileSync(path.join(ROOT, 'docs/design-reference/founder/brian-keith-rogers-headshot-original.png'));
 assert.equal(crypto.createHash('sha256').update(founderSource).digest('hex'), '9bb3f69903b49705abeb212f88bde0ad5200ee5cf60de289e2698a77c467c979');
-const optimizedFounderPortrait = fs.statSync(path.join(ROOT, 'assets/images/digital-business-card/brian-keith-rogers.jpg'));
-assert.ok(optimizedFounderPortrait.size < 100_000, 'homepage founder portrait must remain below 100 KB');
+const optimizedFounderPortrait = fs.readFileSync(path.join(ROOT, 'assets/images/homepage/brian-smiling-portrait.webp'));
+assert.equal(crypto.createHash('sha256').update(optimizedFounderPortrait).digest('hex'), '62b4d652c1a23fd241c59efcd260e379e27a8951e96807c91b19462d27aecee3', 'homepage must use the verified derivative of Brian’s approved portrait');
+assert.equal(optimizedFounderPortrait.toString('ascii', 0, 4), 'RIFF');
+assert.equal(optimizedFounderPortrait.toString('ascii', 8, 12), 'WEBP');
+assert.ok(optimizedFounderPortrait.length > 0 && optimizedFounderPortrait.length < 100_000, 'homepage founder portrait must remain below 100 KB');
+const digitalCardPortrait = fs.statSync(path.join(ROOT, 'assets/images/digital-business-card/brian-keith-rogers.jpg'));
+assert.ok(digitalCardPortrait.size < 100_000, 'digital-card portrait must remain below 100 KB');
 assert.match(visualSystem, /Light backgrounds use/);
 assert.match(visualSystem, /Dark or black backgrounds use/);
 
