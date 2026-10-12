@@ -12,6 +12,7 @@ export const PUBLIC_MANIFEST = Object.freeze([
   'assets/css/digital-business-card.css',
   'assets/css/site.css',
   'assets/css/our-work.css',
+  'assets/css/website-creation.css',
   'assets/images/brand/rogers-holdings-logo-reversed.png',
   'assets/images/brand/rogers-holdings-logo.png',
   'assets/images/digital-business-card/brian-keith-rogers.jpg',
@@ -53,7 +54,8 @@ export const PUBLIC_MANIFEST = Object.freeze([
   'our-work/index.html',
   'robots.txt',
   'sitemap.xml',
-  'spreadsheet-repair/index.html'
+  'spreadsheet-repair/index.html',
+  'website-creation/index.html'
 ].sort());
 
 const MANIFEST_SET = new Set(PUBLIC_MANIFEST);
