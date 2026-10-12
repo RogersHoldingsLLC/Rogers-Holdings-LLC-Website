@@ -236,6 +236,8 @@ The digital business card and its embedded vCard photo retain their existing ass
 
 ## Release checks
 
+The owner-approved Our Work release adds `/our-work/` with Eastland and Missy’s case studies, a concise homepage preview retaining `#work`, and the reviewed image treatments. Its bounded scope, asset integrity and rollback baseline are recorded in [OUR_WORK_APPROVED_RELEASE.md](docs/design-source/OUR_WORK_APPROVED_RELEASE.md). Review-only evidence and original Missy source material stay outside the public build.
+
 Before publishing a homepage change:
 
 1. Check desktop and mobile layouts.
