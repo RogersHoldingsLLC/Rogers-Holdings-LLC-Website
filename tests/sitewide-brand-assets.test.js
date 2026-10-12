@@ -104,7 +104,7 @@ for (const asset of [
 }
 
 assert.doesNotMatch(sitemap, /<priority>|<changefreq>/);
-assert.match(sitemap, /<loc>https:\/\/rogersholdingsllc\.com\/<\/loc>\s*<lastmod>2026-10-08<\/lastmod>/);
+assert.match(sitemap, /<loc>https:\/\/rogersholdingsllc\.com\/<\/loc>\s*<lastmod>2026-10-12<\/lastmod>/);
 assert.match(sitemap, /<loc>https:\/\/rogersholdingsllc\.com\/spreadsheet-repair\/<\/loc>\s*<lastmod>2026-10-08<\/lastmod>/);
 assert.match(sitemap, /<loc>https:\/\/rogersholdingsllc\.com\/business-snapshot\/<\/loc>\s*<lastmod>2026-08-22<\/lastmod>/);
 
