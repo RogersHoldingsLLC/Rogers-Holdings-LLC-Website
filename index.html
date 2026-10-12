@@ -116,6 +116,7 @@
     ]
   }
   </script>
+  <link rel="stylesheet" href="assets/css/our-work.css?v=a8d95ff3">
 </head>
 <body class="home-page">
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -134,7 +135,7 @@
       <nav class="primary-nav" id="primary-navigation" aria-label="Primary navigation" data-navigation>
         <a href="#approach">Approach</a>
         <a href="#process">Process</a>
-        <a href="#work">Our Work</a>
+        <a href="our-work/">Our Work</a>
         <a href="#capabilities">Capabilities</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
@@ -223,51 +224,26 @@
     </section>
 
     <section class="homepage-eastland-showcase" id="work" aria-labelledby="eastland-client-work-heading">
-      <div class="container eastland-showcase-intro" data-reveal>
-        <h2 id="eastland-client-work-heading">See our work in action.</h2>
-        <p>A real problem. A practical fix. A better way forward.</p>
-      </div>
-      <div class="eastland-portfolio-hero">
-        <figure class="eastland-workspace" data-reveal>
-          <picture class="homepage-eastland-picture">
+      <div class="container work-preview">
+        <header class="work-preview-heading" data-reveal>
+          <div><p class="eyebrow">Our Work</p><h2 id="eastland-client-work-heading">See our work in action.</h2><p>A real problem. A practical fix. A better way forward.</p></div>
+          <a class="button button-dark" href="our-work/">Explore Our Work</a>
+        </header>
+        <div class="work-preview-grid">
+          <article class="work-preview-card" data-reveal>
+            <figure class="work-preview-image"><picture class="homepage-eastland-picture">
             <source media="(max-width: 1100px)" type="image/avif" srcset="assets/images/homepage/eastland-product-family-tablet.avif?v=0cecc197">
             <source media="(max-width: 1100px)" type="image/webp" srcset="assets/images/homepage/eastland-product-family-tablet.webp?v=0cecc197">
             <source media="(max-width: 1100px)" srcset="assets/images/homepage/eastland-product-family-tablet.jpg?v=0cecc197">
             <source type="image/avif" srcset="assets/images/homepage/eastland-product-family-desktop.avif?v=0cecc197">
             <source type="image/webp" srcset="assets/images/homepage/eastland-product-family-desktop.webp?v=0cecc197">
             <img src="assets/images/homepage/eastland-product-family-desktop.jpg?v=0cecc197" width="2400" height="1244" loading="lazy" decoding="async" alt="Complete Eastland First Church of God client-work presentation across desktop, laptop, tablet, and phone displays on a warm executive desk">
-          </picture>
-        </figure>
-      </div>
-      <div class="eastland-portfolio-evidence">
-        <div class="container eastland-project-story">
-          <header class="eastland-project-heading" data-reveal>
-            <div>
-              <p class="eyebrow">Eastland First Church of God</p>
-              <h2>From a Facebook-first presence to a clear digital front door.</h2>
-            </div>
-            <div>
-              <p>Eastland needed one owned place where visitors could find service times, ministries, messages, giving, directions, and contact information.</p>
-            </div>
-          </header>
-          <ol class="eastland-story-timeline" aria-label="Eastland project story">
-            <li data-reveal><span>01</span><h3>Challenge</h3><p>Facebook was the primary online presence. Important visitor information was fragmented and difficult to find.</p></li>
-            <li data-reveal><span>02</span><h3>Assessment</h3><p>We mapped the visitor journey and identified gaps in mobile usability, information structure, search visibility, and engagement.</p></li>
-            <li data-reveal><span>03</span><h3>Improvement</h3><p>We built a mobile-first website that organized essential information and created clearer paths to visit, watch, give, and connect.</p></li>
-            <li data-reveal><span>04</span><h3>Result</h3><p>Current public experience: A responsive website with clear paths to service information, visit planning, ministries, messages, directions, and contact details.</p></li>
-          </ol>
-          <section class="eastland-live-proof" aria-labelledby="eastland-live-proof-heading" data-reveal>
-            <div class="eastland-live-proof__copy">
-              <h3 id="eastland-live-proof-heading">See the work on the live site</h3>
-              <p>Rogers Holdings helped Eastland First Church of God establish its Google Business Profile, built its current custom website, and continues to maintain and update the site.</p>
-              <p>The public website works across phone and desktop screens and brings service times, visit information, ministries, messages, directions, and contact details together in one experience.</p>
-              <p class="eastland-live-proof__boundary">Presented as a current project example—not a testimonial or a claim about attendance, engagement, donations, or other outcomes.</p>
-            </div>
-            <nav class="eastland-live-proof__links" aria-label="Eastland project links">
-              <a class="button button-dark" href="https://www.eastlandfirstchurchofgod.com" target="_blank" rel="noopener noreferrer">View the Live Eastland Website <span class="sr-only">(opens in a new tab)</span></a>
-              <a href="https://www.google.com/maps/search/?api=1&amp;query=Eastland+First+Church+of+God%2C+1706+Old+Owingsville+Rd%2C+Mt+Sterling%2C+KY+40353" target="_blank" rel="noopener noreferrer">View Google Listing <span class="sr-only">(opens in a new tab)</span></a>
-            </nav>
-          </section>
+          </picture></figure>
+            <div><p class="eyebrow">Website · Google Business Profile</p><h3>Eastland First Church of God</h3><p>One clear place for service times, ministries, messages and visitor information.</p><a class="work-text-link" href="our-work/#eastland">Read the Eastland story <span aria-hidden="true">↗</span></a></div>
+          </article>
+          <article class="work-preview-card work-preview-card-text" data-reveal>
+            <div><p class="eyebrow">Spreadsheet project</p><h3>Missy’s Squishies and More</h3><p>Built around her business</p><a class="work-text-link" href="our-work/#missys-squishies">Read Missy’s story <span aria-hidden="true">↗</span></a></div>
+          </article>
         </div>
       </div>
     </section>
@@ -334,7 +310,7 @@
   <footer class="site-footer phase3-footer">
     <div class="container phase3-footer-layout">
       <div class="footer-brand"><a class="brand-lockup brand-lockup-light" href="#top" aria-label="Rogers Holdings LLC home"><img src="assets/images/brand/rogers-holdings-logo-reversed.png" width="52" height="52" alt=""><span>Rogers Holdings <small>LLC</small></span></a><p>Kentucky-based, family-owned, and focused on practical business improvement.</p></div>
-      <div><h2>Explore &amp; contact</h2><nav aria-label="Footer navigation"><a href="#approach">Approach</a><a href="#process">Process</a><a href="#work">Our Work</a><a href="#capabilities">Capabilities</a><a href="#about">About</a><a href="#contact">Contact</a><a href="business-snapshot/">Business Snapshot</a><a href="privacy/">Privacy</a></nav><address><a href="mailto:briankeith@rogersholdingsllc.com">briankeith@rogersholdingsllc.com</a><a href="tel:+18594044351">859-404-4351</a><span>Kentucky · Serving businesses across the U.S.</span></address></div>
+      <div><h2>Explore &amp; contact</h2><nav aria-label="Footer navigation"><a href="#approach">Approach</a><a href="#process">Process</a><a href="our-work/">Our Work</a><a href="#capabilities">Capabilities</a><a href="#about">About</a><a href="#contact">Contact</a><a href="business-snapshot/">Business Snapshot</a><a href="privacy/">Privacy</a></nav><address><a href="mailto:briankeith@rogersholdingsllc.com">briankeith@rogersholdingsllc.com</a><a href="tel:+18594044351">859-404-4351</a><span>Kentucky · Serving businesses across the U.S.</span></address></div>
     </div>
     <div class="container footer-bottom"><span>© <span data-current-year>2026</span> Rogers Holdings LLC</span><span>Privately held · Family operated</span></div>
   </footer>

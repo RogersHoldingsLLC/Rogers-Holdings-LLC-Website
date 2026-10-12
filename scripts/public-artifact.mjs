@@ -11,6 +11,7 @@ export const PUBLIC_MANIFEST = Object.freeze([
   'apple-touch-icon.png',
   'assets/css/digital-business-card.css',
   'assets/css/site.css',
+  'assets/css/our-work.css',
   'assets/images/brand/rogers-holdings-logo-reversed.png',
   'assets/images/brand/rogers-holdings-logo.png',
   'assets/images/digital-business-card/brian-keith-rogers.jpg',
@@ -34,6 +35,7 @@ export const PUBLIC_MANIFEST = Object.freeze([
   'assets/images/homepage/homepage-hero-v2.2-tablet.jpg',
   'assets/images/homepage/homepage-hero-v2.2-tablet.webp',
   'assets/images/social/business-snapshot-share.jpg',
+  'assets/images/our-work/missy-artwork-extracted.webp',
   'assets/images/social/rogers-holdings-home-share.jpg',
   'assets/js/digital-business-card.js',
   'assets/js/site.js',
@@ -48,6 +50,7 @@ export const PUBLIC_MANIFEST = Object.freeze([
   'google914083dd95ef8b05.html',
   'index.html',
   'privacy/index.html',
+  'our-work/index.html',
   'robots.txt',
   'sitemap.xml',
   'spreadsheet-repair/index.html'

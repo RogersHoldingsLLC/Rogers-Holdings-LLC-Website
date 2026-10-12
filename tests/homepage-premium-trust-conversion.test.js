@@ -4,6 +4,7 @@ const path = require('node:path');
 
 const ROOT = path.resolve(__dirname, '..');
 const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+const work = fs.readFileSync(path.join(ROOT, 'our-work/index.html'), 'utf8');
 const css = fs.readFileSync(path.join(ROOT, 'assets/css/site.css'), 'utf8');
 const script = fs.readFileSync(path.join(ROOT, 'assets/js/site.js'), 'utf8');
 
@@ -80,13 +81,15 @@ assert.doesNotMatch(html, /Business Optimization Platform|class="section phase3-
 assert.match(html, /<h2 id="eastland-client-work-heading">See our work in action\.<\/h2>/);
 assert.match(html, /A real problem\. A practical fix\. A better way forward\./);
 assert.doesNotMatch(html, /<h2 id="eastland-client-work-heading">Selected Client Work<\/h2>/);
-assert.match(html, /class="eastland-live-proof__links" aria-label="Eastland project links"/);
+assert.match(work, /class="eastland-live-proof__links" aria-label="Eastland project links"/);
 assert.doesNotMatch(html, /class="eastland-project-actions"/);
-assert.match(html, /From a Facebook-first presence to a clear digital front door\./);
-assert.match(html, /Current public experience: A responsive website with clear paths to service information, visit planning, ministries, messages, directions, and contact details\./);
+assert.match(work, /From a Facebook-first presence to a clear digital front door\./);
+assert.match(work, /Current public experience: A responsive website with clear paths to service information, visit planning, ministries, messages, directions, and contact details\./);
 assert.doesNotMatch(body, /easier to find, easier to use, and easier to maintain|free of charge|home church/i);
-assert.ok(html.indexOf(primaryCta) < html.indexOf('See the work on the live site'), 'Free Business Snapshot must remain the primary homepage offer');
-assert.match(html, /class="button button-dark" href="https:\/\/www\.eastlandfirstchurchofgod\.com"/, 'Eastland live proof must remain visually secondary to the Snapshot offer');
+assert.ok(html.indexOf(primaryCta) < html.indexOf('Explore Our Work'), 'Free Business Snapshot must remain the primary homepage offer');
+assert.match(work, /class="button button-dark" href="https:\/\/www\.eastlandfirstchurchofgod\.com"/, 'Eastland live proof must remain accessible on Our Work');
+assert.doesNotMatch(html, /class="eastland-story-timeline"|class="eastland-live-proof"/, 'homepage must not duplicate detailed case studies');
+assert.match(html, /href="our-work\/">Explore Our Work/);
 const publicHewPattern = /\bHEW\b|Gates?\s*(?:&|&amp;)\s*Garage|hew-gates-garage|hew-venture|homepage-venture-showcase/i;
 assert.doesNotMatch(html, publicHewPattern);
 assert.doesNotMatch(css, publicHewPattern);
