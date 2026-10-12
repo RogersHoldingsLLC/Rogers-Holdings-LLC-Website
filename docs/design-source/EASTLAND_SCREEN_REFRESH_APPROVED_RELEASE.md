@@ -33,7 +33,12 @@ the existing local review directory; they are not part of the public artifact.
 ## Approved production derivatives
 
 Files below are under `assets/images/homepage/`. Existing filenames, crop
-dimensions, encodings and picture references are retained.
+dimensions, encodings and responsive picture mapping are retained. The six
+existing picture URLs use `?v=0cecc197`, the approved master's hash prefix, to
+invalidate pre-release browser caches. Production verification identified a
+desktop tab retaining the previous image despite the server serving approved
+bytes; this bounded reference update ensures the page requests the refresh.
+The existing responsive-source assertion is updated to require that version.
 
 | File | SHA-256 |
 | --- | --- |
@@ -57,7 +62,8 @@ verification, and desktop/mobile preview inspection. Protected production
 triggers `.github/workflows/deploy-pages.yml` to test, build and deploy the
 allowlisted GitHub Pages artifact.
 
-Only the nine image derivatives enter the published site. This approval record,
+Only the nine image derivatives and versioned homepage references enter the
+published site. This approval record,
 local comparison pages, screen captures, masks, backups and review scripts are
 excluded by the unchanged public manifest. Rollback should revert this bounded
 release through the same pull-request workflow, preserving any later work.

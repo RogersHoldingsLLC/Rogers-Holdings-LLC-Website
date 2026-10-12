@@ -188,7 +188,7 @@ assert.doesNotMatch(workspace + css, /eastland-screen--|class="eastland-screen"/
 const eastlandReferenceHash = crypto.createHash('sha256').update(fs.readFileSync(eastlandReference)).digest('hex');
 assert.equal(eastlandReferenceHash, '516d0b764d82f2ac1b451ca0194602da2abe7e3e57ea94d9218d1dde693acb62', 'authoritative Eastland reference changed');
 assert.match(html, /class="container eastland-showcase-intro"/);
-assert.match(html, /media="\(max-width: 1100px\)" type="image\/avif" srcset="assets\/images\/homepage\/eastland-product-family-tablet\.avif"/);
+assert.match(html, /media="\(max-width: 1100px\)" type="image\/avif" srcset="assets\/images\/homepage\/eastland-product-family-tablet\.avif\?v=0cecc197"/);
 assert.match(css, /\.eastland-live-proof\s*\{[\s\S]*grid-template-columns:/, 'live-proof block must have a responsive layout');
 assert.match(html, /class="eastland-project-heading"/);
 assert.match(html, /class="eastland-story-timeline" aria-label="Eastland project story"/);
