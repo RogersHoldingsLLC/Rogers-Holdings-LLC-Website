@@ -1589,3 +1589,35 @@ h3 { letter-spacing: -.015em; }
   .motion-ready .reveal-item { opacity: 1; transform: none; transition: none; }
   .button { transition: none; }
 }
+
+/* Customer journey review: earlier offers with restrained section spacing. */
+.home-page .phase3-hero .hero-lede { max-width: min(100%, 480px); }
+.home-page .phase3-hero-note { max-width: 52ch; }
+.home-page .website-offer,
+.home-page .spreadsheet-repair { padding-block: 36px; }
+.home-page .phase3-final-cta { padding-block: clamp(48px, 6vw, 80px); }
+@media (max-width: 680px) {
+  .home-page .website-offer,
+  .home-page .spreadsheet-repair { padding-block: 24px; }
+}
+
+/* Mobile hero follows the same intro, sample and action order as the DOM. */
+@media (max-width: 680px) {
+  .home-page .phase3-hero { min-height: 0; }
+  .home-page .phase3-hero-layout { padding-block: 100px 36px; }
+  .home-page .homepage-hero-media {
+    position: relative; inset: auto; z-index: auto;
+    width: 100%; height: auto; margin: 24px 0 0;
+  }
+  .home-page .homepage-hero-media picture,
+  .home-page .homepage-hero-media img {
+    position: static; inset: auto; width: 100%; height: auto;
+  }
+  .home-page .homepage-hero-media::after { display: none; }
+  .home-page .homepage-hero-media figcaption {
+    position: static; max-width: none; margin: 0;
+  }
+}
+@media (max-width: 360px) {
+  .home-page .phase3-hero-layout { padding-top: 90px; }
+}

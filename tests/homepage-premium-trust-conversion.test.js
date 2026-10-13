@@ -9,15 +9,15 @@ const css = fs.readFileSync(path.join(ROOT, 'assets/css/site.css'), 'utf8');
 const script = fs.readFileSync(path.join(ROOT, 'assets/js/site.js'), 'utf8');
 
 const primaryCta = 'Request Your Free Business Snapshot';
-assert.equal((html.match(new RegExp(primaryCta, 'g')) || []).length, 3);
+assert.equal((html.match(new RegExp(primaryCta, 'g')) || []).length, 1);
 assert.equal((html.match(/<p class="phase3-hero-note">Free Business Snapshot · Human-reviewed · Executive Brief typically within three business days<\/p>/g) || []).length, 1);
-assert.equal((html.match(/<p class="phase3-cta-assurance">Free Business Snapshot · Human-reviewed · Executive Brief typically within three business days · No sales call required<\/p>/g) || []).length, 1);
-assert.ok(html.includes('Rogers Holdings helps small and growing businesses work smarter by improving the websites, workflows, automation, practical AI use, and business systems behind everyday work. The goal is simple: clearer customer paths, less wasted time, better organization, and a business that is easier to run.'));
+assert.match(html, /href="mailto:briankeith@rogersholdingsllc\.com\?subject=Project%20Inquiry">Email About Your Project/);
+assert.ok(html.includes('Practical help for small and growing businesses: create a clear website, repair a spreadsheet, or improve the systems behind everyday work. Work directly with founder Brian Keith Rogers.'));
 
 assert.match(html, /<section class="section phase3-method" id="approach"/);
 assert.match(html, /<section class="section phase3-snapshot" id="process"/);
 assert.match(html, /aria-label="Assess, Prioritize, Improve methodology"/);
-assert.ok(html.includes('A practical place to start'));
+assert.ok(html.includes('Optional Free Business Snapshot'));
 assert.ok(html.includes('Get a clear outside view before spending money on the wrong fix.'));
 assert.ok(html.includes('Tell us what is not working. Rogers Holdings will review the challenge and visible evidence, then typically within three business days send a concise, human-reviewed Executive Brief.'));
 for (const deliverable of [
@@ -30,8 +30,7 @@ const snapshotEnd = html.indexOf('</section>', snapshotStart);
 const snapshotSection = html.slice(snapshotStart, snapshotEnd);
 assert.match(snapshotSection, /href="business-snapshot\/" data-report-link>Request Your Free Business Snapshot<\/a>/);
 assert.ok(snapshotSection.includes('No sales call required. Use the brief on your own or continue only if further help makes sense.'));
-assert.match(html, /id="business-friction-heading">Does any of this sound familiar\?<\/h2>/);
-assert.match(html, /Good systems should make business easier—not harder\./);
+assert.doesNotMatch(html, /class="homepage-value-strip"/, "avoid repeating capability problems before the offers");
 const body = html.slice(html.indexOf('<body'));
 for (const retiredJourneyLabel of [
   'Discovery Conversation',
@@ -43,11 +42,14 @@ for (const retiredJourneyLabel of [
 assert.doesNotMatch(body, /phase3-method-sequence|phase3-process-sequence|phase3-process-substage/);
 
 const sectionOrder = [
-  'class="homepage-value-strip"',
-  'class="section phase3-snapshot"',
-  'class="section phase3-method"',
+  'class="section website-offer"',
+  'class="section spreadsheet-repair"',
   'class="homepage-eastland-showcase"',
-  'class="section phase3-capabilities"'
+  'class="section phase3-method"',
+  'class="section phase3-capabilities"',
+  'class="section phase3-owner"',
+  'class="section phase3-snapshot"',
+  'class="section phase3-final-cta"'
 ].map((marker) => html.indexOf(marker));
 assert.ok(sectionOrder.every((position) => position >= 0));
 assert.deepEqual(sectionOrder, [...sectionOrder].sort((a, b) => a - b));
@@ -86,7 +88,7 @@ assert.doesNotMatch(html, /class="eastland-project-actions"/);
 assert.match(work, /From a Facebook-first presence to a clear digital front door\./);
 assert.match(work, /Current public experience: A responsive website with clear paths to service information, visit planning, ministries, messages, directions, and contact details\./);
 assert.doesNotMatch(body, /easier to find, easier to use, and easier to maintain|free of charge|home church/i);
-assert.ok(html.indexOf(primaryCta) < html.indexOf('Explore Our Work'), 'Free Business Snapshot must remain the primary homepage offer');
+assert.ok(html.indexOf('Explore Paid Services') < html.indexOf('Explore Our Work'), 'paid services must be discoverable before project proof');
 assert.match(work, /class="button button-dark" href="https:\/\/www\.eastlandfirstchurchofgod\.com"/, 'Eastland live proof must remain accessible on Our Work');
 assert.doesNotMatch(html, /class="eastland-story-timeline"|class="eastland-live-proof"/, 'homepage must not duplicate detailed case studies');
 assert.match(html, /href="our-work\/">Explore Our Work/);
