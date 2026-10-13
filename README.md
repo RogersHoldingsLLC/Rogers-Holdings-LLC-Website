@@ -246,3 +246,7 @@ Before publishing a homepage change:
 4. Confirm analytics, canonical metadata, social metadata, JSON-LD, favicons, and Search Console verification remain intact.
 5. Verify email, telephone, and featured-project links.
 6. Review Git status and the complete diff before committing.
+
+## Approved customer journey refinement
+
+The reviewed homepage brings Website Creation and Spreadsheet Repair forward, connects them to Eastland and Missy proof, removes repeated friction framing and uses direct project inquiry as the closing action. Snapshot remains optional. Mobile presents intro, approved Executive Brief image/disclosure, then CTA buttons in matching DOM order, while preserving desktop geometry. The bounded scope, unchanged terms/assets/intake, validation and rollback baseline are recorded in [CUSTOMER_JOURNEY_APPROVED_RELEASE.md](docs/design-source/CUSTOMER_JOURNEY_APPROVED_RELEASE.md).

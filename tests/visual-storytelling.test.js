@@ -95,6 +95,13 @@ for (const [viewport, expectedDimensions] of Object.entries(heroV22Dimensions)) 
   }
 }
 
+// A single semantic sample sits after intro copy and before the action links.
+// This prevents CSS-only reordering from disagreeing with screen-reader order.
+assert.equal((html.match(/<figure class="homepage-hero-media"/g) || []).length, 1);
+const introPosition = html.indexOf('<p class="hero-lede">');
+const samplePosition = html.indexOf('<figure class="homepage-hero-media"');
+const actionsPosition = html.indexOf('<div class="button-row">', introPosition);
+assert.ok(introPosition < samplePosition && samplePosition < actionsPosition);
 const heroStart = html.indexOf('<figure class="homepage-hero-media"');
 const heroEnd = html.indexOf('</figure>', heroStart);
 const hero = html.slice(heroStart, heroEnd);
@@ -139,27 +146,28 @@ for (const [, , width, height] of families) assert.ok(width > 0 && height > 0);
 
 const sectionOrder = [
   'class="hero phase3-hero"',
-  'class="homepage-value-strip"',
-  'class="section phase3-snapshot"',
-  'class="section phase3-method"',
+  'class="section website-offer"',
+  'class="section spreadsheet-repair"',
   'class="homepage-eastland-showcase"',
+  'class="section phase3-method"',
   'class="section phase3-capabilities"',
   'class="section phase3-owner"',
+  'class="section phase3-snapshot"',
   'class="section phase3-final-cta"'
 ].map((marker) => html.indexOf(marker));
 assert.ok(sectionOrder.every((position) => position >= 0));
-assert.deepEqual(sectionOrder, [...sectionOrder].sort((a, b) => a - b), 'homepage sections must follow the approved primary and secondary order');
+assert.deepEqual(sectionOrder, [...sectionOrder].sort((a, b) => a - b), 'homepage sections must follow the reviewed offer-to-proof customer journey order');
 
 for (const copy of [
   'How Rogers Holdings works', 'Assess, Prioritize, Improve methodology',
-  'A practical place to start',
+  'Optional Free Business Snapshot',
   'Get a clear outside view before spending money on the wrong fix.',
   'The clearest visible issue', 'What deserves attention first',
   'A practical recommended next step, with plain-English reasoning',
   'See our work in action.', 'Eastland First Church of God',
   'From a Facebook-first presence to a clear digital front door.',
   'Facebook was the primary online presence.', 'Eastland project story',
-  'Faith-led. Owner accountable.', 'My commitment to every client', 'A simple place to start'
+  'Faith-led. Owner accountable.', 'My commitment to every client', 'Talk with Brian'
 ]) assert.ok((html + work).includes(copy), `missing preserved secondary content: ${copy}`);
 
 const renderedHomepage = html.slice(html.indexOf('<body'));
