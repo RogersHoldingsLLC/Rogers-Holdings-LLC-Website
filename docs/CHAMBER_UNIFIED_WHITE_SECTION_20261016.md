@@ -13,3 +13,5 @@ Verification: all eight existing suites, 69-file build and diff check pass. Prev
 Latest owner polish: full white field retained; outer panel/profile button use existing RH --color-gold #A97B27. Added one restrained offset top-left gold corner matching founder portrait treatment (same color; scaled to 56px, offset 10px) and subtle shadow. No changes to official mark, image colors or click destinations. Silent reel already delivered; no re-render.
 
 Final gold-trim verification: full background computed rgb(255,255,255); outer and corner borders rgb(169,123,39), exactly --color-gold #A97B27; member text dark rgb(38,43,36). Actual screenshots visually inspected. Real-click final member page identity verified again at 1440/390/320. No overflow/errors or image/branding changes.
+
+Final breathing-room refinement: full-white card max width 430px, 28px internal padding, 24px logo/text gutter, 6px row gap. Latest owner clarifies same cohesive white-card/gold-trim direction applies to separate reel, which will be revised separately as v2. Original logo remains 96px on site, unmodified.
