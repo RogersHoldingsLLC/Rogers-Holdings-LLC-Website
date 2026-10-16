@@ -8,6 +8,7 @@ export const PRODUCTION_ORIGIN = 'https://rogersholdingsllc.com';
 
 export const PUBLIC_MANIFEST = Object.freeze([
   'CNAME',
+  'assets/js/chamber-membership.js',
   'assets/images/our-work/howl-and-timber-wordmark.svg',
   'examples/howl-and-timber/index.html',
   'examples/howl-and-timber/styles.css',

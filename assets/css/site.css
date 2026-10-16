@@ -1621,3 +1621,11 @@ h3 { letter-spacing: -.015em; }
 @media (max-width: 360px) {
   .home-page .phase3-hero-layout { padding-top: 90px; }
 }
+
+/* Homepage footer membership widget: official Chamber artwork on a legible panel. */
+.chamber-membership { width: min(100%, 250px); min-height: 248px; margin-top: 28px; padding: 20px 22px 16px; border: 1px solid rgba(203, 180, 133, .45); border-radius: 5px; background: #fcfbf8; color: #262b24; text-align: center; }
+.chamber-membership .mn-widget-member-name { font-size: 13px; line-height: 1.5; }
+.chamber-membership .mn-widget-member-text { margin: 5px 0 12px; font-size: 11px; color: #596151; }
+.chamber-membership .mn-widget-member-logo { display: block; width: 145px; height: auto; max-width: 100%; margin: 0 auto; }
+.chamber-membership-profile { display: inline-block; margin-top: 14px; font-size: 11px; line-height: 1.5; color: #4f593f; text-underline-offset: 3px; }
+.chamber-membership-profile:focus-visible, .chamber-membership .mn-widget-member-link:focus-visible { outline: 2px solid #9f7d3c; outline-offset: 5px; }
