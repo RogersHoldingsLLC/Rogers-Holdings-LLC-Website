@@ -16,6 +16,7 @@
         const link = target.querySelector(".mn-widget-member-link");
         if (!link) return;
         link.setAttribute("rel", "noopener noreferrer");
+        link.setAttribute("aria-label", "Mt. Sterling Chamber homepage (opens in a new tab)");
         if (link.href === "http://www.mtsterlingchamber.com/") {
           link.href = "https://www.mtsterlingchamber.com/";
         }
@@ -36,7 +37,7 @@
       observer.disconnect();
       loadMembership();
     }, { rootMargin: "240px" });
-    observer.observe(target);
+    observer.observe(target.closest(".chamber-membership"));
   } else {
     window.addEventListener("load", loadMembership, { once: true });
   }

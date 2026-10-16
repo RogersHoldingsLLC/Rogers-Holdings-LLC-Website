@@ -1622,10 +1622,17 @@ h3 { letter-spacing: -.015em; }
   .home-page .phase3-hero-layout { padding-top: 90px; }
 }
 
-/* Homepage footer membership widget: official Chamber artwork on a legible panel. */
-.chamber-membership { width: min(100%, 250px); min-height: 248px; margin-top: 28px; padding: 20px 22px 16px; border: 1px solid rgba(203, 180, 133, .45); border-radius: 5px; background: #fcfbf8; color: #262b24; text-align: center; }
-.chamber-membership .mn-widget-member-name { font-size: 13px; line-height: 1.5; }
-.chamber-membership .mn-widget-member-text { margin: 5px 0 12px; font-size: 11px; color: #596151; }
-.chamber-membership .mn-widget-member-logo { display: block; width: 145px; height: auto; max-width: 100%; margin: 0 auto; }
-.chamber-membership-profile { display: inline-block; margin-top: 14px; font-size: 11px; line-height: 1.5; color: #4f593f; text-underline-offset: 3px; }
-.chamber-membership-profile:focus-visible, .chamber-membership .mn-widget-member-link:focus-visible { outline: 2px solid #9f7d3c; outline-offset: 5px; }
+/* Homepage Chamber membership: original badge, compact dark-footer integration. */
+.chamber-membership { display: grid; grid-template-columns: 96px minmax(0, 1fr); column-gap: 18px; row-gap: 4px; width: min(100%, 390px); margin-top: 28px; padding-top: 20px; border-top: 1px solid rgba(203, 180, 133, .28); color: #fcfbf8; text-align: left; }
+#mni-membership-639277029874283606, .chamber-membership .mn-widget-member { display: contents; }
+.chamber-membership .mn-widget-member-name { grid-column: 2; grid-row: 1; align-self: end; font-size: 13px; line-height: 1.45; text-align: left; }
+.chamber-membership .mn-widget-member-text { grid-column: 2; grid-row: 2; font-size: 11px; line-height: 1.5; color: rgba(252, 251, 248, .65); text-align: left; }
+.chamber-membership .mn-widget-member-assoc { grid-column: 1; grid-row: 1 / 4; align-self: start; }
+.chamber-membership .mn-widget-member-link { display: block; width: 96px; }
+.chamber-membership .mn-widget-member-logo { display: block; width: 96px; height: auto; max-width: 100%; margin: 0; }
+.chamber-membership-profile { grid-column: 2; grid-row: 3; align-self: start; display: inline-block; width: fit-content; max-width: 100%; padding: 8px 11px; border: 1px solid rgba(203, 180, 133, .65); border-radius: 3px; font-size: 11px; font-weight: 650; line-height: 1.55; color: #ead7ab; text-decoration: none; }
+.chamber-membership-profile:hover { background: rgba(203, 180, 133, .1); }
+.chamber-membership-note { grid-column: 1 / -1; grid-row: 4; margin-top: 9px; font-size: 10px; line-height: 1.6; color: rgba(252, 251, 248, .5); }
+.chamber-membership-profile:focus-visible, .chamber-membership .mn-widget-member-link:focus-visible { outline: 2px solid #cbb485; outline-offset: 5px; }
+#mni-membership-639277029874283606:empty + .chamber-membership-profile { grid-column: 1 / -1; grid-row: 1; }
+#mni-membership-639277029874283606:empty ~ .chamber-membership-note { display: none; }
