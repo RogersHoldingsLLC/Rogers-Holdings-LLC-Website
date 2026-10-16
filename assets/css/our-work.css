@@ -126,3 +126,18 @@
   .work-missy-story > p:not(.work-review-label):not(.work-asset-note) { font-size: 17px; }
   .work-next-step h2 { font-size: 36px; }
 }
+
+/* Simple linked logo cards; existing project stories retained. */
+.website-example-section { background: #f5f0e6; }
+.website-example-section > .container > p:not(.eyebrow) { max-width: 65ch; }
+.website-example-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 32px; }
+.website-example-card { display: flex; flex-direction: column; gap: 12px; padding: 28px; background: #fffaf1; border: 1px solid #d5c9b3; color: #272b24; text-decoration: none; border-radius: 8px; }
+.website-example-card img { display: block; width: 100%; height: 180px; object-fit: contain; margin-bottom: 12px; }
+.website-example-card > span { font-size: .8rem; line-height: 1.5; }
+.website-example-card > strong { font-size: 1rem; }
+.website-example-card-dark { background: #080808; color: #ead09a; }
+.website-example-card:hover { border-color: #9f7d3c; }
+.website-example-card:focus-visible { outline: 3px solid #9f7d3c; outline-offset: 5px; }
+@media (max-width: 800px) { .website-example-grid { grid-template-columns: 1fr; } .website-example-card img { height: 160px; } }
+
+.website-example-card-howl { background: #17262b; color: #f4f0e6; }

@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /examples/
 
 Sitemap: https://rogersholdingsllc.com/sitemap.xml

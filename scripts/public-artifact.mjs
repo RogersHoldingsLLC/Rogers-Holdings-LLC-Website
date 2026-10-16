@@ -8,6 +8,27 @@ export const PRODUCTION_ORIGIN = 'https://rogersholdingsllc.com';
 
 export const PUBLIC_MANIFEST = Object.freeze([
   'CNAME',
+  'assets/images/our-work/howl-and-timber-wordmark.svg',
+  'examples/howl-and-timber/index.html',
+  'examples/howl-and-timber/styles.css',
+  'examples/howl-and-timber/assets/wordmark.svg',
+  'examples/howl-and-timber/assets/fictional-team.png',
+  'examples/howl-and-timber/assets/husky-mountains.jpg',
+
+  'assets/images/our-work/cortez-capital-concept-logo.png',
+  'assets/images/our-work/captured-by-karmen-wordmark.png',
+  'examples/cortez-capital/index.html',
+  'examples/cortez-capital/styles.css',
+  'examples/cortez-capital/script.js',
+  'examples/cortez-capital/site.webmanifest',
+  'examples/cortez-capital/assets/Hero_Header_optimized.jpg',
+  'examples/cortez-capital/assets/Main_Logo.png',
+  'examples/cortez-capital/assets/Profile_Logo.png',
+  'examples/cortez-capital/assets/icons/apple-touch-icon.png',
+  'examples/cortez-capital/assets/icons/favicon-32.png',
+  'examples/cortez-capital/assets/icons/icon-192.png',
+  'examples/cortez-capital/assets/icons/icon-512.png',
+
   'apple-touch-icon.png',
   'assets/css/digital-business-card.css',
   'assets/css/site.css',
