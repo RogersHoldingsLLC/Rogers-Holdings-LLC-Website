@@ -108,7 +108,7 @@ h3 { margin-bottom: 12px; font-size: 20px; line-height: 1.25; }
 .site-header .header-logo-mark, .site-footer .header-logo-mark { position: relative; display: block; flex: 0 0 auto; width: 44px; height: 44px; }
 .site-header .header-logo-mark img, .site-footer .header-logo-mark img { position: absolute; inset: 0; width: 100%; height: 100%; }
 .site-header .header-logo-primary, .site-footer .header-logo-primary { clip-path: inset(17%); filter: brightness(0) invert(1); transition: filter .25s ease; }
-.site-header .brand-lockup small { color: var(--color-gold); }
+.site-header .brand-lockup small { color: var(--color-gold-hover); }
 .site-header.is-scrolled .brand-lockup { color: var(--ink); }
 .site-header.is-scrolled .header-logo-primary { filter: brightness(0); }
 .primary-nav { display: flex; align-items: center; gap: 25px; }
@@ -264,7 +264,7 @@ h3 { margin-bottom: 12px; font-size: 20px; line-height: 1.25; }
 .site-footer nav, .site-footer address { display: grid; gap: 10px; font-style: normal; }
 .site-footer nav a, .site-footer address a { color: rgba(255,255,255,.72); font-size: 13px; text-decoration: none; }
 .site-footer nav a:hover, .site-footer address a:hover { color: var(--gold-pale); }
-.site-footer address span { margin-top: 8px; color: rgba(255,255,255,.42); font-size: 12px; }
+.site-footer address span { margin-top: 8px; color: rgba(255,255,255,.64); font-size: 12px; }
 .footer-bottom { display: flex; padding-top: 25px; border-top: 1px solid rgba(255,255,255,.1); justify-content: space-between; color: rgba(255,255,255,.42); font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
 
 /* Shared foundation normalization */
@@ -1637,4 +1637,4 @@ h3 { letter-spacing: -.015em; }
 #mni-membership-639277029874283606:empty + .chamber-membership-profile { grid-column: 1 / -1; grid-row: 1; }
 #mni-membership-639277029874283606:empty ~ .chamber-membership-note { display: none; }
 
-.chamber-membership::before { position: absolute; top: -10px; left: -10px; width: 56px; height: 56px; border-top: 1px solid var(--color-gold); border-left: 1px solid var(--color-gold); content: ""; pointer-events: none; }
+.chamber-membership::before { position: absolute; top: -10px; left: -10px; width: 56px; height: 56px; border-top: 2px solid var(--color-gold); border-left: 2px solid var(--color-gold); content: ""; pointer-events: none; }
