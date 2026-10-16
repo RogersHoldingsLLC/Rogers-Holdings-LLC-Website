@@ -23,7 +23,7 @@ function artifactHashes() {
 }
 
 validateSourceBoundary();
-assert.equal(PUBLIC_MANIFEST.length, 49, 'public artifact must contain exactly 49 allowlisted files');
+assert.equal(PUBLIC_MANIFEST.length, 68, 'public artifact must contain exactly 68 allowlisted files');
 const firstBuild = buildPublicArtifact();
 assert.deepEqual(firstBuild, PUBLIC_MANIFEST);
 
