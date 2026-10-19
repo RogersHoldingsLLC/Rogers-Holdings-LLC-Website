@@ -261,3 +261,7 @@ The card puts Save Contact and the other actions directly after the profile on p
 ## Vertical phone card refinement
 
 On phones, the card now uses the available screen width with safe-area insets and a 20px content gutter, a compact branded header, and one vertical profile → contact details → full-width action sequence. Save Contact leads six stacked, readable action rows. The page scrolls naturally without a fixed-height fit or floating controls; desktop and compact landscape layouts are preserved.
+
+## Compact phone card hierarchy
+
+A follow-up informed by the owner’s actual Safari screenshot trims the phone header, removes the redundant phone-only card badge, reduces portrait and section spacing, and brings Save Contact immediately after the profile. Secondary actions use a compact two-column group within the vertical page. Phone action targets remain at least 52px (Save Contact 56px); description, portrait asset, contact details, URLs and vCard are unchanged.
