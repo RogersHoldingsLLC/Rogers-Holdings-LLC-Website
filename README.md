@@ -232,7 +232,10 @@ approved smiling PNG through proportional resizing and compression only.
 The 97,798-byte image retains the existing frame and lazy loading, with the
 homepage’s below-100-KB image limit enforced. The full-resolution supplied PNG
 is preserved locally and excluded from the public build.
-The digital business card and its embedded vCard photo retain their existing asset.
+The digital business card now uses Brian’s separately approved smiling JPEG,
+proportionally resized to 576×720 and compressed without facial edits. Its
+embedded vCard photo matches the card asset; contact fields, card markup,
+styles, links, and QR destination remain unchanged.
 
 ## Release checks
 
