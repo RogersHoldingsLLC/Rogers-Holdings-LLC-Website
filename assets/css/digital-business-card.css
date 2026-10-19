@@ -496,8 +496,8 @@ h1 {
   }
 
   .brand-bar {
-    min-height: 68px;
-    padding: 12px 20px;
+    min-height: 56px;
+    padding: 8px 20px;
     gap: 12px;
     flex-wrap: wrap;
   }
@@ -509,50 +509,55 @@ h1 {
     font-size: .8125rem;
   }
 
+  .brand-lockup img {
+    width: 34px;
+    height: 34px;
+  }
+
   .card-label {
-    flex: 0 1 76px;
-    font-size: .5625rem;
+    display: none;
   }
 
   .card-content {
     display: flex;
     flex-direction: column;
-    padding: 22px 20px 16px;
+    padding: 16px 20px 12px;
   }
 
   .portrait-frame {
-    width: 136px;
+    width: 112px;
     max-width: 100%;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
   }
 
   .eyebrow {
+    margin-bottom: 6px;
     font-size: .6875rem;
     letter-spacing: .1em;
   }
 
   h1 {
-    font-size: 2.25rem;
+    font-size: 2rem;
     line-height: 1.08;
     overflow-wrap: anywhere;
   }
 
   .description {
-    margin-top: 12px;
+    margin-top: 8px;
     font-size: 1rem;
     line-height: 1.5;
   }
 
   .actions {
-    grid-template-columns: minmax(0, 1fr);
-    margin-top: 16px;
-    gap: 10px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 14px;
+    gap: 8px;
   }
 
   .action {
-    min-height: 56px;
-    padding: 14px 10px;
-    font-size: 1rem;
+    min-height: 52px;
+    padding: 12px 10px;
+    font-size: .9375rem;
     letter-spacing: .01em;
     text-transform: none;
   }
@@ -563,7 +568,7 @@ h1 {
   }
 
   .action-primary {
-    min-height: 60px;
+    min-height: 56px;
     font-size: 1rem;
   }
 
