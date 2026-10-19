@@ -639,6 +639,17 @@ h1 {
   }
 }
 
+/* Allow final links to scroll above floating phone browser controls. */
+@media (max-width: 599px), (max-width: 932px) and (max-height: 500px) {
+  html {
+    scroll-padding-bottom: calc(104px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .card-stage {
+    padding-bottom: calc(104px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
