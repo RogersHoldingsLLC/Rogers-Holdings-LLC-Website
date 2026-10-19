@@ -265,3 +265,7 @@ On phones, the card now uses the available screen width with safe-area insets an
 ## Compact phone card hierarchy
 
 A follow-up informed by the owner’s actual Safari screenshot trims the phone header, removes the redundant phone-only card badge, reduces portrait and section spacing, and brings Save Contact immediately after the profile. Secondary actions use a compact two-column group within the vertical page. Phone action targets remain at least 52px (Save Contact 56px); description, portrait asset, contact details, URLs and vCard are unchanged.
+
+## Phone browser toolbar clearance
+
+The card reserves 104px plus the bottom safe-area inset after its content on phones and short landscape views. This lets the final email/phone links scroll above floating browser chrome without changing the compact layout, locking scrolling, or constraining viewport height.
