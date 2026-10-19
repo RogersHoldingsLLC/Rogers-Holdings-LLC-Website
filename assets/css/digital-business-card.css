@@ -21,12 +21,12 @@
 }
 
 html {
-  min-width: 320px;
+  min-width: 0;
   background: var(--executive);
 }
 
 body {
-  min-width: 320px;
+  min-width: 0;
   min-height: 100vh;
   min-height: 100svh;
   margin: 0;
@@ -103,6 +103,7 @@ button {
 
 .business-card {
   width: min(100%, 980px);
+  min-width: 0;
   overflow: hidden;
   border: 1px solid rgba(212, 179, 106, .5);
   background: var(--paper);
@@ -477,6 +478,149 @@ h1 {
   .action {
     min-height: 50px;
     font-size: 10px;
+  }
+}
+
+/* Phone refinement: content can grow with text size and browser chrome. */
+@media (max-width: 599px) {
+  .card-stage {
+    padding: calc(12px + env(safe-area-inset-top, 0px))
+      calc(12px + env(safe-area-inset-right, 0px))
+      calc(12px + env(safe-area-inset-bottom, 0px))
+      calc(12px + env(safe-area-inset-left, 0px));
+    align-items: start;
+  }
+
+  .brand-bar {
+    flex-wrap: wrap;
+    gap: 8px 12px;
+  }
+
+  .brand-lockup {
+    min-width: 0;
+    line-height: 1.15;
+  }
+
+  .card-label {
+    font-size: .5625rem;
+  }
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 16px 12px;
+  }
+
+  .portrait-frame {
+    width: 120px;
+    max-width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .eyebrow {
+    font-size: .6875rem;
+    letter-spacing: .1em;
+  }
+
+  h1 {
+    font-size: 2.25rem;
+    line-height: 1.08;
+    overflow-wrap: anywhere;
+  }
+
+  .description {
+    margin-top: 12px;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .actions {
+    margin-top: 22px;
+    gap: 10px;
+  }
+
+  .action {
+    min-height: 56px;
+    padding: 14px 10px;
+    font-size: .8125rem;
+    letter-spacing: .01em;
+    text-transform: none;
+  }
+
+  .action span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .action-primary {
+    min-height: 60px;
+    font-size: .9375rem;
+  }
+
+  .contact-details {
+    display: grid;
+    margin: 16px 0 0;
+    gap: 0;
+    justify-items: center;
+    font-size: .875rem;
+    line-height: 1.5;
+  }
+
+  .contact-details > span {
+    display: none;
+  }
+
+  .contact-details a {
+    display: flex;
+    max-width: 100%;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    text-align: center;
+  }
+
+  .share-status {
+    margin-top: 8px;
+    font-size: .8125rem;
+  }
+}
+
+@media (max-width: 280px) {
+  .actions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (min-width: 600px) and (max-width: 932px) and (max-height: 500px) {
+  .card-stage {
+    padding: calc(12px + env(safe-area-inset-top, 0px))
+      calc(12px + env(safe-area-inset-right, 0px))
+      calc(12px + env(safe-area-inset-bottom, 0px))
+      calc(12px + env(safe-area-inset-left, 0px));
+    align-items: start;
+  }
+
+  .card-content {
+    padding: 22px;
+    column-gap: 24px;
+    grid-template-columns: 160px minmax(0, 1fr);
+  }
+
+  .profile {
+    gap: 20px;
+    grid-template-columns: 160px minmax(0, 1fr);
+  }
+
+  .portrait-frame {
+    width: 160px;
+  }
+
+  h1 {
+    font-size: 2.25rem;
+  }
+
+  .action {
+    font-size: .8125rem;
+    text-transform: none;
   }
 }
 
