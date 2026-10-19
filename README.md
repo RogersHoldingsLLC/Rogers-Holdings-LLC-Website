@@ -257,3 +257,7 @@ The reviewed homepage brings Website Creation and Spreadsheet Repair forward, co
 ## iPhone digital business card refinement
 
 The card puts Save Contact and the other actions directly after the profile on phones, with larger readable labels, 56–60px action targets, a compact portrait, individually accessible contact links, and additive safe-area padding. Layouts grow naturally for text enlargement and landscape browsing. Desktop placement, approved smiling portrait, vCard bytes, contact destinations, branding, and sharing behavior are preserved.
+
+## Vertical phone card refinement
+
+On phones, the card now uses the available screen width with safe-area insets and a 20px content gutter, a compact branded header, and one vertical profile → contact details → full-width action sequence. Save Contact leads six stacked, readable action rows. The page scrolls naturally without a fixed-height fit or floating controls; desktop and compact landscape layouts are preserved.
