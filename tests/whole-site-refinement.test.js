@@ -11,16 +11,19 @@ const css = read('assets/css/site.css');
 const js = read('assets/js/site.js');
 const snapshotDoc = read('docs/BUSINESS_SNAPSHOT_PREMIUM_EXPERIENCE.md');
 
-const labels = ['Approach', 'Process', 'Capabilities', 'Our Work', 'About', 'Contact'];
+const labels = ['Approach', 'Process', 'Services', 'Our Work', 'About', 'Contact'];
 for (const [name, html] of [['homepage', home], ['Business Snapshot', snapshot], ['Privacy', privacy]]) {
-  for (const label of labels) assert.ok(html.includes(`>${label}</a>`), `${name} missing ${label}`);
+  for (const label of labels) {
+    const expected = label === 'Process' ? 'Free Snapshot' : label;
+    assert.ok(html.includes(`>${expected}</a>`), `${name} missing ${expected}`);
+  }
   assert.ok(html.includes('>Business Snapshot</a>'), `${name} missing product navigation label`);
   assert.match(html, /site\.js\?v=whole-site-refinement-1/);
 }
 
-assert.match(home, /site\.css\?v=customer-journey-2/);
-assert.match(snapshot, /site\.css\?v=whole-site-refinement-1/);
-assert.match(privacy, /site\.css\?v=whole-site-refinement-1/);
+assert.match(home, /site\.css\?v=understand-first-20261026/);
+assert.match(snapshot, /site\.css\?v=understand-first-20261026/);
+assert.match(privacy, /site\.css\?v=understand-first-20261026/);
 
 assert.ok(home.includes('Request Your Free Business Snapshot'));
 assert.ok(snapshot.includes('Request Your Free Business Snapshot'));
@@ -37,7 +40,7 @@ assert.match(snapshot, /<\/section>\s*<section class="section intake-section" ar
 
 const homepageHead = home.slice(0, home.indexOf('</head>'));
 const homepageBody = home.slice(home.indexOf('<body'));
-for (const term of ['Free Business Snapshot', 'Executive Brief', 'Discovery Conversation', 'Digital Business Assessment', 'Improvement Plan', 'Implementation Services', 'Ongoing Optimization']) {
+for (const term of ['Free Business Snapshot', 'Executive Brief', 'Website Creation', 'Excel & Google Sheets Repair']) {
   assert.ok(homepageHead.includes(term), `homepage structured data missing canonical service term: ${term}`);
 }
 for (const retiredJourneyLabel of ['Discovery Conversation', 'Digital Business Assessment', 'Improvement Plan', 'Implementation Services', 'Ongoing Optimization']) {

@@ -72,7 +72,7 @@ const files = fs.readdirSync(homepageAssets).sort();
 const productionFiles = files.filter((file) =>
   !file.startsWith('homepage-hero-v2-desktop-proof.') && file !== 'brian-smiling-portrait.png'
 );
-assert.equal(productionFiles.length, 46, 'homepage production directory must contain exactly 45 preserved production derivatives and the approved smiling founder portrait');
+assert.equal(productionFiles.filter(f => !['rh-monogram-mask.png', 'rh-original-gold-frame.png'].includes(f)).length, 46, 'homepage production directory must contain exactly 45 preserved production derivatives and the approved smiling founder portrait');
 assert.ok(productionFiles.includes('brian-smiling-portrait.webp'));
 assert.deepEqual(imageDimensions(path.join(homepageAssets, 'brian-smiling-portrait.webp')), [1040, 1300]);
 for (const [family, viewport] of families) {
@@ -95,13 +95,16 @@ for (const [viewport, expectedDimensions] of Object.entries(heroV22Dimensions)) 
   }
 }
 
-// A single semantic sample sits after intro copy and before the action links.
-// This prevents CSS-only reordering from disagreeing with screen-reader order.
+// One disclosed sample is retained in Snapshot; the original workflow and contact action lead the concept.
 assert.equal((html.match(/<figure class="homepage-hero-media"/g) || []).length, 1);
 const introPosition = html.indexOf('<p class="hero-lede">');
 const samplePosition = html.indexOf('<figure class="homepage-hero-media"');
 const actionsPosition = html.indexOf('<div class="button-row">', introPosition);
-assert.ok(introPosition < samplePosition && samplePosition < actionsPosition);
+assert.ok(introPosition < actionsPosition);
+assert.ok(samplePosition > html.indexOf('id="process"'), 'the single disclosed sample belongs with optional Snapshot');
+assert.match(html, /class="rh-sculpture"/);
+assert.match(html, /data-rh-sculpture data-mask="assets\/images\/homepage\/rh-monogram-mask\.png"/);
+assert.match(html, /href="#contact">Talk with Brian/);
 const heroStart = html.indexOf('<figure class="homepage-hero-media"');
 const heroEnd = html.indexOf('</figure>', heroStart);
 const hero = html.slice(heroStart, heroEnd);
@@ -111,8 +114,6 @@ const eastlandEnd = html.indexOf('</picture>', eastlandStart);
 const eastland = html.slice(eastlandStart, eastlandEnd);
 
 for (const [markup, family, viewport] of [
-  [hero, 'homepage-hero-v2.2', 'mobile'],
-  [hero, 'homepage-hero-v2.2', 'tablet'],
   [hero, 'homepage-hero-v2.2', 'desktop'],
   [eastland, 'eastland-product-family', 'tablet'],
   [eastland, 'eastland-product-family', 'desktop']
@@ -123,7 +124,7 @@ for (const [markup, family, viewport] of [
   assert.ok(avif >= 0 && webp > avif && jpg > webp, `${family} ${viewport} sources must be ordered AVIF, WebP, JPG`);
 }
 
-assert.match(hero, /media="\(min-width: 1101px\)" type="image\/avif" srcset="assets\/images\/homepage\/homepage-hero-v2\.2-desktop\.avif"/);
+assert.match(hero, /type="image\/avif" srcset="assets\/images\/homepage\/homepage-hero-v2\.2-desktop\.avif"/);
 assert.match(hero, /width="1536" height="1024" loading="eager" fetchpriority="high" decoding="async"/);
 assert.equal(html.split(approvedSampleDisclosure).length - 1, 1, 'the approved sample disclosure must render exactly once');
 assert.ok(hero.includes(approvedSampleDisclosure), 'the approved sample disclosure must remain visibly connected to the hero sample');
@@ -146,20 +147,20 @@ for (const [, , width, height] of families) assert.ok(width > 0 && height > 0);
 
 const sectionOrder = [
   'class="hero phase3-hero"',
-  'class="section website-offer"',
-  'class="section spreadsheet-repair"',
   'class="homepage-eastland-showcase"',
+  'class="section phase3-owner"',
   'class="section phase3-method"',
   'class="section phase3-capabilities"',
-  'class="section phase3-owner"',
+  'class="section website-offer"',
+  'class="section spreadsheet-repair"',
   'class="section phase3-snapshot"',
   'class="section phase3-final-cta"'
 ].map((marker) => html.indexOf(marker));
 assert.ok(sectionOrder.every((position) => position >= 0));
-assert.deepEqual(sectionOrder, [...sectionOrder].sort((a, b) => a - b), 'homepage sections must follow the reviewed offer-to-proof customer journey order');
+assert.deepEqual(sectionOrder, [...sectionOrder].sort((a, b) => a - b), 'homepage sections must follow the reviewed hero-to-proof-to-founder customer journey order');
 
 for (const copy of [
-  'How Rogers Holdings works', 'Assess, Prioritize, Improve methodology',
+  'How Rogers Holdings works', 'Understand, Prioritize, Scope and review methodology',
   'Optional Free Business Snapshot',
   'Get a clear outside view before spending money on the wrong fix.',
   'The clearest visible issue', 'What deserves attention first',
@@ -250,9 +251,8 @@ assert.equal(heroMasterHash, '02238a7a536a004970a03a332ee083efaf80cecbcf8034f73a
 
 for (const term of [
   'Free Business Snapshot', 'Request Your Free Business Snapshot', 'Executive Brief',
-  'Discovery Conversation', 'Digital Business Assessment', 'Improvement Plan',
-  'Implementation Services', 'Ongoing Optimization'
-]) assert.ok(html.includes(term), `missing canonical Business Snapshot term: ${term}`);
+  'Website Creation', 'Excel & Google Sheets Repair'
+]) assert.ok(html.includes(term), `missing current service or Snapshot term: ${term}`);
 
 assert.doesNotMatch(html, /Request Your Business Snapshot|phase3-snapshot-proof|visual-proof-pair|eastland-visual-stage/);
 

@@ -1469,7 +1469,7 @@ h3 { letter-spacing: -.015em; }
   .phase3-method .phase3-editorial-header h2 { font-size: clamp(34px, 10vw, 42px); }
   .phase3-method .phase3-editorial-header > p { margin-top: 18px; }
   .phase3-capabilities .phase3-editorial-header { padding-bottom: 22px; margin-bottom: 24px; }
-  .phase3-capabilities .phase3-editorial-header h2 { font-size: 28px; }
+  .phase3-capabilities .phase3-editorial-header h2 { font-size: 28px; white-space: normal; }
   .phase3-method-grid { grid-template-columns: 1fr; margin-top: 0; border-radius: 22px; }
   .phase3-method-grid li { padding: 18px 22px 18px 54px; }
   .phase3-method-grid li + li::before { top: -8px; left: 26px; width: 16px; height: 16px; transform: rotate(135deg); }
@@ -1638,3 +1638,381 @@ h3 { letter-spacing: -.015em; }
 #mni-membership-639277029874283606:empty ~ .chamber-membership-note { display: none; }
 
 .chamber-membership::before { position: absolute; top: -10px; left: -10px; width: 56px; height: 56px; border-top: 2px solid var(--color-gold); border-left: 2px solid var(--color-gold); content: ""; pointer-events: none; }
+
+/* Unpublished RH concept: one owner-first composition, scoped to this homepage. */
+.concept-page .phase3-hero { display: block; min-height: 0; background: #121510; }
+.concept-page .phase3-hero-layout { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 64px; min-height: 0; padding-block: 132px 56px; }
+.concept-page .phase3-hero-copy { max-width: none; }
+.concept-page .phase3-hero h1 { max-width: 18ch; margin-bottom: 22px; font-size: clamp(44px, 4.7vw, 68px); line-height: 1.02; }
+.concept-page .phase3-hero .hero-lede { max-width: 48ch; font-size: 17px; line-height: 1.7; }
+.concept-page .phase3-hero .button-row { margin-top: 26px; gap: 12px; }
+.concept-page .phase3-hero-note { max-width: 43ch; margin-top: 16px; color: #c0c2b9; font-size: 11px; }
+.concept-workflow { min-width: 0; margin: 0; padding: 22px; border: 1px solid #555340; border-top: 2px solid #b89b58; background: radial-gradient(ellipse at 70% 40%, #272b20, #191d17 70%); box-shadow: 0 20px 60px #0003; }
+.concept-workflow-top { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 16px; border-bottom: 1px solid #cbb48540; color: #d6c598; font-size: 10px; line-height: 1.5; letter-spacing: .12em; text-transform: uppercase; }
+.concept-workflow svg { display: block; width: 100%; height: auto; overflow: visible; margin-block: 12px 8px; }
+.workflow-input rect { fill: #1b2019; stroke: #777761; stroke-width: 1; }
+.workflow-input path, .workflow-input circle { fill: none; stroke: #d6c598; stroke-width: 1.5; }
+.concept-workflow text { fill: #f2ede1; font: 16px var(--sans); }
+.workflow-routes, .workflow-line { fill: none; stroke: #bca567; stroke-width: 1.8; }
+.workflow-line { stroke-dasharray: 600; stroke-dashoffset: 0; animation: rh-connect 1.5s ease both; }
+.line-two { animation-delay: .2s; }
+.line-three { animation-delay: .4s; }
+.line-four { animation-delay: 1.3s; }
+.workflow-halo { fill: none; stroke: #d6c598; stroke-width: 1; opacity: .25; transform-origin: 373px 169px; animation: rh-understand 1.6s ease .6s 2; }
+.workflow-core { fill: #343a2b; stroke: #cbb485; stroke-width: 1.5; }
+.workflow-listening { fill: none; stroke: #e1d2a9; stroke-width: 1.8; }
+.concept-workflow .workflow-understanding { fill: #f8f1db; font-family: var(--serif); font-size: 19px; }
+.workflow-result { animation: rh-next-step .8s ease 1.7s both; }
+.workflow-result rect { fill: #cbb485; stroke: #ddcda5; }
+.concept-workflow .workflow-result text { fill: #181c15; font-size: 15px; font-weight: 600; }
+.concept-workflow figcaption { padding-top: 14px; border-top: 1px solid #cbb48540; color: #c0c2b9; font-size: 12px; line-height: 1.6; }
+.concept-workflow figcaption strong { color: #eee7d5; font-weight: 400; }
+.concept-mobile-legend, .concept-workflow .concept-workflow-mobile { display: none; }
+@keyframes rh-connect { from { stroke-dashoffset: 600; } to { stroke-dashoffset: 0; } }
+@keyframes rh-understand { 0%, 100% { opacity: .25; transform: scale(1); } 50% { opacity: .55; transform: scale(1.06); } }
+@keyframes rh-next-step { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+
+.concept-page .phase3-owner { padding-block: 44px; background: #faf9f5; border-bottom: 1px solid var(--color-border); }
+.concept-page .phase3-owner-layout { grid-template-columns: 140px minmax(0, 1fr); gap: 40px; align-items: center; }
+.concept-page .phase3-owner figure { width: 140px; max-width: none; }
+.concept-page .phase3-founder-portrait-frame { padding: 5px; }
+.concept-page .phase3-founder-portrait figcaption { display: block; padding-top: 8px; }
+.concept-page .phase3-founder-portrait figcaption strong { display: block; font-size: 16px; }
+.concept-page .phase3-founder-portrait figcaption span { display: block; margin-top: 3px; font-size: 9px; }
+.concept-page .phase3-owner h2 { max-width: none; margin-bottom: 18px; font-size: clamp(28px, 2.6vw, 36px); line-height: 1.12; }
+.concept-page .phase3-owner-lede { max-width: 88ch; margin-bottom: 12px; font-size: 16px; }
+.concept-page .phase3-owner-layout > div > p:not(.eyebrow):not(.phase3-owner-lede) { max-width: 88ch; font-size: 14px; color: var(--color-text-secondary); }
+.concept-page .phase3-owner-principles { display: flex; flex-wrap: wrap; gap: 10px 24px; margin-top: 18px; padding-top: 16px; }
+.concept-page .phase3-owner-principles li { display: flex; gap: 8px; padding: 0; border: 0; }
+.concept-page .phase3-owner-principles span { position: static; font-size: 9px; }
+.concept-page .phase3-owner-principles strong { font-family: var(--sans); font-size: 12px; font-weight: 600; }
+
+.concept-page .homepage-eastland-showcase { padding-block: 46px; }
+.concept-page .work-preview-heading { margin-bottom: 24px; }
+.concept-page .work-preview-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+.concept-page .work-preview-card { display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: 22px; padding: 24px; border: 1px solid #d8cfbd; background: #faf8f0; }
+.concept-page .work-preview-card + .work-preview-card { border-left: 1px solid #d8cfbd; }
+.concept-page .work-preview-image { width: 100%; margin: 0; }
+.concept-page .work-preview-image img { height: auto; }
+.concept-missy-proof { display: flex; flex-direction: column; justify-content: center; min-height: 0; margin: 0; padding: 22px 14px 0; aspect-ratio: 2400 / 1244; background: #f3eee3; }
+.concept-missy-proof img { display: block; width: 100%; height: auto; }
+.concept-missy-proof figcaption { margin-top: 16px; color: #645c4d; font-size: 11px; text-align: center; }
+.concept-page .work-preview-card h3 { font-size: clamp(25px, 2.5vw, 34px); }
+.concept-page .phase3-method { padding-block: 48px; }
+.concept-page .phase3-method > .container { display: block; }
+.concept-page .phase3-method .phase3-editorial-header { padding: 0 0 24px; border-right: 0; border-bottom: 1px solid var(--color-border); }
+.concept-page .phase3-method .phase3-editorial-header h2 { max-width: 25ch; font-size: 36px; }
+.concept-page .phase3-method-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: none; margin-top: 24px; border-radius: 0; }
+.concept-page .phase3-method-grid li { padding: 24px; }
+.concept-page .phase3-method-grid p { font-size: 14px; }
+.concept-page .phase3-capabilities { padding-block: 40px; }
+.concept-page .phase3-capabilities .phase3-editorial-header { max-width: 850px; margin-inline: auto; }
+.concept-page .phase3-capabilities .phase3-editorial-header h2 { font-size: 36px; white-space: normal; }
+.concept-page .phase3-capabilities .phase3-editorial-header p:not(.eyebrow) { font-size: 16px; line-height: 1.65; }
+.concept-capability-details { border-block: 1px solid var(--color-border); }
+.concept-capability-details > summary { min-height: 52px; padding: 15px 6px; cursor: pointer; font-size: 15px; font-weight: 600; }
+.concept-capability-details[open] .phase3-capability-groups { margin-block: 16px 24px; }
+.concept-page .phase3-snapshot { padding-block: 48px; }
+.concept-page .phase3-snapshot-copy h2 { font-size: 36px; }
+.concept-page .phase3-snapshot-panel { padding: 20px; }
+.concept-page .phase3-snapshot .homepage-hero-media,
+.concept-page .phase3-snapshot .homepage-hero-media picture,
+.concept-page .phase3-snapshot .homepage-hero-media img { position: static; inset: auto; width: 100%; height: auto; margin: 0; }
+.concept-page .phase3-snapshot .homepage-hero-media { z-index: auto; }
+.concept-page .phase3-snapshot .homepage-hero-media::after { display: none; }
+.concept-page .phase3-snapshot .homepage-hero-media img { max-height: 250px; object-fit: contain; background: #171511; }
+.concept-page .phase3-snapshot .homepage-hero-media figcaption { position: static; max-width: none; margin: 0 0 18px; font-size: 11px; }
+.concept-page .phase3-snapshot-deliverables strong { font-family: var(--sans); font-size: 16px; }
+.concept-page .phase3-snapshot-deliverables li { padding-block: 10px; }
+.concept-page :focus-visible { outline: 3px solid #b28e32; outline-offset: 5px; }
+.concept-page .phase3-hero :focus-visible { outline-color: #e6ce88; }
+
+@media (max-width: 960px) {
+  .concept-page .phase3-hero-layout { grid-template-columns: 1fr 1fr; gap: 30px; padding-block: 112px 40px; }
+  .concept-page .phase3-hero h1 { font-size: 46px; }
+  .concept-page .phase3-hero .hero-lede { font-size: 16px; }
+  .concept-page .phase3-hero .button-row { flex-wrap: wrap; }
+  .concept-page .phase3-hero .button { width: auto; }
+}
+@media (max-width: 680px) {
+  .concept-page .phase3-hero-layout { display: flex; flex-direction: column; align-items: stretch; gap: 28px; padding-block: 104px 30px; }
+  .concept-page .phase3-hero h1 { max-width: 18ch; font-size: 40px; }
+  .concept-page .phase3-hero .hero-lede { font-size: 16px; line-height: 1.6; }
+  .concept-page .phase3-hero .button-row { gap: 10px; margin-top: 22px; }
+  .concept-page .phase3-hero .button { width: 100%; }
+  .concept-workflow { padding: 16px; }
+  .concept-workflow-top { font-size: 9px; padding-bottom: 12px; }
+  .concept-mobile-legend { display: flex; gap: 12px; margin-top: 15px; color: #eee7d5; font-size: 12px; }
+  .concept-workflow svg { margin-block: 0; }
+  .concept-workflow .concept-workflow-desktop { display: none; }
+  .concept-workflow .concept-workflow-mobile { display: block; }
+  .concept-workflow figcaption { font-size: 12px; padding-top: 10px; }
+  .concept-page .phase3-owner { padding-block: 30px; }
+  .concept-page .phase3-owner-layout { grid-template-columns: 84px minmax(0, 1fr); gap: 20px; align-items: start; }
+  .concept-page .phase3-owner figure { width: 84px; }
+  .concept-page .phase3-founder-portrait figcaption strong { font-size: 12px; }
+  .concept-page .phase3-founder-portrait figcaption span { font-size: 8px; }
+  .concept-page .phase3-owner-layout > div { grid-column: 1 / -1; }
+  .concept-page .phase3-owner h2 { font-size: 30px; }
+  .concept-page .phase3-owner-lede { font-size: 16px; }
+  .concept-page .phase3-owner-principles { gap: 12px 20px; }
+  .concept-page .homepage-eastland-showcase { padding-block: 30px; }
+  .concept-page .work-preview-heading h2 { font-size: 32px; }
+  .concept-page .work-preview-grid { grid-template-columns: 1fr; gap: 18px; }
+  .concept-page .work-preview-card { padding: 18px; gap: 18px; }
+  .concept-page .work-preview-card h3 { font-size: 28px; }
+  .concept-page .phase3-method { padding-block: 32px; }
+  .concept-page .phase3-method .phase3-editorial-header h2 { font-size: 30px; }
+  .concept-page .phase3-method-grid { grid-template-columns: 1fr; }
+  .concept-page .phase3-method-grid li { padding: 20px 20px 20px 48px; }
+  .concept-page .phase3-method-grid h3 { font-size: 26px; }
+  .concept-page .phase3-capabilities { padding-block: 32px; }
+  .concept-page .phase3-capabilities .phase3-editorial-header h2 { font-size: 30px; }
+  .concept-page .phase3-snapshot { padding-block: 32px; }
+  .concept-page .phase3-snapshot-copy h2 { font-size: 30px; }
+  .concept-page .phase3-snapshot-layout { gap: 24px; }
+}
+@media (max-width: 360px) {
+  .concept-page .phase3-hero h1 { font-size: 36px; }
+  .concept-workflow-top { letter-spacing: .06em; }
+  .concept-mobile-legend { gap: 10px; font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .concept-workflow *, .concept-workflow *::before, .concept-workflow *::after { animation: none !important; }
+}
+
+.concept-workflow-mobile .workflow-input text { font-size: 13px; }
+.concept-workflow-mobile .workflow-understanding { font-size: 16px; }
+.concept-workflow-mobile .workflow-result text { font-size: 14px; }
+.concept-workflow-mobile .workflow-halo { transform-origin: 140px 120px; }
+
+/* Premium hero pass: a quiet, spatial composition; copy and actions stay still. */
+.concept-page .phase3-hero { background: radial-gradient(ellipse at 78% 40%, #292721 0, #161817 37%, #111413 72%); }
+.concept-page .phase3-hero-layout { gap: 40px; padding-block: 144px 76px; align-items: center; }
+.concept-page .phase3-hero h1 { letter-spacing: -.045em; font-weight: 400; }
+.concept-workflow { position: relative; isolation: isolate; padding: 24px 0; border: 0; background: transparent; box-shadow: none; }
+.concept-workflow::before { content: ""; position: absolute; z-index: -1; inset: 12% -3%; background: radial-gradient(ellipse, #c2a66a17, transparent 65%); filter: blur(18px); }
+.concept-workflow-top { margin-inline: 22px; border: 0; padding-bottom: 20px; font-size: 9px; letter-spacing: .2em; color: #b5a581; }
+.concept-workflow svg { margin-block: 0 18px; }
+.workflow-input rect { fill: transparent; stroke: none; }
+.workflow-input path, .workflow-input circle { stroke: #ae9670; opacity: .65; }
+.concept-workflow .workflow-input text { fill: #e6e0d3; font-size: 15px; letter-spacing: .015em; }
+.workflow-routes, .workflow-line { stroke: #cbb07b; stroke-width: 1; }
+.workflow-line { animation: rh-premium-connect 3.2s cubic-bezier(.2,.6,.2,1) both; }
+.line-two { animation-delay: .45s; }.line-three { animation-delay: .9s; }.line-four { animation-delay: 2.2s; }
+.workflow-core { fill: url(#rh-depth); stroke: #a990604d; stroke-width: 1; filter: drop-shadow(0 20px 22px #0008); }
+.workflow-glint { fill: none; stroke: #edd9a130; stroke-width: .6; }
+.workflow-orbit { fill: none; stroke: url(#rh-gold); stroke-width: .8; opacity: .7; stroke-dasharray: 900; animation: rh-orbit-arrive 4.8s cubic-bezier(.2,.6,.2,1) both; }
+.orbit-front { animation-delay: .7s; opacity: .4; }
+.workflow-halo { stroke: #d9bf8633; animation: rh-premium-breathe 5.5s ease both; }
+.concept-workflow .workflow-understanding { font-size: 20px; letter-spacing: -.025em; }
+.workflow-listening { stroke: #dbc99e; stroke-width: 1; }
+.workflow-result { animation: rh-next-step 1.5s ease 3s both; }
+.workflow-result rect { fill: #292923; stroke: #a58a5655; stroke-width: .8; }
+.concept-workflow .workflow-result text { fill: #e8d7b2; font-weight: 400; font-size: 14px; letter-spacing: .035em; }
+.concept-workflow figcaption { margin-inline: 22px; border-color: #cbb48520; padding-top: 18px; font-size: 11px; color: #a7a89f; }
+@keyframes rh-premium-connect { from { stroke-dashoffset: 600; opacity: .1; } to { stroke-dashoffset: 0; opacity: .85; } }
+@keyframes rh-orbit-arrive { from { stroke-dashoffset: 900; opacity: 0; } to { stroke-dashoffset: 0; } }
+@keyframes rh-premium-breathe { 0% { opacity: .1; } 45% { opacity: .8; } 100% { opacity: .3; } }
+@media(max-width:960px) { .concept-page .phase3-hero-layout { gap: 24px; padding-block: 120px 48px; } }
+@media(max-width:680px) {
+ .concept-page .phase3-hero-layout { padding-block: 104px 30px; gap: 20px; }
+ .concept-workflow { padding: 12px 0; }
+ .concept-workflow-top,.concept-workflow figcaption { margin-inline: 4px; }
+ .concept-workflow-top { padding-bottom: 12px; }
+ .concept-workflow .workflow-input text { font-size: 12px; }
+ .concept-workflow-mobile .workflow-core { fill: #292820; }
+ .concept-workflow-mobile .workflow-orbit { stroke: #bda16b; opacity: .2; }
+ .concept-workflow-mobile .workflow-understanding { font-size: 16px; }
+ .concept-workflow-mobile .workflow-result text { font-size: 13px; letter-spacing: 0; }
+}
+@media(prefers-reduced-motion:reduce) { .concept-workflow * { animation: none !important; } }
+
+/* Meaning pass: understand first, connect the work, agree a focused improvement. */
+.hero-real-example { max-width: 48ch; margin-top: 22px; padding-top: 18px; border-top: 1px solid #cbb48525; color: #aeb1a6; font-size: 12px; line-height: 1.6; }
+.hero-real-example a { color: #dfc896; text-decoration: underline; text-underline-offset: 4px; }
+.concept-workflow-top { letter-spacing: .12em; }
+.workflow-input { animation: rh-business-context 1s ease both; }
+.workflow-core { animation: rh-business-focus 1.5s ease .7s both; }
+.workflow-halo { animation: rh-business-focus 1.8s ease .7s both; }
+.workflow-line { animation: rh-premium-connect 2.2s cubic-bezier(.2,.6,.2,1) 2s both; }
+.line-two { animation-delay: 2.3s; }.line-three { animation-delay: 2.6s; }.line-four { animation-delay: 3.8s; }
+.workflow-result { animation: rh-next-step 1.2s ease 4.8s both; }
+.concept-workflow .workflow-understanding { font-size: 17px; }
+.concept-workflow .workflow-result text { font-size: 13px; letter-spacing: .01em; }
+@keyframes rh-business-context { from { opacity: .2; } to { opacity: 1; } }
+@keyframes rh-business-focus { 0% { opacity: .25; } 60% { opacity: 1; } 100% { opacity: 1; } }
+@media(max-width:680px) {
+ .hero-real-example { margin-top: 18px; padding-top: 14px; }
+ .concept-workflow-top { font-size: 8px; letter-spacing: .06em; }
+ .concept-workflow-mobile .workflow-understanding { font-size: 13px; }
+ .concept-workflow-mobile .workflow-result text { font-size: 12px; }
+}
+@media(prefers-reduced-motion:reduce) { .concept-workflow * { animation: none !important; } }
+
+/* Visual polish only: readable fine detail and a clearer settled focal point. */
+.concept-page .phase3-hero-layout { column-gap: 48px; }
+.concept-page .phase3-hero .hero-lede { color: #c6c8bf; }
+.concept-page .phase3-hero-note { color: #c0c2b8; font-size: 12px; line-height: 1.6; }
+.concept-page .hero-real-example { max-width: 49ch; color: #bfc1b6; font-size: 13px; line-height: 1.65; border-top-color: #cbb48538; }
+.concept-workflow-top { font-size: 10px; color: #c5b48e; letter-spacing: .1em; }
+.concept-workflow .workflow-input text { fill: #eee9dd; font-size: 16px; }
+.workflow-input path,.workflow-input circle { stroke: #c6ab78; opacity: .85; }
+.workflow-routes,.workflow-line { stroke: #cdb17a; stroke-width: 1.4; }
+.workflow-core { stroke: #cfb78080; stroke-width: 1.2; filter: drop-shadow(0 16px 20px #0009); }
+.workflow-glint { stroke: #ead8b34d; }
+.workflow-listening { stroke: #e5d4aa; stroke-width: 1.3; }
+.concept-workflow .workflow-understanding { fill: #fff5dd; font-size: 18px; }
+.workflow-result rect { fill: #373326; stroke: #c6a96c; stroke-width: 1; }
+.concept-workflow .workflow-result text { fill: #f0dfb7; font-size: 14px; letter-spacing: 0; }
+.concept-workflow figcaption { color: #bfc1b7; font-size: 12px; border-top-color: #cbb48530; }
+.concept-workflow figcaption strong { color: #eee2c9; }
+.workflow-line { animation-timing-function: cubic-bezier(.22,.61,.36,1); }
+.workflow-result { animation-timing-function: cubic-bezier(.22,.61,.36,1); }
+@media(max-width:680px) {
+ .concept-workflow-top { font-size: 9px; letter-spacing: .025em; gap: 8px; padding-bottom: 8px; }
+ .concept-workflow .workflow-input text { font-size: 14px; }
+ .concept-workflow-mobile .workflow-understanding { font-size: 14px; }
+ .concept-workflow-mobile .workflow-result text { font-size: 13px; }
+ .concept-workflow-mobile .workflow-core { fill: #323026; }
+ .concept-workflow figcaption { font-size: 12px; line-height: 1.7; }
+ .concept-page .hero-real-example { font-size: 12px; }
+ .concept-page .phase3-hero-note { font-size: 11px; }
+}
+
+.concept-workflow-desktop .workflow-understanding { transform: translateY(7px); }
+
+/* Graphic hierarchy: understanding is the focal point, without a competing icon. */
+.concept-workflow-desktop .workflow-understanding { transform: none; font-size: 25px; letter-spacing: -.035em; }
+.concept-workflow-desktop .workflow-core { stroke: #cfb78099; }
+.concept-workflow-desktop .workflow-glint { stroke: #ead8b33d; }
+.concept-workflow-mobile .workflow-understanding { font-size: 14px; letter-spacing: -.02em; }
+
+/* Snapshot sample: square, edge-to-edge authentic source; no letterbox bars. */
+.concept-page .phase3-snapshot .homepage-hero-media picture { display: block; aspect-ratio: 1; overflow: hidden; }
+.concept-page .phase3-snapshot .homepage-hero-media img { width: 100%; height: 100%; max-height: none; aspect-ratio: 1; object-fit: cover; object-position: 100% 50%; }
+
+/* Authentic client artwork sits above each matched project presentation. */
+.project-client-logo { display: flex; justify-content: center; align-items: center; min-height: 124px; margin: 0; padding: 4px 12px; }
+.project-client-logo img { display: block; width: auto; max-width: 210px; height: 110px; object-fit: contain; border: 0; box-shadow: none; }
+.project-client-logo img[src*="eastland-official"] { mix-blend-mode: multiply; }
+.concept-page .work-preview-card { gap: 20px; }
+.concept-page .concept-missy-proof { display: block; padding: 0; aspect-ratio: auto; background: transparent; }
+.concept-page .concept-missy-proof img { width: 100%; height: auto; aspect-ratio: 2400 / 1244; object-fit: contain; }
+.concept-page .concept-missy-proof figcaption { margin-top: 10px; font-size: 10px; line-height: 1.5; }
+.project-client-logo-detail { padding-block: 24px; }
+.work-missy .project-client-logo { margin-block: 24px 12px; }
+.work-missy .work-missy-figure img { width: 100%; height: auto; }
+@media(max-width:680px) { .project-client-logo { min-height: 100px; } .project-client-logo img { max-width: 180px; height: 90px; } }
+
+/* Separate sculptural artwork; official flat brand files and hero copy stay intact. */
+.rh-sculpture { margin: 0; min-width: 0; align-self: center; }
+.rh-sculpture-stage { position: relative; width: 100%; aspect-ratio: 640 / 560; }
+.rh-sculpture canvas { display: block; width: 100%; height: 100%; }
+.rh-sculpture-fallback { position: absolute; width: 40%; height: auto; left: 30%; top: 25%; }
+@media(max-width:680px) { .rh-sculpture { margin-inline: -8px; } .rh-sculpture-stage { max-height: 390px; } }
+
+@media(min-width:681px) { .concept-page .work-preview-card { grid-template-rows: 124px minmax(0, 1fr) auto; } }
+
+@media(min-width:681px) { .concept-page .work-preview-grid { align-items: stretch; } }
+
+.concept-page .work-preview-image, .concept-page .work-preview-image picture, .concept-page .work-preview-image img { background: transparent; }
+
+/* Editorial context: one first-screen focal exhibit, real work as the next beat. */
+.concept-page .phase3-hero { position: relative; isolation: isolate; overflow: hidden; background: #f4f0e6; }
+.concept-page .phase3-hero::after { content: ""; position: absolute; z-index: -1; inset: 0 0 0 calc(50% + 20px); background: #111512; pointer-events: none; }
+.concept-page .phase3-hero-layout { min-height: min(940px, 100svh); grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 48px; padding-block: 132px 64px; align-items: center; }
+.concept-page .phase3-hero h1 { max-width: 15ch; font-size: clamp(54px, 5.4vw, 78px); line-height: .99; letter-spacing: -.045em; color: #192019; margin-bottom: 26px; }
+.concept-page .phase3-hero .hero-emphasis { color: #84672f; font-style: italic; }
+.concept-page .phase3-hero .eyebrow { color: #826324; }
+.concept-page .phase3-hero .hero-lede { color: #4b5147; font-size: 17px; line-height: 1.7; max-width: 44ch; }
+.concept-page .phase3-hero-note { color: #615f53; }
+.concept-page .hero-real-example { color: #615f53; border-color: #c9bda1; }
+.concept-page .hero-real-example a { color: #72571d; }
+.concept-page .phase3-hero .button-row a:first-child { background: #1b231b; color: #faf7ef; border-color: #1b231b; box-shadow: 0 8px 24px #25301b0c; }
+.concept-page .phase3-hero .button-row a:nth-child(2) { color: #293026; background: transparent; border-color: #aaa58f; }
+.concept-page .phase3-hero .button-row a:first-child:hover { background: #35412d; border-color: #35412d; }
+.concept-page .phase3-hero .button-row a:nth-child(2):hover { background: #e8e1d1; border-color: #847149; }
+.concept-page .phase3-hero :focus-visible { outline-color: #8a6b26; }
+.concept-page .rh-sculpture { margin-inline: -28px -54px; }
+.concept-page .rh-sculpture-stage { width: calc(100% + 24px); }
+.concept-page .homepage-eastland-showcase { padding-block: 64px; background: #ece7dc; }
+.concept-page .homepage-eastland-showcase > .container { width: min(1360px, calc(100% - 64px)); }
+.concept-page .work-preview-heading h2 { font-size: clamp(40px, 4.2vw, 62px); letter-spacing: -.035em; line-height: 1.02; }
+.concept-page .work-preview-card { transition: border-color 200ms ease, box-shadow 200ms ease; }
+.concept-page .work-preview-card:hover, .concept-page .work-preview-card:focus-within { border-color: #aa8b4e; box-shadow: 0 14px 38px #3d32150b; }
+.concept-page .phase3-owner { padding-block: 56px; background: #faf9f4; }
+.concept-page .phase3-owner-layout { grid-template-columns: 164px minmax(0, 1fr); gap: 48px; }
+.concept-page .phase3-owner figure { width: 164px; }
+.concept-page .phase3-owner h2 { max-width: 27ch; font-size: clamp(32px, 3vw, 43px); }
+.concept-page .phase3-method { padding-block: 68px; background: #1a211b; color: #f1ebdc; }
+.concept-page .phase3-method h2, .concept-page .phase3-method h3 { color: #f1ebdc; }
+.concept-page .phase3-method .eyebrow, .concept-page .phase3-method-grid span { color: #c6aa70; }
+.concept-page .phase3-method .phase3-editorial-header { border-color: #c7b4853d; }
+.concept-page .phase3-method .phase3-editorial-header h2 { font-size: clamp(34px, 3.5vw, 48px); max-width: 25ch; letter-spacing: -.025em; }
+.concept-page .phase3-method-grid, .concept-page .phase3-method-grid li { background: transparent; border-color: #c7b4853d; }
+.concept-page .phase3-method-grid p { color: #c7cbbf; }
+@media(max-width:960px) and (min-width:681px) {
+ .concept-page .phase3-hero-layout { gap: 30px; padding-block: 116px 48px; min-height: 0; }
+ .concept-page .phase3-hero h1 { font-size: 54px; }
+ .concept-page .rh-sculpture { margin-inline: -12px -24px; }
+}
+@media(max-width:680px) {
+ .concept-page .phase3-hero::after { display: none; }
+ .concept-page .phase3-hero-layout { min-height: 0; padding-block: 108px 0; gap: 28px; }
+ .concept-page .phase3-hero h1 { max-width: 16ch; font-size: 44px; line-height: 1.01; }
+ .concept-page .phase3-hero .hero-lede { font-size: 16px; line-height: 1.65; }
+ .concept-page .rh-sculpture { align-self: stretch; background: #111512; margin-inline: calc((100% - 100vw) / 2); padding-block: 12px; }
+ .concept-page .rh-sculpture-stage { width: 100%; max-height: none; }
+ .concept-page .homepage-eastland-showcase { padding-block: 40px; }
+ .concept-page .homepage-eastland-showcase > .container { width: calc(100% - 36px); }
+ .concept-page .work-preview-heading h2 { font-size: 40px; }
+ .concept-page .phase3-owner { padding-block: 36px; }
+ .concept-page .phase3-owner-layout { grid-template-columns: 84px minmax(0, 1fr); gap: 20px; }
+ .concept-page .phase3-owner figure { width: 84px; }
+ .concept-page .phase3-owner h2 { font-size: 32px; }
+ .concept-page .phase3-method { padding-block: 40px; }
+ .concept-page .phase3-method .phase3-editorial-header h2 { font-size: 34px; }
+}
+@media(max-width:360px) { .concept-page .phase3-hero h1 { font-size: 40px; } }
+@media(prefers-reduced-motion:reduce) { .concept-page .work-preview-card { transition: none; } }
+
+/* Keep navigation readable over the editorial hero and use a reliable split ground. */
+.concept-page .site-header { background: #111512; }
+@media(min-width:681px) { .concept-page .phase3-hero { background: linear-gradient(90deg,#f4f0e6 0 calc(50% + 20px),#111512 calc(50% + 20px) 100%); } }
+.concept-page .phase3-method .phase3-editorial-header > p { color: #c7cbbf; }
+
+.concept-page .site-header.is-scrolled { background: #f4f0e6; }
+
+/* Crisp framed sculpture study: stationary frame, softened material ground. */
+.concept-page .phase3-hero { background: #f4f0e6; }
+.concept-page .phase3-hero::after { display: none; }
+.concept-page .rh-sculpture { position: relative; background: transparent; }
+.concept-page .rh-sculpture-stage::before { content: ""; position: absolute; z-index: -1; width: 88%; aspect-ratio: 1; left: 6%; top: 50%; transform: translateY(-50%); border: 1px solid #b69a5e; background: radial-gradient(ellipse at 48% 42%,#293028 0,#171e18 58%,#101610 100%); box-shadow: 0 28px 58px #26301b16; }
+.concept-page .rh-sculpture-stage { isolation: isolate; }
+.rh-motion-toggle { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); border: 0; border-bottom: 1px solid #847149; background: #f4f0e6; color: #58471f; padding: 6px 2px; font: 10px/1.4 var(--sans); letter-spacing: .08em; text-transform: uppercase; cursor: pointer; }
+.rh-motion-toggle:focus-visible { outline: 2px solid #84672f; outline-offset: 4px; }
+.rh-motion-toggle[hidden] { display: none; }
+@media(max-width:680px) { .concept-page .rh-sculpture { background: transparent; padding-block: 14px 28px; } .rh-motion-toggle { bottom: -10px; } }
+
+/* Transparent sculpture stage: stationary gold outline and feathered shadow only. */
+.concept-page .rh-sculpture-stage::before { z-index: 0; background: transparent; box-shadow: none; pointer-events: none; }
+.concept-page .rh-sculpture-stage::after { content: ""; position: absolute; z-index: -1; inset: 4% 0 0; background: radial-gradient(ellipse at 54% 53%,rgba(52,48,36,.10) 0%,rgba(52,48,36,.055) 30%,rgba(52,48,36,.012) 52%,transparent 72%); pointer-events: none; }
+.concept-page .rh-sculpture canvas { position: relative; z-index: 1; background: transparent; }
+.concept-page .rh-motion-toggle { z-index: 2; }
+
+/* Official source ratios: gold frame and neutral black RH on a light ground. */
+.concept-page .rh-sculpture-stage { container-type: inline-size; }
+.concept-page .rh-sculpture-stage::before { box-sizing: border-box; border: 10px solid transparent; border-image-source: url("../images/homepage/rh-original-gold-frame.png"); border-image-slice: 17; border-image-width: 1; border-image-repeat: stretch; }
+@media(max-width:680px) { .concept-page .rh-sculpture-stage::before { border-width: 5px; } }
+@supports(width:1cqw) { .concept-page .rh-sculpture-stage::before { border-width: calc(1.4376238cqw + .5px); } }
+
+/* Four bounded service categories; workflow is shared context, not another offer. */
+.service-category-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0 44px; border-top: 1px solid var(--line); text-align: left; }
+.service-category { padding: 28px 0; border-bottom: 1px solid var(--line); }
+.service-number { color: #84672f; font: 600 10px/1.4 var(--sans); letter-spacing: .12em; }
+.service-category h3 { margin: 10px 0 14px; font-size: clamp(26px,2.5vw,34px); line-height: 1.12; letter-spacing: -.02em; }
+.service-category p { max-width: 52ch; margin: 0 0 18px; color: var(--color-text-secondary); font-size: 16px; line-height: 1.65; }
+.service-category a { display: inline-flex; align-items: center; gap: 8px; padding-block: 5px; color: #5d4923; font-size: 13px; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
+.service-scope-note { max-width: 76ch; margin: 28px auto 0; color: var(--color-text-secondary); font-size: 15px; line-height: 1.7; text-align: center; }
+@media(max-width:680px) { .service-category-grid { grid-template-columns: 1fr; } .service-category { padding-block: 24px; } .service-category h3 { max-width: 22ch; font-size: 28px; } .service-scope-note { text-align: left; } }
