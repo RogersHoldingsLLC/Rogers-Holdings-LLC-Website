@@ -222,7 +222,7 @@ assert.doesNotMatch(html, /name="formStartedAt"|data-form-started-at/);
 assert.match(html, /data-error-callback="businessSnapshotTurnstileError"/);
 assert.match(html, /data-expired-callback="businessSnapshotTurnstileExpired"/);
 assert.match(html, /data-timeout-callback="businessSnapshotTurnstileTimeout"/);
-assert.match(html, /site\.css\?v=understand-first-20261026/);
+assert.match(html, /site\.css\?v=viewer-refinement-v10-20261026/);
 assert.match(html, /site\.js\?v=whole-site-refinement-1/);
 assert.match(html, /<p class="delivery-note" data-delivery-note hidden><\/p>/);
 assert.doesNotMatch(html, /secure submission endpoint is not connected yet/i);

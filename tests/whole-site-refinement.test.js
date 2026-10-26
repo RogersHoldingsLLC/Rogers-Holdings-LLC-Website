@@ -14,16 +14,15 @@ const snapshotDoc = read('docs/BUSINESS_SNAPSHOT_PREMIUM_EXPERIENCE.md');
 const labels = ['Approach', 'Process', 'Services', 'Our Work', 'About', 'Contact'];
 for (const [name, html] of [['homepage', home], ['Business Snapshot', snapshot], ['Privacy', privacy]]) {
   for (const label of labels) {
-    const expected = label === 'Process' ? 'Free Snapshot' : label;
+    const expected = label === 'Process' ? 'Free Business Snapshot' : label;
     assert.ok(html.includes(`>${expected}</a>`), `${name} missing ${expected}`);
   }
-  assert.ok(html.includes('>Business Snapshot</a>'), `${name} missing product navigation label`);
   assert.match(html, /site\.js\?v=whole-site-refinement-1/);
 }
 
-assert.match(home, /site\.css\?v=understand-first-20261026/);
-assert.match(snapshot, /site\.css\?v=understand-first-20261026/);
-assert.match(privacy, /site\.css\?v=understand-first-20261026/);
+assert.match(home, /site\.css\?v=viewer-refinement-v10-20261026/);
+assert.match(snapshot, /site\.css\?v=viewer-refinement-v10-20261026/);
+assert.match(privacy, /site\.css\?v=viewer-refinement-v10-20261026/);
 
 assert.ok(home.includes('Request Your Free Business Snapshot'));
 assert.ok(snapshot.includes('Request Your Free Business Snapshot'));
@@ -84,3 +83,5 @@ assert.doesNotMatch(showcase, /facebook/i);
 assert.doesNotMatch(home + snapshot + privacy, /localhost|workers\.dev|preview_url|TURNSTILE_SECRET_KEY/i);
 
 console.log('Whole-site refinement contract tests passed');
+
+for (const page of [home, snapshot, privacy]) { const nav = page.match(/<nav class="primary-nav"[\s\S]*?<\/nav>/)[0]; assert.equal((nav.match(/>Free Business Snapshot<\/a>/g) || []).length,1); assert.doesNotMatch(nav, />Business Snapshot<\/a>|>Free Snapshot<\/a>/); }

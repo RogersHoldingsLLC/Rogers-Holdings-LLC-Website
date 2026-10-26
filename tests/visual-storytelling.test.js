@@ -237,7 +237,7 @@ for (const approvedProofCopy of [
   'See the work on the live site',
   'Rogers Holdings helped Eastland First Church of God establish its Google Business Profile, built its current custom website, and continues to maintain and update the site.',
   'The public website works across phone and desktop screens and brings service times, visit information, ministries, messages, directions, and contact details together in one experience.',
-  'Presented as a current project example—not a testimonial or a claim about attendance, engagement, donations, or other outcomes.'
+  'Current website example; no attendance, engagement or donation results are claimed.'
 ]) assert.ok(eastlandProof.includes(approvedProofCopy), `missing approved Eastland live-proof copy: ${approvedProofCopy}`);
 assert.doesNotMatch(eastlandProof, /<blockquote|<q\b|endors(?:e|ed|ement)|verified by Eastland|\b\d+(?:\.\d+)?%/i);
 assert.doesNotMatch(renderedHomepage, /free of charge|home church/i);
@@ -257,3 +257,5 @@ for (const term of [
 assert.doesNotMatch(html, /Request Your Business Snapshot|phase3-snapshot-proof|visual-proof-pair|eastland-visual-stage/);
 
 console.log('Visual storytelling contract tests passed');
+
+assert.ok(work.indexOf('id="missys-squishies"') < work.indexOf('class="section website-example-section"'), 'both real stories precede fictional design examples');

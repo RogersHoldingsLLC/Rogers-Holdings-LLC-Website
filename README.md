@@ -273,3 +273,7 @@ The card reserves 104px plus the bottom safe-area inset after its content on pho
 ## Reviewed understand-first refresh — 2026-10-26
 
 The owner-approved refresh leads with understanding the business, presents four bounded service categories, brings real project proof forward and uses the reviewed black RH sculpture with a source-derived gold frame. Existing commercial terms and intake behavior remain intact. Scope, validation and rollback are recorded in [UNDERSTAND_FIRST_APPROVED_RELEASE_2026_10_26.md](docs/design-source/UNDERSTAND_FIRST_APPROVED_RELEASE_2026_10_26.md).
+
+## Reviewed v10 viewer refinement
+
+The follow-up clarifies deliverables, simplifies Snapshot navigation, puts real project stories first, separates custom workbook discussions from repair terms and replaces continuous hero motion with a short sequence that settles. Scoped responsive spacing fixes preserve the visual identity and commercial terms. See [VIEWER_REFINEMENT_V10_APPROVED_RELEASE.md](docs/design-source/VIEWER_REFINEMENT_V10_APPROVED_RELEASE.md) for scope, validation and rollback.

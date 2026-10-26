@@ -29,7 +29,7 @@ for(const [, name, hash] of assetRows) {
 }
 
 // Approved story keeps its illustration disclosure and excludes internal review notes.
-const missy = work.slice(work.indexOf('id="missys-squishies"'), work.indexOf('class="section phase3-final-cta'));
+const missy = work.slice(work.indexOf('id="missys-squishies"'), work.indexOf('</section>', work.indexOf('id="missys-squishies"')));
 assert.doesNotMatch(work + home, /Local review|Proposed website adaptation|await owner-approved|Story awaiting approval|Demonstration image pending/i);
 assert.match(missy, /Formatting-derived workbook illustration with sample data; customer contents and operating logic are not shown\./);
 assert.equal((missy.match(/<img\b/g) || []).length, 2);
