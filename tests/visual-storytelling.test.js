@@ -162,7 +162,7 @@ assert.deepEqual(sectionOrder, [...sectionOrder].sort((a, b) => a - b), 'homepag
 for (const copy of [
   'How Rogers Holdings works', 'Understand, Prioritize, Scope and review methodology',
   'Optional Free Business Snapshot',
-  'Get a clear outside view before spending money on the wrong fix.',
+  'Get a clear outside view of your next step.',
   'The clearest visible issue', 'What deserves attention first',
   'A practical recommended next step, with plain-English reasoning',
   'See our work in action.', 'Eastland First Church of God',

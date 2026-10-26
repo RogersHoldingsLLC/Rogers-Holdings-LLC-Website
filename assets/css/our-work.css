@@ -141,3 +141,15 @@
 @media (max-width: 800px) { .website-example-grid { grid-template-columns: 1fr; } .website-example-card img { height: 160px; } }
 
 .website-example-card-howl { background: #17262b; color: #f4f0e6; }
+
+/* The project need and current deliverable lead; proof remains close at hand. */
+.our-work-page .eastland-story-timeline h3 { font-size: 24px; line-height: 1.15; }
+.our-work-page .eastland-story-timeline li { border-top: 1px solid var(--line); padding-top: 16px; }
+.work-missy-story > h3:first-child { margin-top: 0; }
+.work-missy-story > h3:not(:first-child) { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--line); }
+@media(max-width:540px) {
+ .our-work-page .eastland-project-heading h3 { font-size: 29px; }
+ .work-case-heading h2 { font-size: 34px; }
+ .work-missy-layout { gap: 28px; }
+ .our-work-page .eastland-story-timeline { gap: 20px; }
+}
