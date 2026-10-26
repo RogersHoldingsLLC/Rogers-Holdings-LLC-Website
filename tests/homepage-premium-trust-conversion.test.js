@@ -10,13 +10,13 @@ const script = fs.readFileSync(path.join(ROOT, 'assets/js/site.js'), 'utf8');
 
 const primaryCta = 'Request Your Free Business Snapshot';
 assert.equal((html.match(new RegExp(primaryCta, 'g')) || []).length, 1);
-assert.equal((html.match(/<p class="phase3-hero-note">Free Business Snapshot · Human-reviewed · Executive Brief typically within three business days<\/p>/g) || []).length, 1);
+assert.equal((html.match(/<p class="phase3-hero-note">Start with a short conversation\. Paid work begins with an agreed scope and quote\.<\/p>/g) || []).length, 1);
 assert.match(html, /href="mailto:briankeith@rogersholdingsllc\.com\?subject=Project%20Inquiry">Email About Your Project/);
-assert.ok(html.includes('Practical help for small and growing businesses: create a clear website, repair a spreadsheet, or improve the systems behind everyday work. Work directly with founder Brian Keith Rogers.'));
+assert.ok(html.includes('I’m Brian Keith Rogers. I help business owners make practical improvements by understanding how your business operates and what matters to you.'));
 
 assert.match(html, /<section class="section phase3-method" id="approach"/);
 assert.match(html, /<section class="section phase3-snapshot" id="process"/);
-assert.match(html, /aria-label="Assess, Prioritize, Improve methodology"/);
+assert.match(html, /aria-label="Understand, Prioritize, Scope and review methodology"/);
 assert.ok(html.includes('Optional Free Business Snapshot'));
 assert.ok(html.includes('Get a clear outside view before spending money on the wrong fix.'));
 assert.ok(html.includes('Tell us what is not working. Rogers Holdings will review the challenge and visible evidence, then typically within three business days send a concise, human-reviewed Executive Brief.'));
@@ -42,43 +42,27 @@ for (const retiredJourneyLabel of [
 assert.doesNotMatch(body, /phase3-method-sequence|phase3-process-sequence|phase3-process-substage/);
 
 const sectionOrder = [
-  'class="section website-offer"',
-  'class="section spreadsheet-repair"',
+  'class="hero phase3-hero"',
   'class="homepage-eastland-showcase"',
+  'class="section phase3-owner"',
   'class="section phase3-method"',
   'class="section phase3-capabilities"',
-  'class="section phase3-owner"',
+  'class="section website-offer"',
+  'class="section spreadsheet-repair"',
   'class="section phase3-snapshot"',
   'class="section phase3-final-cta"'
 ].map((marker) => html.indexOf(marker));
 assert.ok(sectionOrder.every((position) => position >= 0));
 assert.deepEqual(sectionOrder, [...sectionOrder].sort((a, b) => a - b));
 
-for (const heading of [
-  'I need more customers',
-  'I’m wasting too much time',
-  'My business is disorganized',
-  'My website isn’t doing its job',
-  'I want to use AI, but I don’t know where it actually helps',
-  'I know something isn’t working, but I’m not sure what'
-]) {
-  assert.match(html, new RegExp(heading));
+const serviceOverview = html.slice(html.indexOf('class="service-category-grid"'), html.indexOf('class="service-scope-note"'));
+assert.equal((serviceOverview.match(/<h3>/g) || []).length, 4, 'exactly four service categories are authorized');
+for (const heading of ['Websites', 'Spreadsheets', 'Forms &amp; Intake', 'Business Documents &amp; Templates']) {
+  assert.ok(serviceOverview.includes('<h3>' + heading + '</h3>'), 'missing agreed service category: ' + heading);
 }
-for (const capability of [
-  'Digital Optimization',
-  'Websites',
-  'Google Workspace',
-  'Automation',
-  'Responsible AI',
-  'Operational Consulting'
-]) {
-  assert.match(html, new RegExp(capability));
-}
-
-for (const band of ['Customer growth', 'Time + organization', 'Direction + technology']) {
-  assert.ok(html.includes(band));
-}
-assert.match(html, /<h2>What can we help you fix\?<\/h2>/);
+assert.doesNotMatch(serviceOverview, /Business Tool Setup|Tech Support|Managed IT|AdGrants|Cybersecurity|<h3>[^<]*Workflow/i);
+assert.ok(html.includes('If the project is a fit, we agree on the deliverables, price and review before work begins.'));
+assert.match(html, /<h2>What do you want to work better\?<\/h2>/);
 assert.doesNotMatch(html, /Business Optimization Platform|class="section phase3-platform"/);
 assert.match(html, /<h2 id="eastland-client-work-heading">See our work in action\.<\/h2>/);
 assert.match(html, /A real problem\. A practical fix\. A better way forward\./);
@@ -88,7 +72,7 @@ assert.doesNotMatch(html, /class="eastland-project-actions"/);
 assert.match(work, /From a Facebook-first presence to a clear digital front door\./);
 assert.match(work, /Current public experience: A responsive website with clear paths to service information, visit planning, ministries, messages, directions, and contact details\./);
 assert.doesNotMatch(body, /easier to find, easier to use, and easier to maintain|free of charge|home church/i);
-assert.ok(html.indexOf('Explore Paid Services') < html.indexOf('Explore Our Work'), 'paid services must be discoverable before project proof');
+assert.ok(html.indexOf('Talk with Brian') < html.indexOf('Explore Our Work'), 'contact must be discoverable before project proof');
 assert.match(work, /class="button button-dark" href="https:\/\/www\.eastlandfirstchurchofgod\.com"/, 'Eastland live proof must remain accessible on Our Work');
 assert.doesNotMatch(html, /class="eastland-story-timeline"|class="eastland-live-proof"/, 'homepage must not duplicate detailed case studies');
 assert.match(html, /href="our-work\/">Explore Our Work/);
@@ -100,8 +84,8 @@ assert.match(html, /href="business-snapshot\/" data-report-link>Request Your Fre
 assert.match(html, /class="phase3-founder-portrait"/);
 assert.match(html, /src="assets\/images\/homepage\/brian-smiling-portrait\.webp" width="1040" height="1300" loading="lazy"/);
 assert.match(html, /<strong>Brian Keith Rogers<\/strong><span>Founder, Rogers Holdings LLC<\/span>/);
-assert.match(html, /<h2><span>Christ-like service\.<\/span><span>Honest guidance\.<\/span><span>Personal accountability\.<\/span><\/h2>/);
-assert.match(html, /My faith shapes how I do business: tell the truth, serve people well, keep my word, and steward every resource responsibly\./);
+assert.match(html, /<h2>You know your business\. I want to understand it\.<\/h2>/);
+assert.match(html, /My faith shapes how I work: be honest, help where I can and follow through\./);
 for (const commitment of ['Lead with integrity', 'Serve before selling', 'Own the work', 'Practice good stewardship']) {
   assert.match(html, new RegExp(commitment));
 }

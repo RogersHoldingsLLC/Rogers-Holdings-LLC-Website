@@ -73,10 +73,8 @@ assert.match(html, /<\/section>\s*<section class="section intake-section" aria-l
 assert.ok(preFieldWords.length <= 120, `pre-field content must remain at most 120 words; found ${preFieldWords.length}`);
 assert.doesNotMatch(heroMarkup, /testimonial|endorsement|guarantee|\b\d+(?:\.\d+)?%/i);
 
-for (const viewport of ['desktop', 'tablet', 'mobile']) {
-  assert.ok(homepage.includes(`homepage-hero-v2.2-${viewport}.avif`));
-  assert.ok(homepage.includes(`homepage-hero-v2.2-${viewport}.webp`));
-  assert.ok(homepage.includes(`homepage-hero-v2.2-${viewport}.jpg`));
+for (const format of ['avif', 'webp', 'jpg']) {
+  assert.ok(homepage.includes(`homepage-hero-v2.2-desktop.${format}`));
 }
 assert.ok(homepage.includes('Illustrative Executive Brief sample — North Point Fitness is a fictional business. Shown to demonstrate the format and level of detail.'));
 
@@ -224,7 +222,7 @@ assert.doesNotMatch(html, /name="formStartedAt"|data-form-started-at/);
 assert.match(html, /data-error-callback="businessSnapshotTurnstileError"/);
 assert.match(html, /data-expired-callback="businessSnapshotTurnstileExpired"/);
 assert.match(html, /data-timeout-callback="businessSnapshotTurnstileTimeout"/);
-assert.match(html, /site\.css\?v=whole-site-refinement-1/);
+assert.match(html, /site\.css\?v=understand-first-20261026/);
 assert.match(html, /site\.js\?v=whole-site-refinement-1/);
 assert.match(html, /<p class="delivery-note" data-delivery-note hidden><\/p>/);
 assert.doesNotMatch(html, /secure submission endpoint is not connected yet/i);
@@ -244,9 +242,11 @@ const canonicalJourney = [
 
 const homepageHead = homepage.slice(0, homepage.indexOf('</head>'));
 const homepageBody = homepage.slice(homepage.indexOf('<body'));
-for (const term of canonicalJourney) {
+for (const term of canonicalJourney.slice(0, 2)) {
   assert.match(productionLanguage, new RegExp(term));
-  assert.match(homepageHead, new RegExp(term), `${term} must remain in homepage service metadata`);
+}
+for (const service of ['Website Creation', 'Excel & Google Sheets Repair', 'Free Business Snapshot']) {
+  assert.ok(homepageHead.includes(service), `${service} must be represented in homepage service metadata`);
 }
 for (const retiredJourneyLabel of canonicalJourney.slice(2)) {
   assert.doesNotMatch(homepageBody, new RegExp(retiredJourneyLabel), `${retiredJourneyLabel} must not be rendered on the homepage`);
@@ -437,3 +437,6 @@ assert.match(source, /window\.addEventListener\('pagehide'/);
 assert.match(source, /window\.addEventListener\('unhandledrejection'/);
 
 console.log('Business Snapshot frontend contract tests passed.');
+
+assert.ok(html.includes('It will summarize what we reviewed, what the evidence supports, any suggested next step, and the reasoning behind it.'), 'receipt must distinguish reviewed evidence from a presumed diagnosis');
+assert.ok(!html.includes('It will identify the clearest visible issue, what deserves attention first, a practical recommended next step, and plain-English reasoning.'), 'receipt must not promise a diagnosis before review');

@@ -269,3 +269,7 @@ A follow-up informed by the owner’s actual Safari screenshot trims the phone h
 ## Phone browser toolbar clearance
 
 The card reserves 104px plus the bottom safe-area inset after its content on phones and short landscape views. This lets the final email/phone links scroll above floating browser chrome without changing the compact layout, locking scrolling, or constraining viewport height.
+
+## Reviewed understand-first refresh — 2026-10-26
+
+The owner-approved refresh leads with understanding the business, presents four bounded service categories, brings real project proof forward and uses the reviewed black RH sculpture with a source-derived gold frame. Existing commercial terms and intake behavior remain intact. Scope, validation and rollback are recorded in [UNDERSTAND_FIRST_APPROVED_RELEASE_2026_10_26.md](docs/design-source/UNDERSTAND_FIRST_APPROVED_RELEASE_2026_10_26.md).

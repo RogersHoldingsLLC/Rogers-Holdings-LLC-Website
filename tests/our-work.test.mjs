@@ -31,8 +31,8 @@ for(const [, name, hash] of assetRows) {
 // Approved story keeps its illustration disclosure and excludes internal review notes.
 const missy = work.slice(work.indexOf('id="missys-squishies"'), work.indexOf('class="section phase3-final-cta'));
 assert.doesNotMatch(work + home, /Local review|Proposed website adaptation|await owner-approved|Story awaiting approval|Demonstration image pending/i);
-assert.match(missy, /Project illustration; not the live workbook\./);
-assert.equal((missy.match(/<img\b/g) || []).length, 1);
+assert.match(missy, /Formatting-derived workbook illustration with sample data; customer contents and operating logic are not shown\./);
+assert.equal((missy.match(/<img\b/g) || []).length, 2);
 assert.ok(PUBLIC_MANIFEST.includes('assets/images/our-work/missy-artwork-extracted.webp'));
 assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root, 'assets/images/our-work/missy-artwork-extracted.webp'))).digest('hex'), '7c46fd3e8a18ce7fe7b845e66545871dc75790d4af213b9572ac44640b23e596', 'approved extracted illustration changed');
 assert.equal(PUBLIC_MANIFEST.includes('docs/design-reference/missys-squishies/missy-story-source.jpg'), false);
