@@ -110,8 +110,7 @@ void main(){
     }catch(error){console.warn('RH studio renderer unavailable; using the static-compatible canvas treatment.',error);return null;}
   }
 
-  let underface,front,side,fc,sc,face,edge,alpha,distance,base,width=0,height=656,maxDistance=0,progress=0,started=false,frame=0,lastPaint=0,paintedForm=-1,paused=false,pauseAt=0,pausedTime=0,animationStart=0;
-  const pauseButton=document.querySelector('[data-rh-motion-toggle]');
+  let underface,front,side,fc,sc,face,edge,alpha,distance,base,width=0,height=656,maxDistance=0,progress=0,started=false,frame=0,lastPaint=0,paintedForm=-1;
   function fit(){const d=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(canvas.clientWidth*d);canvas.height=Math.round(canvas.clientHeight*d);}
   function surface(form){
     // Continuous inward formation from the authentic contour, never separate chunks.
@@ -126,7 +125,7 @@ void main(){
   }
   function draw(t,yaw=0){
     if(!front)return;progress=t;lastYaw=yaw;
-    const ms=t*5200,form=reduce.matches?1:smooth((ms-700)/3600),depth=3+form*27;if(!studio&&form!==paintedForm){surface(form);paintedForm=form;}
+    const ms=t*4500,form=reduce.matches?1:smooth((ms-250)/2300),depth=3+form*27;if(!studio&&form!==paintedForm){surface(form);paintedForm=form;}
     if(studio){const quality=Math.min(1.5,1400/canvas.width);studio.render(Math.round(canvas.width*quality),Math.round(canvas.height*quality),form,yaw);ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,canvas.width,canvas.height);ctx.imageSmoothingQuality='high';ctx.drawImage(studio.canvas,0,0,canvas.width,canvas.height);}else{
     ctx.setTransform(canvas.width/640,0,0,canvas.height/560,0,0);ctx.clearRect(0,0,640,560);
     const light=ctx.createRadialGradient(344,244,15,344,244,276);light.addColorStop(0,'rgba(188,164,108,.065)');light.addColorStop(1,'rgba(188,164,108,0)');ctx.fillStyle=light;ctx.fillRect(0,0,640,560);
@@ -135,22 +134,14 @@ void main(){
     for(let z=Math.ceil(depth);z>0;z--)ctx.drawImage(side,-z*(.66+Math.sin(yaw)*1.5),z*.72);
     ctx.drawImage(underface,0,0);ctx.drawImage(front,0,0);ctx.restore();
     }
-    canvas.dataset.state=reduce.matches||t>=1?'assembled':studio?'material-reveal':ms<700?'contour':'forming';canvas.dataset.motion=reduce.matches?'reduced':paused?'paused':'gentle-turn';canvas.dataset.yaw=String(yaw);canvas.dataset.formation=String(form);
+    canvas.dataset.state=reduce.matches||t>=1?'assembled':studio?'material-reveal':ms<700?'contour':'forming';canvas.dataset.motion=reduce.matches?'reduced':t>=1?'settled':'finite';canvas.dataset.loopActive=String(!reduce.matches&&t<1);canvas.dataset.yaw=String(yaw);canvas.dataset.formation=String(form);
   }
-  function animate(start){animationStart=start;const tick=now=>{
-    if(reduce.matches){draw(1);return;}if(paused)return;
-    const elapsed=now-start-pausedTime,t=Math.min(1,elapsed/5200);
-    const yaw=t<1?0:Math.sin((elapsed-5200)/20000*Math.PI*2)*.18;
-    if(now-lastPaint>30){draw(t,yaw);lastPaint=now;}
-    frame=requestAnimationFrame(tick);
+  function animate(start){const tick=now=>{
+    if(reduce.matches){frame=0;draw(1,0);return;}
+    const t=Math.min(1,(now-start)/4500),yaw=.12*Math.pow(Math.sin(Math.PI*t),2);
+    if(now-lastPaint>30||t===1){draw(t,t===1?0:yaw);lastPaint=now;}
+    if(t<1)frame=requestAnimationFrame(tick);else frame=0;
   };frame=requestAnimationFrame(tick);}
-  if(pauseButton)pauseButton.addEventListener('click',()=>{
-    if(reduce.matches)return;paused=!paused;
-    pauseButton.textContent=paused?'Resume animation':'Pause animation';
-    pauseButton.setAttribute('aria-pressed',String(paused));
-    if(paused){pauseAt=performance.now();cancelAnimationFrame(frame);canvas.dataset.motion='paused';}
-    else{pausedTime+=performance.now()-pauseAt;animate(animationStart);}
-  });
   mask.onload=()=>{
     const src=make(mask.width,mask.height),sx=src.getContext('2d');sx.drawImage(mask,0,0);const source=sx.getImageData(0,0,mask.width,mask.height).data;let x0=mask.width,y0=mask.height,x1=0,y1=0;
     for(let y=0;y<mask.height;y++)for(let x=0;x<mask.width;x++)if(source[(y*mask.width+x)*4+3]){x0=Math.min(x0,x);y0=Math.min(y0,y);x1=Math.max(x1,x);y1=Math.max(y1,y);}
@@ -173,7 +164,7 @@ void main(){
     studio=makeStudio(alpha,width,height);canvas.dataset.renderer=studio?'webgl-extruded-studio':'canvas-fallback';if(studio)studio.canvas.addEventListener('webglcontextlost',event=>{event.preventDefault();studio=null;paintedForm=-1;canvas.dataset.renderer='canvas-fallback';draw(progress,lastYaw);});
     canvas.dataset.sourceGeometry='original-mask';canvas.dataset.construction='continuous-inward-surface';fit();
     if(reduce.matches){started=true;draw(1);}else{draw(0);const observer=new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)&&!started){started=true;observer.disconnect();animate(performance.now());}},{threshold:.55});observer.observe(canvas);}
-    new ResizeObserver(()=>{fit();draw(progress,lastYaw);}).observe(canvas);reduce.addEventListener('change',()=>{cancelAnimationFrame(frame);if(reduce.matches){draw(1);if(pauseButton)pauseButton.hidden=true;}else{if(pauseButton)pauseButton.hidden=false;paused=false;pausedTime=0;animate(performance.now()-5200);}});if(pauseButton)pauseButton.hidden=reduce.matches;
+    new ResizeObserver(()=>{fit();draw(progress,lastYaw);}).observe(canvas);reduce.addEventListener('change',()=>{cancelAnimationFrame(frame);frame=0;started=true;draw(1,0);});
   };
   mask.onerror=()=>{canvas.dataset.state='unavailable';};mask.src=canvas.dataset.mask;
 })();
