@@ -46,8 +46,8 @@ const preFieldWords = preFieldMarkup
   .match(/[A-Za-z0-9]+(?:[’'-][A-Za-z0-9]+)*/g) || [];
 const approvedHeroCopy = {
   eyebrow: 'Free Business Snapshot',
-  heading: 'Tell us what isn’t working. Get a clear next step.',
-  lede: 'Describe the challenge. Rogers Holdings will review your information and visible public evidence, then typically within three business days send a concise, human-reviewed Executive Brief.',
+  heading: 'Start with your goal. Explore a practical next step.',
+  lede: 'Describe your goal and current work. Rogers Holdings will review your information and visible public evidence, then typically within three business days send a concise, human-reviewed Executive Brief.',
   cta: 'Request Your Free Business Snapshot',
   trust: 'Free <span aria-hidden="true">·</span> Human-reviewed by Brian Rogers <span aria-hidden="true">·</span> Typically within three business days'
 };
@@ -139,10 +139,10 @@ assert.match(visibleFormText, /A business or personal email is fine\./);
 assert.ok(descriptionIds(emailInput).includes('email-hint'));
 assert.equal(getAttribute(emailInput, 'data-description-id'), 'email-hint');
 assert.match(formMarkup, /id="email-hint"[^>]*>A business or personal email is fine\.<\/span>/);
-assert.match(visibleFormText, /02 About the challenge/);
+assert.match(visibleFormText, /02 About your goal/);
 assert.doesNotMatch(visibleFormText, /The decision in front of you/);
 assert.match(visibleFormText, /Business website \(optional\)/);
-assert.match(visibleFormText, /Include the full URL if your website is relevant to the challenge\./);
+assert.match(visibleFormText, /Include the full URL if your website is relevant to your goal\./);
 assert.match(visibleFormText, /A few sentences are enough\. Tell us what is happening now, what you want to improve, and anything you have already tried\. Do not include passwords or sensitive personal information\./);
 assert.ok(descriptionIds(challengeTextarea).includes('challenge-hint'));
 assert.ok(descriptionIds(challengeTextarea).includes('challenge-count'));
@@ -222,7 +222,7 @@ assert.doesNotMatch(html, /name="formStartedAt"|data-form-started-at/);
 assert.match(html, /data-error-callback="businessSnapshotTurnstileError"/);
 assert.match(html, /data-expired-callback="businessSnapshotTurnstileExpired"/);
 assert.match(html, /data-timeout-callback="businessSnapshotTurnstileTimeout"/);
-assert.match(html, /site\.css\?v=viewer-refinement-v10-20261026/);
+assert.match(html, /site\.css\?v=mobile-search-20261026/);
 assert.match(html, /site\.js\?v=whole-site-refinement-1/);
 assert.match(html, /<p class="delivery-note" data-delivery-note hidden><\/p>/);
 assert.doesNotMatch(html, /secure submission endpoint is not connected yet/i);

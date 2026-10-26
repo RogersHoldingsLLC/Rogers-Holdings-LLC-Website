@@ -2007,7 +2007,7 @@ h3 { letter-spacing: -.015em; }
 @media(max-width:680px) { .concept-page .rh-sculpture-stage::before { border-width: 5px; } }
 @supports(width:1cqw) { .concept-page .rh-sculpture-stage::before { border-width: calc(1.4376238cqw + .5px); } }
 
-/* Four bounded service categories; workflow is shared context, not another offer. */
+/* Bounded service categories with shared review and scope expectations. */
 .service-category-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0 44px; border-top: 1px solid var(--line); text-align: left; }
 .service-category { padding: 28px 0; border-bottom: 1px solid var(--line); }
 .service-number { color: #84672f; font: 600 10px/1.4 var(--sans); letter-spacing: .12em; }
@@ -2040,3 +2040,51 @@ h3 { letter-spacing: -.015em; }
 }
 
 @media(max-width:900px) { .concept-page .phase3-snapshot-copy h2 { max-width: none; } }
+
+/* Mobile/search revision: keep the opening message, mark and actions together. */
+.concept-page .phase3-hero-layout { display: block; min-height: 0; padding-block: 132px 64px; }
+.concept-page .phase3-hero-copy { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); column-gap: 48px; align-items: start; }
+.concept-page .phase3-hero-copy > :not(.rh-sculpture) { grid-column: 1; }
+.concept-page .phase3-hero-copy > .rh-sculpture { grid-column: 2; grid-row: 1 / 7; align-self: center; }
+.concept-page .phase3-hero h1 { margin-bottom: 22px; }
+.concept-page .phase3-hero .hero-lede { margin: 0; }
+.concept-page .phase3-hero .hero-services { margin: 16px 0 0; }
+.concept-page .phase3-hero .button-row { margin-top: 24px; }
+.concept-page .phase3-hero-note { margin-bottom: 0; }
+.concept-page .work-preview { padding-block: 0; }
+.concept-page .work-preview-card { grid-template-rows: auto 80px auto; }
+.concept-page .work-preview-card > div:first-child { padding-top: 0; }
+.concept-page .work-preview-card .project-client-logo { height: 80px; min-height: 0; margin: 0; padding: 0; }
+.concept-page .work-preview-card .project-client-logo img { height: 80px; max-width: 180px; }
+.service-search { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; column-gap: 44px; }
+.service-search .service-number, .service-search h3 { grid-column: 1; }
+.service-search .service-number { grid-row: 1; align-self: start; }
+.service-search h3 { grid-row: 1 / 5; align-self: start; max-width: 22ch; margin-top: 30px; }
+.service-search p, .service-search a { grid-column: 2; }
+@media(max-width:960px) and (min-width:681px) {
+ .concept-page .phase3-hero-layout { padding-block: 116px 44px; }
+ .concept-page .phase3-hero-copy { column-gap: 30px; }
+ .concept-page .phase3-hero h1 { font-size: 50px; }
+}
+@media(max-width:680px) {
+ .concept-page .phase3-hero-layout { padding-block: 104px 30px; }
+ .concept-page .phase3-hero-copy { display: flex; flex-direction: column; align-items: stretch; }
+ .concept-page .phase3-hero .eyebrow { margin-bottom: 12px; font-size: 9px; line-height: 1.6; }
+ .concept-page .phase3-hero h1 { max-width: 17ch; margin-bottom: 8px; font-size: 40px; line-height: 1.04; }
+ .concept-page .phase3-hero-copy > .rh-sculpture { width: 176px; max-width: 100%; margin: 0 auto 12px; padding: 0; align-self: center; }
+ .concept-page .phase3-hero .hero-lede { font-size: 16px; line-height: 1.55; }
+ .concept-page .phase3-hero .hero-services { margin-top: 12px; font-size: 14px; line-height: 1.55; }
+ .concept-page .phase3-hero .button-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+ .concept-page .phase3-hero .button { padding-inline: 10px; min-height: 48px; font-size: 12px; }
+ .concept-page .phase3-hero-note { max-width: none; margin-top: 14px; font-size: 12px; }
+ .concept-page .work-preview-card { grid-template-rows: auto 64px auto; gap: 16px; }
+ .concept-page .work-preview-card .project-client-logo, .concept-page .work-preview-card .project-client-logo img { height: 64px; }
+ .concept-page .homepage-eastland-showcase { padding-block: 32px; }
+ .concept-page .work-preview-heading h2 { font-size: 34px; }
+ .service-search { display: block; }
+ .service-search h3 { max-width: 22ch; margin-top: 10px; }
+}
+@media(max-width:360px) {
+ .concept-page .phase3-hero h1 { font-size: 36px; }
+ .concept-page .phase3-hero-copy > .rh-sculpture { width: 160px; }
+}

@@ -277,3 +277,7 @@ The owner-approved refresh leads with understanding the business, presents four 
 ## Reviewed v10 viewer refinement
 
 The follow-up clarifies deliverables, simplifies Snapshot navigation, puts real project stories first, separates custom workbook discussions from repair terms and replaces continuous hero motion with a short sequence that settles. Scoped responsive spacing fixes preserve the visual identity and commercial terms. See [VIEWER_REFINEMENT_V10_APPROVED_RELEASE.md](docs/design-source/VIEWER_REFINEMENT_V10_APPROVED_RELEASE.md) for scope, validation and rollback.
+
+## Mobile composition and search foundations review
+
+The local follow-up integrates the compact brand sculpture, founder introduction and actions in the first phone viewport, improves project hierarchy and spacing, adds the bounded fifth service SEO & Local Search Foundations, and makes the Snapshot invitation goal-first. See [MOBILE_SEARCH_LOCAL_REVIEW_2026_10_26.md](docs/design-source/MOBILE_SEARCH_LOCAL_REVIEW_2026_10_26.md) for scope, evidence, preservation checks and the publication approval gate.
