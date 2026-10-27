@@ -2047,8 +2047,8 @@ h3 { letter-spacing: -.015em; }
 .concept-page .phase3-hero-copy > :not(.rh-sculpture) { grid-column: 1; }
 .concept-page .phase3-hero-copy > .rh-sculpture { grid-column: 2; grid-row: 1 / 7; align-self: center; }
 .concept-page .phase3-hero h1 { margin-bottom: 22px; }
-.concept-page .phase3-hero .hero-lede { margin: 0; }
-.concept-page .phase3-hero .hero-services { margin: 16px 0 0; }
+.concept-page .phase3-hero .hero-lede { margin: 0; text-wrap: balance; }
+.concept-page .phase3-hero .hero-services { margin: 0 0 16px; text-wrap: balance; }
 .concept-page .phase3-hero .button-row { margin-top: 24px; }
 .concept-page .phase3-hero-note { margin-bottom: 0; }
 .concept-page .work-preview { padding-block: 0; }
@@ -2073,7 +2073,7 @@ h3 { letter-spacing: -.015em; }
  .concept-page .phase3-hero h1 { max-width: 17ch; margin-bottom: 8px; font-size: 40px; line-height: 1.04; }
  .concept-page .phase3-hero-copy > .rh-sculpture { width: 176px; max-width: 100%; margin: 0 auto 12px; padding: 0; align-self: center; }
  .concept-page .phase3-hero .hero-lede { font-size: 16px; line-height: 1.55; }
- .concept-page .phase3-hero .hero-services { margin-top: 12px; font-size: 14px; line-height: 1.55; }
+ .concept-page .phase3-hero .hero-services { margin: 0 0 12px; font-size: 14px; line-height: 1.55; }
  .concept-page .phase3-hero .button-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
  .concept-page .phase3-hero .button { padding-inline: 10px; min-height: 48px; font-size: 12px; }
  .concept-page .phase3-hero-note { max-width: none; margin-top: 14px; font-size: 12px; }
@@ -2087,6 +2087,7 @@ h3 { letter-spacing: -.015em; }
 @media(max-width:360px) {
  .concept-page .phase3-hero h1 { font-size: 36px; }
  .concept-page .phase3-hero-copy > .rh-sculpture { width: 160px; }
+ .concept-page .phase3-hero .button { padding-inline: 8px; letter-spacing: .06em; }
 }
 
 /* Service details are reached from the service list; SEO follows the same reading order. */

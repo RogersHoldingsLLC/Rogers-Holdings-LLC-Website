@@ -293,3 +293,11 @@ The next bounded review replaces the distant desk-photo sample with readable HTM
 ## Snapshot PDF access — local review
 
 The follow-up preserves the readable preview and replaces inline expansion with a clearly labeled new-tab link to the exact approved fictional PDF. See [SNAPSHOT_PDF_LINK_LOCAL_REVIEW_2026_10_27.md](docs/design-source/SNAPSHOT_PDF_LINK_LOCAL_REVIEW_2026_10_27.md) for file identity, public-artifact scope, actual browser checks and the publication gate.
+
+## Hero hierarchy — local review
+
+The bounded hero pass keeps all live wording verbatim, moves the service description directly below the headline, balances paragraph wrapping and keeps both 320px CTA labels on one line without shrinking their 48px targets. Headline/sculpture geometry, services, pricing and Snapshot PDF access remain intact. See [HERO_HIERARCHY_LOCAL_REVIEW_2026_10_27.md](docs/design-source/HERO_HIERARCHY_LOCAL_REVIEW_2026_10_27.md) for actual visual comparisons, validation and the publication gate.
+
+## Premium editorial homepage — local review
+
+The distinct review version applies a homepage-scoped editorial system: full-width headline, paired phone signature, aligned grids, alternating project evidence, numbered services and a larger Snapshot presentation. All existing information and assets stay intact. See [PREMIUM_EDITORIAL_LOCAL_REVIEW_2026_10_27.md](docs/design-source/PREMIUM_EDITORIAL_LOCAL_REVIEW_2026_10_27.md) for actual before/after comparisons, payload/accessibility checks, tradeoffs and the unexecuted preview plan.
