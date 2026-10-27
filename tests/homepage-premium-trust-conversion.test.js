@@ -21,9 +21,9 @@ assert.ok(html.includes('Optional Free Business Snapshot'));
 assert.ok(html.includes('See what deserves attention before choosing a project.'));
 assert.ok(html.includes('A website project, a workbook change or a better handoff starts with a decision. The Free Business Snapshot gives you a focused outside view of your goal, the visible evidence and a practical next step—before you agree to paid work.'));
 for (const deliverable of [
-  'What the visible evidence supports',
-  'A first priority connected to your goal',
-  'A practical next step and the reasoning behind it'
+  'what the visible evidence supports',
+  'what deserves attention first',
+  'why the suggested next step makes sense'
 ]) assert.ok(html.includes(deliverable), `missing compact Snapshot deliverable: ${deliverable}`);
 const snapshotStart = html.indexOf('<section class="section phase3-snapshot"');
 const snapshotEnd = html.indexOf('</section>', snapshotStart);
@@ -112,7 +112,7 @@ assert.doesNotMatch(css, /phase3-method-sequence|phase3-process-sequence|phase3-
 assert.match(css, /@media \(min-width: 1101px\) and \(max-height: 820px\)[\s\S]*?\.phase3-hero-layout \{ padding-block: 108px 46px; \}/);
 assert.match(css, /@media \(min-width: 961px\) and \(max-width: 1100px\) and \(orientation: landscape\)/);
 assert.match(css, /@media \(min-width: 2201px\)[\s\S]*?\.eastland-workspace \{ max-width: 2200px/);
-assert.match(html, /rel="preload" as="image" href="assets\/images\/homepage\/homepage-hero-v2\.2-desktop\.avif"/);
+assert.doesNotMatch(html, /rel="preload"[^>]*homepage-hero-v2\.2/, 'retired desk photo must not consume an image preload');
 assert.match(script, /if \('IntersectionObserver' in window && !reduceMotion\.matches\)/);
 assert.match(script, /if \(parallaxScenes\.length && !reduceMotion\.matches\)/);
 

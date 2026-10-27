@@ -2136,3 +2136,53 @@ h3 { letter-spacing: -.015em; }
 
 .concept-page .phase3-snapshot-copy h2 { max-width: none; }
 .service-scope-layout .eyebrow { font-size: 10px; line-height: 1.5; color: #826324; }
+
+/* Readable Snapshot evidence from the approved fictional Executive Brief. */
+.concept-page .phase3-snapshot-layout {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas: "intro sample" "action sample" "expectations expectations";
+  grid-template-rows: auto minmax(0,1fr) auto;
+  gap: 28px 64px;
+  align-items: start;
+}
+.concept-page .phase3-snapshot-copy { grid-area: intro; }
+.concept-page .phase3-snapshot-copy h2 { margin-top: 14px; line-height: 1.08; }
+.concept-page .phase3-snapshot-lede { margin-top: 22px; }
+.snapshot-brief { grid-area: sample; min-width: 0; margin: 0; }
+.snapshot-brief-sheet { padding: 28px; border: 1px solid #d5c5a4; border-top: 4px solid #ad822b; background: #faf7ef; color: #22271f; box-shadow: 0 14px 32px rgba(0,0,0,.14); }
+.snapshot-brief-header { padding-bottom: 20px; border-bottom: 1px solid #cabc9f; }
+.snapshot-sample-label { margin: 0 0 10px; color: #6d511a; font: 700 11px/1.6 var(--sans); letter-spacing: .1em; text-transform: uppercase; }
+.snapshot-brief h3 { margin: 0; color: #22271f; font: 500 34px/1.08 var(--serif); letter-spacing: -.02em; }
+.snapshot-brief-client { margin: 12px 0 0; color: #545a4d; font-size: 13px; line-height: 1.6; }
+.snapshot-brief-client strong { color: #22271f; font-weight: 600; }
+.snapshot-brief h4 { margin: 0 0 10px; color: #70521b; font: 700 11px/1.5 var(--sans); letter-spacing: .09em; text-transform: uppercase; }
+.snapshot-brief-finding { padding-block: 22px; border-bottom: 1px solid #cabc9f; }
+.snapshot-brief-finding p { margin: 0; color: #22271f; font: 500 26px/1.22 var(--serif); text-wrap: balance; }
+.snapshot-brief-fix { padding-block: 22px; }
+.snapshot-brief-fix p, .snapshot-full-sample-content p, .snapshot-full-sample-content li { margin: 0; color: #363d30; font: 16px/1.65 var(--sans); }
+.snapshot-full-sample { border-top: 1px solid #cabc9f; scroll-margin-top: 96px; }
+.snapshot-full-sample summary { padding-block: 16px 12px; color: #624811; font: 600 14px/1.6 var(--sans); text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.snapshot-full-sample summary::marker { color: #87651e; }
+.snapshot-full-sample summary:focus-visible { outline: 3px solid #75551a; outline-offset: 5px; }
+.snapshot-full-sample-content { padding-top: 20px; }
+.snapshot-full-sample-content h4 { margin-top: 24px; }
+.snapshot-full-sample-content .snapshot-sample-source { font-size: 12px; overflow-wrap: anywhere; }
+.snapshot-full-sample-content ul { margin: 0; padding-left: 20px; }
+.snapshot-brief figcaption { margin-top: 14px; color: #c7cbbf; font: 12px/1.65 var(--sans); }
+.snapshot-action { grid-area: action; align-self: start; }
+.snapshot-action .button { max-width: 100%; white-space: normal; text-align: center; }
+.snapshot-action .phase3-snapshot-assurance { max-width: 48ch; margin-top: 16px; font-size: 13px; }
+.concept-page .snapshot-expectations { grid-area: expectations; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 32px; margin-top: 8px; padding-top: 28px; border-top: 1px solid rgba(212,179,106,.25); }
+.concept-page .snapshot-expectations h3 { margin-top: 0; }
+@media(max-width:900px) {
+  .concept-page .phase3-snapshot-layout { grid-template-columns: minmax(0,1fr); grid-template-areas: "intro" "sample" "action" "expectations"; grid-template-rows: none; gap: 24px; }
+  .snapshot-brief { width: 100%; max-width: 600px; }
+  .concept-page .snapshot-expectations { grid-template-columns: 1fr; gap: 24px; margin-top: 0; padding-top: 24px; }
+}
+@media(max-width:680px) {
+  .snapshot-brief-sheet { padding: 20px; }
+  .snapshot-brief h3 { font-size: 30px; }
+  .snapshot-brief-finding p { font-size: 24px; }
+  .snapshot-action .button { width: 100%; padding-inline: 14px; font-size: 10px; line-height: 1.6; }
+  .snapshot-action .phase3-snapshot-assurance { margin-top: 12px; }
+}

@@ -20,15 +20,15 @@ for (const [name, html] of [['homepage', home], ['Business Snapshot', snapshot],
   assert.match(html, /site\.js\?v=whole-site-refinement-1/);
 }
 
-assert.match(home, /site\.css\?v=service-review-20261026/);
+assert.match(home, /site\.css\?v=snapshot-sample-20261027/);
 assert.match(snapshot, /site\.css\?v=service-review-20261026/);
 assert.match(privacy, /site\.css\?v=service-review-20261026/);
 
 assert.ok(home.includes('Request Your Free Business Snapshot'));
 assert.ok(snapshot.includes('Request Your Free Business Snapshot'));
 assert.ok(snapshot.includes('Request My Free Business Snapshot'));
-assert.ok(home.includes('homepage-hero-media'));
-for (const viewport of ['desktop', 'tablet', 'mobile']) assert.ok(home.includes(`homepage-hero-v2.2-${viewport}.avif`));
+assert.ok(home.includes('class="snapshot-brief"'));
+assert.doesNotMatch(home, /homepage-hero-v2\.2-(desktop|tablet|mobile)/, 'readable HTML sample replaces the desk-photo download');
 assert.ok(home.includes('Illustrative Executive Brief sample — North Point Fitness is a fictional business. Shown to demonstrate the format and level of detail.'));
 assert.doesNotMatch(home, /visual-proof-pair|north-point-assessment-|north-point-plan-|phase3-snapshot-proof/);
 assert.doesNotMatch(snapshot, /homepage-hero-v2\.2|north-point-|<picture class="snapshot-hero__media"/);
@@ -46,7 +46,7 @@ for (const retiredJourneyLabel of ['Discovery Conversation', 'Digital Business A
   assert.ok(!homepageBody.includes(retiredJourneyLabel), `homepage must not render expanded journey label: ${retiredJourneyLabel}`);
 }
 assert.ok(homepageBody.includes('See what deserves attention before choosing a project.'));
-assert.ok(homepageBody.includes('A practical next step and the reasoning behind it'));
+assert.ok(homepageBody.includes('why the suggested next step makes sense'));
 
 assert.match(snapshot, /action="https:\/\/intake\.rogersholdingsllc\.com\/api\/business-snapshot"/);
 assert.match(snapshot, /data-endpoint-configured="true"/);

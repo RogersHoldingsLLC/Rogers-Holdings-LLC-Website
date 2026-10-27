@@ -285,3 +285,7 @@ The local follow-up integrates the compact brand sculpture, founder introduction
 ## Service details, Chamber loading and Snapshot local review
 
 The next local review stabilizes the Chamber card while its optional logo loads, makes the service list lead to scope/pricing details, adds consistent SEO explanatory copy and gives the Snapshot a clearer customer decision, input, deliverable and next step. Existing approved prices and production intake behavior remain intact. See [SERVICE_DETAILS_CHAMBER_SNAPSHOT_LOCAL_REVIEW_2026_10_27.md](docs/design-source/SERVICE_DETAILS_CHAMBER_SNAPSHOT_LOCAL_REVIEW_2026_10_27.md) for diagnosis, validation and review gates. Starting-price proposals are held separately outside public source.
+
+## Readable Snapshot sample — local review
+
+The next bounded review replaces the distant desk-photo sample with readable HTML from the approved fictional North Point Fitness Executive Brief, puts evidence directly after the phone benefit statement and provides a native full-sample disclosure. Services, commercial terms, other images and intake remain intact. See [READABLE_SNAPSHOT_LOCAL_REVIEW_2026_10_27.md](docs/design-source/READABLE_SNAPSHOT_LOCAL_REVIEW_2026_10_27.md) for source fidelity, actual visual checks, evidence and the publication gate.
