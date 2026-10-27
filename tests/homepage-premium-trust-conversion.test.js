@@ -88,6 +88,8 @@ assert.match(html, /class="phase3-founder-portrait"/);
 assert.match(html, /src="assets\/images\/homepage\/brian-smiling-portrait\.webp" width="1040" height="1300" loading="lazy"/);
 assert.match(html, /<p class="phase3-owner-intro"><strong>I’m Brian Keith Rogers<\/strong><\/p><p class="phase3-owner-lede">/);
 assert.match(html, /<figcaption><span>Founder, Rogers Holdings LLC<\/span><\/figcaption>/);
+assert.ok(html.includes("Why a holding company?"));
+assert.ok(html.includes('Rogers Holdings LLC was created with room to grow. Our vision extends beyond one service, with a long-term goal of building and supporting businesses and ventures under one company. Today, we help business owners make practical improvements through the services you see here.'));
 assert.match(html, /<h2>You know your business\. I want to understand it\.<\/h2>/);
 assert.match(html, /My faith shapes how I work: be honest, help where I can and follow through\./);
 for (const commitment of ['Lead with integrity', 'Serve before selling', 'Own the work', 'Practice good stewardship']) {

@@ -11,3 +11,11 @@ The hero action becomes “Speak with Rogers Holdings” with its existing `#con
 Only this hero introduction/action, corresponding mobile layout and existing wording contract change; “start” corrects the dictated “star.” Per Brian’s placement clarification, “I’m Brian Keith Rogers” sits directly above the unchanged paragraph beginning “I’m comfortable with technology.” The existing duplicate name is removed from the portrait caption; “Founder, Rogers Holdings LLC” stays with the actual photo. All remaining wording, offers, prices, links, assets, layout and intake remain unchanged. No claim about staff size is added.
 
 Validation and local screenshot evidence are retained outside the public artifact in `../evidence/company-hero-copy-review-20261027/`. Brian subsequently authorized publishing when finished and adding the personal introduction close to his portrait. Final local checks precede the normal CI, merge and Pages review/deployment workflow.
+
+## Company vision addition
+
+Brian also requested “Why a holding company?” and directed using the established long-term vision. The company block follows the founder material and says:
+
+“Rogers Holdings LLC was created with room to grow. Our vision extends beyond one service, with a long-term goal of building and supporting businesses and ventures under one company. Today, we help business owners make practical improvements through the services you see here.”
+
+This describes a future goal and present services; it does not claim existing subsidiaries, a portfolio, staffing or tax/legal benefits. No contradictory company explanation was found in the approved site/docs. Brian authorized publication when these requested changes and final QA are complete.
