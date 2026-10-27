@@ -151,8 +151,6 @@ const sectionOrder = [
   'class="section phase3-owner"',
   'class="section phase3-method"',
   'class="section phase3-capabilities"',
-  'class="section website-offer"',
-  'class="section spreadsheet-repair"',
   'class="section phase3-snapshot"',
   'class="section phase3-final-cta"'
 ].map((marker) => html.indexOf(marker));
@@ -162,9 +160,9 @@ assert.deepEqual(sectionOrder, [...sectionOrder].sort((a, b) => a - b), 'homepag
 for (const copy of [
   'How Rogers Holdings works', 'Understand, Prioritize, Scope and review methodology',
   'Optional Free Business Snapshot',
-  'Get a clear outside view of your next step.',
-  'The clearest visible issue', 'What deserves attention first',
-  'A practical recommended next step, with plain-English reasoning',
+  'See what deserves attention before choosing a project.',
+  'What the visible evidence supports', 'A first priority connected to your goal',
+  'A practical next step and the reasoning behind it',
   'See our work in action.', 'Eastland First Church of God',
   'From a Facebook-first presence to a clear digital front door.',
   'Facebook was the primary online presence.', 'Eastland project story',

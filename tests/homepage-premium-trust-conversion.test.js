@@ -18,12 +18,12 @@ assert.match(html, /<section class="section phase3-method" id="approach"/);
 assert.match(html, /<section class="section phase3-snapshot" id="process"/);
 assert.match(html, /aria-label="Understand, Prioritize, Scope and review methodology"/);
 assert.ok(html.includes('Optional Free Business Snapshot'));
-assert.ok(html.includes('Get a clear outside view of your next step.'));
-assert.ok(html.includes('Tell us about your goal and how things work today. Rogers Holdings will review your information and visible evidence, then typically within three business days send a concise, human-reviewed Executive Brief.'));
+assert.ok(html.includes('See what deserves attention before choosing a project.'));
+assert.ok(html.includes('A website project, a workbook change or a better handoff starts with a decision. The Free Business Snapshot gives you a focused outside view of your goal, the visible evidence and a practical next step—before you agree to paid work.'));
 for (const deliverable of [
-  'The clearest visible issue',
-  'What deserves attention first',
-  'A practical recommended next step, with plain-English reasoning'
+  'What the visible evidence supports',
+  'A first priority connected to your goal',
+  'A practical next step and the reasoning behind it'
 ]) assert.ok(html.includes(deliverable), `missing compact Snapshot deliverable: ${deliverable}`);
 const snapshotStart = html.indexOf('<section class="section phase3-snapshot"');
 const snapshotEnd = html.indexOf('</section>', snapshotStart);
@@ -47,8 +47,6 @@ const sectionOrder = [
   'class="section phase3-owner"',
   'class="section phase3-method"',
   'class="section phase3-capabilities"',
-  'class="section website-offer"',
-  'class="section spreadsheet-repair"',
   'class="section phase3-snapshot"',
   'class="section phase3-final-cta"'
 ].map((marker) => html.indexOf(marker));
@@ -56,9 +54,9 @@ assert.ok(sectionOrder.every((position) => position >= 0));
 assert.deepEqual(sectionOrder, [...sectionOrder].sort((a, b) => a - b));
 
 const serviceOverview = html.slice(html.indexOf('class="service-category-grid"'), html.indexOf('class="service-scope-note"'));
-assert.equal((serviceOverview.match(/<h3>/g) || []).length, 5, 'exactly five service categories are authorized');
+assert.equal((serviceOverview.match(/<h3\b/g) || []).length, 5, 'exactly five service categories are authorized');
 for (const heading of ['Websites', 'Spreadsheets', 'Forms &amp; Intake', 'Business Documents &amp; Templates', 'SEO &amp; Local Search Foundations']) {
-  assert.ok(serviceOverview.includes('<h3>' + heading + '</h3>'), 'missing agreed service category: ' + heading);
+  assert.ok(new RegExp('<h3(?: [^>]*)?>' + heading + '</h3>').test(serviceOverview), 'missing agreed service category: ' + heading);
 }
 assert.doesNotMatch(serviceOverview, /Business Tool Setup|Tech Support|Managed IT|AdGrants|Cybersecurity|<h3>[^<]*Workflow/i);
 assert.ok(html.includes('If the project is a fit, we agree on the deliverables, price and review before work begins.'));

@@ -23,7 +23,7 @@ function artifactHashes() {
 }
 
 validateSourceBoundary();
-assert.equal(PUBLIC_MANIFEST.length, 75, 'public artifact must contain exactly 75 allowlisted files');
+assert.equal(PUBLIC_MANIFEST.length, 76, 'public artifact must contain exactly 76 allowlisted files');
 const firstBuild = buildPublicArtifact();
 assert.deepEqual(firstBuild, PUBLIC_MANIFEST);
 
@@ -55,7 +55,7 @@ assert.equal(organization.contactPoint[0].telephone, '+18594044351');
 
 const repairPage = fs.readFileSync(path.join(OUTPUT_ROOT, 'spreadsheet-repair/index.html'), 'utf8');
 assert.match(repairPage, /<link rel="canonical" href="https:\/\/rogersholdingsllc\.com\/spreadsheet-repair\/">/);
-assert.match(homepage, /href="spreadsheet-repair\/">View Spreadsheet Repair details &amp; terms/);
+assert.match(homepage, /href="services\/#spreadsheets">View spreadsheet scope &amp; pricing/);
 assert.match(repairPage, /<h1 id="repair-service-heading">Excel &amp; Google Sheets Repair<\/h1>/);
 assert.match(repairPage, /href="mailto:briankeith@rogersholdingsllc\.com\?subject=[^"]+">Email About a Spreadsheet Repair<\/a>/);
 assert.doesNotMatch(repairPage, /<form\b|<input\b|<iframe\b|\sdownload(?:=|>|\s)/i);

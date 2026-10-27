@@ -82,6 +82,7 @@ export const PUBLIC_MANIFEST = Object.freeze([
   'our-work/index.html',
   'robots.txt',
   'sitemap.xml',
+  'services/index.html',
   'spreadsheet-repair/index.html',
   'website-creation/index.html'
 ].sort());

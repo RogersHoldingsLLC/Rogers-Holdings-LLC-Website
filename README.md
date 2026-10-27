@@ -281,3 +281,7 @@ The follow-up clarifies deliverables, simplifies Snapshot navigation, puts real 
 ## Mobile composition and search foundations review
 
 The local follow-up integrates the compact brand sculpture, founder introduction and actions in the first phone viewport, improves project hierarchy and spacing, adds the bounded fifth service SEO & Local Search Foundations, and makes the Snapshot invitation goal-first. See [MOBILE_SEARCH_LOCAL_REVIEW_2026_10_26.md](docs/design-source/MOBILE_SEARCH_LOCAL_REVIEW_2026_10_26.md) for scope, evidence, preservation checks and the publication approval gate.
+
+## Service details, Chamber loading and Snapshot local review
+
+The next local review stabilizes the Chamber card while its optional logo loads, makes the service list lead to scope/pricing details, adds consistent SEO explanatory copy and gives the Snapshot a clearer customer decision, input, deliverable and next step. Existing approved prices and production intake behavior remain intact. See [SERVICE_DETAILS_CHAMBER_SNAPSHOT_LOCAL_REVIEW_2026_10_27.md](docs/design-source/SERVICE_DETAILS_CHAMBER_SNAPSHOT_LOCAL_REVIEW_2026_10_27.md) for diagnosis, validation and review gates. Starting-price proposals are held separately outside public source.

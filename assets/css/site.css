@@ -2088,3 +2088,51 @@ h3 { letter-spacing: -.015em; }
  .concept-page .phase3-hero h1 { font-size: 36px; }
  .concept-page .phase3-hero-copy > .rh-sculpture { width: 160px; }
 }
+
+/* Service details are reached from the service list; SEO follows the same reading order. */
+.concept-page .service-search { display: block; }
+.concept-page .service-search h3 { margin-top: 10px; }
+.concept-page .service-search p { max-width: 76ch; }
+.concept-page .snapshot-expectations { margin-top: 28px; }
+.concept-page .snapshot-expectations h3 { margin: 22px 0 10px; color: #f1ebdc; font: 500 24px/1.2 var(--serif); }
+.concept-page .snapshot-expectations p { max-width: 54ch; margin: 0; color: #c7cbbf; font-size: 15px; line-height: 1.7; }
+.service-scope-hero { padding-block: 136px 48px; }
+.service-scope-hero h1 { max-width: 18ch; margin-bottom: 24px; font-size: clamp(40px,5vw,64px); line-height: 1.04; }
+.service-scope-hero > .container > p:not(.eyebrow) { max-width: 60ch; color: #d8d5cd; font-size: 18px; line-height: 1.65; }
+.service-detail-index { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 28px; }
+.service-detail-index a { color: #ead09a; font-size: 14px; line-height: 1.6; text-underline-offset: 4px; }
+.service-scope-section { padding-block: 52px; border-bottom: 1px solid var(--line); background: #f4f0e6; scroll-margin-top: 96px; }
+.service-scope-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+.service-scope-layout h2 { max-width: 24ch; margin-bottom: 20px; font-size: clamp(30px,3vw,42px); line-height: 1.12; }
+.service-scope-layout h3 { margin: 24px 0 10px; font: 500 24px/1.2 var(--serif); }
+.service-scope-layout > div > h3:first-child { margin-top: 0; }
+.service-scope-layout p:not(.eyebrow), .service-scope-next p:not(.eyebrow) { max-width: 58ch; color: var(--color-text-secondary); font-size: 16px; line-height: 1.7; }
+.service-detail-link, .service-return { display: block; width: fit-content; max-width: 100%; padding-block: 10px; color: #72571d; font-size: 14px; line-height: 1.6; text-underline-offset: 4px; }
+.service-return { margin-top: 16px; }
+.service-scope-next { padding-block: 48px; }
+.service-scope-next h2 { max-width: 24ch; font-size: clamp(32px,3.4vw,44px); line-height: 1.12; }
+.service-scope-next .service-optional-snapshot { margin-top: 20px; font-size: 14px; }
+@media(max-width:800px) { .service-scope-layout { grid-template-columns: 1fr; gap: 28px; } }
+@media(max-width:680px) {
+ .service-scope-hero { padding-block: 112px 32px; }
+ .service-scope-section { padding-block: 32px; }
+ .service-scope-layout h2 { font-size: 32px; }
+ .service-detail-index { flex-direction: column; gap: 6px; }
+ .service-detail-index a { padding-block: 6px; }
+}
+
+/* Keep the Chamber card stable while its optional remote logo widget loads. */
+.chamber-membership { min-height: 185px; }
+.chamber-membership #mni-membership-639277029874283606 { display: flex; grid-column: 1; grid-row: 1 / 4; align-self: start; align-items: center; justify-content: center; width: 96px; height: 96px; }
+.chamber-membership .mn-widget-member { display: block; width: 96px; height: 96px; }
+.chamber-membership .mn-widget-member-name, .chamber-membership .mn-widget-member-text { display: none; }
+.chamber-membership .mn-widget-member-assoc { display: block; }
+.chamber-membership .mn-widget-member-link, .chamber-membership .mn-widget-member-logo { width: 96px; height: 96px; object-fit: contain; }
+.chamber-membership-name { grid-column: 2; grid-row: 1; align-self: end; color: #262b24; font-size: 13px; line-height: 1.45; }
+.chamber-membership-text { grid-column: 2; grid-row: 2; color: #596151; font-size: 11px; line-height: 1.5; }
+.chamber-membership #mni-membership-639277029874283606:empty::before { content: "Chamber member"; padding: 12px; color: #68705f; border: 1px solid #e1d9c8; font: 11px/1.5 var(--sans); }
+.chamber-membership #mni-membership-639277029874283606:empty ~ .chamber-membership-note { display: block; visibility: hidden; }
+.concept-page .service-category[id], .concept-page .service-category h3[id] { scroll-margin-top: 96px; }
+
+.concept-page .phase3-snapshot-copy h2 { max-width: none; }
+.service-scope-layout .eyebrow { font-size: 10px; line-height: 1.5; color: #826324; }
