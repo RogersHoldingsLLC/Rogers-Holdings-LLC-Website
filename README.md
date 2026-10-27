@@ -289,3 +289,7 @@ The next local review stabilizes the Chamber card while its optional logo loads,
 ## Readable Snapshot sample — local review
 
 The next bounded review replaces the distant desk-photo sample with readable HTML from the approved fictional North Point Fitness Executive Brief, puts evidence directly after the phone benefit statement and provides a native full-sample disclosure. Services, commercial terms, other images and intake remain intact. See [READABLE_SNAPSHOT_LOCAL_REVIEW_2026_10_27.md](docs/design-source/READABLE_SNAPSHOT_LOCAL_REVIEW_2026_10_27.md) for source fidelity, actual visual checks, evidence and the publication gate.
+
+## Snapshot PDF access — local review
+
+The follow-up preserves the readable preview and replaces inline expansion with a clearly labeled new-tab link to the exact approved fictional PDF. See [SNAPSHOT_PDF_LINK_LOCAL_REVIEW_2026_10_27.md](docs/design-source/SNAPSHOT_PDF_LINK_LOCAL_REVIEW_2026_10_27.md) for file identity, public-artifact scope, actual browser checks and the publication gate.

@@ -124,12 +124,17 @@ for (const [markup, family, viewport] of [
 }
 
 assert.doesNotMatch(hero, /<picture|<img/, 'the sample content must remain readable text');
-assert.match(hero, /<details class="snapshot-full-sample" id="snapshot-full-sample">/);
-assert.match(hero, /<summary>Read the full fictional sample<\/summary>/);
+const samplePdfLink = hero.match(/<a class="snapshot-sample-link"[^>]*>[\s\S]*?<\/a>/)?.[0] || '';
+assert.match(samplePdfLink, /href="assets\/samples\/north-point-fitness-executive-brief\.pdf"/);
+assert.match(samplePdfLink, /target="_blank" rel="noopener noreferrer"/);
+assert.match(samplePdfLink, /aria-describedby="snapshot-pdf-new-tab"/);
+assert.ok(samplePdfLink.includes('View fictional sample brief (PDF)'));
+assert.doesNotMatch(samplePdfLink, /\bdownload(?:=|\s|>)/, 'PDF opens normally without a forced download');
+assert.doesNotMatch(hero, /<details|<summary|snapshot-full-sample/);
+assert.ok(hero.includes('Opens in a new tab.'));
 assert.match(hero, /Fictional sample · Business Check/);
 assert.ok(hero.includes('The path from interest to membership is not obvious'));
 assert.ok(hero.includes('Add one clear Start Membership button to the main navigation and homepage hero.'));
-assert.ok(hero.includes('No membership purchase, payment, account creation, or private customer flow was tested. This is a fictional demonstration sample.'));
 assert.ok(samplePosition < html.indexOf('class="snapshot-expectations"'), 'evidence precedes the longer explanation in DOM order');
 assert.equal(html.split(approvedSampleDisclosure).length - 1, 1, 'the approved sample disclosure must render exactly once');
 assert.ok(hero.includes(approvedSampleDisclosure), 'the approved sample disclosure must remain visibly connected to the hero sample');
