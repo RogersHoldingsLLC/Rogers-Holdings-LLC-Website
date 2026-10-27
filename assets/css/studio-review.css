@@ -52,6 +52,9 @@
 .studio-review .phase3-owner h2 { max-width: 22ch; margin: 14px 0 22px; font-size: clamp(40px,4vw,56px); line-height: 1.06; letter-spacing: -.025em; text-wrap: balance; }
 .studio-review .phase3-owner p:not(.eyebrow) { max-width: 65ch; font-size: 16px; line-height: 1.7; }
 .studio-review .phase3-owner-principles { display: flex; flex-wrap: wrap; gap: 12px 22px; margin-top: 24px; padding-top: 20px; }
+.studio-review .company-vision { margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--studio-rule); align-items: start; }
+.studio-review .company-vision h3 { margin: 0; font: 500 28px/1.15 var(--serif); letter-spacing: -.02em; }
+.studio-review .company-vision p { margin: 0; max-width: 70ch; font-size: 15px; line-height: 1.7; }
 .studio-review .phase3-method { padding-block: var(--studio-space); background: #19221b; }
 .studio-review .phase3-method > .container { display: grid; grid-template-columns: minmax(0,.95fr) minmax(0,1.05fr); align-items: start; gap: 64px; }
 .studio-review .phase3-method .phase3-editorial-header { margin: 0; padding: 0; border: 0; }
@@ -125,7 +128,7 @@
   .studio-review .phase3-hero .hero-services { grid-column: 1 / -1; grid-row: 3; max-width: 42ch; margin: 0 0 22px; font-size: 15px; line-height: 1.6; }
   .studio-review .phase3-hero-copy > .rh-sculpture { grid-column: 1; grid-row: 4; width: 148px; max-width: 100%; margin: 0; padding: 0; align-self: center; }
   .studio-review .phase3-hero .hero-lede { grid-column: 2; grid-row: 4; max-width: none; margin: 0; font-size: 15px; line-height: 1.55; align-self: center; text-wrap: pretty; }
-  .studio-review .phase3-hero .button-row { grid-column: 1 / -1; grid-row: 5; display: grid; grid-template-columns: 1fr 1fr; margin-top: 22px; padding-top: 20px; border-top: 1px solid #cfc5af; gap: 10px; }
+  .studio-review .phase3-hero .button-row { grid-column: 1 / -1; grid-row: 5; display: grid; grid-template-columns: minmax(0,1fr); margin-top: 22px; padding-top: 20px; border-top: 1px solid #cfc5af; gap: 10px; }
   .studio-review .phase3-hero .button { min-height: 50px; padding-inline: 10px; font-size: 12px; letter-spacing: .04em; }
   .studio-review .phase3-hero-note { grid-column: 1 / -1; grid-row: 6; margin-top: 14px; font-size: 12px; line-height: 1.6; }
   .studio-review.concept-page .phase3-hero-copy > .phase3-hero-note { grid-column: 1 / -1; max-width: none; }

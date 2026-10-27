@@ -9,7 +9,7 @@ const read = f => fs.readFileSync(path.join(root, f), 'utf8');
 const home = read('index.html');
 const work = read('our-work/index.html');
 assert.match(home, /id="work"/);
-assert.match(home, /href="our-work\/">Explore Our Work/);
+assert.match(home, /href="our-work\/">Explore more demos/);
 assert.match(home, /href="our-work\/#eastland"/);
 assert.match(home, /href="our-work\/#missys-squishies"/);
 assert.doesNotMatch(home, /class="eastland-story-timeline"|class="eastland-live-proof"/);
