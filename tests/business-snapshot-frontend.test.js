@@ -46,8 +46,8 @@ const preFieldWords = preFieldMarkup
   .match(/[A-Za-z0-9]+(?:[’'-][A-Za-z0-9]+)*/g) || [];
 const approvedHeroCopy = {
   eyebrow: 'Free Business Snapshot',
-  heading: 'Start with your goal. Explore a practical next step.',
-  lede: 'Describe your goal and current work. Rogers Holdings will review your information and visible public evidence, then typically within three business days send a concise, human-reviewed Executive Brief.',
+  heading: 'Get a second look at your next step.',
+  lede: 'Share your goal and current work; a website is optional. Brian reviews the evidence and typically sends your Executive Brief within three business days.',
   cta: 'Request Your Free Business Snapshot',
   trust: 'Free <span aria-hidden="true">·</span> Human-reviewed by Brian Rogers <span aria-hidden="true">·</span> Typically within three business days'
 };
@@ -61,9 +61,9 @@ assert.doesNotMatch(heroMarkup, /<picture\b|<img\b|homepage-hero-v2\.2|north-poi
 assert.match(heroMarkup, /<section class="snapshot-summary" id="snapshot-deliverable" aria-labelledby="snapshot-deliverable-heading"/);
 assert.match(heroMarkup, /<h2 id="snapshot-deliverable-heading">Your Executive Brief<\/h2>/);
 for (const deliverable of [
-  'The clearest visible issue',
-  'What deserves attention first',
-  'A practical recommended next step, with plain-English reasoning'
+  'What the visible evidence supports',
+  'A first priority connected to your goal',
+  'A practical next step and the reasoning behind it'
 ]) {
   assert.equal(heroMarkup.split(deliverable).length - 1, 1, `${deliverable} must appear once before the form`);
 }
@@ -222,7 +222,7 @@ assert.doesNotMatch(html, /name="formStartedAt"|data-form-started-at/);
 assert.match(html, /data-error-callback="businessSnapshotTurnstileError"/);
 assert.match(html, /data-expired-callback="businessSnapshotTurnstileExpired"/);
 assert.match(html, /data-timeout-callback="businessSnapshotTurnstileTimeout"/);
-assert.match(html, /site\.css\?v=mobile-search-20261026/);
+assert.match(html, /site\.css\?v=service-review-20261026/);
 assert.match(html, /site\.js\?v=whole-site-refinement-1/);
 assert.match(html, /<p class="delivery-note" data-delivery-note hidden><\/p>/);
 assert.doesNotMatch(html, /secure submission endpoint is not connected yet/i);

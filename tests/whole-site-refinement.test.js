@@ -20,9 +20,9 @@ for (const [name, html] of [['homepage', home], ['Business Snapshot', snapshot],
   assert.match(html, /site\.js\?v=whole-site-refinement-1/);
 }
 
-assert.match(home, /site\.css\?v=mobile-search-20261026/);
-assert.match(snapshot, /site\.css\?v=mobile-search-20261026/);
-assert.match(privacy, /site\.css\?v=mobile-search-20261026/);
+assert.match(home, /site\.css\?v=service-review-20261026/);
+assert.match(snapshot, /site\.css\?v=service-review-20261026/);
+assert.match(privacy, /site\.css\?v=service-review-20261026/);
 
 assert.ok(home.includes('Request Your Free Business Snapshot'));
 assert.ok(snapshot.includes('Request Your Free Business Snapshot'));
@@ -32,7 +32,7 @@ for (const viewport of ['desktop', 'tablet', 'mobile']) assert.ok(home.includes(
 assert.ok(home.includes('Illustrative Executive Brief sample — North Point Fitness is a fictional business. Shown to demonstrate the format and level of detail.'));
 assert.doesNotMatch(home, /visual-proof-pair|north-point-assessment-|north-point-plan-|phase3-snapshot-proof/);
 assert.doesNotMatch(snapshot, /homepage-hero-v2\.2|north-point-|<picture class="snapshot-hero__media"/);
-assert.match(snapshot, /Start with your goal\. Explore a practical next step\./);
+assert.match(snapshot, /Get a second look at your next step\./);
 assert.match(snapshot, /class="snapshot-summary"/);
 assert.doesNotMatch(snapshot, /snapshot-value-strip|snapshot-hero-secondary/);
 assert.match(snapshot, /<\/section>\s*<section class="section intake-section" aria-labelledby="snapshot-section-heading">/);
@@ -45,8 +45,8 @@ for (const term of ['Free Business Snapshot', 'Executive Brief', 'Website Creati
 for (const retiredJourneyLabel of ['Discovery Conversation', 'Digital Business Assessment', 'Improvement Plan', 'Implementation Services', 'Ongoing Optimization']) {
   assert.ok(!homepageBody.includes(retiredJourneyLabel), `homepage must not render expanded journey label: ${retiredJourneyLabel}`);
 }
-assert.ok(homepageBody.includes('Get a clear outside view of your next step.'));
-assert.ok(homepageBody.includes('A practical recommended next step, with plain-English reasoning'));
+assert.ok(homepageBody.includes('See what deserves attention before choosing a project.'));
+assert.ok(homepageBody.includes('A practical next step and the reasoning behind it'));
 
 assert.match(snapshot, /action="https:\/\/intake\.rogersholdingsllc\.com\/api\/business-snapshot"/);
 assert.match(snapshot, /data-endpoint-configured="true"/);
