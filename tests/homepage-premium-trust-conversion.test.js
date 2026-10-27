@@ -13,6 +13,11 @@ assert.equal((html.match(new RegExp(primaryCta, 'g')) || []).length, 1);
 assert.equal((html.match(/<p class="phase3-hero-note">Start with a short conversation\. Paid work begins with an agreed scope and quote\.<\/p>/g) || []).length, 1);
 assert.match(html, /href="mailto:briankeith@rogersholdingsllc\.com\?subject=Project%20Inquiry">Email About Your Project/);
 assert.ok(html.includes('I’m Brian Keith Rogers. I start by understanding your business and what you want to accomplish.'));
+const heroMarkup = html.slice(html.indexOf('<section class="hero phase3-hero"'), html.indexOf('<section class="homepage-eastland-showcase"'));
+const readingOrder = ['<h1>', 'class="hero-services"', 'class="rh-sculpture"', 'class="hero-lede"', 'class="button-row"'].map(marker => heroMarkup.indexOf(marker));
+assert.ok(readingOrder.every(position => position >= 0));
+assert.deepEqual(readingOrder, [...readingOrder].sort((a, b) => a - b), 'the practical service line must follow the promise before artwork, founder and actions');
+assert.doesNotMatch(heroMarkup, /<br\b/, 'hero copy must wrap responsively');
 
 assert.match(html, /<section class="section phase3-method" id="approach"/);
 assert.match(html, /<section class="section phase3-snapshot" id="process"/);
