@@ -33,6 +33,7 @@ export const PUBLIC_MANIFEST = Object.freeze([
   'apple-touch-icon.png',
   'assets/css/digital-business-card.css',
   'assets/css/site.css',
+  'assets/css/studio-review.css',
   'assets/css/our-work.css',
   'assets/css/website-creation.css',
   'assets/images/brand/rogers-holdings-logo-reversed.png',

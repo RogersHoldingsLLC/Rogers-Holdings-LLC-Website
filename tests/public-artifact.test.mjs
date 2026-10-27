@@ -23,7 +23,7 @@ function artifactHashes() {
 }
 
 validateSourceBoundary();
-assert.equal(PUBLIC_MANIFEST.length, 77, 'public artifact must contain exactly 77 allowlisted files');
+assert.equal(PUBLIC_MANIFEST.length, 78, 'public artifact must contain exactly 78 allowlisted files');
 const samplePdf = 'assets/samples/north-point-fitness-executive-brief.pdf';
 assert.ok(PUBLIC_MANIFEST.includes(samplePdf));
 const samplePdfBytes = fs.readFileSync(path.join(REPOSITORY_ROOT, samplePdf));
