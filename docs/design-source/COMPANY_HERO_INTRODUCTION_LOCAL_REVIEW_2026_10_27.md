@@ -19,3 +19,7 @@ Brian also requested “Why a holding company?” and directed using the establi
 “Rogers Holdings LLC was created with room to grow. Our vision extends beyond one service, with a long-term goal of building and supporting businesses and ventures under one company. Today, we help business owners make practical improvements through the services you see here.”
 
 This describes a future goal and present services; it does not claim existing subsidiaries, a portfolio, staffing or tax/legal benefits. No contradictory company explanation was found in the approved site/docs. Brian authorized publication when these requested changes and final QA are complete.
+
+## More demos navigation
+
+Brian requested making the additional demos on the next page clear. The existing `our-work/` destination contains real project stories plus website examples explicitly labeled “Fictional concepts and an owned startup project.” The homepage work CTA becomes “Explore more demos” with the same destination. The existing two-client-project introduction is preserved and followed by “Explore more website demos on the next page.” No new examples, counts or client-results claims are introduced; destination disclosures stay unchanged.
