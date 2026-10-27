@@ -95,17 +95,17 @@ for (const [viewport, expectedDimensions] of Object.entries(heroV22Dimensions)) 
   }
 }
 
-// One disclosed sample is retained in Snapshot; the original workflow and contact action lead the concept.
-assert.equal((html.match(/<figure class="homepage-hero-media"/g) || []).length, 1);
+// The approved fictional brief is readable HTML; preserved images and source PDF remain unchanged.
+assert.equal((html.match(/<figure class="snapshot-brief"/g) || []).length, 1);
 const introPosition = html.indexOf('<p class="hero-lede">');
-const samplePosition = html.indexOf('<figure class="homepage-hero-media"');
+const samplePosition = html.indexOf('<figure class="snapshot-brief"');
 const actionsPosition = html.indexOf('<div class="button-row">', introPosition);
 assert.ok(introPosition < actionsPosition);
 assert.ok(samplePosition > html.indexOf('id="process"'), 'the single disclosed sample belongs with optional Snapshot');
 assert.match(html, /class="rh-sculpture"/);
 assert.match(html, /data-rh-sculpture data-mask="assets\/images\/homepage\/rh-monogram-mask\.png"/);
 assert.match(html, /href="#contact">Talk with Brian/);
-const heroStart = html.indexOf('<figure class="homepage-hero-media"');
+const heroStart = html.indexOf('<figure class="snapshot-brief"');
 const heroEnd = html.indexOf('</figure>', heroStart);
 const hero = html.slice(heroStart, heroEnd);
 const approvedSampleDisclosure = 'Illustrative Executive Brief sample — North Point Fitness is a fictional business. Shown to demonstrate the format and level of detail.';
@@ -114,7 +114,6 @@ const eastlandEnd = html.indexOf('</picture>', eastlandStart);
 const eastland = html.slice(eastlandStart, eastlandEnd);
 
 for (const [markup, family, viewport] of [
-  [hero, 'homepage-hero-v2.2', 'desktop'],
   [eastland, 'eastland-product-family', 'tablet'],
   [eastland, 'eastland-product-family', 'desktop']
 ]) {
@@ -124,15 +123,21 @@ for (const [markup, family, viewport] of [
   assert.ok(avif >= 0 && webp > avif && jpg > webp, `${family} ${viewport} sources must be ordered AVIF, WebP, JPG`);
 }
 
-assert.match(hero, /type="image\/avif" srcset="assets\/images\/homepage\/homepage-hero-v2\.2-desktop\.avif"/);
-assert.match(hero, /width="1536" height="1024" loading="eager" fetchpriority="high" decoding="async"/);
+assert.doesNotMatch(hero, /<picture|<img/, 'the sample content must remain readable text');
+assert.match(hero, /<details class="snapshot-full-sample" id="snapshot-full-sample">/);
+assert.match(hero, /<summary>Read the full fictional sample<\/summary>/);
+assert.match(hero, /Fictional sample · Business Check/);
+assert.ok(hero.includes('The path from interest to membership is not obvious'));
+assert.ok(hero.includes('Add one clear Start Membership button to the main navigation and homepage hero.'));
+assert.ok(hero.includes('No membership purchase, payment, account creation, or private customer flow was tested. This is a fictional demonstration sample.'));
+assert.ok(samplePosition < html.indexOf('class="snapshot-expectations"'), 'evidence precedes the longer explanation in DOM order');
 assert.equal(html.split(approvedSampleDisclosure).length - 1, 1, 'the approved sample disclosure must render exactly once');
 assert.ok(hero.includes(approvedSampleDisclosure), 'the approved sample disclosure must remain visibly connected to the hero sample');
 assert.ok(hero.includes('Illustrative Executive Brief sample'));
 assert.ok(hero.includes('North Point Fitness is a fictional business'));
 assert.ok(hero.includes('Shown to demonstrate the format and level of detail'));
 assert.doesNotMatch(html, /Fictional sample shown for demonstration\. North Point Fitness is fictional\./);
-assert.match(hero, /<figure class="homepage-hero-media" aria-labelledby="snapshot-sample-note">/);
+assert.match(hero, /<figure class="snapshot-brief" aria-labelledby="snapshot-brief-title" aria-describedby="snapshot-sample-note">/);
 assert.equal((html.match(/id="snapshot-sample-note"/g) || []).length, 1, 'the sample disclosure ID must remain unique');
 const sampleCaption = hero.match(/<figcaption\b[\s\S]*?<\/figcaption>/)?.[0] || '';
 assert.match(sampleCaption, /id="snapshot-sample-note"/);
@@ -161,8 +166,8 @@ for (const copy of [
   'How Rogers Holdings works', 'Understand, Prioritize, Scope and review methodology',
   'Optional Free Business Snapshot',
   'See what deserves attention before choosing a project.',
-  'What the visible evidence supports', 'A first priority connected to your goal',
-  'A practical next step and the reasoning behind it',
+  'what the visible evidence supports', 'what deserves attention first',
+  'why the suggested next step makes sense',
   'See our work in action.', 'Eastland First Church of God',
   'From a Facebook-first presence to a clear digital front door.',
   'Facebook was the primary online presence.', 'Eastland project story',
