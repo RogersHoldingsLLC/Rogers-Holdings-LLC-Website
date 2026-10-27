@@ -12,7 +12,7 @@ const primaryCta = 'Request Your Free Business Snapshot';
 assert.equal((html.match(new RegExp(primaryCta, 'g')) || []).length, 1);
 assert.equal((html.match(/<p class="phase3-hero-note">Start with a short conversation\. Paid work begins with an agreed scope and quote\.<\/p>/g) || []).length, 1);
 assert.match(html, /href="mailto:briankeith@rogersholdingsllc\.com\?subject=Project%20Inquiry">Email About Your Project/);
-assert.ok(html.includes('I’m Brian Keith Rogers. I start by understanding your business and what you want to accomplish.'));
+assert.ok(html.includes('We’re Rogers Holdings LLC. We start by understanding your business and what you want to accomplish.'));
 const heroMarkup = html.slice(html.indexOf('<section class="hero phase3-hero"'), html.indexOf('<section class="homepage-eastland-showcase"'));
 const readingOrder = ['<h1>', 'class="hero-services"', 'class="rh-sculpture"', 'class="hero-lede"', 'class="button-row"'].map(marker => heroMarkup.indexOf(marker));
 assert.ok(readingOrder.every(position => position >= 0));
@@ -75,7 +75,7 @@ assert.doesNotMatch(html, /class="eastland-project-actions"/);
 assert.match(work, /From a Facebook-first presence to a clear digital front door\./);
 assert.match(work, /Current public experience: A responsive website with clear paths to service information, visit planning, ministries, messages, directions, and contact details\./);
 assert.doesNotMatch(body, /easier to find, easier to use, and easier to maintain|free of charge|home church/i);
-assert.ok(html.indexOf('Talk with Brian') < html.indexOf('Explore Our Work'), 'contact must be discoverable before project proof');
+assert.ok(html.indexOf('Speak with Rogers Holdings') < html.indexOf('Explore Our Work'), 'contact must be discoverable before project proof');
 assert.match(work, /class="button button-dark" href="https:\/\/www\.eastlandfirstchurchofgod\.com"/, 'Eastland live proof must remain accessible on Our Work');
 assert.doesNotMatch(html, /class="eastland-story-timeline"|class="eastland-live-proof"/, 'homepage must not duplicate detailed case studies');
 assert.match(html, /href="our-work\/">Explore Our Work/);
@@ -86,7 +86,8 @@ assert.match(html, /href="business-snapshot\/" data-report-link>Request Your Fre
 
 assert.match(html, /class="phase3-founder-portrait"/);
 assert.match(html, /src="assets\/images\/homepage\/brian-smiling-portrait\.webp" width="1040" height="1300" loading="lazy"/);
-assert.match(html, /<strong>Brian Keith Rogers<\/strong><span>Founder, Rogers Holdings LLC<\/span>/);
+assert.match(html, /<p class="phase3-owner-intro"><strong>I’m Brian Keith Rogers<\/strong><\/p><p class="phase3-owner-lede">/);
+assert.match(html, /<figcaption><span>Founder, Rogers Holdings LLC<\/span><\/figcaption>/);
 assert.match(html, /<h2>You know your business\. I want to understand it\.<\/h2>/);
 assert.match(html, /My faith shapes how I work: be honest, help where I can and follow through\./);
 for (const commitment of ['Lead with integrity', 'Serve before selling', 'Own the work', 'Practice good stewardship']) {

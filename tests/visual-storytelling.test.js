@@ -104,7 +104,7 @@ assert.ok(introPosition < actionsPosition);
 assert.ok(samplePosition > html.indexOf('id="process"'), 'the single disclosed sample belongs with optional Snapshot');
 assert.match(html, /class="rh-sculpture"/);
 assert.match(html, /data-rh-sculpture data-mask="assets\/images\/homepage\/rh-monogram-mask\.png"/);
-assert.match(html, /href="#contact">Talk with Brian/);
+assert.match(html, /href="#contact">Speak with Rogers Holdings/);
 const heroStart = html.indexOf('<figure class="snapshot-brief"');
 const heroEnd = html.indexOf('</figure>', heroStart);
 const hero = html.slice(heroStart, heroEnd);
