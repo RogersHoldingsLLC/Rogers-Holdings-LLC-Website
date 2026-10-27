@@ -23,7 +23,12 @@ function artifactHashes() {
 }
 
 validateSourceBoundary();
-assert.equal(PUBLIC_MANIFEST.length, 76, 'public artifact must contain exactly 76 allowlisted files');
+assert.equal(PUBLIC_MANIFEST.length, 77, 'public artifact must contain exactly 77 allowlisted files');
+const samplePdf = 'assets/samples/north-point-fitness-executive-brief.pdf';
+assert.ok(PUBLIC_MANIFEST.includes(samplePdf));
+const samplePdfBytes = fs.readFileSync(path.join(REPOSITORY_ROOT, samplePdf));
+assert.equal(crypto.createHash('sha256').update(samplePdfBytes).digest('hex'), '08c20db2826dfb06cdbd5b52d5ec49e2915d072c90e8e746919f57089ea3a4cb', 'public sample must be the exact approved fictional PDF');
+assert.deepEqual(samplePdfBytes, fs.readFileSync(path.join(REPOSITORY_ROOT, 'docs/design-reference/homepage-hero-v2.2/Executive Brief - North Point Fitness.pdf')));
 const firstBuild = buildPublicArtifact();
 assert.deepEqual(firstBuild, PUBLIC_MANIFEST);
 

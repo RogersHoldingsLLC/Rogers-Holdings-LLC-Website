@@ -20,7 +20,7 @@ for (const [name, html] of [['homepage', home], ['Business Snapshot', snapshot],
   assert.match(html, /site\.js\?v=whole-site-refinement-1/);
 }
 
-assert.match(home, /site\.css\?v=snapshot-sample-20261027/);
+assert.match(home, /site\.css\?v=snapshot-pdf-20261027/);
 assert.match(snapshot, /site\.css\?v=service-review-20261026/);
 assert.match(privacy, /site\.css\?v=service-review-20261026/);
 
