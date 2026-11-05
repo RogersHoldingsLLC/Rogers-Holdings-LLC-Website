@@ -18,7 +18,7 @@
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
-  <meta name="theme-color" content="#171916">
+  <meta name="theme-color" content="#11100e">
   <meta name="application-name" content="Rogers Holdings LLC">
   <meta name="apple-mobile-web-app-title" content="Rogers Holdings LLC">
   <meta name="format-detection" content="telephone=yes">
@@ -113,11 +113,14 @@
     ]
   }
   </script>
-  <link rel="stylesheet" href="assets/css/our-work.css?v=mobile-search-20261026">
-  <link rel="stylesheet" href="assets/css/website-creation.css?v=1">
-  <link rel="stylesheet" href="assets/css/studio-review.css?v=company-hero-20261027">
+  <link rel="stylesheet" href="assets/css/our-work.css?v=visitor-review-20261104">
+  <link rel="stylesheet" href="assets/css/website-creation.css?v=scope-quote-20261104">
+  <link rel="stylesheet" href="assets/css/studio-review.css?v=gold-linked-cards-20261105">
+  <script src="assets/js/listening-hero.js?v=private-option-20261104"></script>
+  <link rel="stylesheet" href="assets/css/clear-path-hero.css?v=screen-width-20261105">
+  <script src="assets/js/clear-path-hero.js?v=20261105"></script>
 </head>
-<body class="home-page concept-page studio-review">
+<body class="home-page concept-page studio-review clear-path-hero">
   <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header" data-site-header>
     <div class="nav-shell">
@@ -131,15 +134,12 @@
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" data-menu-toggle>
         <span class="sr-only">Open navigation</span><span></span><span></span><span></span>
       </button>
-      <nav class="primary-nav" id="primary-navigation" aria-label="Primary navigation" data-navigation>
-        <a href="#capabilities">Services</a>
+      <nav class="primary-nav" id="primary-navigation" aria-label="Primary navigation" data-navigation><a href="#capabilities">Services</a>
         <a href="#approach">Approach</a>
         <a href="business-snapshot/" data-report-link>Free Business Snapshot</a>
         <a href="our-work/">Our Work</a>
         <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-
-      </nav>
+        <a href="#contact">Contact</a></nav>
     </div>
   </header>
 
@@ -148,18 +148,31 @@
       <div class="container phase3-hero-layout">
         <div class="phase3-hero-copy">
           <p class="eyebrow eyebrow-light">Business optimization for small and growing businesses</p>
-          <h1>Make the next improvement <span class="hero-emphasis">fit your business.</span></h1>
+          <h1>Better tools. <span class="hero-emphasis">Built around your business.</span></h1>
           <p class="hero-services">Websites, spreadsheets, forms, business documents and local search foundations.</p>
+          <div class="hero-signature" data-reveal>
           <figure class="rh-sculpture" aria-labelledby="rh-sculpture-caption">
             <div class="rh-sculpture-stage"><canvas data-rh-sculpture data-mask="assets/images/homepage/rh-monogram-mask.png" width="640" height="560" role="img" aria-label="A dimensional black study of the original RH monogram within a stationary gold square, making a brief shallow turn before settling front-facing."><img src="assets/images/brand/rogers-holdings-logo.png" width="160" height="160" alt="Rogers Holdings RH mark"></canvas><noscript><img class="rh-sculpture-fallback" src="assets/images/brand/rogers-holdings-logo-reversed.png" width="160" height="160" alt="Rogers Holdings RH mark"></noscript></div>
             <figcaption id="rh-sculpture-caption" class="sr-only">The original RH silhouette, rendered with sculpted depth and studio lighting. Decorative brand artwork; no client results or business metrics are depicted.</figcaption>
           </figure>
-          <p class="hero-lede">We’re Rogers Holdings LLC. We start by understanding your business and what you want to accomplish.</p>
-          <div class="button-row">
-            <a class="button button-gold" href="#contact">Speak with Rogers Holdings</a>
-            <a class="button button-ghost" href="#work">See Our Work</a>
           </div>
-          <p class="phase3-hero-note">Start with a short conversation. Paid work begins with an agreed scope and quote.</p>
+          <figure class="hero-listening" aria-labelledby="listening-hero-caption" aria-describedby="listening-scene-note">
+            <div class="hero-listening-stage"><video id="listening-hero-video" data-listening-video data-src="assets/media/listening-hero-loop.mp4" poster="assets/media/listening-hero-poster.jpg" width="1916" height="1080" autoplay muted loop playsinline preload="none" aria-label="Illustrative listening scene"></video><button class="listening-motion-toggle" type="button" data-listening-toggle aria-controls="listening-hero-video" aria-label="Play listening video">Play motion</button></div>
+            <figcaption id="listening-hero-caption">Listening before recommending.</figcaption><span class="sr-only" id="listening-scene-note">An illustrative scene, not a customer testimonial or a claim of customer results.</span>
+          </figure>
+          <div class="button-row">
+            <a class="button button-gold" href="business-snapshot/" data-report-link>Request Your Free Business Snapshot</a>
+            <a class="button button-ghost" href="our-work/">See Our Work</a>
+          </div>
+          <p class="phase3-hero-note">The Snapshot is free and optional. Paid work begins with an agreed scope and quote.</p>
+          <figure class="clear-path-art" aria-labelledby="clear-path-caption" data-clear-path data-state="still">
+            <div class="clear-path-stage">
+              <img src="assets/media/clear-path-settled.jpg" width="1918" height="1080" alt="Black and gold ribbons aligned into a clear path on a cream background.">
+              <video id="clear-path-video" data-clear-path-video data-src="assets/media/clear-path.mp4" width="1918" height="1080" muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+            </div>
+            <figcaption id="clear-path-caption" class="sr-only">An abstract illustration of loose ends becoming an orderly path. Decorative artwork, not a depiction of client results.</figcaption>
+            <div class="clear-path-controls container"><button type="button" data-clear-path-toggle aria-controls="clear-path-video" hidden>Play animation</button></div>
+          </figure>
         </div>
       </div>
     </section>
@@ -174,23 +187,72 @@
         </header>
         <div class="work-preview-grid">
           <article class="work-preview-card" data-reveal>
+            <figure class="home-project-media home-eastland-media"><picture class="homepage-eastland-picture"><source type="image/avif" srcset="assets/images/homepage/eastland-product-family-desktop.avif"><source type="image/webp" srcset="assets/images/homepage/eastland-product-family-desktop.webp"><img src="assets/images/homepage/eastland-product-family-desktop.jpg" width="2400" height="1244" loading="lazy" decoding="async" alt="Eastland's website presented across desktop, laptop, tablet and phone screens"></picture><figcaption>A real website project · View the live site and project story</figcaption></figure>
             <div><p class="eyebrow">Website · Google Business Profile</p><h3>Eastland First Church of God</h3><p>One clear place for service times, ministries, messages and visitor information.</p><a class="work-text-link" href="our-work/#eastland">Read the Eastland story <span aria-hidden="true">↗</span></a></div>
-            <div class="project-client-logo"><img src="assets/images/our-work/eastland-official-logo.jpg" width="1536" height="1024" loading="lazy" decoding="async" alt="Eastland First Church of God logo"></div>
-            <figure class="work-preview-image"><picture class="homepage-eastland-picture">
-            <source media="(max-width: 1100px)" type="image/avif" srcset="assets/images/homepage/eastland-product-family-tablet.avif?v=0cecc197">
-            <source media="(max-width: 1100px)" type="image/webp" srcset="assets/images/homepage/eastland-product-family-tablet.webp?v=0cecc197">
-            <source media="(max-width: 1100px)" srcset="assets/images/homepage/eastland-product-family-tablet.jpg?v=0cecc197">
-            <source type="image/avif" srcset="assets/images/homepage/eastland-product-family-desktop.avif?v=0cecc197">
-            <source type="image/webp" srcset="assets/images/homepage/eastland-product-family-desktop.webp?v=0cecc197">
-            <img src="assets/images/homepage/eastland-product-family-desktop.jpg?v=0cecc197" width="2400" height="1244" loading="lazy" decoding="async" alt="Complete Eastland First Church of God client-work presentation across desktop, laptop, tablet, and phone displays on a warm executive desk">
-          </picture></figure>
+
           </article>
           <article class="work-preview-card" data-reveal>
+            <figure class="home-project-media home-missy-media"><div><img src="assets/images/our-work/missy-artwork-extracted.webp" width="984" height="392" loading="lazy" decoding="async" alt="Missy’s Squishies and More artwork alongside an illustrative laptop workbook"></div><figcaption>Project artwork · Workbook visual is illustrative</figcaption></figure>
             <div><p class="eyebrow">Spreadsheet project</p><h3>Missy’s Squishies and More</h3><p>A Google Sheets workflow connecting inventory, checkout totals and fulfillment.</p><a class="work-text-link" href="our-work/#missys-squishies">Read Missy’s story <span aria-hidden="true">↗</span></a></div>
-            <div class="project-client-logo"><img src="assets/images/our-work/missy-official-logo-extracted.png" width="328" height="192" loading="lazy" decoding="async" alt="Missy’s Squishies and More logo"></div>
-            <figure class="concept-missy-proof"><img src="assets/images/our-work/missy-workbook-redacted.png" width="1440" height="746" loading="lazy" decoding="async" alt="Composed Inventory and Fulfillment views derived from the actual multi-tab workbook, with private contents, internal labels and operating details concealed"><figcaption>Formatting-derived workbook illustration with sample data; customer contents and operating logic are not shown.</figcaption></figure>
+
           </article>
         </div>
+      </div>
+    </section>
+
+    <section class="section phase3-capabilities" id="capabilities">
+      <div class="container">
+        <div class="phase3-section-heading phase3-editorial-header" data-reveal>
+          <div><p class="eyebrow">How we can help</p><h2>What do you want to work better?</h2><p>Five focused services. Start with one task or combine only the parts you need.</p></div>
+        </div>
+        <div class="service-category-grid" aria-label="Five practical service categories">
+          <article class="service-category service-feature" id="website-creation" data-reveal>
+            <a class="service-card-link" href="website-creation/" aria-labelledby="service-scope-1">
+            <div class="commercial-service-stage commercial-websites">
+              <div class="commercial-title-plane" aria-hidden="true"><span class="commercial-service-name">Websites</span><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" focusable="false"><circle cx="28" cy="27" r="19"/><ellipse cx="28" cy="27" rx="8" ry="19"/><path d="M9 27h38M44 46l6-6a7 7 0 0 1 10 10l-6 6a7 7 0 0 1-10-10Zm-4 4 8-8"/></svg></div>
+              <h3 class="commercial-benefit" id="website-creation-heading">Turn interest into connection.</h3>
+            </div>
+            <div class="service-card-copy"><span class="service-number">01 / Websites</span><p>Build or improve a clear, responsive website using agreed pages and your approved content.</p><span class="service-card-cta" id="service-scope-1">View Website Creation scope &amp; quote <span aria-hidden="true">↗</span></span></div>
+            </a>
+          </article>
+          <article class="service-category service-feature" id="spreadsheet-repair" data-reveal>
+            <a class="service-card-link" href="services/#spreadsheets" aria-labelledby="service-scope-2">
+            <div class="commercial-service-stage commercial-spreadsheets">
+              <div class="commercial-title-plane" aria-hidden="true"><span class="commercial-service-name">Spreadsheets</span><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" focusable="false"><rect x="10" y="9" width="43" height="45" rx="5"/><path d="M10 24h43M26 9v45M41 9v45M10 39h43" opacity=".5"/><path d="m14 45 14-12 10 7 17-21M43 19h12v12"/></svg></div>
+              <h3 class="commercial-benefit" id="spreadsheet-repair-heading">Bring clarity to your business.</h3>
+            </div>
+            <div class="service-card-copy"><span class="service-number">02 / Spreadsheets</span><p>A focused repair or a workbook built around the job you need it to do.</p><p class="service-boundary">New and custom workbook projects are scoped and quoted separately from the focused repair offer.</p><span class="service-card-cta" id="service-scope-2">View spreadsheet scope &amp; quote <span aria-hidden="true">↗</span></span></div>
+            </a>
+          </article>
+          <article class="service-category service-compact" data-reveal>
+            <a class="service-card-link" href="services/#forms-intake" aria-labelledby="service-scope-3">
+            <div class="commercial-service-stage commercial-forms">
+              <div class="commercial-title-plane" aria-hidden="true"><span class="commercial-service-name">Forms<br>&amp; Intake</span><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="m9 14 5 5 8-12M29 14h24M9 32l5 5 8-12M29 32h24M9 50l5 5 8-12M29 50h24"/></svg></div>
+              <h3 class="commercial-benefit">Make information flow.</h3>
+            </div>
+            <div class="service-card-copy"><span class="service-number">03 / Forms &amp; Intake</span><p>Clear questions. A straightforward request. An agreed place for responses.</p><span class="service-card-cta" id="service-scope-3">View Forms &amp; Intake scope <span aria-hidden="true">↗</span></span></div>
+            </a>
+          </article>
+          <article class="service-category service-compact" data-reveal>
+            <a class="service-card-link" href="services/#business-documents" aria-labelledby="service-scope-4">
+            <div class="commercial-service-stage commercial-documents">
+              <div class="commercial-title-plane" aria-hidden="true"><span class="commercial-service-name"><span>Business</span><span>Documents</span></span><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M15 7h25l12 12v38H15ZM40 7v14h12M23 31h17M21 46q6-12 10 0t13-3"/></svg></div>
+              <h3 class="commercial-benefit">Communicate with confidence.</h3>
+            </div>
+            <div class="service-card-copy"><span class="service-number">04 / Business Documents &amp; Templates</span><p>Reusable checklists, instructions and templates shaped around how you work.</p><span class="service-card-cta" id="service-scope-4">View document &amp; template scope <span aria-hidden="true">↗</span></span></div>
+            </a>
+          </article>
+          <article class="service-category service-search service-compact" data-reveal>
+            <a class="service-card-link" href="services/#seo-local-search" aria-labelledby="service-scope-5">
+            <div class="commercial-service-stage commercial-search">
+              <div class="commercial-title-plane" aria-hidden="true"><span class="commercial-service-name">Local Search</span><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M33 54S13 35 13 23a20 20 0 0 1 40 0c0 12-20 31-20 31Z"/><circle cx="33" cy="23" r="7"/><circle cx="51" cy="43" r="8"/><path d="m57 49 6 6"/></svg></div>
+              <h3 class="commercial-benefit">Help the right people find you.</h3>
+            </div>
+            <div class="service-card-copy"><span class="service-number">05 / SEO &amp; Local Search Foundations</span><p>Practical improvements to how your website and public business information show up.</p><span class="service-card-cta" id="service-scope-5">View SEO &amp; Local Search scope <span aria-hidden="true">↗</span></span></div>
+            </a>
+          </article>
+        </div>
+        <p class="service-scope-note">We agree the useful deliverables, quote and review before work begins. One focused task may be all you need.</p><p class="service-family-note">Need several parts to work together? <a href="packages/">Explore Business Presence &amp; Business Systems <span aria-hidden="true">↗</span></a> — two ways to organize these same services around your goal.</p>
       </div>
     </section>
 
@@ -223,28 +285,15 @@
       </div>
     </section>
 
-    <section class="section phase3-capabilities" id="capabilities">
-      <div class="container">
-        <div class="phase3-section-heading phase3-editorial-header" data-reveal>
-          <div><p class="eyebrow">How we can help</p><h2>What do you want to work better?</h2><p>A clearer website, a more reliable workbook, a better handoff or a simpler routine may help.</p></div>
-        </div>
-        <div class="service-category-grid" aria-label="Five practical service categories">
-          <article class="service-category" id="website-creation" data-reveal><span class="service-number">01</span><h3 id="website-creation-heading">Websites</h3><p>Build or improve a clear, responsive website using agreed pages and your approved content.</p><a href="website-creation/">View Website Creation pricing &amp; scope <span aria-hidden="true">↗</span></a></article>
-          <article class="service-category" id="spreadsheet-repair" data-reveal><span class="service-number">02</span><h3 id="spreadsheet-repair-heading">Spreadsheets</h3><p>Discuss a new or custom workbook, or a focused repair to an existing one. We first review what it needs to do and whether the work is a fit.</p><p class="service-boundary">New and custom workbook projects are scoped and quoted separately from the focused repair offer.</p><a href="services/#spreadsheets">View spreadsheet scope &amp; pricing <span aria-hidden="true">↗</span></a></article>
-          <article class="service-category" data-reveal><span class="service-number">03</span><h3>Forms &amp; Intake</h3><p>Create or improve straightforward inquiry, request and intake forms, with clear questions and an agreed place for responses.</p><a href="services/#forms-intake">View Forms &amp; Intake scope <span aria-hidden="true">↗</span></a></article>
-          <article class="service-category" data-reveal><span class="service-number">04</span><h3>Business Documents &amp; Templates</h3><p>Build clear, reusable checklists, instructions and business templates around the way you work.</p><a href="services/#business-documents">View document &amp; template scope <span aria-hidden="true">↗</span></a></article>
-          <article class="service-category service-search" data-reveal><span class="service-number">05</span><h3>SEO &amp; Local Search Foundations</h3><p>Make your website and public business information easier to understand. We review your goals and what is already in place before recommending practical search improvements.</p><a href="services/#seo-local-search">View SEO &amp; Local Search scope <span aria-hidden="true">↗</span></a></article>
-        </div>
-        <p class="service-scope-note">We start by understanding your business, what you want to accomplish and how the work gets done today. If the project is a fit, we agree on the deliverables, price and review before work begins.</p>
-      </div>
-    </section>
+
 
     <section class="section phase3-snapshot" id="process" aria-labelledby="snapshot-heading">
       <div class="container phase3-snapshot-layout">
         <div class="phase3-snapshot-copy">
           <p class="eyebrow eyebrow-light">Optional Free Business Snapshot</p>
           <h2 id="snapshot-heading">See what deserves attention before choosing a project.</h2>
-          <p class="phase3-snapshot-lede">A website project, a workbook change or a better handoff starts with a decision. The Free Business Snapshot gives you a focused outside view of your goal, the visible evidence and a practical next step—before you agree to paid work.</p>
+          <p class="phase3-snapshot-lede">A focused outside view of your business, with one practical next step. Start here if you’re not sure what to tackle first.</p>
+          <ul class="snapshot-quick-facts" aria-label="Snapshot at a glance"><li><strong>Free &amp; optional</strong><span>No obligation to continue</span></li><li><strong>Human-reviewed</strong><span>By Brian Keith Rogers</span></li><li><strong>Typically 3 business days</strong><span>A concise Executive Brief</span></li></ul>
         </div>
         <figure class="snapshot-brief" aria-labelledby="snapshot-brief-title" aria-describedby="snapshot-sample-note">
           <div class="snapshot-brief-sheet">
@@ -272,11 +321,13 @@
           <a class="button button-gold" href="business-snapshot/" data-report-link>Request Your Free Business Snapshot</a>
           <p class="phase3-snapshot-assurance">No sales call required. Use the brief on your own or continue only if further help makes sense.</p>
         </div>
+        <details class="snapshot-details"><summary>What to share &amp; what happens next <span aria-hidden="true">+</span></summary>
         <div class="snapshot-expectations">
           <div><h3>What you share</h3><p>Your goal, how the work happens today and what you have tried. A relevant website is helpful but optional. A short description is enough; no files or account access are required to request a Snapshot.</p></div>
           <div><h3>What you receive</h3><p>A concise, human-reviewed Executive Brief from Brian Keith Rogers, typically within three business days. It explains what the visible evidence supports, what deserves attention first and why the suggested next step makes sense.</p></div>
           <div><h3>What happens next</h3><p>Use the brief on your own. If a project is worth exploring, discuss the scope and quote with Brian. There is no obligation to continue.</p></div>
         </div>
+        </details>
       </div>
     </section>
 
@@ -291,12 +342,12 @@
   <footer class="site-footer phase3-footer">
     <div class="container phase3-footer-layout">
       <div class="footer-brand"><a class="brand-lockup brand-lockup-light" href="#top" aria-label="Rogers Holdings LLC home"><img src="assets/images/brand/rogers-holdings-logo-reversed.png" width="52" height="52" alt=""><span>Rogers Holdings <small>LLC</small></span></a><p>Kentucky-based, family-owned, and focused on practical business improvement.</p><aside class="chamber-membership" aria-label="Chamber of Commerce membership"><div id="mni-membership-639277029874283606"></div><strong class="chamber-membership-name">Rogers Holdings LLC</strong><span class="chamber-membership-text">Proud Member of</span><a class="chamber-membership-profile" href="https://mtsterlingchamber.chambermaster.com/list/member/rogers-holdings-llc-2908" target="_blank" rel="noopener noreferrer">View Rogers Holdings member profile <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a><span class="chamber-membership-note">Chamber logo opens the Chamber website.</span></aside></div>
-      <div><h2>Explore &amp; contact</h2><nav aria-label="Footer navigation"><a href="#approach">Approach</a><a href="business-snapshot/" data-report-link>Free Business Snapshot</a><a href="our-work/">Our Work</a><a href="#capabilities">Services</a><a href="#about">About</a><a href="#contact">Contact</a><a href="website-creation/">Website Creation</a><a href="spreadsheet-repair/">Spreadsheet Repair</a><a href="privacy/">Privacy</a></nav><address><a href="mailto:briankeith@rogersholdingsllc.com">briankeith@rogersholdingsllc.com</a><a href="tel:+18594044351">859-404-4351</a><span>Kentucky · Serving businesses across the U.S.</span></address></div>
+      <div><h2>Explore &amp; contact</h2><nav aria-label="Footer navigation"><a href="#capabilities">Services</a><a href="#approach">Approach</a><a href="business-snapshot/" data-report-link>Free Business Snapshot</a><a href="our-work/">Our Work</a><a href="#about">About</a><a href="#contact">Contact</a><a href="packages/">Packages</a><a href="website-creation/">Website Creation</a><a href="spreadsheet-repair/">Spreadsheet Repair</a><a href="privacy/">Privacy</a></nav><address><a href="mailto:briankeith@rogersholdingsllc.com">briankeith@rogersholdingsllc.com</a><a href="tel:+18594044351">859-404-4351</a><span>Kentucky · Serving businesses across the U.S.</span></address></div>
     </div>
     <div class="container footer-bottom"><span>© <span data-current-year>2026</span> Rogers Holdings LLC</span><span>Privately held · Family operated</span></div>
   </footer>
-  <script src="assets/js/site.js?v=whole-site-refinement-1" defer></script>
+  <script src="assets/js/site.js?v=whole-site-refinement-1&amp;review=visitor-review-20261104" defer></script>
   <script src="assets/js/chamber-membership.js?v=2" defer></script>
-  <script src="assets/js/rh-sculpture.js?v=finite-v10-20261026" defer></script>
+  <script src="assets/js/rh-sculpture.js?v=large-native-aa-20261104" defer></script>
 </body>
 </html>

@@ -449,10 +449,10 @@ h3 { margin-bottom: 12px; font-size: 20px; line-height: 1.25; }
 .snapshot-page .form-group legend span { display: grid; width: 26px; height: 26px; border: 1px solid rgba(184,135,51,.44); border-radius: 50%; place-items: center; color: #795919; font-size: 8px; }
 .snapshot-page .form-grid { gap: 23px 18px; }
 .snapshot-page .field label { margin-bottom: 9px; color: #30312c; font-size: 12px; letter-spacing: .01em; }
-.snapshot-page .field input, .snapshot-page .field textarea { padding: 15px 16px; border-color: #c9c1b3; border-radius: 2px; background: #fffefb; box-shadow: 0 1px 0 rgba(255,255,255,.8) inset; font-size: 14px; transition: border-color .2s ease, box-shadow .2s ease, background .2s ease, transform .2s ease; }
+.snapshot-page .field input, .snapshot-page .field textarea { padding: 15px 16px; border-color: #887c68; border-radius: 2px; background: #fffefb; box-shadow: 0 1px 0 rgba(255,255,255,.8) inset; font-size: 14px; transition: border-color .2s ease, box-shadow .2s ease, background .2s ease, transform .2s ease; }
 .snapshot-page .field input { min-height: 54px; }
 .snapshot-page .field textarea { min-height: 154px; line-height: 1.6; }
-.snapshot-page .field input::placeholder, .snapshot-page .field textarea::placeholder { color: #a09b91; opacity: 1; }
+.snapshot-page .field input::placeholder, .snapshot-page .field textarea::placeholder { color: #6f695f; opacity: 1; }
 .snapshot-page .field input:focus, .snapshot-page .field textarea:focus { border-color: #a97825; outline: 0; background: #fff; box-shadow: 0 0 0 4px rgba(184,135,51,.14), 0 6px 20px rgba(43,39,31,.06); }
 .snapshot-page .field input[aria-invalid="true"], .snapshot-page .field textarea[aria-invalid="true"] { border-color: #a84432; background: #fffafa; box-shadow: 0 0 0 3px rgba(168,68,50,.09); }
 .snapshot-page .field input[aria-invalid="false"]:not(:placeholder-shown), .snapshot-page .field textarea[aria-invalid="false"]:not(:placeholder-shown) { border-color: #759174; }

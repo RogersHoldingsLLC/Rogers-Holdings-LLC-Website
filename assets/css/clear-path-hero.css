@@ -1,0 +1,68 @@
+/* Selected artwork; copy and navigation remain real HTML. Prior options stay reversible. */
+.clear-path-art { display: none; }
+html:not(.hero-rh-preview):not(.hero-listening-preview) .clear-path-hero .hero-signature { display: none; }
+html:not(.hero-rh-preview):not(.hero-listening-preview) .clear-path-hero .phase3-hero { container-type: inline-size; }
+/* Break out of the text grid. Container units exclude classic browser scrollbars. */
+html:not(.hero-rh-preview):not(.hero-listening-preview) .clear-path-hero .clear-path-art {
+  display: block; grid-column: 1 / -1; grid-row: 6;
+  width: 100vw; width: 100cqw; max-width: none; min-width: 0; margin: 28px 0 0;
+  margin-inline: calc(50% - 50vw); margin-inline: calc(50% - 50cqw);
+}
+.clear-path-stage {
+  --clear-path-edge-x: clamp(22px,5vw,72px);
+  --clear-path-edge-y: clamp(24px,6vw,72px);
+  --clear-path-edge-blur: 8px;
+  --clear-path-edge-mask: linear-gradient(90deg,#000,transparent var(--clear-path-edge-x),transparent calc(100% - var(--clear-path-edge-x)),#000),linear-gradient(180deg,#000,transparent var(--clear-path-edge-y),transparent calc(100% - var(--clear-path-edge-y)),#000);
+  position: relative; isolation: isolate; width: 100%; aspect-ratio: 1918 / 1080;
+  overflow: hidden; background: transparent;
+  animation: clear-path-arrive 1100ms cubic-bezier(.22,1,.36,1) both;
+}
+.clear-path-stage img, .clear-path-stage video { display: block; width: 100%; height: 100%; object-fit: contain; }
+.clear-path-stage video { position: absolute; inset: 0; visibility: hidden; }
+.clear-path-art[data-state="playing"] video { visibility: visible; }
+/* Blur only the perimeter, then feather it into the actual page paper. The center stays sharp. */
+.clear-path-stage::before, .clear-path-stage::after { content: ""; position: absolute; inset: 0; pointer-events: none; }
+.clear-path-stage::before {
+  z-index: 1;
+  -webkit-backdrop-filter: blur(var(--clear-path-edge-blur));
+  backdrop-filter: blur(var(--clear-path-edge-blur));
+  -webkit-mask-image: var(--clear-path-edge-mask);
+  mask-image: var(--clear-path-edge-mask);
+}
+.clear-path-stage::after {
+  z-index: 2;
+  background: linear-gradient(90deg,var(--studio-paper,#f4f0e6),transparent var(--clear-path-edge-x),transparent calc(100% - var(--clear-path-edge-x)),var(--studio-paper,#f4f0e6)),linear-gradient(180deg,var(--studio-paper,#f4f0e6),transparent var(--clear-path-edge-y),transparent calc(100% - var(--clear-path-edge-y)),var(--studio-paper,#f4f0e6));
+}
+@keyframes clear-path-arrive { from { opacity: 0; } to { opacity: 1; } }
+.clear-path-controls { display: flex; justify-content: flex-end; min-height: 44px; margin-top: 8px; }
+.clear-path-controls button { min-width: 140px; min-height: 44px; padding: 10px 16px; border: 1px solid #a49475; border-radius: 0; background: #f4f0e6; color: #302a20; font: 700 12px/1.5 var(--sans); cursor: pointer; }
+.clear-path-controls button[hidden] { display: none; }
+.clear-path-controls button[aria-disabled="true"] { cursor: default; border-color: transparent; color: #625b4f; }
+.studio-review .clear-path-controls button:focus-visible { outline: 3px solid #775520; outline-offset: 4px; }
+@media (min-width: 961px) {
+  html:not(.hero-rh-preview):not(.hero-listening-preview) .clear-path-hero .phase3-hero { padding-bottom: 0; }
+  html:not(.hero-rh-preview):not(.hero-listening-preview) .clear-path-hero .phase3-hero-layout { padding-bottom: 28px; }
+  html:not(.hero-rh-preview):not(.hero-listening-preview) .clear-path-hero .phase3-hero-copy { grid-template-rows: repeat(5,min-content); gap: 0 56px; align-items: start; }
+  html:not(.hero-rh-preview):not(.hero-listening-preview) .clear-path-hero .phase3-hero-copy > h1 { grid-column: 1; grid-row: 2 / 5; max-width: 15ch; margin-bottom: 0; }
+  html:not(.hero-rh-preview):not(.hero-listening-preview) .clear-path-hero .hero-services { grid-column: 2; grid-row: 2; margin: 6px 0 0; }
+  html:not(.hero-rh-preview):not(.hero-listening-preview) .clear-path-hero .button-row { grid-column: 2; grid-row: 3; margin-top: 24px; }
+  html:not(.hero-rh-preview):not(.hero-listening-preview) .clear-path-hero .phase3-hero-note { grid-column: 2; grid-row: 4; max-width: 49ch; margin-top: 16px; }
+  html:not(.hero-rh-preview):not(.hero-listening-preview) .clear-path-hero .clear-path-art { grid-row: 5; margin-top: 0; }
+  /* Trim only empty upper backdrop on wide displays; retain the entire ribbon movement. */
+  .clear-path-stage { aspect-ratio: 2.65; }
+  .clear-path-stage img, .clear-path-stage video { object-fit: cover; object-position: center bottom; }
+}
+@media (max-width: 960px) {
+  html:not(.hero-rh-preview):not(.hero-listening-preview) .clear-path-hero .phase3-hero-copy > .eyebrow { grid-column: 1; grid-row: 1; }
+  html:not(.hero-rh-preview):not(.hero-listening-preview) .clear-path-hero .phase3-hero-copy > h1 { grid-column: 1; grid-row: 2; }
+  html:not(.hero-rh-preview):not(.hero-listening-preview) .clear-path-hero .hero-services { grid-column: 1; grid-row: 3; }
+  html:not(.hero-rh-preview):not(.hero-listening-preview) .clear-path-hero .button-row { grid-column: 1; grid-row: 4; }
+  html:not(.hero-rh-preview):not(.hero-listening-preview) .clear-path-hero .phase3-hero-note { grid-column: 1; grid-row: 5; }
+  html:not(.hero-rh-preview):not(.hero-listening-preview) .clear-path-hero .clear-path-art { grid-column: 1; grid-row: 6; margin-top: 20px; }
+  .clear-path-stage { aspect-ratio: 1918 / 1080; }
+  .clear-path-stage { --clear-path-edge-blur: 5px; }
+  .clear-path-stage img, .clear-path-stage video { object-fit: contain; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .clear-path-hero .clear-path-art, .clear-path-hero .clear-path-art * { animation: none !important; transition: none !important; }
+}

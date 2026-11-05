@@ -72,9 +72,10 @@ assert.match(css, /\.home-page section\[id\]\s*\{[^}]*scroll-margin-top:\s*92px/
 assert.match(css, /\.snapshot-page \.field-error\s*\{[\s\S]*?min-height:/);
 assert.match(css, /\.legal-content\s*\{[\s\S]*?780px/);
 
-const showcaseStart = home.indexOf('<picture class="homepage-eastland-picture"');
-const showcaseEnd = home.indexOf('</picture>', showcaseStart);
-const showcase = home.slice(showcaseStart, showcaseEnd);
+const work = read('our-work/index.html');
+const showcaseStart = work.indexOf('<picture class="homepage-eastland-picture"');
+const showcaseEnd = work.indexOf('</picture>', showcaseStart);
+const showcase = work.slice(showcaseStart, showcaseEnd);
 assert.ok(showcase.includes('eastland-product-family-desktop'));
 assert.ok(showcase.includes('eastland-product-family-tablet'));
 assert.doesNotMatch(showcase, /eastland-product-family-mobile/);

@@ -662,6 +662,7 @@ h3 {
     box-shadow: 0 28px 80px rgba(0, 0, 0, 0.46);
     opacity: 0;
     pointer-events: none;
+    visibility: hidden;
     transform: translateY(-8px);
     transition: opacity 180ms ease, transform 180ms ease;
   }
@@ -669,6 +670,7 @@ h3 {
   .menu-open .site-nav {
     opacity: 1;
     pointer-events: auto;
+    visibility: visible;
     transform: translateY(0);
   }
 
@@ -766,4 +768,8 @@ h3 {
 .demo-notice { padding: 112px max(24px, calc((100vw - 1180px)/2)) 24px; border-bottom: 1px solid var(--gold-line); background: #11100d; color: var(--silver); font-size: .88rem; }
 .demo-notice strong { display: block; color: var(--gold-soft); letter-spacing: .1em; text-transform: uppercase; font-size: .76rem; margin-bottom: 6px; }
 .demo-notice span { display: block; max-width: 80ch; }
+.demo-return { display: inline-flex; align-items: center; min-height: 44px; color: var(--gold-soft); text-decoration: underline; text-underline-offset: 4px; }
+.demo-notice .demo-return { margin-top: 8px; }
+.site-footer .demo-return { color: var(--gold-soft); }
+.demo-return:focus-visible { outline-width: 3px; }
 @media (max-width: 640px) { .demo-notice { padding: 98px 22px 22px; } }
