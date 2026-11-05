@@ -23,7 +23,7 @@ function artifactHashes() {
 }
 
 validateSourceBoundary();
-assert.equal(PUBLIC_MANIFEST.length, 78, 'public artifact must contain exactly 78 allowlisted files');
+assert.equal(PUBLIC_MANIFEST.length, 87, 'public artifact must contain exactly 87 allowlisted files');
 const samplePdf = 'assets/samples/north-point-fitness-executive-brief.pdf';
 assert.ok(PUBLIC_MANIFEST.includes(samplePdf));
 const samplePdfBytes = fs.readFileSync(path.join(REPOSITORY_ROOT, samplePdf));
@@ -42,6 +42,17 @@ const publicText = publicTextFiles
   .join('\n');
 assert.doesNotMatch(publicText, /859-404-7300|\+1-859-404-7300|\+18594047300|8594047300|404-7300|4047300/i);
 assert.doesNotMatch(publicText, /call or text/i);
+// Owner-approved public pricing boundary applies to metadata and JSON-LD too.
+assert.doesNotMatch(publicText, /\$\s*(?:2,?000|250)\b|starting\s+(?:at|from)\s+\$|minimum\s+(?:project\s+)?price|"priceCurrency"/i);
+const packages = fs.readFileSync(path.join(OUTPUT_ROOT, 'packages/index.html'), 'utf8');
+assert.match(packages, /id="business-presence"/);
+assert.match(packages, /id="business-systems"/);
+assert.match(packages, /smallest useful scoped solution/);
+assert.match(packages, /free, optional and separate/);
+assert.match(packages, /You retain ownership of your business content and accounts/);
+assert.match(packages, /not automatically included/);
+assert.doesNotMatch(packages, /<form\b|<input\b|Starter|Enhanced|Complete tier|\$[0-9]/i);
+
 
 const publicSmsFiles = publicTextFiles.filter((relativePath) => (
   /sms:/i.test(fs.readFileSync(path.join(OUTPUT_ROOT, relativePath), 'utf8'))
@@ -60,10 +71,16 @@ assert.equal(organization.contactPoint[0].telephone, '+18594044351');
 
 const repairPage = fs.readFileSync(path.join(OUTPUT_ROOT, 'spreadsheet-repair/index.html'), 'utf8');
 assert.match(repairPage, /<link rel="canonical" href="https:\/\/rogersholdingsllc\.com\/spreadsheet-repair\/">/);
-assert.match(homepage, /href="services\/#spreadsheets">View spreadsheet scope &amp; pricing/);
+assert.match(homepage, /class="service-card-link" href="services\/#spreadsheets" aria-labelledby="service-scope-2"/);
+assert.match(homepage, /id="service-scope-2">View spreadsheet scope &amp; quote/);
 assert.match(repairPage, /<h1 id="repair-service-heading">Excel &amp; Google Sheets Repair<\/h1>/);
 assert.match(repairPage, /href="mailto:briankeith@rogersholdingsllc\.com\?subject=[^"]+">Email About a Spreadsheet Repair<\/a>/);
 assert.doesNotMatch(repairPage, /<form\b|<input\b|<iframe\b|\sdownload(?:=|>|\s)/i);
+assert.match(repairPage, /50% after written scope approval and before work/);
+assert.match(repairPage, /Balance within three business days of written acceptance/);
+assert.match(repairPage, /One consolidated in-scope review round within seven calendar days/);
+assert.match(repairPage, /Full rebuilds, macros\/VBA, Apps Script, Power Query, external connections\/integrations/);
+
 assert.equal(firstBuild.some((entry) => entry.startsWith('docs/review/')), false);
 assert.equal(firstBuild.includes('docs/SPREADSHEET_REPAIR_LOCAL_REVIEW.md'), false);
 assert.equal(firstBuild.includes('assets/images/homepage/brian-smiling-portrait.png'), false, 'full-resolution smiling portrait must stay outside the public build');

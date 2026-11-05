@@ -26,10 +26,12 @@ menuToggle.addEventListener("click", () => {
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && document.body.classList.contains("menu-open")) {
+    event.preventDefault();
     document.body.classList.remove("menu-open");
     header.classList.remove("is-open");
     menuToggle.setAttribute("aria-expanded", "false");
     menuToggle.setAttribute("aria-label", "Open navigation");
+    menuToggle.focus({ preventScroll: true });
   }
 });
 

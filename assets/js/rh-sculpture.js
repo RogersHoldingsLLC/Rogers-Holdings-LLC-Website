@@ -1,6 +1,6 @@
 (() => {
   'use strict';
-  const canvas=document.querySelector('[data-rh-sculpture]');if(!canvas)return;
+  const canvas=document.querySelector('[data-rh-sculpture]');if(!canvas||document.documentElement.classList.contains('hero-listening-preview')||(document.body.classList.contains('clear-path-hero')&&!document.documentElement.classList.contains('hero-rh-preview')))return;
   const ctx=canvas.getContext('2d',{alpha:true});if(!ctx)return;
   const reduce=matchMedia('(prefers-reduced-motion: reduce)'),mask=new Image();
   const make=(w,h)=>Object.assign(document.createElement('canvas'),{width:w,height:h});
@@ -12,8 +12,8 @@
     const gl=surfaceCanvas.getContext('webgl',{alpha:true,antialias:true,premultipliedAlpha:false,preserveDrawingBuffer:true});
     if(!gl)return null;
     const pad=24,tw=shapeWidth+pad*2,th=shapeHeight+pad*2,units=2/shapeHeight;
-    const inside=new Uint8Array(tw*th);
-    for(let y=0;y<shapeHeight;y++)for(let x=0;x<shapeWidth;x++)inside[(y+pad)*tw+x+pad]=sourceAlpha[y*shapeWidth+x]>=128?1:0;
+    const inside=new Uint8Array(tw*th),sourceCoverage=new Float32Array(tw*th);
+    for(let y=0;y<shapeHeight;y++)for(let x=0;x<shapeWidth;x++){const i=(y+pad)*tw+x+pad;sourceCoverage[i]=sourceAlpha[y*shapeWidth+x]/255;inside[i]=sourceCoverage[i]>=.5?1:0;}
     function field(target){
       const d=new Float32Array(tw*th);for(let i=0;i<d.length;i++)d[i]=inside[i]===target?10000:0;
       for(let y=0;y<th;y++)for(let x=0;x<tw;x++){const i=y*tw+x;if(!d[i])continue;d[i]=Math.min(d[i],x?d[i-1]+1:10000,y?d[i-tw]+1:10000,x&&y?d[i-tw-1]+1.414:10000);}
@@ -22,7 +22,8 @@
     }
     const di=field(1),dout=field(0),pixels=new Uint8Array(tw*th*4);
     for(let i=0;i<inside.length;i++){
-      const sd=(inside[i]?-(di[i]-.5):dout[i]-.5)*units;
+      // Retain the original edge coverage rather than snapping its contour to whole pixels.
+      const sd=((inside[i]?-(di[i]-.5):dout[i]-.5)+(inside[i]?1-sourceCoverage[i]:-sourceCoverage[i]))*units;
       const value=Math.round(Math.max(0,Math.min(1,.5+sd/4))*65535);
       pixels[i*4]=value>>8;pixels[i*4+1]=value&255;pixels[i*4+3]=255;
     }
@@ -40,7 +41,7 @@ float mapShape(vec3 p){
  vec2 rg=texture2D(uField,clamp(uv,0.,1.)).rg*255.;
  float d=(dot(rg,vec2(256.,1.))/65535.-.5)*4.;
  vec2 overflow=max(abs(p.xy)-uSize*.5,0.);d+=length(overflow);
- float bevel=.039,halfDepth=.16+.03*uFinish;
+ float bevel=.039,halfDepth=.24+.05*uFinish;
  vec2 q=vec2(d+bevel,abs(p.z)-halfDepth+bevel);
  return min(max(q.x,q.y),0.)+length(max(q,0.))-bevel;
 }
@@ -70,12 +71,12 @@ vec3 light(vec3 n,vec3 v,vec3 l,vec3 radiance,vec3 f0,float rough){
 void main(){
  vec2 uv=(gl_FragCoord.xy-uResolution*.5)/uResolution.y;uv-=vec2(-0.0019915,0.0264492);
  mat3 rotation=ry(uYaw)*rx(.10),inverse=rx(-.10)*ry(-uYaw);
- vec3 ro=vec3(0.,0.,5.4),rd=normalize(vec3(uv*4.3272162,-5.4));
+ vec3 ro=vec3(0.,0.,5.4),rd=normalize(vec3(uv*3.1,-5.4));
  vec3 o=inverse*ro,d=inverse*rd;
- vec3 extent=vec3(uSize*.5,.23),m=1./d,near=(-extent-o)*m,far=(extent-o)*m;
+ vec3 extent=vec3(uSize*.5,.36),m=1./d,near=(-extent-o)*m,far=(extent-o)*m;
  vec3 lo=min(near,far),hi=max(near,far);
  float entry=max(max(lo.x,lo.y),lo.z),exit=min(min(hi.x,hi.y),hi.z);
- float shadow=exp(-pow((uv.x+.002)/.17,2.)-pow((uv.y+.265)/.024,2.))*.27;
+ float shadow=exp(-pow((uv.x+.002)/.22,2.)-pow((uv.y+.31)/.030,2.))*.37;
  if(exit<max(entry,0.)){gl_FragColor=vec4(0.,0.,0.,shadow);return;}
  float t=max(entry,0.),closest=10.;bool hit=false;vec3 p;
  for(int i=0;i<80;i++){
@@ -111,7 +112,7 @@ void main(){
   }
 
   let underface,front,side,fc,sc,face,edge,alpha,distance,base,width=0,height=656,maxDistance=0,progress=0,started=false,frame=0,lastPaint=0,paintedForm=-1;
-  function fit(){const d=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(canvas.clientWidth*d);canvas.height=Math.round(canvas.clientHeight*d);}
+  function fit(){const d=Math.min(devicePixelRatio||1,3),w=Math.round(canvas.clientWidth*d),h=Math.round(canvas.clientHeight*d);if(w<1||h<1)return;if(canvas.width!==w)canvas.width=w;if(canvas.height!==h)canvas.height=h;}
   function surface(form){
     // Continuous inward formation from the authentic contour, never separate chunks.
     const reach=6.4+form*(maxDistance+4),data=face.data,sd=edge.data;
@@ -124,13 +125,13 @@ void main(){
     fc.putImageData(face,0,0);sc.putImageData(edge,0,0);
   }
   function draw(t,yaw=0){
-    if(!front)return;progress=t;lastYaw=yaw;
-    const ms=t*4500,form=reduce.matches?1:smooth((ms-250)/2300),depth=3+form*27;if(!studio&&form!==paintedForm){surface(form);paintedForm=form;}
-    if(studio){const quality=Math.min(1.5,1400/canvas.width);studio.render(Math.round(canvas.width*quality),Math.round(canvas.height*quality),form,yaw);ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,canvas.width,canvas.height);ctx.imageSmoothingQuality='high';ctx.drawImage(studio.canvas,0,0,canvas.width,canvas.height);}else{
+    if(!front||canvas.width<1||canvas.height<1)return;progress=t;lastYaw=yaw;
+    const ms=t*4500,form=reduce.matches?1:smooth((ms-250)/2300),depth=(3+form*43)*height/656;if(!studio&&form!==paintedForm){surface(form);paintedForm=form;}
+    if(studio){const quality=Math.min(1.2,1800/canvas.width);studio.render(Math.round(canvas.width*quality),Math.round(canvas.height*quality),form,yaw);ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,canvas.width,canvas.height);ctx.imageSmoothingQuality='high';ctx.drawImage(studio.canvas,0,0,canvas.width,canvas.height);}else{
     ctx.setTransform(canvas.width/640,0,0,canvas.height/560,0,0);ctx.clearRect(0,0,640,560);
     const light=ctx.createRadialGradient(344,244,15,344,244,276);light.addColorStop(0,'rgba(188,164,108,.065)');light.addColorStop(1,'rgba(188,164,108,0)');ctx.fillStyle=light;ctx.fillRect(0,0,640,560);
-    ctx.save();ctx.translate(319,428);ctx.scale(1,.12);const shadow=ctx.createRadialGradient(0,0,8,0,0,190);shadow.addColorStop(0,'rgba(0,0,0,.52)');shadow.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=shadow;ctx.fillRect(-200,-200,400,400);ctx.restore();
-    ctx.save();ctx.translate(318.88475,267.73228);ctx.scale(Math.cos(yaw),1);ctx.scale(0.4088674,0.4088674);ctx.translate(-width/2,-height/2);
+    ctx.save();ctx.translate(319,428);ctx.scale(1,.12);const shadow=ctx.createRadialGradient(0,0,8,0,0,190);shadow.addColorStop(0,'rgba(0,0,0,.62)');shadow.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=shadow;ctx.fillRect(-200,-200,400,400);ctx.restore();
+    ctx.save();ctx.translate(318.88475,267.73228);ctx.scale(Math.cos(yaw),1);ctx.scale(374.4/height,374.4/height);ctx.translate(-width/2,-height/2);
     for(let z=Math.ceil(depth);z>0;z--)ctx.drawImage(side,-z*(.66+Math.sin(yaw)*1.5),z*.72);
     ctx.drawImage(underface,0,0);ctx.drawImage(front,0,0);ctx.restore();
     }
@@ -145,6 +146,7 @@ void main(){
   mask.onload=()=>{
     const src=make(mask.width,mask.height),sx=src.getContext('2d');sx.drawImage(mask,0,0);const source=sx.getImageData(0,0,mask.width,mask.height).data;let x0=mask.width,y0=mask.height,x1=0,y1=0;
     for(let y=0;y<mask.height;y++)for(let x=0;x<mask.width;x++)if(source[(y*mask.width+x)*4+3]){x0=Math.min(x0,x);y0=Math.min(y0,y);x1=Math.max(x1,x);y1=Math.max(y1,y);}
+    height=y1-y0+1; // Keep the authentic mask at its native contour resolution.
     width=Math.round((x1-x0+1)*height/(y1-y0+1));const shape=make(width,height),ax=shape.getContext('2d');ax.imageSmoothingQuality='high';ax.drawImage(mask,x0,y0,x1-x0+1,y1-y0+1,0,0,width,height);const ink=ax.getImageData(0,0,width,height).data;
     alpha=new Uint8Array(width*height);distance=new Float32Array(width*height);
     for(let p=0;p<alpha.length;p++){alpha[p]=ink[p*4+3];distance[p]=alpha[p]?10000:0;}

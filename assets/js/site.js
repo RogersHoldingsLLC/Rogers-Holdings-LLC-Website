@@ -56,6 +56,7 @@ if (menuToggle && navigation) {
 
 function updateHeader() {
   header?.classList.toggle('is-scrolled', window.scrollY > 20 || document.body.classList.contains('interior-page'));
+  if (window.scrollY < 60) navigation?.querySelectorAll('[aria-current="location"]').forEach((link) => link.removeAttribute('aria-current'));
 }
 window.addEventListener('scroll', updateHeader, { passive: true });
 updateHeader();
@@ -68,6 +69,10 @@ function revealTargetContext(target) {
   const revealItems = [target, ...(target.querySelectorAll?.('[data-reveal], .reveal-item') || [])];
   revealItems.forEach((item) => item.classList?.add('is-visible'));
 }
+
+document.addEventListener('toggle', (event) => {
+  if (event.target.matches?.('.work-project-details') && event.target.open) revealTargetContext(event.target);
+}, true);
 
 function scrollToPageTarget(target, behavior = 'auto') {
   revealTargetContext(target);
@@ -100,6 +105,11 @@ document.addEventListener('click', (event) => {
     : 'smooth';
   if (window.location.hash !== hash) window.history.pushState(null, '', hash);
   scrollToPageTarget(target, behavior);
+  if (link.classList.contains('project-logo-link') || link.hasAttribute('data-focus-target')) {
+    const destinationHeading = target.querySelector('h1, h2, h3') || target;
+    if (!destinationHeading.hasAttribute('tabindex')) destinationHeading.setAttribute('tabindex', '-1');
+    destinationHeading.focus({ preventScroll: true });
+  }
 });
 
 function alignCurrentHash() {

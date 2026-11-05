@@ -97,21 +97,21 @@ for (const [viewport, expectedDimensions] of Object.entries(heroV22Dimensions)) 
 
 // The approved fictional brief is readable HTML; preserved images and source PDF remain unchanged.
 assert.equal((html.match(/<figure class="snapshot-brief"/g) || []).length, 1);
-const introPosition = html.indexOf('<p class="hero-lede">');
+const introPosition = html.indexOf('<p class="hero-services">');
 const samplePosition = html.indexOf('<figure class="snapshot-brief"');
 const actionsPosition = html.indexOf('<div class="button-row">', introPosition);
 assert.ok(introPosition < actionsPosition);
 assert.ok(samplePosition > html.indexOf('id="process"'), 'the single disclosed sample belongs with optional Snapshot');
 assert.match(html, /class="rh-sculpture"/);
 assert.match(html, /data-rh-sculpture data-mask="assets\/images\/homepage\/rh-monogram-mask\.png"/);
-assert.match(html, /href="#contact">Speak with Rogers Holdings/);
+assert.match(html, /href="business-snapshot\/" data-report-link>Request Your Free Business Snapshot/);
 const heroStart = html.indexOf('<figure class="snapshot-brief"');
 const heroEnd = html.indexOf('</figure>', heroStart);
 const hero = html.slice(heroStart, heroEnd);
 const approvedSampleDisclosure = 'Illustrative Executive Brief sample — North Point Fitness is a fictional business. Shown to demonstrate the format and level of detail.';
-const eastlandStart = html.indexOf('<picture class="homepage-eastland-picture"');
-const eastlandEnd = html.indexOf('</picture>', eastlandStart);
-const eastland = html.slice(eastlandStart, eastlandEnd);
+const eastlandStart = work.indexOf('<picture class="homepage-eastland-picture"');
+const eastlandEnd = work.indexOf('</picture>', eastlandStart);
+const eastland = work.slice(eastlandStart, eastlandEnd);
 
 for (const [markup, family, viewport] of [
   [eastland, 'eastland-product-family', 'tablet'],
@@ -158,14 +158,14 @@ for (const [, , width, height] of families) assert.ok(width > 0 && height > 0);
 const sectionOrder = [
   'class="hero phase3-hero"',
   'class="homepage-eastland-showcase"',
+  'class="section phase3-capabilities"',
   'class="section phase3-owner"',
   'class="section phase3-method"',
-  'class="section phase3-capabilities"',
   'class="section phase3-snapshot"',
   'class="section phase3-final-cta"'
 ].map((marker) => html.indexOf(marker));
 assert.ok(sectionOrder.every((position) => position >= 0));
-assert.deepEqual(sectionOrder, [...sectionOrder].sort((a, b) => a - b), 'homepage sections must follow the reviewed hero-to-proof-to-founder customer journey order');
+assert.deepEqual(sectionOrder, [...sectionOrder].sort((a, b) => a - b), 'homepage sections must bring service choices forward after project proof');
 
 for (const copy of [
   'How Rogers Holdings works', 'Understand, Prioritize, Scope and review methodology',
@@ -205,8 +205,9 @@ const workspace = work.slice(workspaceStart, workspaceEnd);
 assert.doesNotMatch(workspace + css, /eastland-screen--|class="eastland-screen"/, 'runtime screen overlays must remain retired');
 const eastlandReferenceHash = crypto.createHash('sha256').update(fs.readFileSync(eastlandReference)).digest('hex');
 assert.equal(eastlandReferenceHash, '516d0b764d82f2ac1b451ca0194602da2abe7e3e57ea94d9218d1dde693acb62', 'authoritative Eastland reference changed');
-assert.match(work, /class="container eastland-showcase-intro"/);
-assert.match(html, /media="\(max-width: 1100px\)" type="image\/avif" srcset="assets\/images\/homepage\/eastland-product-family-tablet\.avif\?v=0cecc197"/);
+assert.match(work, /class="work-case-brief"/);
+assert.match(work, /<details class="work-project-details">/);
+assert.match(work, /media="\(max-width: 1100px\)" type="image\/avif" srcset="\.\.\/assets\/images\/homepage\/eastland-product-family-tablet\.avif\?v=0cecc197"/);
 assert.match(css, /\.eastland-live-proof\s*\{[\s\S]*grid-template-columns:/, 'live-proof block must have a responsive layout');
 assert.match(work, /class="eastland-project-heading"/);
 assert.match(work, /class="eastland-story-timeline" aria-label="Eastland project story"/);

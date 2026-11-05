@@ -9,14 +9,14 @@ const css = fs.readFileSync(path.join(ROOT, 'assets/css/site.css'), 'utf8');
 const script = fs.readFileSync(path.join(ROOT, 'assets/js/site.js'), 'utf8');
 
 const primaryCta = 'Request Your Free Business Snapshot';
-assert.equal((html.match(new RegExp(primaryCta, 'g')) || []).length, 1);
-assert.equal((html.match(/<p class="phase3-hero-note">Start with a short conversation\. Paid work begins with an agreed scope and quote\.<\/p>/g) || []).length, 1);
+assert.equal((html.match(new RegExp(primaryCta, 'g')) || []).length, 2);
+assert.equal((html.match(/<p class="phase3-hero-note">The Snapshot is free and optional\. Paid work begins with an agreed scope and quote\.<\/p>/g) || []).length, 1);
 assert.match(html, /href="mailto:briankeith@rogersholdingsllc\.com\?subject=Project%20Inquiry">Email About Your Project/);
-assert.ok(html.includes('We’re Rogers Holdings LLC. We start by understanding your business and what you want to accomplish.'));
+assert.match(html, /href="business-snapshot\/" data-report-link>Request Your Free Business Snapshot/);
 const heroMarkup = html.slice(html.indexOf('<section class="hero phase3-hero"'), html.indexOf('<section class="homepage-eastland-showcase"'));
-const readingOrder = ['<h1>', 'class="hero-services"', 'class="rh-sculpture"', 'class="hero-lede"', 'class="button-row"'].map(marker => heroMarkup.indexOf(marker));
+const readingOrder = ['<h1>', 'class="hero-services"', 'class="rh-sculpture"', 'class="button-row"'].map(marker => heroMarkup.indexOf(marker));
 assert.ok(readingOrder.every(position => position >= 0));
-assert.deepEqual(readingOrder, [...readingOrder].sort((a, b) => a - b), 'the practical service line must follow the promise before artwork, founder and actions');
+assert.deepEqual(readingOrder, [...readingOrder].sort((a, b) => a - b), 'the practical service line must follow the promise before artwork and actions');
 assert.doesNotMatch(heroMarkup, /<br\b/, 'hero copy must wrap responsively');
 
 assert.match(html, /<section class="section phase3-method" id="approach"/);
@@ -24,7 +24,7 @@ assert.match(html, /<section class="section phase3-snapshot" id="process"/);
 assert.match(html, /aria-label="Understand, Prioritize, Scope and review methodology"/);
 assert.ok(html.includes('Optional Free Business Snapshot'));
 assert.ok(html.includes('See what deserves attention before choosing a project.'));
-assert.ok(html.includes('A website project, a workbook change or a better handoff starts with a decision. The Free Business Snapshot gives you a focused outside view of your goal, the visible evidence and a practical next step—before you agree to paid work.'));
+assert.ok(html.includes('A focused outside view of your business, with one practical next step. Start here if you’re not sure what to tackle first.'));
 for (const deliverable of [
   'what the visible evidence supports',
   'what deserves attention first',
@@ -49,9 +49,9 @@ assert.doesNotMatch(body, /phase3-method-sequence|phase3-process-sequence|phase3
 const sectionOrder = [
   'class="hero phase3-hero"',
   'class="homepage-eastland-showcase"',
+  'class="section phase3-capabilities"',
   'class="section phase3-owner"',
   'class="section phase3-method"',
-  'class="section phase3-capabilities"',
   'class="section phase3-snapshot"',
   'class="section phase3-final-cta"'
 ].map((marker) => html.indexOf(marker));
@@ -61,10 +61,10 @@ assert.deepEqual(sectionOrder, [...sectionOrder].sort((a, b) => a - b));
 const serviceOverview = html.slice(html.indexOf('class="service-category-grid"'), html.indexOf('class="service-scope-note"'));
 assert.equal((serviceOverview.match(/<h3\b/g) || []).length, 5, 'exactly five service categories are authorized');
 for (const heading of ['Websites', 'Spreadsheets', 'Forms &amp; Intake', 'Business Documents &amp; Templates', 'SEO &amp; Local Search Foundations']) {
-  assert.ok(new RegExp('<h3(?: [^>]*)?>' + heading + '</h3>').test(serviceOverview), 'missing agreed service category: ' + heading);
+  assert.ok(new RegExp('<span class="service-number">0[1-5] / ' + heading + '</span>').test(serviceOverview), 'missing agreed service category: ' + heading);
 }
 assert.doesNotMatch(serviceOverview, /Business Tool Setup|Tech Support|Managed IT|AdGrants|Cybersecurity|<h3>[^<]*Workflow/i);
-assert.ok(html.includes('If the project is a fit, we agree on the deliverables, price and review before work begins.'));
+assert.ok(html.includes('We agree the useful deliverables, quote and review before work begins.'));
 assert.match(html, /<h2>What do you want to work better\?<\/h2>/);
 assert.doesNotMatch(html, /Business Optimization Platform|class="section phase3-platform"/);
 assert.match(html, /<h2 id="eastland-client-work-heading">See our work in action\.<\/h2>/);
@@ -75,7 +75,7 @@ assert.doesNotMatch(html, /class="eastland-project-actions"/);
 assert.match(work, /From a Facebook-first presence to a clear digital front door\./);
 assert.match(work, /Current public experience: A responsive website with clear paths to service information, visit planning, ministries, messages, directions, and contact details\./);
 assert.doesNotMatch(body, /easier to find, easier to use, and easier to maintain|free of charge|home church/i);
-assert.ok(html.indexOf('Speak with Rogers Holdings') < html.indexOf('Explore more demos'), 'contact must be discoverable before project proof');
+assert.ok(html.indexOf('Request Your Free Business Snapshot') < html.indexOf('Explore more demos'), 'the optional Snapshot action must be discoverable before project proof');
 assert.match(work, /class="button button-dark" href="https:\/\/www\.eastlandfirstchurchofgod\.com"/, 'Eastland live proof must remain accessible on Our Work');
 assert.doesNotMatch(html, /class="eastland-story-timeline"|class="eastland-live-proof"/, 'homepage must not duplicate detailed case studies');
 assert.match(html, /href="our-work\/">Explore more demos/);

@@ -1,5 +1,5 @@
 /* Local editorial art-direction review. Existing content, assets and interactions stay intact. */
-.studio-review { --studio-paper: #f4f0e6; --studio-ink: #20271f; --studio-rule: #cfc5af; --studio-space: clamp(56px,6vw,88px); }
+.studio-review { --studio-paper: #f4f0e6; --studio-ink: #24221e; --studio-rule: #cfc5af; --studio-space: clamp(56px,6vw,88px); }
 .studio-review .container, .studio-review .nav-shell { width: calc(100% - 128px); max-width: 1280px; margin-inline: auto; }
 .studio-review .nav-shell { padding-inline: 0; }
 .studio-review .eyebrow { font-size: 10px; line-height: 1.6; letter-spacing: .16em; }
@@ -43,7 +43,7 @@
 .studio-review .work-preview-image, .studio-review .concept-missy-proof { grid-area: image; align-self: center; width: 100%; min-width: 0; margin: 0; padding: 14px; border: 1px solid #c7bba3; background: #e3dccd; box-shadow: none; }
 .studio-review .work-preview-image picture { display: block; aspect-ratio: auto; }
 .studio-review .work-preview-image img, .studio-review .concept-missy-proof img { display: block; width: 100%; height: auto; max-height: none; object-fit: contain; }
-.studio-review .concept-missy-proof figcaption { margin: 12px 0 0; color: #565a4e; font: 12px/1.65 var(--sans); }
+.studio-review .concept-missy-proof figcaption { margin: 12px 0 0; color: #5f5a50; font: 12px/1.65 var(--sans); }
 .studio-review .phase3-owner { padding-block: var(--studio-space); background: #faf7ef; }
 .studio-review .phase3-owner-layout { grid-template-columns: 240px minmax(0,1fr); align-items: center; gap: 72px; }
 .studio-review .phase3-owner figure { width: 100%; margin: 0; }
@@ -55,13 +55,13 @@
 .studio-review .company-vision { margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--studio-rule); align-items: start; }
 .studio-review .company-vision h3 { margin: 0; font: 500 28px/1.15 var(--serif); letter-spacing: -.02em; }
 .studio-review .company-vision p { margin: 0; max-width: 70ch; font-size: 15px; line-height: 1.7; }
-.studio-review .phase3-method { padding-block: var(--studio-space); background: #19221b; }
+.studio-review .phase3-method { padding-block: var(--studio-space); background: #171614; }
 .studio-review .phase3-method > .container { display: grid; grid-template-columns: minmax(0,.95fr) minmax(0,1.05fr); align-items: start; gap: 64px; }
 .studio-review .phase3-method .phase3-editorial-header { margin: 0; padding: 0; border: 0; }
 .studio-review .phase3-method h2 { max-width: 16ch; margin: 16px 0 0; font-size: clamp(42px,4.2vw,60px); line-height: 1.05; letter-spacing: -.025em; text-wrap: balance; }
 .studio-review .phase3-method-grid { display: block; margin: 0; padding: 0; border: 0; background: transparent; }
 .studio-review .phase3-method-grid::before, .studio-review .phase3-method-grid li::before { display: none; }
-.studio-review .phase3-method-grid li { display: grid; grid-template-columns: 32px minmax(0,1fr); gap: 8px 20px; margin: 0; padding: 24px 0; border: 0; border-top: 1px solid #8c8b684f; background: transparent; }
+.studio-review .phase3-method-grid li { display: grid; grid-template-columns: 32px minmax(0,1fr); gap: 8px 20px; margin: 0; padding: 24px 0; border: 0; border-top: 1px solid #a896704f; background: transparent; }
 .studio-review .phase3-method-grid li > span { grid-column: 1; grid-row: 1 / 3; padding-top: 8px; }
 .studio-review .phase3-method-grid h3 { grid-column: 2; margin: 0; font-size: 30px; line-height: 1.15; }
 .studio-review .phase3-method-grid p { grid-column: 2; max-width: 46ch; margin: 0; font-size: 15px; line-height: 1.7; }
@@ -76,9 +76,9 @@
 .studio-review .service-category h3 { grid-column: 2; max-width: none; margin: 0 0 14px; font: 500 clamp(28px,2.6vw,36px)/1.12 var(--serif); letter-spacing: -.02em; }
 .studio-review .service-category p { grid-column: 2; max-width: 52ch; margin: 0 0 12px; font-size: 15px; line-height: 1.7; }
 .studio-review .service-category .service-boundary { font-size: 14px; }
-.studio-review .service-category a { grid-column: 2; width: fit-content; max-width: 100%; min-height: 44px; margin: 0; padding-block: 12px; font-size: 13px; text-wrap: balance; }
+.studio-review .service-category .service-card-cta { grid-column: 2; width: fit-content; max-width: 100%; min-height: 44px; margin: 0; padding-block: 12px; font-size: 13px; text-wrap: balance; }
 .studio-review .service-scope-note { grid-column: 1 / -1; max-width: 86ch; margin: 0; padding-top: 24px; border-top: 1px solid #c9bea8; font-size: 14px; text-align: left; }
-.studio-review .phase3-snapshot { padding-block: var(--studio-space); background: #20291f; }
+.studio-review .phase3-snapshot { padding-block: var(--studio-space); background: #1d1b18; }
 .studio-review .phase3-snapshot-layout { grid-template-columns: minmax(0,1fr) minmax(0,1fr); grid-template-areas: "intro sample" "action sample" "expectations sample"; grid-template-rows: auto auto minmax(0,1fr); gap: 26px 64px; }
 .studio-review .phase3-snapshot-copy h2 { max-width: 19ch; margin: 16px 0 0; font-size: clamp(42px,4vw,56px); line-height: 1.06; letter-spacing: -.025em; text-wrap: balance; }
 .studio-review .phase3-snapshot-lede { max-width: 48ch; margin-top: 22px; font-size: 16px; line-height: 1.7; }
@@ -88,7 +88,7 @@
 .studio-review .snapshot-brief-fix p { font-size: 17px; line-height: 1.65; }
 .studio-review .snapshot-action .button { width: 100%; max-width: 430px; }
 .studio-review .snapshot-expectations { display: block; margin: 0; padding: 0; border: 0; }
-.studio-review .snapshot-expectations > div { padding-top: 18px; margin-top: 18px; border-top: 1px solid #85907855; }
+.studio-review .snapshot-expectations > div { padding-top: 18px; margin-top: 18px; border-top: 1px solid #a8967055; }
 .studio-review .snapshot-expectations > div:first-child { margin-top: 0; }
 .studio-review .snapshot-expectations h3 { margin: 0 0 8px; font-size: 23px; }
 .studio-review .snapshot-expectations p { font-size: 14px; line-height: 1.7; }
@@ -96,9 +96,9 @@
 .studio-review .phase3-final-cta .phase3-cta-layout { grid-template-columns: minmax(0,1.2fr) minmax(0,.8fr); align-items: center; gap: 64px; }
 .studio-review .phase3-final-cta .eyebrow { color: #6c501b; }
 .studio-review .phase3-final-cta h2 { max-width: 21ch; margin-bottom: 24px; color: var(--studio-ink); font-size: clamp(44px,5vw,72px); line-height: 1.03; letter-spacing: -.035em; text-wrap: balance; }
-.studio-review .phase3-final-cta p:not(.eyebrow) { color: #4e5548; font-size: 16px; line-height: 1.7; }
-.studio-review .phase3-final-cta a { color: #293324; overflow-wrap: anywhere; }
-.studio-review .phase3-final-cta .button { background: #20271f; border-color: #20271f; color: #faf7ef; }
+.studio-review .phase3-final-cta p:not(.eyebrow) { color: #595348; font-size: 16px; line-height: 1.7; }
+.studio-review .phase3-final-cta a { color: #302b22; overflow-wrap: anywhere; }
+.studio-review .phase3-final-cta .button { background: #24221e; border-color: #24221e; color: #faf7ef; }
 .studio-review .phase3-final-cta .phase3-cta-assurance { margin: 14px 0 24px; font-size: 12px; }
 .studio-review .phase3-footer { padding-top: 56px; }
 @media(min-width:1800px) { .studio-review .phase3-hero-copy > .rh-sculpture { width: 400px; } }
@@ -150,7 +150,7 @@
   .studio-review .phase3-method-grid h3 { font-size: 28px; }
   .studio-review .service-category { grid-template-columns: 22px minmax(0,1fr); gap: 0 12px; }
   .studio-review .service-category h3 { font-size: 30px; }
-  .studio-review .service-category a { display: block; line-height: 1.7; }
+  .studio-review .service-category .service-card-cta { display: block; line-height: 1.7; }
   .studio-review .snapshot-brief-sheet { padding: 22px; }
   .studio-review .snapshot-brief h3 { font-size: 34px; }
   .studio-review .snapshot-brief-finding p { font-size: 26px; }
@@ -168,4 +168,476 @@
 @media(prefers-reduced-motion:reduce) {
   .studio-review *, .studio-review *::before, .studio-review *::after { scroll-behavior: auto !important; }
   .studio-review .reveal-item { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+
+/* Focused visual services and Snapshot preview, November 2026. */
+.studio-review .phase3-capabilities > .container { display: block; }
+.studio-review .phase3-capabilities .phase3-editorial-header { margin-bottom: 38px; }
+.studio-review .phase3-capabilities .phase3-editorial-header h2 { max-width: 19ch; font-size: clamp(42px, 4.8vw, 68px); }
+.studio-review .phase3-capabilities .phase3-editorial-header p:not(.eyebrow) { max-width: none; }
+.studio-review .service-category-grid { display: grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap: 22px; }
+.studio-review .service-category { grid-column: span 2; display: flex; flex-direction: column; min-width: 0; padding: 0; border: 1px solid #d1c6b0; background: #fffdf7; overflow: hidden; }
+.studio-review .service-feature { grid-column: span 3; }
+.studio-review .service-card-copy { display: flex; flex-direction: column; flex: 1; padding: 28px; }
+.studio-review .service-number { display: block; margin: 0 0 14px; padding: 0; color: #685324; font: 600 10px/1.6 var(--sans); letter-spacing: .11em; text-transform: uppercase; }
+.studio-review .service-category h3 { margin: 0 0 16px; font: 500 clamp(28px,2.8vw,38px)/1.08 var(--serif); letter-spacing: -.025em; text-wrap: balance; }
+.studio-review .service-category p { max-width: 48ch; margin: 0 0 16px; color: #595348; font-size: 15px; line-height: 1.65; }
+.studio-review .service-category .service-boundary { color: #625c51; font-size: 13px; }
+.studio-review .service-category .service-card-cta { display: flex; justify-content: space-between; align-items: center; gap: 16px; width: 100%; min-height: 48px; margin-top: auto; padding: 14px 0 0; border-top: 1px solid #d1c6b0; color: #302a20; font-size: 13px; line-height: 1.6; }
+.studio-review .service-category .service-card-cta > span { font-size: 20px; }
+.studio-review .service-scope-note { max-width: 84ch; margin: 28px 0 0; padding-top: 22px; }
+.studio-review .service-compact h3 { font-size: clamp(27px,2.4vw,33px); }
+.studio-review .snapshot-quick-facts { display: grid; gap: 0; list-style: none; margin: 24px 0 0; padding: 0; }
+.studio-review .snapshot-quick-facts li { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 20px; padding: 13px 0; border-top: 1px solid #a8967055; font-size: 13px; line-height: 1.6; }
+.studio-review .snapshot-quick-facts strong { color: #f8f2e4; font-weight: 500; }
+.studio-review .snapshot-quick-facts span { color: #d0c7b6; }
+.studio-review .phase3-snapshot-layout { grid-template-areas: "intro sample" "action sample" "details sample"; gap: 22px 64px; }
+.studio-review .snapshot-details { grid-area: details; align-self: start; border-top: 1px solid #a8967066; border-bottom: 1px solid #a8967066; }
+.studio-review .snapshot-details summary { display: flex; align-items: center; justify-content: space-between; min-height: 52px; padding: 12px 0; color: #f8f2e4; cursor: pointer; font-size: 14px; list-style: none; }
+.studio-review .snapshot-details summary::-webkit-details-marker { display: none; }
+.studio-review .snapshot-details summary span { margin-left: 16px; font-size: 24px; }
+.studio-review .snapshot-details[open] summary span { transform: rotate(45deg); }
+.studio-review .snapshot-details .snapshot-expectations { padding-bottom: 22px; }
+@media(min-width:1001px) { .studio-review .phase3-owner-layout { grid-template-columns: 280px minmax(0,1fr); } }
+@media(max-width:800px) {
+  .studio-review .service-category-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; }
+  .studio-review .service-category { grid-column: span 1; }
+  .studio-review .service-search { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; }
+  .studio-review .phase3-snapshot-layout { grid-template-areas: "intro" "sample" "action" "details"; }
+}
+@media(max-width:600px) {
+  .studio-review .phase3-capabilities .phase3-editorial-header { margin-bottom: 28px; }
+  .studio-review .service-category-grid { grid-template-columns: minmax(0,1fr); gap: 22px; }
+  .studio-review .service-category, .studio-review .service-search { grid-column: 1; display: flex; }
+  .studio-review .service-card-copy { padding: 24px; }
+  .studio-review .service-category h3 { font-size: 32px; }
+  .studio-review .snapshot-quick-facts li { display: block; }
+  .studio-review .snapshot-quick-facts li span { display: block; }
+  .studio-review .snapshot-action .button { font-size: 11px; letter-spacing: .035em; }
+}
+
+/* Owner-confirmed palette: black, gold, cream and warm neutral tones. */
+.studio-review { --studio-ink: #24221e; --color-dark: #11100e; --color-graphite: #33302a; --color-text: #24221e; --color-text-secondary: #625b4f; }
+.studio-review .phase3-hero .eyebrow-light { color: #775520; }
+.studio-review .phase3-method, .studio-review .phase3-snapshot { color: #f5eedf; }
+.studio-review .phase3-method h2, .studio-review .phase3-method h3, .studio-review .phase3-snapshot-copy h2 { color: #f5eedf; }
+.studio-review .phase3-method-grid p, .studio-review .phase3-snapshot-lede, .studio-review .phase3-snapshot-assurance, .studio-review .snapshot-expectations p { color: #d0c7b6; }
+.studio-review .phase3-method .eyebrow, .studio-review .phase3-method-grid li > span, .studio-review .phase3-snapshot .eyebrow { color: #d4b36a; }
+.studio-review .snapshot-brief-sheet { color: #24221e; }
+.studio-review .snapshot-brief-header, .studio-review .snapshot-brief-finding, .studio-review .snapshot-brief-fix { border-color: #d6cbb7; }
+.studio-review .snapshot-brief-finding p, .studio-review .snapshot-brief-fix p, .studio-review .snapshot-brief-client { color: #383127; }
+.studio-review .snapshot-sample-label, .studio-review .snapshot-brief h4 { color: #775520; }
+.studio-review .snapshot-brief > figcaption { color: #d0c7b6; }
+.studio-review .phase3-footer { background: #11100e; }
+.studio-review .site-header { background: #11100e; }
+.studio-review .site-header.is-scrolled { background: #f4f0e6; }
+.studio-review .snapshot-brief h3, .studio-review .snapshot-brief-client strong { color: #24221e; }
+.studio-review .snapshot-pdf-note { color: #625b4f; }
+.studio-review .phase3-snapshot .snapshot-sample-link:focus-visible { outline-color: #775520; }
+.studio-review .phase3-hero h1 { color: #24221e; }
+.studio-review .phase3-hero .hero-services, .studio-review .phase3-hero .hero-lede { color: #625b4f; }
+.studio-review .phase3-hero .button-row a.button-gold { background: #24221e; border-color: #24221e; color: #faf7ef; }
+.studio-review .phase3-hero .button-row a.button-gold:hover { background: #44392b; }
+.studio-review .phase3-hero .button-row a.button-ghost { color: #302a20; }
+.studio-review .chamber-membership { color: #302a20; }
+.studio-review .chamber-membership-text { color: #625b4f; }
+.studio-review .chamber-membership-profile { color: #655128; }
+.studio-review .chamber-membership-note { color: #6c6354; }
+
+.studio-review .phase3-footer .chamber-membership .chamber-membership-name { color: #302a20; }
+
+/* Second owner review: tighter imagery, stronger contrast and a calmer rhythm. */
+.studio-review .homepage-eastland-showcase { border-bottom: 1px solid #d1c6b0; }
+.studio-review .work-preview-card { padding-top: 24px; }
+.studio-review .work-preview-image, .studio-review .concept-missy-proof { padding: 10px; background: #e7decc; border-color: #c8b68f; box-shadow: 0 12px 30px #302a2008; }
+.studio-review .phase3-founder-portrait-frame { padding: 10px; border-color: #b69a5e; background: #ede5d6; box-shadow: 10px 10px 0 #d8c9a52b; }
+.studio-review .phase3-owner-principles { border-top-color: #cbb98f; }
+.studio-review .phase3-capabilities .phase3-editorial-header { display: grid; width: 100%; max-width: none; margin-inline: 0; grid-template-columns: 1fr; margin-bottom: 34px; padding-bottom: 28px; border-bottom: 1px solid #c9b991; }
+.studio-review .phase3-capabilities .phase3-editorial-header h2 { max-width: 20ch; margin-bottom: 16px; }
+.studio-review .service-category-grid { gap: 28px; }
+.studio-review .service-category { border-color: #d5c9b2; box-shadow: 0 10px 26px #302a2005; }
+.studio-review .service-card-copy { padding: 28px; }
+.studio-review .service-feature:first-child { background: #1c1914; border-color: #51442c; }
+.studio-review .service-feature:first-child .service-number { color: #d4b36a; }
+.studio-review .service-feature:first-child h3 { color: #fbf5e7; }
+.studio-review .service-feature:first-child p { color: #d5cbb9; }
+.studio-review .service-feature:first-child .service-card-cta { color: #ead2a0; border-color: #655439; }
+.studio-review .service-feature:first-child :focus-visible { outline-color: #e6ce88; }
+.studio-review .service-feature h3 { max-width: 18ch; font-size: clamp(32px,3vw,42px); }
+.studio-review .service-category .service-card-cta { text-decoration-thickness: 1px; text-underline-offset: 5px; }
+.studio-review .service-category .service-card-cta:hover { text-decoration-thickness: 2px; }
+.studio-review .service-compact { background: #faf6ed; }
+.studio-review .service-compact .service-card-copy { padding: 24px; }
+.studio-review .service-compact .service-number { min-height: 32px; margin-bottom: 12px; }
+.studio-review .service-compact h3 { margin-bottom: 16px; }
+.studio-review .service-scope-note { max-width: none; margin-top: 28px; padding: 22px 0 0; border-top-color: #c9b991; }
+.studio-review .phase3-snapshot { background: #1b1813; }
+.studio-review .phase3-snapshot-copy h2 { max-width: 20ch; font-size: clamp(42px,4vw,56px); }
+.studio-review .snapshot-brief-sheet { border: 1px solid #d1bf96; border-top: 4px solid #b48a34; box-shadow: 8px 8px 0 #b48a3426, 0 20px 48px #00000024; }
+.studio-review .snapshot-brief-finding { margin-top: 20px; padding: 20px; border: 0; border-left: 2px solid #b48a34; background: #f0e8d8; }
+.studio-review .snapshot-brief-finding p { font-size: clamp(26px,2.2vw,32px); }
+.studio-review .snapshot-brief-fix { padding-top: 24px; }
+.studio-review .snapshot-details summary { padding-inline: 4px; }
+.studio-review .phase3-final-cta { background: #e7dbc1; border-top: 1px solid #baa16a; }
+.studio-review .phase3-final-cta h2 { max-width: 20ch; }
+@media(min-width:1001px) {
+  .studio-review .phase3-method > .container { display: block; }
+  .studio-review .phase3-method .phase3-editorial-header { max-width: 820px; }
+  .studio-review .phase3-method h2 { max-width: 25ch; margin-top: 14px; font-size: clamp(42px,4vw,56px); }
+  .studio-review .phase3-method-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 36px; margin-top: 38px; }
+  .studio-review .phase3-method-grid li { display: block; padding: 22px 0 0; border-top: 1px solid #9d81475c; }
+  .studio-review .phase3-method-grid li > span { display: inline-block; padding: 0 0 15px; }
+  .studio-review .phase3-method-grid h3 { margin-bottom: 14px; font-size: 30px; }
+  .studio-review .phase3-method-grid p { max-width: 40ch; }
+  .studio-review .phase3-capabilities .phase3-editorial-header > div { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,.8fr); gap: 12px 64px; align-items: end; }
+  .studio-review .phase3-capabilities .phase3-editorial-header .eyebrow { grid-column: 1 / -1; margin: 0; }
+  .studio-review .phase3-capabilities .phase3-editorial-header h2 { margin: 0; }
+  .studio-review .phase3-capabilities .phase3-editorial-header p:not(.eyebrow) { max-width: 29ch; margin: 0 0 4px; font-size: 18px; }
+}
+@media(max-width:1000px) {
+  .studio-review .service-category-grid { gap: 20px; }
+  .studio-review .service-card-copy, .studio-review .service-compact .service-card-copy { padding: 22px; }
+}
+@media(max-width:600px) {
+  .studio-review .phase3-capabilities .phase3-editorial-header { padding-bottom: 22px; margin-bottom: 24px; }
+  .studio-review .service-category-grid { gap: 24px; }
+  .studio-review .service-feature h3 { max-width: 18ch; font-size: 34px; }
+  .studio-review .service-compact .service-number { min-height: 0; }
+  .studio-review .service-category h3 { font-size: 31px; }
+  .studio-review .snapshot-brief-sheet { box-shadow: 5px 5px 0 #b48a3426; }
+  .studio-review .snapshot-brief-finding { padding: 16px; }
+  .studio-review .phase3-snapshot-copy h2 { font-size: 38px; }
+}
+@media(max-width:360px) {
+  .studio-review .service-card-copy, .studio-review .service-compact .service-card-copy { padding: 20px; }
+  .studio-review .phase3-snapshot-copy h2 { font-size: 35px; }
+}
+
+
+/* Final V25 commercial reference: live type, distinct icons and layered cards. */
+.studio-review .commercial-service-stage { position: relative; isolation: isolate; height: 330px; --commercial-gold: #d9b452; overflow: hidden; background: #15130f; color: #15130f; font-family: var(--sans); }
+.studio-review .commercial-title-plane { position: absolute; inset: 34px 30px; padding: 26px; border-radius: 12px; background: #f6f0e3; box-shadow: 0 12px 22px #00000026; transform: rotate(-3deg); }
+.studio-review .commercial-title-plane::before { position: absolute; z-index: -1; inset: -8px -6px; border-radius: inherit; background: var(--commercial-gold); transform: rotate(8deg); content: ""; }
+.studio-review .commercial-websites .commercial-title-plane { background: transparent; }
+.studio-review .commercial-websites .commercial-title-plane::after { position: absolute; z-index: -1; inset: 0; border-radius: inherit; background: #f6f0e3; content: ""; }
+.studio-review .commercial-service-name { display: block; font: 800 clamp(42px,4.4vw,62px)/1.03 var(--sans); letter-spacing: -.05em; }
+.studio-review .commercial-title-plane svg { position: absolute; right: 24px; bottom: 23px; width: 64px; height: 64px; color: #bc9748; }
+.studio-review .service-category .commercial-benefit { position: absolute; z-index: 2; left: 58px; top: 183px; width: calc(100% - 195px); max-width: none; margin: 0; color: #15130f; font: 600 28px/1.08 var(--sans); letter-spacing: -.035em; text-wrap: balance; transform: rotate(-3deg); }
+.studio-review .commercial-websites .commercial-service-name { padding-bottom: 30px; border-bottom: 1px solid #bc9748; }
+.studio-review .commercial-spreadsheets { background: #f2eadb; }
+.studio-review .commercial-spreadsheets .commercial-title-plane { background: transparent; transform: rotate(3deg); }
+.studio-review .commercial-spreadsheets .commercial-title-plane::before { background: #15130f; transform: rotate(-10deg); }
+.studio-review .commercial-spreadsheets .commercial-title-plane::after { position: absolute; z-index: -1; inset: 0; background: var(--commercial-gold); border-radius: inherit; content: ""; }
+.studio-review .commercial-spreadsheets .commercial-service-name { font-size: clamp(35px,3.7vw,54px); padding-bottom: 28px; border-bottom: 1px solid #15130f; }
+.studio-review .commercial-spreadsheets .commercial-title-plane svg { background: #15130f; border-radius: 50%; padding: 8px; width: 68px; height: 68px; color: var(--commercial-gold); }
+.studio-review .service-category .commercial-spreadsheets .commercial-benefit { top: 181px; transform: rotate(3deg); }
+.studio-review .service-compact .commercial-service-stage { height: 250px; }
+.studio-review .commercial-forms .commercial-title-plane { inset: 28px auto 28px 20px; width: 63%; padding: 26px 18px; }
+.studio-review .commercial-forms .commercial-title-plane::before { display: none; }
+.studio-review .commercial-forms .commercial-service-name { font-size: clamp(27px,2.6vw,37px); max-width: none; }
+.studio-review .commercial-forms .commercial-title-plane svg { width: 46px; height: 46px; bottom: 23px; left: 20px; right: auto; }
+.studio-review .service-category .commercial-forms .commercial-benefit { left: auto; right: 17px; top: 72px; width: 43%; padding: 22px 18px; border-radius: 10px; background: var(--commercial-gold); box-shadow: 0 12px 24px #0000002b; font-size: 24px; line-height: 1.12; transform: rotate(4deg); }
+.studio-review .commercial-documents { background: #f2eadb; }
+.studio-review .commercial-documents .commercial-title-plane { inset: 26px 26px 62px; padding: 0; background: transparent; box-shadow: none; transform: none; }
+.studio-review .commercial-documents .commercial-title-plane::before { display: none; }
+.studio-review .commercial-documents .commercial-service-name { font-size: clamp(28px,2.8vw,40px); }
+.studio-review .commercial-documents .commercial-service-name > span { display: block; padding: 12px 20px; border-radius: 9px; background: var(--commercial-gold); box-shadow: 0 8px 18px #00000017; transform: rotate(-3deg); }
+.studio-review .commercial-documents .commercial-service-name > span + span { position: relative; z-index: 1; margin-top: -2px; margin-left: 9px; margin-right: -8px; padding-right: 50px; background: #15130f; color: #f6f0e3; transform: rotate(3deg); }
+.studio-review .commercial-documents .commercial-title-plane svg { z-index: 2; right: 4px; top: 86px; bottom: auto; width: 35px; height: 35px; }
+.studio-review .service-category .commercial-documents .commercial-benefit { left: 28px; top: auto; bottom: 20px; width: calc(100% - 56px); font-size: 22px; transform: none; }
+.studio-review .commercial-search { background: #eae1cf; }
+.studio-review .commercial-search .commercial-title-plane { inset: 27px 22px 70px; padding: 25px 18px; background: #15130f; color: #f6f0e3; }
+.studio-review .commercial-search .commercial-title-plane::before { display: none; }
+.studio-review .commercial-search .commercial-service-name { max-width: 8ch; padding-bottom: 18px; border-bottom: 1px solid var(--commercial-gold); font-size: clamp(28px,2.8vw,40px); }
+.studio-review .commercial-search .commercial-title-plane svg { width: 48px; height: 48px; top: 38px; right: 15px; bottom: auto; }
+.studio-review .service-category .commercial-search .commercial-benefit { left: auto; right: 22px; top: 145px; width: 79%; padding: 16px 22px; border-radius: 10px; background: var(--commercial-gold); box-shadow: 0 10px 20px #0000001f; font-size: 23px; line-height: 1.08; transform: rotate(3deg); }
+.studio-review .service-compact .service-card-copy { padding-top: 24px; }
+.studio-review .service-compact .service-number { min-height: 0; }
+@media(max-width:1200px) and (min-width:801px) {
+  .studio-review .commercial-title-plane { inset-inline: 23px; padding: 22px; }
+  .studio-review .commercial-service-name { font-size: 48px; }
+  .studio-review .commercial-spreadsheets .commercial-service-name { font-size: 38px; }
+  .studio-review .service-category .commercial-benefit { left: 48px; font-size: 25px; }
+  .studio-review .commercial-forms .commercial-service-name { font-size: 29px; }
+  .studio-review .service-category .commercial-forms .commercial-benefit { right: 14px; padding: 20px 14px; font-size: 20px; }
+  .studio-review .commercial-documents .commercial-service-name, .studio-review .commercial-search .commercial-service-name { font-size: 29px; }
+  .studio-review .commercial-documents .commercial-title-plane svg { top: 75px; }
+  .studio-review .service-category .commercial-documents .commercial-benefit { left: 23px; font-size: 20px; }
+  .studio-review .service-category .commercial-search .commercial-benefit { right: 18px; font-size: 21px; }
+}
+@media(max-width:800px) {
+  .studio-review .commercial-service-stage { height: 290px; }
+  .studio-review .commercial-title-plane { inset: 30px 24px; padding: 23px; }
+  .studio-review .commercial-service-name { font-size: 46px; }
+  .studio-review .commercial-spreadsheets .commercial-service-name { font-size: 35px; }
+  .studio-review .service-category .commercial-benefit { left: 49px; top: 163px; width: calc(100% - 155px); font-size: 24px; }
+  .studio-review .commercial-title-plane svg { width: 52px; height: 52px; right: 18px; bottom: 22px; }
+  .studio-review .service-category .commercial-spreadsheets .commercial-benefit { top: 161px; }
+  .studio-review .commercial-spreadsheets .commercial-title-plane svg { width: 58px; height: 58px; }
+  .studio-review .service-category.service-search { display: flex; }
+  .studio-review .commercial-forms .commercial-title-plane { inset: 28px auto 28px 20px; padding: 24px 18px; }
+  .studio-review .commercial-forms .commercial-service-name { font-size: 31px; }
+  .studio-review .commercial-forms .commercial-title-plane svg { width: 44px; height: 44px; }
+  .studio-review .service-category .commercial-forms .commercial-benefit { left: auto; top: 75px; right: 17px; width: 43%; font-size: 23px; }
+  .studio-review .commercial-documents .commercial-title-plane { inset: 26px 26px 62px; padding: 0; }
+  .studio-review .commercial-documents .commercial-service-name { font-size: 32px; }
+  .studio-review .commercial-documents .commercial-title-plane svg { top: 78px; width: 34px; height: 34px; right: 4px; }
+  .studio-review .service-category .commercial-documents .commercial-benefit { left: 28px; top: auto; font-size: 22px; width: calc(100% - 56px); }
+  .studio-review .commercial-search .commercial-title-plane { inset: 27px 22px 70px; padding: 25px 18px; }
+  .studio-review .commercial-search .commercial-service-name { font-size: 36px; }
+  .studio-review .commercial-search .commercial-title-plane svg { top: 34px; width: 48px; height: 48px; }
+  .studio-review .service-category .commercial-search .commercial-benefit { left: auto; top: 145px; right: 22px; width: 79%; font-size: 23px; }
+}
+@media(max-width:360px) {
+  .studio-review .commercial-service-name { font-size: 40px; }
+  .studio-review .commercial-spreadsheets .commercial-service-name { font-size: 30px; }
+  .studio-review .commercial-title-plane { inset-inline: 19px; padding: 20px; }
+  .studio-review .service-category .commercial-benefit { left: 41px; width: calc(100% - 140px); font-size: 22px; }
+  .studio-review .commercial-forms .commercial-service-name { font-size: 27px; }
+  .studio-review .service-category .commercial-forms .commercial-benefit { padding-inline: 13px; font-size: 21px; }
+  .studio-review .commercial-documents .commercial-title-plane { inset-inline: 20px; padding: 0; }
+  .studio-review .commercial-documents .commercial-service-name { font-size: 29px; }
+  .studio-review .service-category .commercial-documents .commercial-benefit { left: 25px; width: calc(100% - 50px); font-size: 20px; }
+  .studio-review .commercial-search .commercial-title-plane { padding-inline: 17px; }
+  .studio-review .commercial-search .commercial-service-name { font-size: 30px; }
+  .studio-review .commercial-search .commercial-title-plane svg { width: 42px; height: 42px; top: 36px; right: 12px; }
+  .studio-review .service-category .commercial-search .commercial-benefit { padding-inline: 18px; font-size: 21px; }
+}
+.studio-review .service-category .commercial-websites .commercial-benefit { color: #15130f; }
+
+/* Fourth owner review: carry the commercial's type and material language throughout the homepage. */
+.studio-review { --display-font: var(--sans); }
+.studio-review h1, .studio-review h2, .studio-review h3 { font-family: var(--display-font); }
+.studio-review .phase3-hero h1 { font-size: clamp(56px,6.05vw,88px); font-weight: 800; line-height: 1.01; letter-spacing: -.055em; }
+.studio-review .phase3-hero .hero-emphasis { color: #8a6427; font-style: normal; font-weight: 800; }
+.studio-review .phase3-hero .hero-services { font-weight: 550; }
+.studio-review .work-preview-heading h2 { max-width: 17ch; font-size: clamp(40px,4.1vw,60px); font-weight: 800; line-height: 1.02; letter-spacing: -.05em; }
+.studio-review .work-preview-card h3 { font: 750 clamp(28px,2.6vw,38px)/1.08 var(--display-font); letter-spacing: -.04em; }
+.studio-review .work-preview-image, .studio-review .concept-missy-proof { border-radius: 7px; box-shadow: 7px 8px 0 #c2a05535; }
+.studio-review .phase3-owner h2 { max-width: 23ch; font-size: clamp(38px,3.55vw,52px); font-weight: 800; line-height: 1.05; letter-spacing: -.045em; }
+.studio-review .phase3-owner-intro strong { display: inline-block; padding: 7px 12px; border-radius: 4px; background: #211c14; color: #f7f0e0; font-weight: 650; }
+.studio-review .phase3-owner-principles li { align-items: center; gap: 8px; }
+.studio-review .phase3-owner-principles li > span { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border: 1px solid #b99a58; border-radius: 50%; color: #806023; font: 700 10px/1 var(--sans); }
+.studio-review .phase3-owner-principles li > strong { font-weight: 650; }
+.studio-review .company-vision h3 { font: 750 26px/1.12 var(--display-font); letter-spacing: -.035em; }
+.studio-review .phase3-method h2 { max-width: 25ch; font-size: clamp(40px,3.65vw,53px); font-weight: 800; line-height: 1.06; letter-spacing: -.045em; }
+.studio-review .phase3-method-grid h3 { font: 750 28px/1.08 var(--display-font); letter-spacing: -.035em; }
+.studio-review .phase3-method-grid li > span { font: 800 44px/1 var(--display-font); letter-spacing: -.06em; color: #c2a055; }
+.studio-review .phase3-method-grid li { border-top: 2px solid #9e80453d; }
+.studio-review .phase3-capabilities .phase3-editorial-header h2 { font-size: clamp(40px,4.2vw,62px); font-weight: 800; line-height: 1.04; letter-spacing: -.05em; }
+.studio-review .phase3-snapshot-copy h2 { max-width: 23ch; font-size: clamp(40px,3.55vw,52px); font-weight: 800; line-height: 1.05; letter-spacing: -.045em; }
+.studio-review .snapshot-quick-facts strong { font-size: 14px; font-weight: 650; }
+.studio-review .snapshot-brief-sheet { border-radius: 7px; }
+.studio-review .snapshot-brief h3 { font: 500 40px/1.08 var(--serif); }
+.studio-review .snapshot-expectations h3 { font: 700 22px/1.15 var(--display-font); letter-spacing: -.025em; }
+.studio-review .phase3-final-cta h2 { max-width: 21ch; font-size: clamp(42px,4.6vw,66px); font-weight: 800; line-height: 1.04; letter-spacing: -.05em; }
+.studio-review .phase3-final-cta .phase3-cta-layout > div:last-child { position: relative; padding: 30px; border-radius: 10px; background: #19160f; box-shadow: 8px 8px 0 #c2a055; }
+.studio-review .phase3-final-cta .phase3-cta-layout > div:last-child a { color: #f7f0e0; }
+.studio-review .phase3-final-cta .phase3-cta-layout > div:last-child .button { width: 100%; border-color: #c2a055; background: #c2a055; color: #15130f; }
+.studio-review .phase3-final-cta .phase3-cta-layout > div:last-child .button:hover { border-color: #dcc084; background: #dcc084; }
+.studio-review .phase3-final-cta .phase3-cta-layout > div:last-child .phase3-cta-assurance { color: #d1c5af; font-size: 12px; }
+.studio-review .phase3-final-cta .phase3-cta-layout > div:last-child :focus-visible { outline-color: #e6ce88; }
+@media(min-width:1001px) {
+  .studio-review .phase3-method .phase3-editorial-header h2 { font-size: clamp(40px,3.65vw,53px); }
+  .studio-review .phase3-method-grid li > span { padding-bottom: 20px; }
+}
+@media(max-width:1000px) and (min-width:681px) {
+  .studio-review .phase3-hero h1 { font-size: clamp(48px,6.3vw,64px); }
+}
+@media(max-width:800px) {
+  .studio-review .phase3-method-grid li { grid-template-columns: 48px minmax(0,1fr); }
+  .studio-review .phase3-method-grid li > span { font-size: 35px; }
+}
+@media(max-width:680px) {
+  .studio-review .phase3-hero h1 { font-size: clamp(32px,9.5vw,42px); line-height: 1.03; }
+  .studio-review .work-preview-heading h2 { font-size: 39px; }
+  .studio-review .work-preview-card h3 { font-size: 30px; }
+  .studio-review .phase3-owner h2 { font-size: 35px; }
+  .studio-review .company-vision h3 { font-size: 25px; }
+  .studio-review .phase3-method h2 { font-size: 36px; }
+  .studio-review .phase3-method-grid h3 { font-size: 27px; }
+  .studio-review .phase3-capabilities .phase3-editorial-header h2 { font-size: 38px; }
+  .studio-review .phase3-snapshot-copy h2 { font-size: 36px; }
+  .studio-review .snapshot-brief h3 { font-size: 34px; }
+  .studio-review .phase3-final-cta h2 { font-size: 40px; }
+  .studio-review .phase3-final-cta .phase3-cta-layout > div:last-child { padding: 24px; box-shadow: 5px 5px 0 #c2a055; }
+}
+@media(max-width:360px) {
+  .studio-review .work-preview-heading h2, .studio-review .phase3-capabilities .phase3-editorial-header h2 { font-size: 34px; }
+  .studio-review .phase3-owner h2, .studio-review .phase3-method h2, .studio-review .phase3-snapshot-copy h2 { font-size: 32px; }
+  .studio-review .phase3-final-cta h2 { font-size: 36px; }
+  .studio-review .phase3-final-cta .phase3-cta-layout > div:last-child { padding: 22px; }
+}
+.studio-review .phase3-hero h1, .studio-review .work-preview-heading h2, .studio-review .phase3-owner h2, .studio-review .phase3-method h2, .studio-review .phase3-capabilities .phase3-editorial-header h2, .studio-review .phase3-snapshot-copy h2, .studio-review .phase3-final-cta h2 { font-family: var(--display-font); }
+.studio-review .phase3-final-cta .phase3-cta-layout > div:last-child > a:not(.button) { display: flex; align-items: center; min-height: 44px; padding-block: 8px; font-size: 14px; }
+
+/* Fifth review: a commercial-inspired hero identity and a lighter work teaser. */
+.studio-review .phase3-hero h1 { font-size: clamp(56px,5.65vw,82px); max-width: 25ch; }
+.studio-review .phase3-hero .hero-emphasis { max-width: none; }
+.studio-review .phase3-hero-copy > .hero-signature { position: relative; grid-column: 2; grid-row: 3 / 7; align-self: center; width: min(100%,450px); height: 365px; margin: 0 auto; }
+.studio-review .hero-signature .rh-sculpture { position: absolute; top: 0; left: 0; width: 345px; max-width: 85%; margin: 0; padding: 0; border-radius: 10px; background: #f7f1e4; box-shadow: 0 10px 30px #00000014; }
+.studio-review .hero-signature .rh-sculpture-stage { width: 100%; max-height: none; }
+.studio-review .work-preview-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; }
+.studio-review .work-preview-card, .studio-review .work-preview-card:nth-child(2) { display: block; padding: 26px; border: 1px solid #c9b991; border-top: 3px solid #c2a055; background: #f8f3e8; }
+.studio-review .work-preview-card h3 { max-width: 20ch; font-size: 28px; }
+.studio-review .work-preview-card p:not(.eyebrow) { max-width: 46ch; font-size: 15px; }
+.studio-review .work-preview-heading { margin-bottom: 30px; }
+.motion-ready .studio-review .phase3-hero h1 { animation: rh-hero-copy-in 650ms both cubic-bezier(.22,1,.36,1); }
+.studio-review .button { transition: background-color 180ms ease, box-shadow 180ms ease; }
+.studio-review .button:hover { box-shadow: 0 7px 18px #15130f20; }
+.studio-review .work-text-link > span, .studio-review .service-category .service-card-cta > span { display: inline-block; transition: transform 180ms ease; }
+.studio-review .work-text-link:hover > span, .studio-review .work-text-link:focus-visible > span, .studio-review .service-category .service-card-cta:hover > span, .studio-review .service-category .service-card-cta:focus-visible > span { transform: translate(3px,-2px); }
+@keyframes rh-hero-copy-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@media(max-width:1000px) and (min-width:681px) {
+  .studio-review .phase3-hero h1 { font-size: clamp(48px,5.9vw,62px); }
+  .studio-review .phase3-hero-copy > .hero-signature { height: 310px; }
+  .studio-review .hero-signature .rh-sculpture { width: 280px; }
+}
+@media(max-width:680px) {
+  .studio-review .phase3-hero-copy { grid-template-columns: minmax(0,1fr); }
+  .studio-review .phase3-hero h1 { max-width: 15ch; font-size: clamp(34px,10vw,43px); }
+  .studio-review .phase3-hero .hero-services, .studio-review .phase3-hero .hero-lede { grid-column: 1; }
+  .studio-review .phase3-hero .hero-lede { max-width: 42ch; }
+  .studio-review .phase3-hero-copy > .hero-signature { grid-column: 1; grid-row: 7; width: min(100%,340px); height: 280px; margin-top: 24px; }
+  .studio-review .hero-signature .rh-sculpture { width: 255px; }
+  .studio-review .work-preview-grid { grid-template-columns: 1fr; gap: 18px; }
+  .studio-review .work-preview-card, .studio-review .work-preview-card:nth-child(2) { padding: 22px; }
+  .studio-review .work-preview-card h3 { font-size: 27px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .studio-review .button, .studio-review .work-text-link > span, .studio-review .service-category .service-card-cta > span { transition: none !important; }
+  .studio-review .work-text-link > span, .studio-review .service-category .service-card-cta > span { transform: none !important; }
+}
+
+/* Owner-requested finish: same hero composition, a more prominent original mark. */
+.studio-review .hero-signature .rh-sculpture { width: 380px; max-width: 89%; box-shadow: 0 8px 16px #231b1226, 0 28px 44px #231b1233; }
+.studio-review .hero-signature .rh-sculpture-stage::before { border-width: 10px; box-shadow: 3px 4px 0 #a57b35, 6px 8px 0 #72521f, 9px 14px 19px #21180d38; }
+@media(max-width:1000px) and (min-width:681px) {
+  .studio-review .hero-signature .rh-sculpture { width: 305px; }
+  .studio-review .hero-signature .rh-sculpture-stage::before { border-width: 8px; }
+}
+@media(max-width:680px) {
+  .studio-review .hero-signature .rh-sculpture { width: 270px; }
+  .studio-review .hero-signature .rh-sculpture-stage::before { border-width: 7px; box-shadow: 2px 3px 0 #a57b35, 4px 6px 0 #72521f, 6px 11px 16px #21180d38; }
+}
+
+/* Owner correction: the original RH and dimensional frame stand alone. */
+.studio-review .hero-signature .rh-sculpture { left: 50%; transform: translateX(-50%); border-radius: 0; background: transparent; box-shadow: none; }
+@media(prefers-reduced-motion:reduce) {
+  .studio-review .phase3-hero h1 { animation: none !important; }
+}
+/* Large authentic RH: use the available art column, with no surrounding cards. */
+.studio-review .phase3-hero-copy > .hero-signature { width: min(100%,580px); height: auto; aspect-ratio: 1.12; }
+.studio-review .hero-signature .rh-sculpture { width: 560px; max-width: 100%; }
+@media(min-width:681px) {
+  .studio-review .phase3-hero-copy { grid-template-rows: repeat(6,min-content) minmax(0,1fr); }
+  .studio-review .phase3-hero-copy > .hero-signature { grid-row: 3 / 8; }
+}
+@media(max-width:680px) {
+  .studio-review .phase3-hero-copy > .hero-signature { grid-row: 7; width: 100%; }
+  .studio-review .hero-signature .rh-sculpture-stage::before { border-width: 9px; }
+}
+
+/* Approved hero focus: one headline, one value line, optional Snapshot first. */
+.studio-review .hero-signature .rh-sculpture-stage::before { box-shadow: inset 0 0 0 2px #30271a, 3px 4px 0 #443521, 6px 8px 0 #11100e, 9px 14px 19px #21180d38; }
+.studio-review .phase3-hero .button-row .button-gold { background: #24221e; color: #f8f4eb; }
+@media(max-width:680px) {
+  .studio-review .hero-signature .rh-sculpture-stage::before { box-shadow: inset 0 0 0 1px #30271a, 2px 3px 0 #443521, 4px 6px 0 #11100e, 6px 11px 16px #21180d38; }
+}
+
+/* Visitor review: balance the original identity with the message, without hero cards. */
+@media(min-width:961px) {
+  .studio-review .phase3-hero-copy { grid-template-columns: minmax(0,1.16fr) minmax(0,1fr); grid-template-rows: repeat(5,min-content); gap: 0 56px; align-content: center; }
+  .studio-review .phase3-hero-copy > .eyebrow { grid-column: 1; grid-row: 1; max-width: 47ch; }
+  .studio-review.concept-page .phase3-hero-copy > h1 { grid-column: 1; grid-row: 2; font-size: clamp(50px,4.8vw,68px); max-width: 13ch; margin-bottom: 24px; }
+  .studio-review .phase3-hero .hero-services { grid-column: 1; grid-row: 3; max-width: 39ch; margin-bottom: 0; font-size: 17px; }
+  .studio-review .phase3-hero-copy > .hero-signature { grid-column: 2; grid-row: 1 / 6; width: min(100%,480px); align-self: center; aspect-ratio: 1.12; }
+  .studio-review .hero-signature .rh-sculpture { width: 460px; }
+  .studio-review .phase3-hero .button-row { grid-column: 1; grid-row: 4; flex-wrap: wrap; margin-top: 26px; }
+  .studio-review .phase3-hero-note { grid-column: 1; grid-row: 5; margin-bottom: 0; }
+}
+@media(min-width:681px) and (max-width:960px) {
+  .studio-review .phase3-hero-copy { grid-template-columns: 1fr; grid-template-rows: none; }
+  .studio-review .phase3-hero-copy > .eyebrow { grid-column: 1; grid-row: 1; }
+  .studio-review.concept-page .phase3-hero-copy > h1 { grid-column: 1; grid-row: 2; max-width: 18ch; font-size: 56px; }
+  .studio-review .phase3-hero .hero-services { grid-column: 1; grid-row: 3; }
+  .studio-review .phase3-hero .button-row { grid-column: 1; grid-row: 4; margin-top: 24px; }
+  .studio-review .phase3-hero-note { grid-column: 1; grid-row: 5; }
+  .studio-review .phase3-hero-copy > .hero-signature { grid-column: 1; grid-row: 6; width: min(100%,420px); margin-top: 24px; }
+}
+.studio-review .phase3-hero .button-row .button-ghost { border-color: transparent; background: transparent; text-decoration: underline; text-underline-offset: 6px; }
+.studio-review .work-preview-card { display: flex; flex-direction: column; gap: 22px; padding: 0 0 28px; border: 0; border-bottom: 1px solid #c9b991; border-radius: 0; background: transparent; box-shadow: none; }
+.studio-review .work-preview-card:nth-child(2) { display: flex; padding: 0 0 28px; border: 0; border-bottom: 1px solid #c9b991; background: transparent; }
+.studio-review .home-project-media { display: block; width: 100%; margin: 0; padding: 0; border: 0; background: transparent; }
+.studio-review .home-project-media > picture, .studio-review .home-project-media > div { display: flex; width: 100%; aspect-ratio: 2400 / 1244; align-items: center; justify-content: center; overflow: hidden; background: #090909; }
+.studio-review .home-project-media .homepage-eastland-picture { aspect-ratio: 2400 / 1244; }
+.studio-review .home-project-media img { display: block; width: 100%; height: auto; max-height: 100%; object-fit: contain; }
+.studio-review .home-project-media figcaption { margin-top: 11px; color: #686153; font-size: 12px; line-height: 1.5; }
+.studio-review .work-preview-card > div { padding: 0 2px; }
+.studio-review .work-preview-card h3 { max-width: 24ch; }
+.studio-review .service-family-note { margin: 18px 0 0; color: #5c5549; font-size: 15px; }
+.studio-review .service-family-note a { display: inline-block; padding-block: 10px; color: #28231b; font-weight: 700; text-underline-offset: 5px; }
+
+/* Private, reversible listening alternative: ?hero=listening. */
+.hero-listening { display: none; }
+.hero-listening-preview .studio-review .hero-signature { display: none; }
+.hero-listening-preview .studio-review .hero-listening { display: block; min-width: 0; margin: 0; }
+.hero-listening-stage { position: relative; width: 100%; aspect-ratio: 16 / 10; overflow: hidden; background: #211d17; border: 1px solid #b39350; box-shadow: 0 18px 42px #21180d26; }
+.hero-listening-stage video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 60% center; }
+.hero-listening figcaption { margin-top: 12px; color: #675a44; font: 650 12px/1.5 var(--sans); letter-spacing: .025em; }
+.listening-motion-toggle { position: absolute; right: 12px; bottom: 12px; min-height: 44px; padding: 10px 15px; border: 1px solid #e7cc8e; background: #15130fe8; color: #fcf7eb; font: 700 12px/1.4 var(--sans); cursor: pointer; }
+.listening-motion-toggle:hover { background: #15130f; }
+.studio-review .listening-motion-toggle:focus-visible { outline: 3px solid #ffe1a1; outline-offset: 4px; }
+@media(min-width:961px) {
+  .hero-listening-preview .studio-review .phase3-hero-copy { grid-template-columns: minmax(0,.9fr) minmax(0,1.3fr); gap: 0 48px; }
+  .hero-listening-preview .studio-review.concept-page .phase3-hero-copy > h1 { font-size: clamp(45px,4.4vw,62px); }
+  .hero-listening-preview .studio-review .hero-listening { grid-column: 2; grid-row: 1 / 6; align-self: center; }
+}
+@media(max-width:960px) {
+  .hero-listening-preview .studio-review .phase3-hero-copy { grid-template-columns: minmax(0,1fr); grid-template-rows: none; }
+  .hero-listening-preview .studio-review .hero-listening { grid-column: 1; grid-row: 3; width: 100%; max-width: 640px; margin: 6px auto 22px; }
+  .hero-listening-preview .studio-review .phase3-hero .hero-services { grid-column: 1; grid-row: 4; }
+  .hero-listening-preview .studio-review .phase3-hero .button-row { grid-column: 1; grid-row: 5; margin-top: 20px; }
+  .hero-listening-preview .studio-review .phase3-hero-note { grid-column: 1; grid-row: 6; }
+}
+@media(max-width:680px) {
+  .hero-listening-preview .studio-review .hero-listening { margin-top: 2px; margin-bottom: 20px; }
+  .hero-listening-preview .studio-review .hero-listening-stage { aspect-ratio: 16 / 9; }
+  .listening-motion-toggle { right: 8px; bottom: 8px; padding: 9px 12px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .hero-listening-preview .studio-review .hero-listening, .hero-listening-preview .studio-review .hero-listening * { animation: none !important; transition: none !important; }
+}
+
+
+/* Owner refinement: richer gold, one native link per card and roomier text flow. */
+.studio-review .service-category-grid { gap: 24px; }
+.studio-review .service-card-link { display: flex; flex: 1; flex-direction: column; align-items: stretch; justify-content: flex-start; gap: 0; min-width: 0; width: auto; max-width: none; margin: 0; padding: 0; border: 0; color: inherit; font: inherit; text-decoration: none; text-wrap: wrap; }
+.studio-review .service-card-link > .commercial-service-stage { flex: 0 0 auto; }
+.studio-review .service-card-copy, .studio-review .service-compact .service-card-copy { padding: 24px; }
+.studio-review .service-category p { max-width: none; text-wrap: wrap; }
+.studio-review .service-category .service-card-cta { text-wrap: wrap; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+.studio-review .service-category .commercial-benefit { text-wrap: wrap; }
+.studio-review .service-feature .commercial-benefit { width: calc(100% - 160px); }
+.studio-review .service-category:has(.service-card-link:hover) { border-color: #99701f; box-shadow: 0 8px 24px #302a201c; }
+.studio-review .service-card-link:hover .service-card-cta, .studio-review .service-card-link:focus-visible .service-card-cta { text-decoration-thickness: 2px; }
+.studio-review .service-card-link:focus-visible { outline: 3px solid #775319; outline-offset: -4px; }
+.studio-review .service-feature:first-child .service-card-link:focus-visible { outline-color: #e6ce88; }
+.studio-review .service-card-link:hover .service-card-cta > span, .studio-review .service-card-link:focus-visible .service-card-cta > span { transform: translate(3px,-2px); }
+@media (min-width: 901px) and (max-width: 1100px) {
+  .studio-review .service-category-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .studio-review .service-category { grid-column: span 1; }
+  .studio-review .service-search { grid-column: 1 / -1; }
+  .studio-review .service-search .service-card-link { display: grid; grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 900px) {
+  .studio-review .service-category-grid { grid-template-columns: minmax(0,1fr); }
+  .studio-review .service-category, .studio-review .service-search { grid-column: 1; }
+}
+@media (max-width: 600px) {
+  .studio-review .service-card-copy, .studio-review .service-compact .service-card-copy { padding: 20px; }
+  .studio-review .service-feature .commercial-benefit { width: calc(100% - 140px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .studio-review .service-card-cta > span { transition: none; }
 }
