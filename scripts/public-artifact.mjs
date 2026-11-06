@@ -64,6 +64,7 @@ export const PUBLIC_MANIFEST = Object.freeze([
   'assets/images/our-work/howl-and-timber-website-preview.jpg',
   'assets/images/our-work/cortez-capital-website-preview.jpg',
   'assets/images/our-work/captured-by-karmen-website-preview.jpg',
+  'assets/images/social/rogers-holdings-brand-share.jpg',
   'assets/images/social/website-creation-examples-share.jpg',
   'assets/images/our-work/eastland-live-home.jpg',
   'assets/images/our-work/eastland-live-mobile-services.png',
