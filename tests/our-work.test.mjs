@@ -25,6 +25,24 @@ assert.doesNotMatch(home + work + website, /eastland-product-family/);
 assert.match(home, /eastland-live-home\.jpg/);
 assert.match(work, /eastland-live-mobile-services\.png/);
 assert.match(website, /eastland-live-visit\.png/);
+// Prospects can see the examples on the service page without opening a disclosure.
+const serviceExamples=website.match(/<section class="section website-preview-section"[\s\S]*?<\/section>/)?.[0];
+assert.ok(serviceExamples,'Website Creation needs a visible examples section');
+assert.doesNotMatch(serviceExamples,/<details|<iframe|<form/);
+assert.equal((serviceExamples.match(/class="website-preview-card"/g)||[]).length,3);
+assert.ok(website.indexOf('id="website-examples"')<website.indexOf('id="website-included-heading"'),'examples precede long service detail');
+for(const [key,href,label]of [['howl-and-timber','../examples/howl-and-timber/','Fictional law-firm concept'],['cortez-capital','../examples/cortez-capital/','Fictional website concept'],['captured-by-karmen','https://capturedbykarmen.rogersholdingsllc.com/','Owned prelaunch project']]){
+ assert.ok(serviceExamples.includes('href="'+href+'"')&&serviceExamples.includes(label));
+ assert.ok(PUBLIC_MANIFEST.includes('assets/images/our-work/'+key+'-website-preview.jpg'));
+}
+for(const [,closed]of work.matchAll(/(<details(?![^>]*\bopen\b)[^>]*>[\s\S]*?<\/details>)/g))assert.doesNotMatch(closed,/class="website-example-card/,'example links must not be hidden in closed details');
+assert.ok(PUBLIC_MANIFEST.includes('assets/images/social/website-creation-examples-share.jpg'));
+const webpage=JSON.parse(website.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'].find(x=>x['@type']==='WebPage');
+assert.equal(webpage.primaryImageOfPage.width,1200);assert.equal(webpage.primaryImageOfPage.height,630);
+assert.equal(webpage.primaryImageOfPage.url,'https://rogersholdingsllc.com/assets/images/social/website-creation-examples-share.jpg');
+assert.equal(webpage.hasPart.itemListElement.length,3);
+assert.match(website,/<meta property="og:image:type" content="image\/jpeg">/);
+assert.match(website,/with a clearly labeled fictional Cortez Capital design preview/);
 assert.doesNotMatch(home, /missy-artwork-extracted|missy-workbook-redacted/);
 // Only the reviewed, flattened actual dashboard derivative may enter active proof.
 for(const page of [home, work]) {
