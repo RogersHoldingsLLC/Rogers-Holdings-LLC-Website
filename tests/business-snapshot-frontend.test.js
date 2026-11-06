@@ -34,10 +34,10 @@ const visibleFormText = formMarkup
   .trim();
 
 const heroStart = html.indexOf('<section class="intake-hero snapshot-hero">');
-const heroEnd = html.indexOf('<section class="section intake-section"', heroStart);
+const heroEnd = html.indexOf('<div class="container snapshot-sample-wrap"', heroStart);
 assert.ok(heroStart >= 0 && heroEnd > heroStart, 'compact Snapshot hero must precede the form section');
 const heroMarkup = html.slice(heroStart, heroEnd);
-const preFieldMarkup = html.slice(html.indexOf('<main'), html.indexOf('<label for="full-name">') + '<label for="full-name">'.length);
+const preFieldMarkup = html.slice(html.indexOf('<main'), html.indexOf('<label for="full-name">') + '<label for="full-name">'.length).replace(/<details class="editorial-detail" id="snapshot-sample">[\s\S]*?<\/details>/, '');
 const preFieldWords = preFieldMarkup
   .replace(/<script\b[\s\S]*?<\/script>/gi, ' ')
   .replace(/<style\b[\s\S]*?<\/style>/gi, ' ')
@@ -47,7 +47,7 @@ const preFieldWords = preFieldMarkup
 const approvedHeroCopy = {
   eyebrow: 'Free Business Snapshot',
   heading: 'Get a second look at your next step.',
-  lede: 'Share your goal and current work; a website is optional. Brian reviews the evidence and typically sends your Executive Brief within three business days.',
+  lede: 'Share your business goal; a website is optional. Brian typically sends your Executive Brief within three business days.',
   cta: 'Request Your Free Business Snapshot',
   trust: 'Free <span aria-hidden="true">·</span> Human-reviewed by Brian Rogers <span aria-hidden="true">·</span> Typically within three business days'
 };
@@ -67,16 +67,17 @@ for (const deliverable of [
 ]) {
   assert.equal(heroMarkup.split(deliverable).length - 1, 1, `${deliverable} must appear once before the form`);
 }
-assert.equal(heroMarkup.split('Focused initial review—not a full audit or consulting engagement.').length - 1, 1);
+assert.equal(heroMarkup.split('Free, optional and separate from paid work. Focused review, not a full audit or consulting engagement.').length - 1, 1);
 assert.doesNotMatch(html, /snapshot-value-strip|This is a focused initial review/);
-assert.match(html, /<\/section>\s*<section class="section intake-section" aria-labelledby="snapshot-section-heading">/);
+assert.match(html, /id="snapshot-sample"/);
+assert.match(html, /<section class="section intake-section" aria-labelledby="snapshot-section-heading">/);
 assert.ok(preFieldWords.length <= 120, `pre-field content must remain at most 120 words; found ${preFieldWords.length}`);
 assert.doesNotMatch(heroMarkup, /testimonial|endorsement|guarantee|\b\d+(?:\.\d+)?%/i);
 
-assert.ok(homepage.includes('class="snapshot-brief"'));
-assert.ok(homepage.includes('The path from interest to membership is not obvious'));
-assert.ok(homepage.includes('View fictional sample brief (PDF)'));
-assert.ok(homepage.includes('Illustrative Executive Brief sample — North Point Fitness is a fictional business. Shown to demonstrate the format and level of detail.'));
+assert.ok(html.includes('class="snapshot-brief"'));
+assert.ok(html.includes('The path from interest to membership is not obvious'));
+assert.ok(html.includes('View fictional sample brief (PDF)'));
+assert.ok(html.includes('Illustrative Executive Brief sample — North Point Fitness is a fictional business. Shown to demonstrate the format and level of detail.'));
 
 const fieldContract = [...formMarkup.matchAll(/<(input|textarea)\b[^>]*>/gi)].map((match) => ({
   tag: match[1].toLowerCase(),
@@ -252,7 +253,7 @@ for (const retiredJourneyLabel of canonicalJourney.slice(2)) {
   assert.doesNotMatch(homepageBody, new RegExp(retiredJourneyLabel), `${retiredJourneyLabel} must not be rendered on the homepage`);
 }
 assert.match(homepageBody, /id="process"/);
-assert.match(homepageBody, /href="business-snapshot\/" data-report-link>Request Your Free Business Snapshot<\/a>/);
+assert.match(homepageBody, /href="business-snapshot\/" data-report-link>Explore the Free Business Snapshot/);
 
 assert.match(html, /<title>Free Business Snapshot \| Rogers Holdings LLC<\/title>/);
 assert.match(html, /Request Your Free Business Snapshot/);

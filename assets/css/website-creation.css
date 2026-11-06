@@ -60,3 +60,10 @@
   .website-offer-panel { padding: 24px 20px; }
   .website-lede { font-size: 18px; }
 }
+
+
+/* Complete, genuine visitor-information section at its original proportions. */
+.website-evidence .project-capture-link, .website-evidence .eastland-design-capture { display: block; width: 100%; }
+.website-evidence .project-capture-link { padding: 10px; border: 1px solid #c6b894; background: #eee7d8; box-shadow: 0 12px 28px #28201912; }
+.website-evidence .eastland-design-capture img { display: block; width: 100%; height: auto; object-fit: contain; }
+.website-evidence .project-capture-link:focus-visible { outline: 3px solid #775319; outline-offset: 5px; }

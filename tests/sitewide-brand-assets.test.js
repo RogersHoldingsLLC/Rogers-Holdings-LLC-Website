@@ -108,10 +108,10 @@ assert.match(sitemap, /<loc>https:\/\/rogersholdingsllc\.com\/<\/loc>\s*<lastmod
 assert.match(sitemap, /<loc>https:\/\/rogersholdingsllc\.com\/spreadsheet-repair\/<\/loc>\s*<lastmod>2026-10-08<\/lastmod>/);
 assert.match(sitemap, /<loc>https:\/\/rogersholdingsllc\.com\/business-snapshot\/<\/loc>\s*<lastmod>2026-08-22<\/lastmod>/);
 
-assert.match(snapshot, /<footer class="[^"]*site-footer[^"]*">[\s\S]*?rogers-holdings-logo-reversed\.png/);
-assert.match(privacy, /<footer class="[^"]*site-footer[^"]*">[\s\S]*?rogers-holdings-logo-reversed\.png/);
-assert.doesNotMatch(snapshot, /<footer[\s\S]*?rogers-holdings-logo\.png/);
-assert.doesNotMatch(privacy, /<footer[\s\S]*?rogers-holdings-logo\.png/);
+assert.match(snapshot, /<footer class="[^"]*site-footer[^"]*">[\s\S]*?rogers-holdings-logo\.png/);
+assert.match(privacy, /<footer class="[^"]*site-footer[^"]*">[\s\S]*?rogers-holdings-logo\.png/);
+assert.doesNotMatch(snapshot, /<footer[\s\S]*?rogers-holdings-logo-reversed\.png/);
+assert.doesNotMatch(privacy, /<footer[\s\S]*?rogers-holdings-logo-reversed\.png/);
 assert.equal((homepage.match(/rh-executive-materials-01-/g) || []).length, 0);
 assert.equal((homepage.match(/assets\/images\/homepage\/brian-smiling-portrait\.webp/g) || []).length, 1);
 assert.match(homepage, /width="1040" height="1300" loading="lazy"/);
