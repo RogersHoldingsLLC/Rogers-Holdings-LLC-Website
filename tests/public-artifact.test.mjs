@@ -47,7 +47,7 @@ assert.doesNotMatch(publicText, /\$\s*(?:2,?000|250)\b|starting\s+(?:at|from)\s+
 const packages = fs.readFileSync(path.join(OUTPUT_ROOT, 'packages/index.html'), 'utf8');
 assert.match(packages, /id="business-presence"/);
 assert.match(packages, /id="business-systems"/);
-assert.match(packages, /smallest useful scoped solution/);
+assert.match(packages, /recommend only the work you need/);
 assert.match(packages, /free, optional and separate/);
 assert.match(packages, /You retain ownership of your business content and accounts/);
 assert.match(packages, /not automatically included/);
