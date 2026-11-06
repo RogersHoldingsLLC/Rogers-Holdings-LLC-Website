@@ -46,8 +46,8 @@ const preFieldWords = preFieldMarkup
   .match(/[A-Za-z0-9]+(?:[’'-][A-Za-z0-9]+)*/g) || [];
 const approvedHeroCopy = {
   eyebrow: 'Free Business Snapshot',
-  heading: 'Get a second look at your next step.',
-  lede: 'Share your business goal; a website is optional. Brian typically sends your Executive Brief within three business days.',
+  heading: 'Not sure where to start?',
+  lede: 'Tell Brian what you need. A website is optional. He typically sends your Executive Brief within three business days.',
   cta: 'Request Your Free Business Snapshot',
   trust: 'Free <span aria-hidden="true">·</span> Human-reviewed by Brian Rogers <span aria-hidden="true">·</span> Typically within three business days'
 };
