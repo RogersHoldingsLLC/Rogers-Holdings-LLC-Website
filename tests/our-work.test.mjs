@@ -9,27 +9,46 @@ const read = f => fs.readFileSync(path.join(root, f), 'utf8');
 const home = read('index.html');
 const work = read('our-work/index.html');
 assert.match(home, /id="work"/);
-assert.match(home, /href="our-work\/">Explore more demos/);
+assert.match(home, /href="our-work\/">See all work/);
 assert.match(home, /href="our-work\/#eastland"/);
 assert.match(home, /href="our-work\/#missys-squishies"/);
 
 // Keep project evidence in the portfolio instead of repeating it in service cards.
-const serviceCards = home.slice(home.indexOf('class="service-category-grid"'), home.indexOf('class="service-scope-note"'));
+const serviceCards = home.slice(home.indexOf('id="capabilities"'), home.indexOf('id="work"'));
 assert.doesNotMatch(serviceCards, /eastland-product-family|missy-workbook-redacted/);
 assert.equal((home.match(/class="homepage-eastland-picture"/g) || []).length, 1);
 assert.equal((work.match(/class="homepage-eastland-picture"/g) || []).length, 1);
 assert.equal((home.match(/missy-workbook-redacted\.png/g) || []).length, 0);
-assert.equal((work.match(/missy-workbook-redacted\.png/g) || []).length, 1);
-assert.equal((serviceCards.match(/class="commercial-service-stage /g) || []).length, 5);
+assert.equal((work.match(/missy-workbook-redacted\.png/g) || []).length, 0);
+const website = read('website-creation/index.html');
+assert.doesNotMatch(home + work + website, /eastland-product-family/);
+assert.match(home, /eastland-live-home\.jpg/);
+assert.match(work, /eastland-live-mobile-services\.png/);
+assert.match(website, /eastland-live-visit\.png/);
+assert.doesNotMatch(home, /missy-artwork-extracted|missy-workbook-redacted/);
+// Only the reviewed, flattened actual dashboard derivative may enter active proof.
+for(const page of [home, work]) {
+ assert.match(page, /missy-dashboard-redacted\.png/);
+ assert.match(page, /Actual dashboard · Private business data and operational details redacted\./);
+ assert.match(page, /View Missy’s redacted dashboard at full resolution \(opens in a new tab\)/);
+ assert.doesNotMatch(page, /data-workbook-demo|portfolio-workbook|Representative workbook layout|missy-workbook-redacted\.png|\.private-missy|image\(20261106/);
+}
+const redactedBytes=fs.readFileSync(path.join(root,'assets/images/our-work/missy-dashboard-redacted.png'));
+assert.equal(crypto.createHash('sha256').update(redactedBytes).digest('hex'),'0071940d13c8fc6050e597eed02bb919d5745526740e0eb518f1147edbd05715','sanitized dashboard must remain the reviewed flattened derivative');
+assert.equal(redactedBytes.readUInt32BE(16),1189);assert.equal(redactedBytes.readUInt32BE(20),780);assert.equal(redactedBytes[24],8);assert.equal(redactedBytes[25],2,'RGB without alpha');
+const redactionChunks=[];for(let p=8;p<redactedBytes.length;){const length=redactedBytes.readUInt32BE(p);redactionChunks.push(redactedBytes.toString('ascii',p+4,p+8));p+=12+length}
+assert.deepEqual(redactionChunks,['IHDR','IDAT','IEND'],'no metadata, embedded original or extra frames');
+assert.ok(PUBLIC_MANIFEST.includes('assets/images/our-work/missy-dashboard-redacted.png'));
+assert.equal(PUBLIC_MANIFEST.some(p=>/source\.png|image\(20261106|\.private-missy|ocr-source|redact\.py/.test(p)),false);
 assert.doesNotMatch(serviceCards, /<img|<picture|<input|<form|<table/);
-for (const benefit of ['Turn interest into connection.', 'Bring clarity to your business.', 'Make information flow.', 'Communicate with confidence.', 'Help the right people find you.']) assert.ok(serviceCards.includes(benefit));
-
 assert.doesNotMatch(home, /class="eastland-story-timeline"|class="eastland-live-proof"/);
 assert.equal((work.match(/<h1\b/g) || []).length, 1);
 assert.match(work, /<link rel="canonical" href="https:\/\/rogersholdingsllc\.com\/our-work\/">/);
 assert.match(work, /aria-current="page">Our Work/);
 
-const logoIndex = work.slice(work.indexOf('<nav class="project-logo-index"'), work.indexOf('</nav>', work.indexOf('<nav class="project-logo-index"')));
+const logoGroups = [...work.matchAll(/<nav class="project-logo-index[^"]*"[\s\S]*?<\/nav>/g)].map(m=>m[0]);
+assert.equal((logoGroups[0].match(/<a /g)||[]).length,2,'real client proof must be distinct from concepts');
+const logoIndex=logoGroups.join('');
 assert.equal((logoIndex.match(/<a /g) || []).length, 5);
 for (const [logo, destination] of [['eastland-official-logo.jpg','#eastland'],['missy-official-logo-extracted.png','#missys-squishies'],['howl-and-timber-wordmark.svg','../examples/howl-and-timber/'],['cortez-capital-concept-logo.png','../examples/cortez-capital/'],['captured-by-karmen-wordmark.png','https://capturedbykarmen.rogersholdingsllc.com/']]) {
  assert.ok(logoIndex.includes(logo) && logoIndex.includes('href="'+destination+'"'));
@@ -52,7 +71,7 @@ for(const [, name, hash] of assetRows) {
 // Approved story keeps its illustration disclosure and excludes internal review notes.
 const missy = work.slice(work.indexOf('id="missys-squishies"'), work.indexOf('</section>', work.indexOf('id="missys-squishies"')));
 assert.doesNotMatch(work + home, /Local review|Proposed website adaptation|await owner-approved|Story awaiting approval|Demonstration image pending/i);
-assert.match(missy, /Formatting-derived workbook illustration with sample data; customer contents and operating logic are not shown\./);
+assert.match(missy, /Actual dashboard · Private business data and operational details redacted\./);
 assert.equal((missy.match(/<img\b/g) || []).length, 1);
 assert.ok(PUBLIC_MANIFEST.includes('assets/images/our-work/missy-artwork-extracted.webp'));
 assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root, 'assets/images/our-work/missy-artwork-extracted.webp'))).digest('hex'), '7c46fd3e8a18ce7fe7b845e66545871dc75790d4af213b9572ac44640b23e596', 'approved extracted illustration changed');

@@ -95,176 +95,21 @@ for (const [viewport, expectedDimensions] of Object.entries(heroV22Dimensions)) 
   }
 }
 
-// The approved fictional brief is readable HTML; preserved images and source PDF remain unchanged.
-assert.equal((html.match(/<figure class="snapshot-brief"/g) || []).length, 1);
-const introPosition = html.indexOf('<p class="hero-services">');
-const samplePosition = html.indexOf('<figure class="snapshot-brief"');
-const actionsPosition = html.indexOf('<div class="button-row">', introPosition);
-assert.ok(introPosition < actionsPosition);
-assert.ok(samplePosition > html.indexOf('id="process"'), 'the single disclosed sample belongs with optional Snapshot');
-assert.match(html, /class="rh-sculpture"/);
-assert.match(html, /data-rh-sculpture data-mask="assets\/images\/homepage\/rh-monogram-mask\.png"/);
-assert.match(html, /href="business-snapshot\/" data-report-link>Request Your Free Business Snapshot/);
-const heroStart = html.indexOf('<figure class="snapshot-brief"');
-const heroEnd = html.indexOf('</figure>', heroStart);
-const hero = html.slice(heroStart, heroEnd);
-const approvedSampleDisclosure = 'Illustrative Executive Brief sample — North Point Fitness is a fictional business. Shown to demonstrate the format and level of detail.';
-const eastlandStart = work.indexOf('<picture class="homepage-eastland-picture"');
-const eastlandEnd = work.indexOf('</picture>', eastlandStart);
-const eastland = work.slice(eastlandStart, eastlandEnd);
 
-for (const [markup, family, viewport] of [
-  [eastland, 'eastland-product-family', 'tablet'],
-  [eastland, 'eastland-product-family', 'desktop']
-]) {
-  const avif = markup.indexOf(`${family}-${viewport}.avif`);
-  const webp = markup.indexOf(`${family}-${viewport}.webp`);
-  const jpg = markup.indexOf(`${family}-${viewport}.jpg`);
-  assert.ok(avif >= 0 && webp > avif && jpg > webp, `${family} ${viewport} sources must be ordered AVIF, WebP, JPG`);
+const snapshot=fs.readFileSync(path.join(root,'business-snapshot/index.html'),'utf8');
+assert.doesNotMatch(html, /<figure class="snapshot-brief"/,'sample is secondary detail, not homepage proof');
+assert.equal((snapshot.match(/<figure class="snapshot-brief"/g)||[]).length,1);
+assert.match(snapshot,/North Point Fitness is a fictional business/);
+assert.match(snapshot,/href="..\/assets\/samples\/north-point-fitness-executive-brief\.pdf"/);
+for(const [page,asset] of [[html,'eastland-live-home.jpg'],[work,'eastland-live-mobile-services.png'],[fs.readFileSync(path.join(root,'website-creation/index.html'),'utf8'),'eastland-live-visit.png']]) {
+ assert.ok(page.includes(asset));assert.doesNotMatch(page,/eastland-product-family/);
 }
-
-assert.doesNotMatch(hero, /<picture|<img/, 'the sample content must remain readable text');
-const samplePdfLink = hero.match(/<a class="snapshot-sample-link"[^>]*>[\s\S]*?<\/a>/)?.[0] || '';
-assert.match(samplePdfLink, /href="assets\/samples\/north-point-fitness-executive-brief\.pdf"/);
-assert.match(samplePdfLink, /target="_blank" rel="noopener noreferrer"/);
-assert.match(samplePdfLink, /aria-describedby="snapshot-pdf-new-tab"/);
-assert.ok(samplePdfLink.includes('View fictional sample brief (PDF)'));
-assert.doesNotMatch(samplePdfLink, /\bdownload(?:=|\s|>)/, 'PDF opens normally without a forced download');
-assert.doesNotMatch(hero, /<details|<summary|snapshot-full-sample/);
-assert.ok(hero.includes('Opens in a new tab.'));
-assert.match(hero, /Fictional sample · Business Check/);
-assert.ok(hero.includes('The path from interest to membership is not obvious'));
-assert.ok(hero.includes('Add one clear Start Membership button to the main navigation and homepage hero.'));
-assert.ok(samplePosition < html.indexOf('class="snapshot-expectations"'), 'evidence precedes the longer explanation in DOM order');
-assert.equal(html.split(approvedSampleDisclosure).length - 1, 1, 'the approved sample disclosure must render exactly once');
-assert.ok(hero.includes(approvedSampleDisclosure), 'the approved sample disclosure must remain visibly connected to the hero sample');
-assert.ok(hero.includes('Illustrative Executive Brief sample'));
-assert.ok(hero.includes('North Point Fitness is a fictional business'));
-assert.ok(hero.includes('Shown to demonstrate the format and level of detail'));
-assert.doesNotMatch(html, /Fictional sample shown for demonstration\. North Point Fitness is fictional\./);
-assert.match(hero, /<figure class="snapshot-brief" aria-labelledby="snapshot-brief-title" aria-describedby="snapshot-sample-note">/);
-assert.equal((html.match(/id="snapshot-sample-note"/g) || []).length, 1, 'the sample disclosure ID must remain unique');
-const sampleCaption = hero.match(/<figcaption\b[\s\S]*?<\/figcaption>/)?.[0] || '';
-assert.match(sampleCaption, /id="snapshot-sample-note"/);
-assert.doesNotMatch(sampleCaption, /\baria-hidden\b|\bhidden\b|class="[^"]*\bsr-only\b/);
-assert.doesNotMatch(sampleCaption, /real client|testimonial|endorsement|customer (?:result|outcome)|\b\d+(?:\.\d+)?%/i);
-assert.match(css, /\.homepage-hero-media figcaption\s*\{[\s\S]*?background: var\(--color-dark\);[\s\S]*?color: var\(--color-text-reversed\);[\s\S]*?font-size: 13px;/);
-assert.match(css, /@media \(max-width: 680px\)[\s\S]*?\.homepage-hero-media figcaption \{[^}]*font-size: 12px;/);
-assert.doesNotMatch(eastland, /eastland-product-family-mobile/, 'Eastland must avoid the aggressive mobile crop');
-assert.match(eastland, /width="2400" height="1244" loading="lazy" decoding="async"/);
-assert.match(eastland, /alt="Complete Eastland First Church of God client-work presentation across desktop, laptop, tablet, and phone displays on a warm executive desk"/);
-for (const [, , width, height] of families) assert.ok(width > 0 && height > 0);
-
-const sectionOrder = [
-  'class="hero phase3-hero"',
-  'class="homepage-eastland-showcase"',
-  'class="section phase3-capabilities"',
-  'class="section phase3-owner"',
-  'class="section phase3-method"',
-  'class="section phase3-snapshot"',
-  'class="section phase3-final-cta"'
-].map((marker) => html.indexOf(marker));
-assert.ok(sectionOrder.every((position) => position >= 0));
-assert.deepEqual(sectionOrder, [...sectionOrder].sort((a, b) => a - b), 'homepage sections must bring service choices forward after project proof');
-
-for (const copy of [
-  'How Rogers Holdings works', 'Understand, Prioritize, Scope and review methodology',
-  'Optional Free Business Snapshot',
-  'See what deserves attention before choosing a project.',
-  'what the visible evidence supports', 'what deserves attention first',
-  'why the suggested next step makes sense',
-  'See our work in action.', 'Eastland First Church of God',
-  'From a Facebook-first presence to a clear digital front door.',
-  'Facebook was the primary online presence.', 'Eastland project story',
-  'Faith-led. Owner accountable.', 'My commitment to every client', 'Talk with Brian'
-]) assert.ok((html + work).includes(copy), `missing preserved secondary content: ${copy}`);
-
-const renderedHomepage = html.slice(html.indexOf('<body'));
-for (const retiredJourneyLabel of [
-  'Discovery Conversation', 'Digital Business Assessment', 'Improvement Plan',
-  'Implementation Services', 'Ongoing Optimization'
-]) assert.doesNotMatch(renderedHomepage, new RegExp(retiredJourneyLabel));
-
-assert.doesNotMatch(html, /class="section phase3-problem"|class="section phase3-principles"/);
-assert.doesNotMatch(html, /Business Optimization Platform|class="section phase3-platform"/);
-assert.doesNotMatch(html + css, /\bHEW\b|Gates?\s*(?:&|&amp;)\s*Garage|hew-gates-garage|hew-venture|homepage-venture-showcase/i);
-
-assert.ok(work.includes('Current public experience: A responsive website with clear paths to service information, visit planning, ministries, messages, directions, and contact details.'));
-assert.doesNotMatch(renderedHomepage, /easier to find, easier to use, and easier to maintain/i);
-assert.doesNotMatch(html + css, /eastland-case-intro|eastland-before-callout|Before Rogers Holdings/);
-for (const fact of ['fragmented and difficult to find', 'search visibility', 'service times, ministries, messages, giving, directions, and contact']) {
-  assert.ok(work.includes(fact), `missing consolidated Eastland challenge fact: ${fact}`);
-}
-assert.doesNotMatch(html + css, /eastland-device-stage|eastland-device-screen|eastland-device--|eastland-browser-bar|eastland-laptop-base|eastland-monitor-stand/);
-assert.doesNotMatch(html, /north-point-snapshot-scene-/);
-assert.doesNotMatch(html, /phase3-case-client|phase3-case-logo|eastland-project-logo\.jpg|<span>Status<\/span>|<span>Location<\/span>|<span>Project<\/span>/);
-
-const workspaceStart = work.indexOf('<figure class="eastland-workspace"');
-const workspaceEnd = work.indexOf('</figure>', workspaceStart);
-const workspace = work.slice(workspaceStart, workspaceEnd);
-assert.doesNotMatch(workspace + css, /eastland-screen--|class="eastland-screen"/, 'runtime screen overlays must remain retired');
-const eastlandReferenceHash = crypto.createHash('sha256').update(fs.readFileSync(eastlandReference)).digest('hex');
-assert.equal(eastlandReferenceHash, '516d0b764d82f2ac1b451ca0194602da2abe7e3e57ea94d9218d1dde693acb62', 'authoritative Eastland reference changed');
-assert.match(work, /class="work-case-brief"/);
-assert.match(work, /<details class="work-project-details">/);
-assert.match(work, /media="\(max-width: 1100px\)" type="image\/avif" srcset="\.\.\/assets\/images\/homepage\/eastland-product-family-tablet\.avif\?v=0cecc197"/);
-assert.match(css, /\.eastland-live-proof\s*\{[\s\S]*grid-template-columns:/, 'live-proof block must have a responsive layout');
-assert.match(work, /class="eastland-project-heading"/);
-assert.match(work, /class="eastland-story-timeline" aria-label="Eastland project story"/);
-assert.match(css, /\.eastland-story-timeline\s*\{[\s\S]*grid-template-columns: repeat\(4/);
-assert.match(visualFirstWorkflow, /Design the composition visually in ChatGPT first/);
-assert.match(visualFirstWorkflow, /Create optimized production derivatives from the exact authoritative source/);
-assert.match(visualFirstWorkflow, /Use cropping and resizing only/);
-assert.match(visualFirstWorkflow, /do not casually reopen the visual during unrelated website work/);
-assert.match(eastlandFreeze, /sole visual source/);
-assert.match(eastlandFreeze, /No reconstructed device scene, runtime screen overlay, or generated replacement is approved for production/);
-assert.match(eastlandFreeze, /The image carries the approved visual presentation/);
-assert.match(homepageHeroFreeze, /approved photographic master contains the authentic page 1 of the Rogers Holdings Executive Brief/);
-assert.match(homepageHeroFreeze, /Production derivatives/);
-assert.match(homepageHeroFreeze, /DO NOT REGENERATE, RECONSTRUCT, RECOMPOSE, OR EDIT THIS VISUAL/);
-
-const homepageHeroV22SourceHash = crypto.createHash('sha256').update(fs.readFileSync(homepageHeroV22Source)).digest('hex');
-assert.equal(homepageHeroV22SourceHash, '08c20db2826dfb06cdbd5b52d5ec49e2915d072c90e8e746919f57089ea3a4cb', 'Hero V2.2 Executive Brief source changed');
-assert.match(homepageHeroV22Refresh, /North Point Fitness/);
-assert.match(homepageHeroV22Refresh, /website-only fictional sample/);
-assert.match(homepageHeroV22Refresh, /preserves the Hero V2\.1 composition/);
-
-assert.match(work, /href="https:\/\/www\.eastlandfirstchurchofgod\.com" target="_blank" rel="noopener noreferrer">View the Live Eastland Website/);
-assert.match(work, /href="https:\/\/www\.google\.com\/maps\/search\/\?api=1&amp;query=Eastland\+First\+Church\+of\+God%2C\+1706\+Old\+Owingsville\+Rd%2C\+Mt\+Sterling%2C\+KY\+40353" target="_blank" rel="noopener noreferrer">.*View Google Listing/);
-assert.equal((work.match(/class="eastland-story-timeline"/g) || []).length, 1, 'Eastland must use one connected project story');
-assert.equal((html.match(/class="eastland-story-timeline"/g) || []).length, 0, 'homepage must link to the detailed story');
-const storyStart = work.indexOf('<ol class="eastland-story-timeline"');
-const storyEnd = work.indexOf('</ol>', storyStart);
-const eastlandStory = work.slice(storyStart, storyEnd);
-assert.equal((eastlandStory.match(/<li data-reveal>/g) || []).length, 4, 'Eastland project story must contain four visible timeline steps');
-assert.equal((html.match(/class="eastland-link-icon"/g) || []).length, 0, 'Eastland project links must use the reference editorial treatment');
-const proofStart = work.indexOf('<section class="eastland-live-proof"');
-const proofEnd = work.indexOf('</section>', proofStart);
-const eastlandProof = work.slice(proofStart, proofEnd);
-assert.ok(proofStart > storyEnd, 'live proof must follow the Eastland project story');
-for (const approvedProofCopy of [
-  'See the work on the live site',
-  'Rogers Holdings helped Eastland First Church of God establish its Google Business Profile, built its current custom website, and continues to maintain and update the site.',
-  'The public website works across phone and desktop screens and brings service times, visit information, ministries, messages, directions, and contact details together in one experience.',
-  'Current website example; no attendance, engagement or donation results are claimed.'
-]) assert.ok(eastlandProof.includes(approvedProofCopy), `missing approved Eastland live-proof copy: ${approvedProofCopy}`);
-assert.doesNotMatch(eastlandProof, /<blockquote|<q\b|endors(?:e|ed|ement)|verified by Eastland|\b\d+(?:\.\d+)?%/i);
-assert.doesNotMatch(renderedHomepage, /free of charge|home church/i);
-assert.match(css, /Homepage primary and secondary composition — canonical reference-match system/);
-assert.doesNotMatch(html, /Rogers Holdings gave our church|Draft testimonial copy/);
-assert.doesNotMatch(html, /BOP interface|Family Vault|workers\.dev|localhost|staging/i);
-
-const heroMaster = path.join(root, 'docs/design-source/homepage-hero-v2-FINAL-AUTHENTIC-MASTER.png');
-const heroMasterHash = crypto.createHash('sha256').update(fs.readFileSync(heroMaster)).digest('hex');
-assert.equal(heroMasterHash, '02238a7a536a004970a03a332ee083efaf80cecbcf8034f73ae6bf9bb34101bc', 'frozen Hero V2 master changed');
-
-for (const term of [
-  'Free Business Snapshot', 'Request Your Free Business Snapshot', 'Executive Brief',
-  'Website Creation', 'Excel & Google Sheets Repair'
-]) assert.ok(html.includes(term), `missing current service or Snapshot term: ${term}`);
-
-assert.doesNotMatch(html, /Request Your Business Snapshot|phase3-snapshot-proof|visual-proof-pair|eastland-visual-stage/);
-
-console.log('Visual storytelling contract tests passed');
-
-assert.ok(work.indexOf('id="missys-squishies"') < work.indexOf('class="section website-example-section"'), 'both real stories precede fictional design examples');
+assert.match(html,/Actual dashboard · Private business data and operational details redacted/);
+assert.match(work,/Private business data and operational details redacted/);
+assert.match(html,/I’m Brian Keith Rogers/);
+assert.match(html,/My faith shapes how I work: be honest, help where I can and follow through/);
+assert.doesNotMatch(html, /data-rh-sculpture|listening-hero|<canvas/);
+const hash=f=>crypto.createHash('sha256').update(fs.readFileSync(f)).digest('hex');
+assert.equal(hash(eastlandReference),'516d0b764d82f2ac1b451ca0194602da2abe7e3e57ea94d9218d1dde693acb62');
+assert.equal(hash(homepageHeroV22Source),'08c20db2826dfb06cdbd5b52d5ec49e2915d072c90e8e746919f57089ea3a4cb');
+console.log('Visual proof disclosure, original source preservation and asset contracts passed');

@@ -23,7 +23,7 @@ function artifactHashes() {
 }
 
 validateSourceBoundary();
-assert.equal(PUBLIC_MANIFEST.length, 87, 'public artifact must contain exactly 87 allowlisted files');
+assert.equal(PUBLIC_MANIFEST.length, 81, 'public artifact must contain exactly 81 reviewed allowlisted files');
 const samplePdf = 'assets/samples/north-point-fitness-executive-brief.pdf';
 assert.ok(PUBLIC_MANIFEST.includes(samplePdf));
 const samplePdfBytes = fs.readFileSync(path.join(REPOSITORY_ROOT, samplePdf));
@@ -71,10 +71,11 @@ assert.equal(organization.contactPoint[0].telephone, '+18594044351');
 
 const repairPage = fs.readFileSync(path.join(OUTPUT_ROOT, 'spreadsheet-repair/index.html'), 'utf8');
 assert.match(repairPage, /<link rel="canonical" href="https:\/\/rogersholdingsllc\.com\/spreadsheet-repair\/">/);
-assert.match(homepage, /class="service-card-link" href="services\/#spreadsheets" aria-labelledby="service-scope-2"/);
-assert.match(homepage, /id="service-scope-2">View spreadsheet scope &amp; quote/);
+assert.match(homepage, /href="services\/#spreadsheets"/);
+assert.match(fs.readFileSync(path.join(OUTPUT_ROOT,'services/index.html'),'utf8'), /New and custom workbooks are scoped and quoted separately/);
+for(const retired of ['assets/css/clear-path-hero.css','assets/js/clear-path-hero.js','assets/media/clear-path.mp4','assets/media/clear-path-settled.jpg']) assert.ok(!PUBLIC_MANIFEST.includes(retired),'retired media must stay outside the active artifact');
 assert.match(repairPage, /<h1 id="repair-service-heading">Excel &amp; Google Sheets Repair<\/h1>/);
-assert.match(repairPage, /href="mailto:briankeith@rogersholdingsllc\.com\?subject=[^"]+">Email About a Spreadsheet Repair<\/a>/);
+assert.match(repairPage, /href="mailto:briankeith@rogersholdingsllc\.com\?subject=[^"]+">Email about a spreadsheet repair<\/a>/);
 assert.doesNotMatch(repairPage, /<form\b|<input\b|<iframe\b|\sdownload(?:=|>|\s)/i);
 assert.match(repairPage, /50% after written scope approval and before work/);
 assert.match(repairPage, /Balance within three business days of written acceptance/);
