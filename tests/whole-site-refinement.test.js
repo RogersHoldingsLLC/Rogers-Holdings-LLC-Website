@@ -26,5 +26,5 @@ for (const page of disclosurePages) {
   }
   assert.match(source, /studio-review\.css\?v=clear-disclosures-20261107/);
 }
-assert.equal(disclosureCount, 11);
-console.log('Eleven native expandable sections have clear, consistent disclosure cues.');
+assert.equal(disclosureCount, 10);
+console.log('Ten native expandable sections have clear, consistent disclosure cues.');

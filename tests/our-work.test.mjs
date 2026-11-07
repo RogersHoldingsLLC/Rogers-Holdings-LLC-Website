@@ -69,12 +69,23 @@ assert.match(work, /aria-current="page">Our Work/);
 const logoGroups = [...work.matchAll(/<nav class="project-logo-index[^"]*"[\s\S]*?<\/nav>/g)].map(m=>m[0]);
 assert.equal((logoGroups[0].match(/<a /g)||[]).length,2,'real client proof must be distinct from concepts');
 const logoIndex=logoGroups.join('');
-assert.equal((logoIndex.match(/<a /g) || []).length, 5);
-for (const [logo, destination] of [['eastland-official-logo.jpg','#eastland'],['missy-official-logo-extracted.png','#missys-squishies'],['howl-and-timber-wordmark.svg','../examples/howl-and-timber/'],['cortez-capital-concept-logo.png','../examples/cortez-capital/'],['captured-by-karmen-wordmark.png','https://capturedbykarmen.rogersholdingsllc.com/']]) {
+assert.equal(logoGroups.length, 1, 'only real client projects have a separate logo index');
+assert.equal((logoIndex.match(/<a /g) || []).length, 2);
+for (const [logo, destination] of [['eastland-official-logo.jpg','#eastland'],['missy-official-logo-extracted.png','#missys-squishies']]) {
  assert.ok(logoIndex.includes(logo) && logoIndex.includes('href="'+destination+'"'));
- assert.equal(work.split(logo).length - 1, 1, 'show each logo once on Our Work');
+ assert.equal(work.split(logo).length - 1, 1, 'show each client logo once on Our Work');
 }
-assert.ok(logoIndex.includes('Fictional law-firm concept') && logoIndex.includes('Fictional website concept') && logoIndex.includes('Prelaunch owned project'));
+const exampleSection=work.match(/<section class="section website-example-section"[\s\S]*?<\/section>/)?.[0];
+assert.ok(exampleSection);
+assert.doesNotMatch(exampleSection, /<details|<summary|<nav|concept-logo-index|work-design-disclosure/);
+assert.equal((exampleSection.match(/<a /g)||[]).length, 3, 'exactly one link per design example');
+for (const [logo, destination, label] of [['howl-and-timber-wordmark.svg','../examples/howl-and-timber/','Fictional law-firm concept'],['cortez-capital-concept-logo.png','../examples/cortez-capital/','Fictional website concept'],['captured-by-karmen-wordmark.png','https://capturedbykarmen.rogersholdingsllc.com/','Prelaunch owned project']]) {
+ assert.equal(work.split(logo).length - 1, 1, 'show each example logo once on Our Work');
+ assert.equal((exampleSection.split('href="'+destination+'"').length - 1), 1);
+ assert.ok(exampleSection.includes(logo) && exampleSection.includes(label));
+}
+assert.match(exampleSection, /no client results are claimed/);
+assert.match(exampleSection, /target="_blank" rel="noopener noreferrer"/);
 
 assert.match(work, /href="\.\.\/spreadsheet-repair\/"/);
 assert.match(work, /href="\.\.\/business-snapshot\/" data-report-link/);
@@ -139,5 +150,5 @@ for (const declaration of ['top: var(--work-menu-top)', 'bottom: auto', 'height:
 assert.match(workCss, /padding-bottom: calc\(24px \+ env\(safe-area-inset-bottom, 0px\)\)/);
 assert.match(workCss, /\.our-work-page \.primary-nav > a \{ flex-shrink: 0; \}/);
 assert.match(workCss, /--work-menu-top: 73px/);
-assert.match(work, /our-work\.css\?v=menu-overlay-20261107/);
+assert.match(work, /our-work\.css\?v=clear-example-cards-20261107/);
 console.log('Our Work menu viewport, overflow, safe-area and cache guards passed.');

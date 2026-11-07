@@ -230,11 +230,6 @@
 .our-work-page .work-project-detail-content .work-missy-layout { gap: 40px; }
 .our-work-page .work-project-detail-content .work-missy-story > p { font-size: 16px; }
 .our-work-page .website-example-section { padding-block: 14px 28px; background: #f5f1e8; }
-.website-example-section .work-project-details { margin-top: 0; }
-.work-design-disclosure { padding-block: 20px; }
-.work-design-disclosure h2 { font-size: 30px; }
-.work-design-disclosure .website-example-grid { margin-top: 20px; }
-.work-design-disclosure .website-example-card { min-height: 90px; padding: 20px; }
 @media(max-width:960px) {
   .project-logo-index { grid-template-columns: repeat(3,minmax(0,1fr)); }
   .work-case-brief { gap: 26px; }
@@ -292,3 +287,9 @@
   }
   .our-work-page .primary-nav > a { flex-shrink: 0; }
 }
+
+/* One visible card per example: artwork, status and destination stay together. */
+.our-work-page .website-example-card { justify-content: flex-start; }
+.our-work-page .website-example-art { display: grid; place-items: center; height: 112px; margin-bottom: 6px; }
+.our-work-page .website-example-art img { width: auto; height: auto; max-width: 100%; max-height: 112px; margin: 0; object-fit: contain; }
+.our-work-page .website-example-card > strong { margin-top: auto; }

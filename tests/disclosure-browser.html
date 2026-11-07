@@ -13,6 +13,14 @@ for(const width of [320,390,768,1440])for(const route of ['/','/services/','/bus
   check(d.documentElement.scrollWidth<=width+1,`${label}: open content stays within viewport`);
   summary.click();await tick();check(!detail.open,`${label}: closes on repeated activation`);
  }
+ if(route==='/our-work/') {
+  const section=d.querySelector('#website-examples'),cards=[...section.querySelectorAll('a')];
+  check(cards.length===3&&new Set(cards.map(a=>a.href)).size===3,`${width}px examples: one link per destination`);
+  check(!section.querySelector('details,summary,nav'),`${width}px examples: no redundant dropdown or second gallery`);
+  check(cards.every(card=>card.querySelector('img')&&card.getBoundingClientRect().width>0&&card.scrollWidth<=card.clientWidth+1),`${width}px examples: logos and labels fit their cards`);
+  for(const card of cards){card.focus();check(d.activeElement===card,`${width}px examples: card keyboard accessible`);}
+  check(d.documentElement.scrollWidth<=width+1,`${width}px examples: no horizontal overflow`);
+ }
  frame.remove();
 }
 document.querySelector('#status').textContent=`${pass} passed; ${fail} failed. Local preview only.`;document.querySelector('#status').className=fail?'fail':'pass';
