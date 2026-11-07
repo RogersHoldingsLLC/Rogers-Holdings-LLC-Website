@@ -69,6 +69,10 @@ assert.match(work, /aria-current="page">Our Work/);
 const logoGroups = [...work.matchAll(/<nav class="project-logo-index[^"]*"[\s\S]*?<\/nav>/g)].map(m=>m[0]);
 assert.equal((logoGroups[0].match(/<a /g)||[]).length,2,'real client proof must be distinct from concepts');
 const logoIndex=logoGroups.join('');
+for(const clientCard of logoGroups[0].matchAll(/<a [\s\S]*?<\/a>/g)) {
+ assert.match(clientCard[0], /<span>Client [^<]+<\/span><strong>/, 'client project status precedes title, matching example cards');
+}
+
 assert.equal(logoGroups.length, 1, 'only real client projects have a separate logo index');
 assert.equal((logoIndex.match(/<a /g) || []).length, 2);
 for (const [logo, destination] of [['eastland-official-logo.jpg','#eastland'],['missy-official-logo-extracted.png','#missys-squishies']]) {
@@ -84,6 +88,11 @@ for (const [logo, destination, label] of [['howl-and-timber-wordmark.svg','../ex
  assert.equal((exampleSection.split('href="'+destination+'"').length - 1), 1);
  assert.ok(exampleSection.includes(logo) && exampleSection.includes(label));
 }
+const exampleDestinations=[...exampleSection.matchAll(/<a [^>]*href="([^"]+)"/g)].map(m=>m[1]);
+assert.deepEqual(exampleDestinations,['https://capturedbykarmen.rogersholdingsllc.com/','../examples/howl-and-timber/','../examples/cortez-capital/'],'lead with Captured by Karmen in both visual and keyboard order');
+const howlBackground=read('assets/images/our-work/howl-and-timber-wordmark.svg').match(/<rect[^>]*fill="(#[a-f0-9]{6})"/)?.[1];
+assert.equal(howlBackground, '#17262b');
+assert.ok(read('assets/css/our-work.css').includes('.our-work-page .website-example-card-howl { background: '+howlBackground+'; color: #f4f0e6; }'),'the full card must match the exact logo background');
 assert.match(exampleSection, /no client results are claimed/);
 assert.match(exampleSection, /target="_blank" rel="noopener noreferrer"/);
 
@@ -150,5 +159,5 @@ for (const declaration of ['top: var(--work-menu-top)', 'bottom: auto', 'height:
 assert.match(workCss, /padding-bottom: calc\(24px \+ env\(safe-area-inset-bottom, 0px\)\)/);
 assert.match(workCss, /\.our-work-page \.primary-nav > a \{ flex-shrink: 0; \}/);
 assert.match(workCss, /--work-menu-top: 73px/);
-assert.match(work, /our-work\.css\?v=clear-example-cards-20261107/);
+assert.match(work, /our-work\.css\?v=consistent-project-cards-20261107/);
 console.log('Our Work menu viewport, overflow, safe-area and cache guards passed.');
