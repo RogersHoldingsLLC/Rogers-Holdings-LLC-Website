@@ -1,59 +1,40 @@
-const header = document.querySelector("[data-header]");
-const menuToggle = document.querySelector("[data-menu-toggle]");
-const siteNav = document.querySelector("[data-site-nav]");
-const motionItems = document.querySelectorAll(".lux-card, .leadership-logo, .portfolio-list span");
-
-motionItems.forEach((item, index) => {
-  item.classList.add("reveal");
-  item.style.setProperty("--reveal-delay", `${Math.min(index * 90, 360)}ms`);
-});
-
-const revealItems = document.querySelectorAll(".reveal");
-
-const syncHeader = () => {
-  header.classList.toggle("is-scrolled", window.scrollY > 16);
-};
-
-syncHeader();
-window.addEventListener("scroll", syncHeader, { passive: true });
-
-menuToggle.addEventListener("click", () => {
-  const isOpen = document.body.classList.toggle("menu-open");
-  header.classList.toggle("is-open", isOpen);
-  menuToggle.setAttribute("aria-expanded", String(isOpen));
-  menuToggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
-});
-
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && document.body.classList.contains("menu-open")) {
-    event.preventDefault();
-    document.body.classList.remove("menu-open");
-    header.classList.remove("is-open");
-    menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.setAttribute("aria-label", "Open navigation");
-    menuToggle.focus({ preventScroll: true });
-  }
-});
-
-siteNav.addEventListener("click", (event) => {
-  if (event.target.matches("a")) {
-    document.body.classList.remove("menu-open");
-    header.classList.remove("is-open");
-    menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.setAttribute("aria-label", "Open navigation");
-  }
-});
-
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target);
-      }
+/* A progressively enhanced, keyboard-operable concept index. No forms or network calls. */
+(() => {
+  const header = document.querySelector('[data-demo-header]');
+  const syncHeader = () => header?.toggleAttribute('data-scrolled', window.scrollY > 24);
+  syncHeader();
+  window.addEventListener('scroll', syncHeader, { passive: true });
+  const explorer = document.querySelector('[data-focus-explorer]');
+  if (!explorer) return;
+  const controls = explorer.querySelector('[data-focus-tabs]');
+  const tabs = [...controls.querySelectorAll('button')];
+  const panels = [...explorer.querySelectorAll('[data-focus-panel]')];
+  controls.setAttribute('role', 'tablist');
+  controls.setAttribute('aria-orientation', 'vertical');
+  explorer.querySelector('.focus-panels').setAttribute('data-enhanced', '');
+  tabs.forEach((tab, index) => {
+    tab.setAttribute('role', 'tab');
+    tab.setAttribute('aria-controls', panels[index].id);
+    panels[index].setAttribute('role', 'tabpanel');
+    panels[index].setAttribute('aria-labelledby', tab.id);
+    panels[index].tabIndex = 0;
+    tab.addEventListener('click', () => select(index));
+    tab.addEventListener('keydown', e => {
+      let next;
+      if (['ArrowRight', 'ArrowDown'].includes(e.key)) next = (index + 1) % tabs.length;
+      if (['ArrowLeft', 'ArrowUp'].includes(e.key)) next = (index + tabs.length - 1) % tabs.length;
+      if (e.key === 'Home') next = 0;
+      if (e.key === 'End') next = tabs.length - 1;
+      if (next !== undefined) { e.preventDefault(); select(next); tabs[next].focus(); }
     });
-  },
-  { threshold: 0.14 }
-);
-
-revealItems.forEach((item) => observer.observe(item));
+  });
+  function select(index) {
+    tabs.forEach((tab, i) => {
+      tab.setAttribute('aria-selected', String(i === index));
+      tab.tabIndex = i === index ? 0 : -1;
+      panels[i].hidden = i !== index;
+    });
+  }
+  select(0);
+  controls.hidden = false;
+})();
