@@ -17,9 +17,15 @@ for(const width of [320,390,768,1440])for(const route of ['/','/services/','/bus
   const section=d.querySelector('#website-examples'),cards=[...section.querySelectorAll('a')];
   const clients=[...d.querySelectorAll('.client-logo-index .project-logo-link')],exampleStyle=w.getComputedStyle(cards[0]);
   check(clients.length===2,`${width}px client projects: exactly two original links`);
+  check(w.getComputedStyle(clients[0]).backgroundColor==='rgb(254, 254, 254)'&&w.getComputedStyle(clients[1]).backgroundColor==='rgb(243, 225, 233)',`${width}px client projects: off-white and pink surfaces match original artwork`);
+  const missyArt=clients[1].querySelector('.project-logo-art'),missyImage=missyArt.querySelector('img');
+  check(missyImage.src.endsWith('/missy-logo-transparent.png')&&Math.abs(missyImage.getBoundingClientRect().width/missyImage.getBoundingClientRect().height-1675/939)<.02,`${width}px client projects: transparent Missy wordmark on plain pink without distortion`);
+  const eastlandImage=clients[0].querySelector('img');
+  check(eastlandImage.getBoundingClientRect().height>=Math.min(190,(clients[0].clientWidth-56)/1.5)-1&&Math.abs(eastlandImage.getBoundingClientRect().width/eastlandImage.getBoundingClientRect().height-1.5)<.02,`${width}px client projects: enlarged Eastland logo retains original proportions`);
+
   for(const client of clients){
    const style=w.getComputedStyle(client);
-   check(style.backgroundColor===exampleStyle.backgroundColor&&style.borderRadius===exampleStyle.borderRadius&&style.paddingTop===exampleStyle.paddingTop&&style.borderTopColor===exampleStyle.borderTopColor,`${width}px client projects: same card surface, border, radius and spacing as examples`);
+   check(style.borderRadius===exampleStyle.borderRadius&&style.paddingTop===exampleStyle.paddingTop&&style.borderTopColor===exampleStyle.borderTopColor,`${width}px client projects: same card border, radius and spacing as examples`);
    check(client.scrollWidth<=client.clientWidth+1&&client.getBoundingClientRect().height>=44,`${width}px client projects: readable card with no overflow`);
    client.focus();check(d.activeElement===client,`${width}px client projects: keyboard accessible`);
   }

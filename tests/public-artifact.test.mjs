@@ -23,7 +23,7 @@ function artifactHashes() {
 }
 
 validateSourceBoundary();
-assert.equal(PUBLIC_MANIFEST.length, 90, 'public artifact retains the approved brand share image and adds four reviewed fictional-demo dependencies');
+assert.equal(PUBLIC_MANIFEST.length, 91, 'public artifact retains approved assets and adds the requested transparent Missy logo');
 const samplePdf = 'assets/samples/north-point-fitness-executive-brief.pdf';
 assert.ok(PUBLIC_MANIFEST.includes(samplePdf));
 const samplePdfBytes = fs.readFileSync(path.join(REPOSITORY_ROOT, samplePdf));

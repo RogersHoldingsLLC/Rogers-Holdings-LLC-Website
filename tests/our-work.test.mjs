@@ -74,8 +74,16 @@ for(const clientCard of logoGroups[0].matchAll(/<a [\s\S]*?<\/a>/g)) {
 }
 
 assert.equal(logoGroups.length, 1, 'only real client projects have a separate logo index');
+assert.match(logoIndex, /project-logo-eastland" href="#eastland"/);
+assert.match(logoIndex, /project-logo-missy" href="#missys-squishies"/);
+assert.ok(PUBLIC_MANIFEST.includes('assets/images/our-work/missy-logo-transparent.png'));
+assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root,'assets/images/our-work/missy-logo-transparent.png'))).digest('hex'),'8a7163bb97ef4873126bfa1b4d33efb85a09544e2b7ed83f6bc05d03a9eed912','reviewed transparent logo is preserved');
+
+assert.ok(read('assets/css/our-work.css').includes('.project-logo-eastland { background: #fefefe; }'));
+assert.ok(read('assets/css/our-work.css').includes('.project-logo-missy { background: #f3e1e9; color: #58236c; overflow: hidden; }'));
+
 assert.equal((logoIndex.match(/<a /g) || []).length, 2);
-for (const [logo, destination] of [['eastland-official-logo.jpg','#eastland'],['missy-official-logo-extracted.png','#missys-squishies']]) {
+for (const [logo, destination] of [['eastland-official-logo.jpg','#eastland'],['missy-logo-transparent.png','#missys-squishies']]) {
  assert.ok(logoIndex.includes(logo) && logoIndex.includes('href="'+destination+'"'));
  assert.equal(work.split(logo).length - 1, 1, 'show each client logo once on Our Work');
 }
@@ -159,5 +167,5 @@ for (const declaration of ['top: var(--work-menu-top)', 'bottom: auto', 'height:
 assert.match(workCss, /padding-bottom: calc\(24px \+ env\(safe-area-inset-bottom, 0px\)\)/);
 assert.match(workCss, /\.our-work-page \.primary-nav > a \{ flex-shrink: 0; \}/);
 assert.match(workCss, /--work-menu-top: 73px/);
-assert.match(work, /our-work\.css\?v=consistent-project-cards-20261107/);
+assert.match(work, /our-work\.css\?v=plain-pink-missy-large-eastland-20261107/);
 console.log('Our Work menu viewport, overflow, safe-area and cache guards passed.');

@@ -22,3 +22,17 @@ All eight test suites, the 90-file allowlisted build and whitespace checks pass.
 ## Follow-up: matching client-project cards
 
 The owner also requested the upper Eastland and Missy logo links use the same card style. Both now use the example cards' cream surface, brass border, 8px corners, 28px inset, 112px artwork area, clear status line and bold project title. They retain their exact original logos, text and project anchors. The pair stacks on narrow screens, with native keyboard links and visible focus indicators. Desktop and 390px phone visuals passed; the responsive fixture compares their computed surfaces, borders, corner radius and spacing directly with the Karmen card, checks keyboard access and verifies no horizontal overflow.
+
+## Follow-up: brand-matched backgrounds and larger Eastland logo
+
+The owner clarified that card backgrounds should blend with the logos, then specifically requested Missy's patterned backdrop be stripped away and replaced with plain pink. Eastland uses `#fefefe`, sampled from its original near-white JPG edges. Howl remains exactly `#17262b`. Cortez now uses near-black `#030303`, close to its sampled edge pixels. Karmen's existing PNG already has a transparent background.
+
+Missy's original file is retained unchanged. A separate background-removal edit was made with the built-in image editing tool, without Magnific credits or API fallback. The new `assets/images/our-work/missy-logo-transparent.png` is a 1675×939 RGBA PNG with actual transparent background. It preserves the three-line wording, colorful lettering and purple script while removing the decorative patterned rectangle. It sits on a solid `#f3e1e9` pink card with `#58236c` text (8.95:1 contrast). The superseded edge-to-edge patterned-art treatment was removed.
+
+Edit prompt: Extract the original Missy's / SQUISHIES / -and More- lettering and its small heart detail onto genuine transparency. Preserve wording, original letter shapes, positions, purple script, colorful middle lettering, outlines and intentional highlights. Remove the entire patterned pink/lavender rectangle, border, scattered background hearts, stars, sparkles and surrounding glow. Do not redesign or rearrange the wordmark. Leave modest clear padding for use on a solid pale-pink website card.
+
+The owner also requested a larger Eastland mark. The client artwork area and image maximum height increased from 112px to 190px; natural width and height preserve the original image proportions at all screen sizes. The high-resolution source remains untouched. Client destinations and labels, Karmen-first ordering, the navigation fix and disclosure improvements are retained.
+
+Validation: all eight test suites and the 91-file allowlisted build pass. The new PNG's chunk checksums, dimensions and alpha were verified. Updated HTML, CSS and transparent-logo bytes are served exactly by the private Tailscale preview. Desktop and 390×844 phone visual review passed, including full lettering, no patterned box, enlarged undistorted Eastland art, readable text and visible project links. Final responsive fixture results are recorded below.
+
+Final browser results: 360 responsive disclosure/card checks and 95 navigation checks passed with zero failures. Nothing was pushed or published.

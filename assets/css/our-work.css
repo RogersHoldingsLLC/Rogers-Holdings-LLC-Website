@@ -135,7 +135,7 @@
 .website-example-card img { display: block; width: 100%; height: 180px; object-fit: contain; margin-bottom: 12px; }
 .website-example-card > span { font-size: .8rem; line-height: 1.5; }
 .website-example-card > strong { font-size: 1rem; }
-.website-example-card-dark { background: #080808; color: #ead09a; }
+.website-example-card-dark { background: #030303; color: #ead09a; }
 .website-example-card:hover { border-color: #9f7d3c; }
 .website-example-card:focus-visible { outline: 3px solid #9f7d3c; outline-offset: 5px; }
 @media (max-width: 800px) { .website-example-grid { grid-template-columns: 1fr; } .website-example-card img { height: 160px; } }
@@ -302,8 +302,8 @@
   gap: 12px; padding: 28px; border: 1px solid #d5c9b3; border-radius: 8px;
   background: #fffaf1; color: #272117; box-shadow: none;
 }
-.our-work-page.durable-site .client-logo-index .project-logo-art { display: grid; place-items: center; height: 112px; margin-bottom: 6px; }
-.our-work-page.durable-site .client-logo-index .project-logo-art img { width: auto; height: auto; max-width: 100%; max-height: 112px; object-fit: contain; }
+.our-work-page.durable-site .client-logo-index .project-logo-art { display: grid; place-items: center; height: 190px; margin-bottom: 6px; }
+.our-work-page.durable-site .client-logo-index .project-logo-art img { width: auto; height: auto; max-width: 100%; max-height: 190px; object-fit: contain; }
 .our-work-page.durable-site .client-logo-index .project-logo-link > span:not(.project-logo-art) { margin: 0; color: inherit; font-size: .8rem; line-height: 1.5; }
 .our-work-page.durable-site .client-logo-index .project-logo-link > strong { margin-top: auto; padding: 0; border: 0; font-size: 1rem; }
 .our-work-page.durable-site .client-logo-index .project-logo-link:hover,
@@ -312,3 +312,9 @@
 .our-work-page.durable-site .client-logo-index .project-logo-link:focus-visible img { transform: none; }
 .our-work-page.durable-site .client-logo-index .project-logo-link:focus-visible { outline: 3px solid #9f7d3c; outline-offset: 5px; }
 @media (max-width: 800px) { .our-work-page.durable-site .client-logo-index { grid-template-columns: 1fr; } }
+
+
+/* Brand-matched surfaces keep each original logo integrated with its card. */
+.our-work-page.durable-site .client-logo-index .project-logo-eastland { background: #fefefe; }
+.our-work-page.durable-site .client-logo-index .project-logo-missy { background: #f3e1e9; color: #58236c; overflow: hidden; }
+/* Missy's transparent background-removal version sits directly on plain pink. */
