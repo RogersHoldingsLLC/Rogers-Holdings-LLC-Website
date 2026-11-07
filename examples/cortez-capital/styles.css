@@ -1031,3 +1031,14 @@ footer>a:last-child:hover{
     transition:none!important
   }
 }
+
+/* Keep the fictional notice legible in a quieter, compact strip. */
+.concept-bar { min-height: 28px; padding-block: 1px; }
+.concept-bar a { display: inline-flex; align-items: center; min-height: 24px; }
+.site-header { top: 28px; }
+.hero { padding-top: 28px; }
+@media (max-width: 760px) {
+ .concept-bar { min-height: 28px; padding-block: 1px; font-size: 9px; }
+ .concept-bar a { font-size: 9px; min-height: 24px; }
+ .site-header { top: 28px; }
+}

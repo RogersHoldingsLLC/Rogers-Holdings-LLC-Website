@@ -101,7 +101,7 @@ assert.doesNotMatch(html, /<figure class="snapshot-brief"/,'sample is secondary 
 assert.equal((snapshot.match(/<figure class="snapshot-brief"/g)||[]).length,1);
 assert.match(snapshot,/North Point Fitness is a fictional business/);
 assert.match(snapshot,/href="..\/assets\/samples\/north-point-fitness-executive-brief\.pdf"/);
-for(const [page,asset] of [[html,'eastland-live-home.jpg'],[work,'eastland-live-mobile-services.png'],[fs.readFileSync(path.join(root,'website-creation/index.html'),'utf8'),'eastland-live-visit.png']]) {
+for(const [page,asset] of [[html,'eastland-live-home.jpg'],[work,'eastland-live-mobile-services.png'],[fs.readFileSync(path.join(root,'website-creation/index.html'),'utf8'),'eastland-live-home.jpg']]) {
  assert.ok(page.includes(asset));assert.doesNotMatch(page,/eastland-product-family/);
 }
 assert.match(html,/Actual dashboard · Private business data and operational details redacted/);

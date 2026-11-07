@@ -24,12 +24,12 @@ const website = read('website-creation/index.html');
 assert.doesNotMatch(home + work + website, /eastland-product-family/);
 assert.match(home, /eastland-live-home\.jpg/);
 assert.match(work, /eastland-live-mobile-services\.png/);
-assert.match(website, /eastland-live-visit\.png/);
+assert.match(website, /eastland-live-home\.jpg/);
 // Prospects can see the examples on the service page without opening a disclosure.
 const serviceExamples=website.match(/<section class="section website-preview-section"[\s\S]*?<\/section>/)?.[0];
 assert.ok(serviceExamples,'Website Creation needs a visible examples section');
 assert.doesNotMatch(serviceExamples,/<details|<iframe|<form/);
-assert.equal((serviceExamples.match(/class="website-preview-card"/g)||[]).length,3);
+assert.equal((serviceExamples.match(/class="website-preview-card"/g)||[]).length,4);
 assert.ok(website.indexOf('id="website-examples"')<website.indexOf('id="website-included-heading"'),'examples precede long service detail');
 for(const [key,href,label]of [['howl-and-timber','../examples/howl-and-timber/','Fictional law-firm concept'],['cortez-capital','../examples/cortez-capital/','Fictional website concept'],['captured-by-karmen','https://capturedbykarmen.rogersholdingsllc.com/','Owned prelaunch project']]){
  assert.ok(serviceExamples.includes('href="'+href+'"')&&serviceExamples.includes(label));
@@ -42,7 +42,7 @@ assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root,'
 const webpage=JSON.parse(website.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'].find(x=>x['@type']==='WebPage');
 assert.equal(webpage.primaryImageOfPage.width,1200);assert.equal(webpage.primaryImageOfPage.height,630);
 assert.equal(webpage.primaryImageOfPage.url,'https://rogersholdingsllc.com/assets/images/social/rogers-holdings-brand-share.jpg');
-assert.equal(webpage.hasPart.itemListElement.length,3);
+assert.equal(webpage.hasPart.itemListElement.length,4);
 assert.match(website,/<meta property="og:image:type" content="image\/jpeg">/);
 assert.match(website,/Rogers Holdings LLC logo and company name on a black, cream and gold textured background/);
 assert.doesNotMatch(home, /missy-artwork-extracted|missy-workbook-redacted/);
@@ -66,30 +66,35 @@ assert.equal((work.match(/<h1\b/g) || []).length, 1);
 assert.match(work, /<link rel="canonical" href="https:\/\/rogersholdingsllc\.com\/our-work\/">/);
 assert.match(work, /aria-current="page">Our Work/);
 
-const logoGroups = [...work.matchAll(/<nav class="project-logo-index[^"]*"[\s\S]*?<\/nav>/g)].map(m=>m[0]);
-assert.equal((logoGroups[0].match(/<a /g)||[]).length,2,'real client proof must be distinct from concepts');
-const logoIndex=logoGroups.join('');
-for(const clientCard of logoGroups[0].matchAll(/<a [\s\S]*?<\/a>/g)) {
- assert.match(clientCard[0], /<span>Client [^<]+<\/span><strong>/, 'client project status precedes title, matching example cards');
+// Client identity and project story form one unit; no redundant jump-card row.
+assert.doesNotMatch(work, /<nav class="project-logo-index|client-logo-index/);
+assert.match(work, /class="container client-project-grid"/);
+for (const [id,logo] of [['eastland','eastland-official-logo.jpg'],['missys-squishies','missy-logo-transparent.png']]) {
+ const section=work.slice(work.indexOf('id="'+id+'"'),work.indexOf('</details>',work.indexOf('id="'+id+'"')));
+ assert.match(section, /work-project-header/);
+ assert.ok(section.includes(logo));
+ assert.match(section, /<h2 /);
+ assert.match(section, /<details class="work-project-details">/);
+ assert.equal(work.split(logo).length-1,1,'show each client logo once');
 }
-
-assert.equal(logoGroups.length, 1, 'only real client projects have a separate logo index');
-assert.match(logoIndex, /project-logo-eastland" href="#eastland"/);
-assert.match(logoIndex, /project-logo-missy" href="#missys-squishies"/);
 assert.ok(PUBLIC_MANIFEST.includes('assets/images/our-work/missy-logo-transparent.png'));
 assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root,'assets/images/our-work/missy-logo-transparent.png'))).digest('hex'),'8a7163bb97ef4873126bfa1b4d33efb85a09544e2b7ed83f6bc05d03a9eed912','reviewed transparent logo is preserved');
-
 assert.ok(read('assets/css/our-work.css').includes('.project-logo-eastland { background: #fefefe; }'));
 assert.ok(read('assets/css/our-work.css').includes('.project-logo-missy { background: #f3e1e9; color: #58236c; overflow: hidden; }'));
 
-assert.equal((logoIndex.match(/<a /g) || []).length, 2);
-for (const [logo, destination] of [['eastland-official-logo.jpg','#eastland'],['missy-logo-transparent.png','#missys-squishies']]) {
- assert.ok(logoIndex.includes(logo) && logoIndex.includes('href="'+destination+'"'));
- assert.equal(work.split(logo).length - 1, 1, 'show each client logo once on Our Work');
-}
 const exampleSection=work.match(/<section class="section website-example-section"[\s\S]*?<\/section>/)?.[0];
 assert.ok(exampleSection);
-assert.doesNotMatch(exampleSection, /<details|<summary|<nav|concept-logo-index|work-design-disclosure/);
+assert.doesNotMatch(exampleSection, /<nav|concept-logo-index|work-design-disclosure/);
+assert.equal((exampleSection.match(/<details /g)||[]).length,3,'one story per example');
+assert.equal((exampleSection.match(/<article /g)||[]).length,3,'one cohesive section per example');
+for(const story of exampleSection.matchAll(/<details[\s\S]*?<\/details>/g)) {
+ assert.match(story[0], /disclosure-summary/);
+ assert.equal((story[0].match(/<h4>/g)||[]).length,3);
+ assert.doesNotMatch(story[0], /<a /,'visible destination is not duplicated in the story');
+}
+assert.match(exampleSection,/inquiry submissions remain unavailable/);
+assert.match(exampleSection,/No legal services, attorney credentials, client relationships or case results/);
+assert.match(exampleSection,/No investment or advisory services, transactions, operating history or client results/);
 assert.equal((exampleSection.match(/<a /g)||[]).length, 3, 'exactly one link per design example');
 for (const [logo, destination, label] of [['howl-and-timber-wordmark.svg','../examples/howl-and-timber/','Fictional law-firm concept'],['cortez-capital-concept-logo.png','../examples/cortez-capital/','Fictional website concept'],['captured-by-karmen-wordmark.png','https://capturedbykarmen.rogersholdingsllc.com/','Prelaunch owned project']]) {
  assert.equal(work.split(logo).length - 1, 1, 'show each example logo once on Our Work');
@@ -120,7 +125,7 @@ for(const [, name, hash] of assetRows) {
 const missy = work.slice(work.indexOf('id="missys-squishies"'), work.indexOf('</section>', work.indexOf('id="missys-squishies"')));
 assert.doesNotMatch(work + home, /Local review|Proposed website adaptation|await owner-approved|Story awaiting approval|Demonstration image pending/i);
 assert.match(missy, /Actual dashboard · Private business data and operational details redacted\./);
-assert.equal((missy.match(/<img\b/g) || []).length, 1);
+assert.equal((missy.match(/<img\b/g) || []).length, 2);
 assert.ok(PUBLIC_MANIFEST.includes('assets/images/our-work/missy-artwork-extracted.webp'));
 assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root, 'assets/images/our-work/missy-artwork-extracted.webp'))).digest('hex'), '7c46fd3e8a18ce7fe7b845e66545871dc75790d4af213b9572ac44640b23e596', 'approved extracted illustration changed');
 assert.equal(PUBLIC_MANIFEST.includes('docs/design-reference/missys-squishies/missy-story-source.jpg'), false);
@@ -167,5 +172,11 @@ for (const declaration of ['top: var(--work-menu-top)', 'bottom: auto', 'height:
 assert.match(workCss, /padding-bottom: calc\(24px \+ env\(safe-area-inset-bottom, 0px\)\)/);
 assert.match(workCss, /\.our-work-page \.primary-nav > a \{ flex-shrink: 0; \}/);
 assert.match(workCss, /--work-menu-top: 73px/);
-assert.match(work, /our-work\.css\?v=plain-pink-missy-large-eastland-20261107/);
+assert.match(work, /our-work\.css\?v=natural-client-stories-20261107/);
 console.log('Our Work menu viewport, overflow, safe-area and cache guards passed.');
+
+assert.match(serviceExamples,/id="eastland-client-work" href="https:\/\/www\.eastlandfirstchurchofgod\.com\/"/);
+assert.equal(website.split('eastland-live-home.jpg').length-1,1,'integrate the existing Eastland screenshot without duplication');
+assert.match(serviceExamples,/Client website project/);
+assert.match(serviceExamples,/href="\.\.\/our-work\/#eastland"/);
+assert.doesNotMatch(website,/<section class="section website-evidence"/);
