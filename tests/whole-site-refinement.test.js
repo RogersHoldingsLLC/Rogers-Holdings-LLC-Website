@@ -8,3 +8,23 @@ assert.match(snapshot,/href="#snapshot-sample"/);assert.match(snapshot,/id="snap
 assert.match(js,/result\.requestId === requestId/);assert.match(js,/result\.environment === 'production'/);assert.match(js,/typeof result\.retry === 'boolean'/);
 assert.match(read('privacy/index.html'),/Privacy/);
 console.log('Shared navigation, intake identity, production response and privacy contracts passed');
+
+// Expandable sections share a visible native-summary invitation without new JS.
+const disclosurePages = ['index.html', 'services/index.html', 'business-snapshot/index.html', 'our-work/index.html', 'spreadsheet-repair/index.html', 'packages/index.html'];
+let disclosureCount = 0;
+for (const page of disclosurePages) {
+  const source = fs.readFileSync(path.join(root, page), 'utf8');
+  const summaries = [...source.matchAll(/<summary\b[^>]*>([\s\S]*?)<\/summary>/g)];
+  for (const summary of summaries) {
+    disclosureCount++;
+    assert.match(summary[0], /<summary class="disclosure-summary">/);
+    assert.match(summary[1], /class="disclosure-title"/);
+    assert.match(summary[1], /class="disclosure-action" aria-hidden="true"/);
+    assert.match(summary[1], /class="disclosure-view">View details/);
+    assert.match(summary[1], /class="disclosure-hide">Hide details/);
+    assert.doesNotMatch(summary[1], /<button|<a\s|role="button"|aria-expanded/);
+  }
+  assert.match(source, /studio-review\.css\?v=clear-disclosures-20261107/);
+}
+assert.equal(disclosureCount, 11);
+console.log('Eleven native expandable sections have clear, consistent disclosure cues.');

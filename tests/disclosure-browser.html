@@ -1,0 +1,19 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Expandable section browser checks</title><style>body{font:16px/1.5 system-ui;margin:24px;background:#f4f0e6}pre{white-space:pre-wrap}iframe{position:fixed;left:-20000px;top:0;border:0}.pass{color:#185b28}.fail{color:#a11616}</style><h1>Expandable section browser checks</h1><p id="status">Running local checks…</p><pre id="results"></pre>
+<script type="module">
+const out=document.querySelector('#results');let pass=0,fail=0;const check=(ok,label)=>{out.textContent+=`${ok?'PASS':'FAIL'} ${label}\n`;ok?pass++:fail++};const tick=()=>new Promise(r=>setTimeout(r,40));
+for(const width of [320,390,768,1440])for(const route of ['/','/services/','/business-snapshot/','/our-work/','/spreadsheet-repair/','/packages/']){
+ const frame=document.createElement('iframe');frame.width=width;frame.height=900;frame.src=route;frame.title=route;const loaded=new Promise(r=>frame.onload=r);document.body.append(frame);await loaded;const d=frame.contentDocument,w=frame.contentWindow;
+ for(const [i,detail] of [...d.querySelectorAll('details')].entries()){
+  const summary=detail.querySelector(':scope > summary'),label=`${width}px ${route} section ${i+1}`,s=w.getComputedStyle(summary),cue=summary.querySelector('.disclosure-action');
+  check(summary.classList.contains('disclosure-summary')&&s.borderTopStyle==='solid'&&parseFloat(s.borderTopWidth)>=1,`${label}: clear bordered control`);
+  check(summary.getBoundingClientRect().height>=44&&summary.scrollWidth<=summary.clientWidth+1,`${label}: readable touch target without overflow`);
+  check(cue?.getAttribute('aria-hidden')==='true'&&w.getComputedStyle(summary.querySelector('.disclosure-view')).display!=='none'&&w.getComputedStyle(summary.querySelector('.disclosure-hide')).display==='none',`${label}: visible View details cue, no redundant spoken control`);
+  summary.focus();check(d.activeElement===summary,`${label}: native summary is keyboard focusable`);
+  summary.click();await tick();check(detail.open&&w.getComputedStyle(summary.querySelector('.disclosure-hide')).display!=='none'&&w.getComputedStyle(summary.querySelector('.disclosure-view')).display==='none',`${label}: opens with Hide details cue`);
+  check(d.documentElement.scrollWidth<=width+1,`${label}: open content stays within viewport`);
+  summary.click();await tick();check(!detail.open,`${label}: closes on repeated activation`);
+ }
+ frame.remove();
+}
+document.querySelector('#status').textContent=`${pass} passed; ${fail} failed. Local preview only.`;document.querySelector('#status').className=fail?'fail':'pass';
+</script></html>
