@@ -135,7 +135,7 @@
 .website-example-card img { display: block; width: 100%; height: 180px; object-fit: contain; margin-bottom: 12px; }
 .website-example-card > span { font-size: .8rem; line-height: 1.5; }
 .website-example-card > strong { font-size: 1rem; }
-.website-example-card-dark { background: #080808; color: #ead09a; }
+.website-example-card-dark { background: #030303; color: #ead09a; }
 .website-example-card:hover { border-color: #9f7d3c; }
 .website-example-card:focus-visible { outline: 3px solid #9f7d3c; outline-offset: 5px; }
 @media (max-width: 800px) { .website-example-grid { grid-template-columns: 1fr; } .website-example-card img { height: 160px; } }
@@ -188,7 +188,8 @@
 @media(prefers-reduced-motion:reduce) { .our-work-page .project-logo-link { animation: none !important; } }
 .our-work-page .website-example-card { color: #272117; }
 .our-work-page .website-example-card-dark { color: #ead09a; }
-.our-work-page .website-example-card-howl { background: #1b1813; color: #f4efe2; }
+/* Match the SVG background exactly so the wordmark blends into the whole card. */
+.our-work-page .website-example-card-howl { background: #17262b; color: #f4f0e6; }
 .our-work-page .work-next-step { background: #1b1813; color: #f7f0e0; }
 .our-work-page .phase3-footer { background: #11100e; }
 .our-work-page .project-logo-link:focus-visible { animation: none !important; opacity: 1; transition-property: transform, box-shadow, border-color; }
@@ -230,11 +231,6 @@
 .our-work-page .work-project-detail-content .work-missy-layout { gap: 40px; }
 .our-work-page .work-project-detail-content .work-missy-story > p { font-size: 16px; }
 .our-work-page .website-example-section { padding-block: 14px 28px; background: #f5f1e8; }
-.website-example-section .work-project-details { margin-top: 0; }
-.work-design-disclosure { padding-block: 20px; }
-.work-design-disclosure h2 { font-size: 30px; }
-.work-design-disclosure .website-example-grid { margin-top: 20px; }
-.work-design-disclosure .website-example-card { min-height: 90px; padding: 20px; }
 @media(max-width:960px) {
   .project-logo-index { grid-template-columns: repeat(3,minmax(0,1fr)); }
   .work-case-brief { gap: 26px; }
@@ -272,3 +268,53 @@
  .our-work-page [data-live-mobile-proof] .project-capture-link { width: min(100%,360px); margin-inline: auto; }
  .our-work-page [data-live-mobile-proof] figcaption { max-width: none; }
 }
+
+/* The scrolled header's backdrop filter must not contain the fixed menu. */
+@media (max-width: 960px) {
+  .our-work-page { --work-menu-top: 73px; }
+  .our-work-page.menu-open .site-header {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .our-work-page.durable-site .primary-nav.is-open {
+    top: var(--work-menu-top);
+    bottom: auto;
+    height: calc(100vh - var(--work-menu-top));
+    height: calc(100dvh - var(--work-menu-top));
+    max-height: none;
+    padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+  }
+  .our-work-page .primary-nav > a { flex-shrink: 0; }
+}
+
+/* One visible card per example: artwork, status and destination stay together. */
+.our-work-page .website-example-card { justify-content: flex-start; }
+.our-work-page .website-example-art { display: grid; place-items: center; height: 112px; margin-bottom: 6px; }
+.our-work-page .website-example-art img { width: auto; height: auto; max-width: 100%; max-height: 112px; margin: 0; object-fit: contain; }
+.our-work-page .website-example-card > strong { margin-top: auto; }
+
+
+/* Client projects use the same clear card treatment as the website examples. */
+.our-work-page.durable-site .client-logo-index { gap: 24px; }
+.our-work-page.durable-site .client-logo-index .project-logo-link {
+  gap: 12px; padding: 28px; border: 1px solid #d5c9b3; border-radius: 8px;
+  background: #fffaf1; color: #272117; box-shadow: none;
+}
+.our-work-page.durable-site .client-logo-index .project-logo-art { display: grid; place-items: center; height: 190px; margin-bottom: 6px; }
+.our-work-page.durable-site .client-logo-index .project-logo-art img { width: auto; height: auto; max-width: 100%; max-height: 190px; object-fit: contain; }
+.our-work-page.durable-site .client-logo-index .project-logo-link > span:not(.project-logo-art) { margin: 0; color: inherit; font-size: .8rem; line-height: 1.5; }
+.our-work-page.durable-site .client-logo-index .project-logo-link > strong { margin-top: auto; padding: 0; border: 0; font-size: 1rem; }
+.our-work-page.durable-site .client-logo-index .project-logo-link:hover,
+.our-work-page.durable-site .client-logo-index .project-logo-link:focus-visible { transform: none; border-color: #9f7d3c; box-shadow: none; }
+.our-work-page.durable-site .client-logo-index .project-logo-link:hover img,
+.our-work-page.durable-site .client-logo-index .project-logo-link:focus-visible img { transform: none; }
+.our-work-page.durable-site .client-logo-index .project-logo-link:focus-visible { outline: 3px solid #9f7d3c; outline-offset: 5px; }
+@media (max-width: 800px) { .our-work-page.durable-site .client-logo-index { grid-template-columns: 1fr; } }
+
+
+/* Brand-matched surfaces keep each original logo integrated with its card. */
+.our-work-page.durable-site .client-logo-index .project-logo-eastland { background: #fefefe; }
+.our-work-page.durable-site .client-logo-index .project-logo-missy { background: #f3e1e9; color: #58236c; overflow: hidden; }
+/* Missy's transparent background-removal version sits directly on plain pink. */

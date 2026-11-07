@@ -69,12 +69,40 @@ assert.match(work, /aria-current="page">Our Work/);
 const logoGroups = [...work.matchAll(/<nav class="project-logo-index[^"]*"[\s\S]*?<\/nav>/g)].map(m=>m[0]);
 assert.equal((logoGroups[0].match(/<a /g)||[]).length,2,'real client proof must be distinct from concepts');
 const logoIndex=logoGroups.join('');
-assert.equal((logoIndex.match(/<a /g) || []).length, 5);
-for (const [logo, destination] of [['eastland-official-logo.jpg','#eastland'],['missy-official-logo-extracted.png','#missys-squishies'],['howl-and-timber-wordmark.svg','../examples/howl-and-timber/'],['cortez-capital-concept-logo.png','../examples/cortez-capital/'],['captured-by-karmen-wordmark.png','https://capturedbykarmen.rogersholdingsllc.com/']]) {
- assert.ok(logoIndex.includes(logo) && logoIndex.includes('href="'+destination+'"'));
- assert.equal(work.split(logo).length - 1, 1, 'show each logo once on Our Work');
+for(const clientCard of logoGroups[0].matchAll(/<a [\s\S]*?<\/a>/g)) {
+ assert.match(clientCard[0], /<span>Client [^<]+<\/span><strong>/, 'client project status precedes title, matching example cards');
 }
-assert.ok(logoIndex.includes('Fictional law-firm concept') && logoIndex.includes('Fictional website concept') && logoIndex.includes('Prelaunch owned project'));
+
+assert.equal(logoGroups.length, 1, 'only real client projects have a separate logo index');
+assert.match(logoIndex, /project-logo-eastland" href="#eastland"/);
+assert.match(logoIndex, /project-logo-missy" href="#missys-squishies"/);
+assert.ok(PUBLIC_MANIFEST.includes('assets/images/our-work/missy-logo-transparent.png'));
+assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root,'assets/images/our-work/missy-logo-transparent.png'))).digest('hex'),'8a7163bb97ef4873126bfa1b4d33efb85a09544e2b7ed83f6bc05d03a9eed912','reviewed transparent logo is preserved');
+
+assert.ok(read('assets/css/our-work.css').includes('.project-logo-eastland { background: #fefefe; }'));
+assert.ok(read('assets/css/our-work.css').includes('.project-logo-missy { background: #f3e1e9; color: #58236c; overflow: hidden; }'));
+
+assert.equal((logoIndex.match(/<a /g) || []).length, 2);
+for (const [logo, destination] of [['eastland-official-logo.jpg','#eastland'],['missy-logo-transparent.png','#missys-squishies']]) {
+ assert.ok(logoIndex.includes(logo) && logoIndex.includes('href="'+destination+'"'));
+ assert.equal(work.split(logo).length - 1, 1, 'show each client logo once on Our Work');
+}
+const exampleSection=work.match(/<section class="section website-example-section"[\s\S]*?<\/section>/)?.[0];
+assert.ok(exampleSection);
+assert.doesNotMatch(exampleSection, /<details|<summary|<nav|concept-logo-index|work-design-disclosure/);
+assert.equal((exampleSection.match(/<a /g)||[]).length, 3, 'exactly one link per design example');
+for (const [logo, destination, label] of [['howl-and-timber-wordmark.svg','../examples/howl-and-timber/','Fictional law-firm concept'],['cortez-capital-concept-logo.png','../examples/cortez-capital/','Fictional website concept'],['captured-by-karmen-wordmark.png','https://capturedbykarmen.rogersholdingsllc.com/','Prelaunch owned project']]) {
+ assert.equal(work.split(logo).length - 1, 1, 'show each example logo once on Our Work');
+ assert.equal((exampleSection.split('href="'+destination+'"').length - 1), 1);
+ assert.ok(exampleSection.includes(logo) && exampleSection.includes(label));
+}
+const exampleDestinations=[...exampleSection.matchAll(/<a [^>]*href="([^"]+)"/g)].map(m=>m[1]);
+assert.deepEqual(exampleDestinations,['https://capturedbykarmen.rogersholdingsllc.com/','../examples/howl-and-timber/','../examples/cortez-capital/'],'lead with Captured by Karmen in both visual and keyboard order');
+const howlBackground=read('assets/images/our-work/howl-and-timber-wordmark.svg').match(/<rect[^>]*fill="(#[a-f0-9]{6})"/)?.[1];
+assert.equal(howlBackground, '#17262b');
+assert.ok(read('assets/css/our-work.css').includes('.our-work-page .website-example-card-howl { background: '+howlBackground+'; color: #f4f0e6; }'),'the full card must match the exact logo background');
+assert.match(exampleSection, /no client results are claimed/);
+assert.match(exampleSection, /target="_blank" rel="noopener noreferrer"/);
 
 assert.match(work, /href="\.\.\/spreadsheet-repair\/"/);
 assert.match(work, /href="\.\.\/business-snapshot\/" data-report-link/);
@@ -128,3 +156,16 @@ assert.ok(PUBLIC_MANIFEST.includes('our-work/index.html'));
 assert.ok(PUBLIC_MANIFEST.includes('assets/css/our-work.css'));
 assert.equal(PUBLIC_MANIFEST.some(f => f.startsWith('docs/our-work-review/')), false);
 console.log('Our Work migration, approved assets, evidence boundary and internal links passed.');
+
+// The mobile menu must be viewport-sized, not trapped by the blurred header.
+const workCss = read('assets/css/our-work.css');
+assert.match(workCss, /@media \(max-width: 960px\)/);
+assert.match(workCss, /\.our-work-page\.menu-open \.site-header\s*\{\s*-webkit-backdrop-filter: none;\s*backdrop-filter: none;/);
+const workMenu = workCss.match(/\.our-work-page\.durable-site \.primary-nav\.is-open\s*\{([^}]+)\}/)?.[1];
+assert.ok(workMenu, 'Our Work needs a scoped full-viewport menu');
+for (const declaration of ['top: var(--work-menu-top)', 'bottom: auto', 'height: calc(100vh - var(--work-menu-top))', 'height: calc(100dvh - var(--work-menu-top))', 'max-height: none', 'overflow-y: auto', 'overscroll-behavior-y: contain']) assert.ok(workMenu.includes(declaration), declaration);
+assert.match(workCss, /padding-bottom: calc\(24px \+ env\(safe-area-inset-bottom, 0px\)\)/);
+assert.match(workCss, /\.our-work-page \.primary-nav > a \{ flex-shrink: 0; \}/);
+assert.match(workCss, /--work-menu-top: 73px/);
+assert.match(work, /our-work\.css\?v=plain-pink-missy-large-eastland-20261107/);
+console.log('Our Work menu viewport, overflow, safe-area and cache guards passed.');

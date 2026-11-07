@@ -1,0 +1,38 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Our Work menu browser checks</title>
+<style>body{font:16px/1.5 system-ui;margin:24px;background:#f4f0e6;color:#181713}pre{white-space:pre-wrap}.pass{color:#185b28}.fail{color:#a11616}iframe{position:fixed;left:-20000px;top:0;border:0}</style>
+<h1>Our Work menu browser checks</h1><p id="status">Running local checks…</p><pre id="results"></pre>
+<script type="module">
+const report=document.querySelector('#results');let passed=0,failed=0;
+const check=(ok,label)=>{report.textContent+=`${ok?'PASS':'FAIL'} ${label}\n`;ok?passed++:failed++};
+const wait=()=>new Promise(resolve=>setTimeout(resolve,90));
+async function frame(width,height){const el=document.createElement('iframe');el.width=width;el.height=height;el.src='/our-work/';el.title=`Our Work ${width} by ${height}`;const loaded=new Promise(r=>el.onload=r);document.body.append(el);await loaded;await wait();return el;}
+for(const [width,height] of [[320,568],[390,844],[680,600],[768,1024],[960,600],[844,390],[667,240]]){
+ const el=await frame(width,height);const d=el.contentDocument,w=el.contentWindow;
+ const toggle=d.querySelector('[data-menu-toggle]'),nav=d.querySelector('[data-navigation]'),header=d.querySelector('[data-site-header]'),links=[...nav.querySelectorAll('a')];
+ const label=`${width}×${height}`;
+ toggle.click();await wait();
+ let rect=nav.getBoundingClientRect(),hr=header.getBoundingClientRect();
+ check(toggle.getAttribute('aria-expanded')==='true'&&nav.classList.contains('is-open'),`${label}: opens`);
+ check(rect.width===width&&Math.abs(rect.top-hr.bottom)<1.1&&Math.abs(rect.bottom-height)<1.1,`${label}: full viewport overlay below header (${Math.round(rect.top)}–${Math.round(rect.bottom)})`);
+ check(w.getComputedStyle(header).backdropFilter==='none',`${label}: no filtered containing block`);
+ check(w.getComputedStyle(d.body).overflowY==='hidden',`${label}: background scroll locked`);
+ check(d.activeElement===links[0],`${label}: focuses first link`);
+ const allVisible=links.every(link=>{const r=link.getBoundingClientRect();return r.top>=rect.top&&r.bottom<=rect.bottom&&d.elementFromPoint(r.x+r.width/2,r.y+r.height/2)===link});
+ if(height>=390)check(allVisible,`${label}: all four choices visible and unobscured without scrolling`);
+ else {check(nav.scrollHeight>nav.clientHeight,`${label}: short-screen menu scrolls`);links.at(-1).focus();await wait();const r=links.at(-1).getBoundingClientRect();check(r.top>=rect.top&&r.bottom<=rect.bottom,`${label}: last choice remains reachable on short screen`);}
+ links.at(-1).focus();d.dispatchEvent(new KeyboardEvent('keydown',{key:'Tab',bubbles:true,cancelable:true}));check(d.activeElement===toggle,`${label}: Tab wraps to close button`);
+ d.dispatchEvent(new KeyboardEvent('keydown',{key:'Tab',shiftKey:true,bubbles:true,cancelable:true}));check(d.activeElement===links.at(-1),`${label}: Shift+Tab wraps to last choice`);
+ d.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true}));check(toggle.getAttribute('aria-expanded')==='false'&&d.activeElement===toggle&&!d.body.classList.contains('menu-open'),`${label}: Escape closes and restores focus/scroll`);
+ toggle.click();toggle.click();check(!nav.classList.contains('is-open'),`${label}: repeated toggle closes cleanly`);
+ w.scrollTo({top:400,behavior:"instant"});await wait();const pageY=w.scrollY;toggle.click();await wait();rect=nav.getBoundingClientRect();check(Math.abs(rect.bottom-height)<1.1&&w.scrollY===pageY,`${label}: opening mid-page keeps position and full overlay`);
+ links[1].addEventListener('click',e=>e.preventDefault(),{once:true});links[1].click();check(!nav.classList.contains('is-open')&&!d.body.classList.contains('menu-open'),`${label}: choosing a link closes menu`);
+ toggle.click();el.width=1024;await wait();check(!nav.classList.contains('is-open')&&!d.body.classList.contains('menu-open')&&toggle.getAttribute('aria-expanded')==='false',`${label}: desktop resize clears mobile state`);
+ el.remove();
+}
+for(const width of [961,1440]){const el=await frame(width,900),d=el.contentDocument,w=el.contentWindow;check(w.getComputedStyle(d.querySelector('[data-menu-toggle]')).display==='none'&&[...d.querySelectorAll('[data-navigation] a')].every(a=>a.getBoundingClientRect().width>0),`${width}px: desktop navigation unchanged`);el.remove();}
+// The no-script menu must retain its accessible static layout.
+const css=await fetch('/assets/css/our-work.css').then(r=>r.text());check(!/\.our-work-page\s+\.primary-nav\s*\{/.test(css),'No broad nav override disrupts the existing noscript fallback');
+document.querySelector('#status').textContent=`${passed} passed; ${failed} failed. Local preview only; no production change.`;
+document.querySelector('#status').className=failed?'fail':'pass';
+</script>
+</html>

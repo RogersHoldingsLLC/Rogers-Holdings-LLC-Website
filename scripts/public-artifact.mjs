@@ -75,6 +75,7 @@ export const PUBLIC_MANIFEST = Object.freeze([
   'assets/images/our-work/eastland-live-visit.png',
   'assets/images/our-work/eastland-official-logo.jpg',
   'assets/images/our-work/missy-official-logo-extracted.png',
+  'assets/images/our-work/missy-logo-transparent.png',
   'assets/images/our-work/missy-workbook-redacted.png',
   'assets/images/our-work/missy-dashboard-redacted.png',
   'assets/images/social/rogers-holdings-home-share.jpg',
