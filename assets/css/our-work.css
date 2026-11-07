@@ -318,3 +318,93 @@
 .our-work-page.durable-site .client-logo-index .project-logo-eastland { background: #fefefe; }
 .our-work-page.durable-site .client-logo-index .project-logo-missy { background: #f3e1e9; color: #58236c; overflow: hidden; }
 /* Missy's transparent background-removal version sits directly on plain pink. */
+
+/* Cohesive project panels: the logo belongs beside its story, not in a jump index. */
+.our-work-page.durable-site .client-project-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; align-items: start; padding-block: 6px 40px; }
+.our-work-page.durable-site .work-client-project { min-width: 0; padding: 24px; border: 1px solid #d5c9b3; border-radius: 8px; background: #fcfaf5; }
+.our-work-page.durable-site .work-project-header { display: grid; grid-template-columns: minmax(120px,.7fr) minmax(0,1fr); gap: 22px; align-items: start; }
+.our-work-page.durable-site .work-project-logo { display: grid; place-items: center; min-width: 0; min-height: 150px; padding: 12px; border: 1px solid #d5c9b3; border-radius: 8px; }
+.our-work-page.durable-site .work-project-logo img { display: block; width: 100%; height: auto; object-fit: contain; }
+.our-work-page.durable-site .work-project-logo.project-logo-eastland { background: #fefefe; }
+.our-work-page.durable-site .work-project-logo.project-logo-missy { background: #f3e1e9; color: #58236c; overflow: hidden; }
+.our-work-page.durable-site .work-project-copy { min-width: 0; }
+.our-work-page.durable-site .work-project-copy h2 { font-size: clamp(24px,2.1vw,30px); line-height: 1.12; }
+.our-work-page.durable-site .work-project-copy .eyebrow { margin: 0 0 10px; line-height: 1.6; }
+.our-work-page.durable-site .work-project-copy > p:not(.eyebrow) { margin: 14px 0 0; font-size: 15px; line-height: 1.6; }
+.our-work-page.durable-site .work-project-copy > .work-brief-boundary { font-size: 12px; }
+.our-work-page.durable-site .work-client-project .work-project-details { margin-top: 24px; }
+.our-work-page.durable-site .work-client-project .work-project-detail-content { padding-top: 0; }
+.our-work-page.durable-site .work-client-project .eastland-workspace[data-live-mobile-proof],
+.our-work-page.durable-site .work-client-project .eastland-project-heading,
+.our-work-page.durable-site .work-client-project .eastland-live-proof,
+.our-work-page.durable-site .work-client-project .work-missy-layout { grid-template-columns: minmax(0,1fr); gap: 24px; }
+.our-work-page.durable-site .work-client-project .eastland-workspace[data-live-mobile-proof] { padding: 18px; }
+.our-work-page.durable-site .work-client-project .project-capture-link { max-width: 320px; margin-inline: auto; }
+.our-work-page.durable-site .work-client-project .eastland-story-timeline { grid-template-columns: minmax(0,1fr); gap: 22px; }
+.our-work-page.durable-site .work-client-project .eastland-live-proof__links { width: 100%; }
+.our-work-page.durable-site .work-client-project .eastland-project-heading h3 { font-size: 26px; }
+.our-work-page.durable-site .work-client-project .eastland-portfolio-evidence { padding: 0; }
+.our-work-page.durable-site .work-client-project .eastland-project-story { padding-block: 24px 0; }
+.our-work-page.durable-site .work-client-project .eastland-project-story p,
+.our-work-page.durable-site .work-client-project .work-missy-story p { max-width: none; }
+
+/* Each example has its own brief and native story; destination links stay visible. */
+.our-work-page.durable-site .website-example-grid { align-items: start; }
+.our-work-page.durable-site .website-example-project { min-width: 0; gap: 24px; padding: 24px; }
+.our-work-page.durable-site .website-example-header { min-width: 0; }
+.our-work-page.durable-site .website-example-status { margin: 20px 0 10px; font-size: 11px; line-height: 1.6; }
+.our-work-page.durable-site .website-example-project h3 { margin: 0; font: 800 25px/1.15 var(--sans); letter-spacing: -.035em; color: inherit; }
+.our-work-page.durable-site .website-example-brief { margin: 14px 0 8px; font-size: 15px; line-height: 1.65; color: inherit; }
+.our-work-page.durable-site .website-example-project .work-text-link { color: inherit; }
+.our-work-page.durable-site .website-example-story { margin: 0; }
+.our-work-page.durable-site .website-example-story-content { color: inherit; }
+.our-work-page.durable-site .website-example-story-content h4 { margin: 22px 0 8px; font: 750 15px/1.4 var(--sans); color: inherit; }
+.our-work-page.durable-site .website-example-story-content h4:first-child { margin-top: 0; }
+.our-work-page.durable-site .website-example-story-content p { margin: 0; font-size: 14px; line-height: 1.75; color: inherit; }
+.our-work-page.durable-site .website-example-project .disclosure-action { flex-direction: column-reverse; gap: 5px; font-size: 10px; }
+.our-work-page.durable-site .website-example-project .disclosure-summary { gap: 12px; padding: 16px 14px; }
+.our-work-page.durable-site .website-example-project .disclosure-title { font-size: 14px; }
+.our-work-page.durable-site .website-example-project a:focus-visible { outline: 3px solid currentColor; outline-offset: 5px; }
+@media (max-width: 1050px) {
+ .our-work-page.durable-site .client-project-grid { grid-template-columns: minmax(0,1fr); }
+ .our-work-page.durable-site .work-project-header { grid-template-columns: minmax(140px,210px) minmax(0,1fr); }
+ .our-work-page.durable-site .website-example-grid { grid-template-columns: minmax(0,1fr); }
+ .our-work-page.durable-site .website-example-header { display: grid; grid-template-columns: minmax(140px,210px) minmax(0,1fr); gap: 0 26px; }
+ .our-work-page.durable-site .website-example-header .website-example-art { grid-row: 1 / 5; height: 140px; margin: 0; align-self: center; }
+ .our-work-page.durable-site .website-example-header .website-example-status { margin-top: 0; }
+}
+@media (max-width: 540px) {
+ .our-work-page.durable-site .client-project-grid { gap: 20px; padding-bottom: 30px; }
+ .our-work-page.durable-site .work-client-project, .our-work-page.durable-site .website-example-project { padding: 18px; }
+ .our-work-page.durable-site .work-project-header { grid-template-columns: minmax(0,.7fr) minmax(0,1fr); gap: 14px; }
+ .our-work-page.durable-site .work-project-logo { min-height: 100px; padding: 7px; }
+ .our-work-page.durable-site .work-project-copy h2 { font-size: clamp(20px,5.6vw,26px); }
+ .our-work-page.durable-site .work-project-copy .eyebrow { font-size: 9px; }
+ .our-work-page.durable-site .work-project-copy > p:not(.eyebrow) { font-size: 13px; }
+ .our-work-page.durable-site .work-project-copy > .work-brief-boundary { font-size: 11px; }
+ .our-work-page.durable-site .work-project-copy .work-text-link { gap: 6px; font-size: 12px; }
+ .our-work-page.durable-site .website-example-header { display: block; }
+ .our-work-page.durable-site .website-example-header .website-example-art { height: 112px; margin-bottom: 20px; }
+}
+
+/* Shared rows keep the paired panels and three story invitations level. */
+@media (min-width: 1051px) {
+ .our-work-page.durable-site .client-project-grid,
+ .our-work-page.durable-site .website-example-grid { align-items: stretch; }
+ .our-work-page.durable-site .work-client-project,
+ .our-work-page.durable-site .website-example-project { display: grid; grid-template-rows: auto 1fr; align-content: start; }
+ .our-work-page.durable-site .work-client-project .work-project-details { margin-top: 0; }
+ @supports (grid-template-rows: subgrid) {
+  .our-work-page.durable-site .work-client-project,
+  .our-work-page.durable-site .website-example-project { grid-row: span 2; grid-template-rows: subgrid; row-gap: 24px; }
+ }
+ .our-work-page.durable-site .work-client-project .disclosure-summary,
+ .our-work-page.durable-site .website-example-project .disclosure-summary { min-height: 130px; }
+}
+
+/* The two full case studies may differ in length: do not pad an open story to its neighbor. */
+@media (min-width: 1051px) {
+ .our-work-page.durable-site .client-project-grid:has(details[open]) { align-items: start; }
+ .our-work-page.durable-site .client-project-grid:has(details[open]) .work-client-project { display: block; grid-row: auto; }
+ .our-work-page.durable-site .client-project-grid:has(details[open]) .work-project-details { margin-top: 24px; }
+}

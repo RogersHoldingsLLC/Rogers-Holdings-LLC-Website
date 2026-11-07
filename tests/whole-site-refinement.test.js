@@ -26,5 +26,35 @@ for (const page of disclosurePages) {
   }
   assert.match(source, /studio-review\.css\?v=clear-disclosures-20261107/);
 }
-assert.equal(disclosureCount, 10);
-console.log('Ten native expandable sections have clear, consistent disclosure cues.');
+assert.equal(disclosureCount, 14);
+console.log('Fourteen native expandable sections have clear, consistent disclosure cues.');
+
+const websiteDetails=read('services/index.html').match(/<section[^>]*id="websites"[\s\S]*?<\/section>/)[0];
+assert.match(websiteDetails, /<details class="editorial-detail"><summary class="disclosure-summary">/);
+assert.match(websiteDetails, /Website project details/);
+assert.match(websiteDetails, /Up to five core pages/);
+assert.match(websiteDetails, /two revision rounds/);
+assert.match(websiteDetails, /Domain registration, hosting and ongoing maintenance are separate/);
+assert.match(websiteDetails, /<\/details><a class="service-detail-link" href="\.\.\/website-creation\/">/);
+
+assert.doesNotMatch(read('services/index.html'), /service-visual-marker/, 'service icons removed in favor of color and texture');
+
+// Texture-only follow-up: no geometry, type, interaction or external-asset additions.
+const textureCSS = read('assets/css/studio-review.css').split('/* Balanced site textures:')[1];
+assert.ok(textureCSS, 'shared texture system exists');
+const textureProperties = [...textureCSS.matchAll(/(?:^|[;{])\s*([a-z-]+)\s*:/gm)].map(m=>m[1]);
+assert.ok(textureProperties.every(p=>p.startsWith('--material-') || ['background-image','background-size'].includes(p)), 'texture pass changes background paint only');
+assert.doesNotMatch(textureCSS, /https?:|animation\s*:|transition\s*:/, 'textures have no remote assets or motion');
+for (const file of ['index.html','services/index.html','our-work/index.html','website-creation/index.html','spreadsheet-repair/index.html','business-snapshot/index.html','packages/index.html','privacy/index.html']) {
+ assert.match(read(file), /texture=balanced-paper-20261107/, `${file} uses refreshed shared texture CSS`);
+}
+const luminance = c => c.map(v=>v/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4).reduce((n,v,i)=>n+v*[.2126,.7152,.0722][i],0);
+const contrast = (a,b) => {const [x,y]=[luminance(a),luminance(b)].sort((a,b)=>b-a);return (x+.05)/(y+.05)};
+const darkenedPaper=[232,221,196].map(v=>v*.898);
+const lightenedInk=[56,56,54].map(v=>v*.945+255*.055);
+assert.ok(contrast([77,73,65],darkenedPaper)>=4.5,'body text retains AA contrast under conservative texture maximum');
+assert.ok(contrast([102,80,27],darkenedPaper)>=4.5,'small gold labels retain AA contrast under conservative texture maximum');
+assert.ok(contrast([222,216,203],lightenedInk)>=4.5,'light reading text retains AA contrast under conservative dark-stone maximum');
+console.log('Shared texture paint-only, cache, no-motion and conservative text contrast guards passed.');
+
+assert.equal((read('assets/css/studio-review.css').match(/{/g)||[]).length,(read('assets/css/studio-review.css').match(/}/g)||[]).length,'shared stylesheet blocks balance');

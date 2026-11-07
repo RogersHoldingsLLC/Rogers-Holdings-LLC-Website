@@ -1,8 +1,15 @@
 <!doctype html><html lang="en"><meta charset="utf-8"><title>Expandable section browser checks</title><style>body{font:16px/1.5 system-ui;margin:24px;background:#f4f0e6}pre{white-space:pre-wrap}iframe{position:fixed;left:-20000px;top:0;border:0}.pass{color:#185b28}.fail{color:#a11616}</style><h1>Expandable section browser checks</h1><p id="status">Running local checks…</p><pre id="results"></pre>
 <script type="module">
 const out=document.querySelector('#results');let pass=0,fail=0;const check=(ok,label)=>{out.textContent+=`${ok?'PASS':'FAIL'} ${label}\n`;ok?pass++:fail++};const tick=()=>new Promise(r=>setTimeout(r,40));
-for(const width of [320,390,768,1440])for(const route of ['/','/services/','/business-snapshot/','/our-work/','/spreadsheet-repair/','/packages/']){
- const frame=document.createElement('iframe');frame.width=width;frame.height=900;frame.src=route;frame.title=route;const loaded=new Promise(r=>frame.onload=r);document.body.append(frame);await loaded;const d=frame.contentDocument,w=frame.contentWindow;
+for(const width of [320,390,768,1024,1200,1440])for(const route of ['/','/services/','/business-snapshot/','/our-work/','/spreadsheet-repair/','/packages/','/website-creation/','/privacy/','/examples/cortez-capital/']){
+ const frame=document.createElement('iframe');frame.width=width;frame.height=900;frame.src=route+'?qa='+Date.now();frame.title=route;const loaded=new Promise(r=>frame.onload=r);document.body.append(frame);await loaded;await tick();const d=frame.contentDocument,w=frame.contentWindow;
+ if(d.body.classList.contains('durable-site')) {
+  const bodyStyle=w.getComputedStyle(d.body),header=d.querySelector('.site-header'),footer=d.querySelector('.site-footer');
+  check(bodyStyle.getPropertyValue('--material-paper').includes('paper')&&bodyStyle.getPropertyValue('--material-linen').includes('repeating-linear-gradient'),`${width}px ${route}: shared paper and linen tokens`);
+  check(bodyStyle.backgroundImage.includes('data:image/svg+xml')&&w.getComputedStyle(header).backgroundImage.includes('data:image/svg+xml')&&w.getComputedStyle(footer).backgroundImage.includes('repeating-linear-gradient'),`${width}px ${route}: cohesive body, header and footer textures`);
+  check(d.documentElement.scrollWidth<=width+1,`${width}px ${route}: texture pass retains viewport width`);
+  check([...d.querySelectorAll('.work-project-logo,.website-example-card')].every(el=>w.getComputedStyle(el).backgroundImage==='none'),`${width}px ${route}: brand-matched logo and example surfaces untouched`);
+ }
  for(const [i,detail] of [...d.querySelectorAll('details')].entries()){
   const summary=detail.querySelector(':scope > summary'),label=`${width}px ${route} section ${i+1}`,s=w.getComputedStyle(summary),cue=summary.querySelector('.disclosure-action');
   check(summary.classList.contains('disclosure-summary')&&s.borderTopStyle==='solid'&&parseFloat(s.borderTopWidth)>=1,`${label}: clear bordered control`);
@@ -14,33 +21,74 @@ for(const width of [320,390,768,1440])for(const route of ['/','/services/','/bus
   summary.click();await tick();check(!detail.open,`${label}: closes on repeated activation`);
  }
  if(route==='/our-work/') {
-  const section=d.querySelector('#website-examples'),cards=[...section.querySelectorAll('a')];
-  const clients=[...d.querySelectorAll('.client-logo-index .project-logo-link')],exampleStyle=w.getComputedStyle(cards[0]);
-  check(clients.length===2,`${width}px client projects: exactly two original links`);
-  check(w.getComputedStyle(clients[0]).backgroundColor==='rgb(254, 254, 254)'&&w.getComputedStyle(clients[1]).backgroundColor==='rgb(243, 225, 233)',`${width}px client projects: off-white and pink surfaces match original artwork`);
-  const missyArt=clients[1].querySelector('.project-logo-art'),missyImage=missyArt.querySelector('img');
-  check(missyImage.src.endsWith('/missy-logo-transparent.png')&&Math.abs(missyImage.getBoundingClientRect().width/missyImage.getBoundingClientRect().height-1675/939)<.02,`${width}px client projects: transparent Missy wordmark on plain pink without distortion`);
-  const eastlandImage=clients[0].querySelector('img');
-  check(eastlandImage.getBoundingClientRect().height>=Math.min(190,(clients[0].clientWidth-56)/1.5)-1&&Math.abs(eastlandImage.getBoundingClientRect().width/eastlandImage.getBoundingClientRect().height-1.5)<.02,`${width}px client projects: enlarged Eastland logo retains original proportions`);
-
+  const section=d.querySelector('#website-examples'),cards=[...section.querySelectorAll('.website-example-project')],links=[...section.querySelectorAll('a')];
+  const clients=[...d.querySelectorAll('.work-client-project')],logos=clients.map(p=>p.querySelector('.work-project-logo'));
+  check(clients.length===2&&!d.querySelector('.client-logo-index'),`${width}px client projects: two cohesive panels without jump-card duplication`);
+  check(w.getComputedStyle(logos[0]).backgroundColor==='rgb(254, 254, 254)'&&w.getComputedStyle(logos[1]).backgroundColor==='rgb(243, 225, 233)',`${width}px client projects: approved off-white and pink surfaces`);
+  check(logos[1].querySelector('img').src.endsWith('/missy-logo-transparent.png'),`${width}px client projects: approved transparent Missy logo`);
+  const rects=clients.map(c=>c.getBoundingClientRect());
+  check(width>1050 ? Math.abs(rects[0].top-rects[1].top)<1&&rects[0].right<rects[1].left : rects[1].top>rects[0].bottom,`${width}px client projects: side by side on desktop, readable stack on smaller screens`);
   for(const client of clients){
-   const style=w.getComputedStyle(client);
-   check(style.borderRadius===exampleStyle.borderRadius&&style.paddingTop===exampleStyle.paddingTop&&style.borderTopColor===exampleStyle.borderTopColor,`${width}px client projects: same card border, radius and spacing as examples`);
-   check(client.scrollWidth<=client.clientWidth+1&&client.getBoundingClientRect().height>=44,`${width}px client projects: readable card with no overflow`);
-   client.focus();check(d.activeElement===client,`${width}px client projects: keyboard accessible`);
+   const logo=client.querySelector('.work-project-logo'),heading=client.querySelector('h2'),img=logo.querySelector('img');
+   check(logo.getBoundingClientRect().right<heading.getBoundingClientRect().left,`${width}px client projects: logo beside its own title`);
+   check(Math.abs(img.getBoundingClientRect().width/img.getBoundingClientRect().height-img.width/img.height)<.03,`${width}px client projects: proportional logo`);
+   check(client.scrollWidth<=client.clientWidth+1,`${width}px client projects: no clipped content`);
+  }
+  check(d.querySelector('#missys-squishies .work-missy-story .work-service-link a')?.getAttribute('href')==='../services/#spreadsheets',`${width}px Missy: related custom-spreadsheet service at end of story`);
+  check(cards.length===3&&links.length===3&&new Set(links.map(a=>a.href)).size===3,`${width}px examples: one visible destination per project`);
+  check(cards[0].id==='captured-by-karmen'&&cards[0].textContent.includes('Prelaunch owned project · A Rogers Holdings Company'),`${width}px examples: Karmen leads with owned/prelaunch label`);
+  check(cards.every(card=>card.querySelector('details')&&card.querySelector('h3')&&card.querySelector('.website-example-brief')),`${width}px examples: each has a brief and its own story`);
+  check(w.getComputedStyle(cards[1]).backgroundColor==='rgb(23, 38, 43)'&&w.getComputedStyle(cards[1]).color==='rgb(244, 240, 230)',`${width}px examples: Howl retains matching green surface and cream type`);
+  for(const link of links){
+   check(link.getBoundingClientRect().height>=44&&!link.closest('details'),`${width}px examples: destination visible without opening story`);
+   link.focus();check(d.activeElement===link,`${width}px examples: keyboard-accessible link`);
+  }
+  check(d.documentElement.scrollWidth<=width+1,`${width}px examples: no horizontal overflow`);
+  if(width>1050)for(const [group,name] of [[clients,'client panels'],[cards,'example panels']]) {
+   const equal=(values)=>Math.max(...values)-Math.min(...values)<1.1;
+   const geometry=()=>{
+    if(name==='example panels'||!group.some(c=>c.querySelector('details').open)) {
+     check(equal(group.map(c=>c.getBoundingClientRect().height)),`${width}px ${name}: equal closed/example panel heights`);
+     check(equal(group.map(c=>c.querySelector('summary').getBoundingClientRect().top)),`${width}px ${name}: aligned story controls`);
+    } else { check(group.every(c=>c.getBoundingClientRect().bottom-c.querySelector('details').getBoundingClientRect().bottom<27),`${width}px ${name}: expanded stories have no artificial trailing space`); }
+    check(equal(group.map(c=>c.querySelector('summary').getBoundingClientRect().height)),`${width}px ${name}: equal control heights`);
+   };
+   geometry();
+   group[0].querySelector('details').open=true;await tick();geometry();
+   group.forEach(c=>c.querySelector('details').open=true);await tick();geometry();
+   check(group.every(c=>c.scrollHeight<=c.clientHeight+1),`${width}px ${name}: all-open content is unclipped`);
+   group.forEach(c=>c.querySelector('details').open=false);
   }
 
-  check(cards.length===3&&new Set(cards.map(a=>a.href)).size===3,`${width}px examples: one link per destination`);
-  check(cards[0].href==='https://capturedbykarmen.rogersholdingsllc.com/'&&cards[0].textContent.includes('Prelaunch owned project · A Rogers Holdings Company'),`${width}px examples: Captured by Karmen leads with owned/prelaunch label`);
-  const howl=section.querySelector('.website-example-card-howl'),howlStyle=w.getComputedStyle(howl);
-  check(howlStyle.backgroundColor==='rgb(23, 38, 43)'&&howlStyle.color==='rgb(244, 240, 230)',`${width}px examples: full Howl card matches logo background and cream text`);
-  check(cards.slice(1).every(card=>cards[0].getBoundingClientRect().top<=card.getBoundingClientRect().top),`${width}px examples: lead card is visually first`);
-
-  check(!section.querySelector('details,summary,nav'),`${width}px examples: no redundant dropdown or second gallery`);
-  check(cards.every(card=>card.querySelector('img')&&card.getBoundingClientRect().width>0&&card.scrollWidth<=card.clientWidth+1),`${width}px examples: logos and labels fit their cards`);
-  for(const card of cards){card.focus();check(d.activeElement===card,`${width}px examples: card keyboard accessible`);}
-  check(d.documentElement.scrollWidth<=width+1,`${width}px examples: no horizontal overflow`);
  }
+ if(route==='/website-creation/') {
+  const section=d.querySelector('#website-examples'),cards=[...section.querySelectorAll('.website-preview-card')];
+  check(cards.length===4,`${width}px website page: four examples`);
+  check(d.querySelectorAll('img[src$="eastland-live-home.jpg"]').length===1,`${width}px website page: Eastland screenshot shown once`);
+  const eastland=section.querySelector('#eastland-client-work'),date=eastland.querySelector('.website-preview-date'),action=eastland.querySelector('.website-preview-action');
+  check(date.compareDocumentPosition(action)&Node.DOCUMENT_POSITION_FOLLOWING,`${width}px website page: capture date before Eastland action`);
+  if(width>700){const rowSize=width>1100?4:2;for(let i=0;i<cards.length;i+=rowSize){const bottoms=cards.slice(i,i+rowSize).map(c=>{const r=d.createRange();r.selectNode(c.querySelector('.website-preview-action').firstChild);return r.getBoundingClientRect().bottom;});check(Math.max(...bottoms)-Math.min(...bottoms)<1.1,`${width}px website page: row ${i/rowSize+1} destination actions align`);}}
+
+  check(section.querySelector('#eastland-client-work')?.textContent.includes('Client website project')&&section.querySelector('a[href="../our-work/#eastland"]'),`${width}px website page: client status and story retained`);
+  for(const card of cards){card.focus();check(d.activeElement===card&&card.scrollWidth<=card.clientWidth+1,`${width}px website page: usable example card`);}
+  check(d.documentElement.scrollWidth<=width+1,`${width}px website page: no horizontal overflow`);
+ }
+
+ if(route==='/services/') {
+  const markers=[...d.querySelectorAll('.service-visual-marker')];
+  check(markers.length===0,`${width}px Services: no decorative service icons`);
+  check(d.documentElement.scrollWidth<=width+1,`${width}px Services: decorative treatments do not overflow`);
+ }
+ if(route==='/examples/cortez-capital/') {
+  const bar=d.querySelector('.concept-bar'),header=d.querySelector('.site-header'),link=bar.querySelector('a');
+  check(d.documentElement.scrollWidth<=width+1&&bar.getBoundingClientRect().right<=width+1,`${width}px Cortez: full page and notice fit viewport (document ${d.documentElement.scrollWidth}, notice ${bar.getBoundingClientRect().right})`);
+  check(bar.getBoundingClientRect().height<=29&&bar.getBoundingClientRect().height>=24,`${width}px Cortez: compact notice with readable target`);
+  check(bar.textContent.includes('Fictional design concept')&&bar.scrollWidth<=bar.clientWidth,`${width}px Cortez: fictional notice visible without overflow`);
+  check(link.getBoundingClientRect().height>=24&&header.getBoundingClientRect().top>=bar.getBoundingClientRect().bottom-1,`${width}px Cortez: return link usable and header not overlapped`);
+  const toggle=d.querySelector('[data-menu-toggle]');
+  if(w.getComputedStyle(toggle).display!=='none'){toggle.click();await tick();check(header.hasAttribute('data-open'),`${width}px Cortez: mobile menu opens`);d.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));check(!header.hasAttribute('data-open'),`${width}px Cortez: Escape closes menu`);}
+ }
+
  frame.remove();
 }
 document.querySelector('#status').textContent=`${pass} passed; ${fail} failed. Local preview only.`;document.querySelector('#status').className=fail?'fail':'pass';

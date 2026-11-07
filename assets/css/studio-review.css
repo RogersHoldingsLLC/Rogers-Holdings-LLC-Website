@@ -342,3 +342,49 @@
  .durable-site .disclosure-summary .disclosure-action { flex-direction: column-reverse; gap: 5px; font-size: 10px; }
  .durable-site .disclosure-summary .disclosure-title { font-size: 14px; }
 }
+
+/* Services: quiet brass, sage and paper texture; no decorative icon system. */
+.service-scope-page.durable-site .service-scope-section { position: relative; background: var(--material-paper),linear-gradient(110deg,#e8ddc4,#f7f3ea 62%); background-size: 640px 640px,auto; }
+.service-scope-page.durable-site .service-scope-section:nth-of-type(odd) { background-image: var(--material-paper),linear-gradient(110deg,#dbe3da,#f1f2e9 66%); }
+.service-scope-page.durable-site .service-introduction { position: relative; padding-left: 24px; border-left: 3px solid #9b7d3b; }
+.service-scope-page.durable-site .service-scope-section:nth-of-type(odd) .service-introduction { border-left-color: #687763; }
+.service-scope-page.durable-site .service-scope-layout > div:last-child { align-self: start; padding: 24px; border: 1px solid #c4b48f; border-radius: 12px; background: #fffdf8c4; box-shadow: 0 12px 28px #31271609; }
+.service-scope-page.durable-site .service-detail-index { gap: 10px; margin-top: 26px; }
+.service-scope-page.durable-site .service-detail-index a { padding: 11px 16px; border: 1px solid #a98c48; border-radius: 6px; background: #e8d9ad0d; text-decoration: none; transition: background .18s,color .18s; }
+.service-scope-page.durable-site .service-detail-index a:hover,
+.service-scope-page.durable-site .service-detail-index a:focus-visible { background: #d4bb77; color: #181713; }
+@media (max-width: 600px) {
+ .service-scope-page.durable-site .service-scope-layout > div:last-child { padding: 16px; }
+ .service-scope-page.durable-site .service-introduction { padding-left: 16px; }
+ .service-scope-page.durable-site .service-detail-index { display: flex; flex-direction: row; }
+}
+@media (prefers-reduced-motion: reduce) { .service-scope-page.durable-site .service-detail-index a { transition: none; } }
+
+/* Balanced site textures: paper for reading, fine linen for section rhythm, stone only as an accent.
+   Background paint only: no layout, typography, artwork, logo-surface or interaction changes. */
+.durable-site {
+ --material-paper: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22320%22%20height%3D%22320%22%20viewBox%3D%220%200%20320%20320%22%3E%3Cdefs%3E%3Cfilter%20id%3D%22paper%22%20x%3D%220%22%20y%3D%220%22%20width%3D%22100%25%22%20height%3D%22100%25%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%22.65%22%20numOctaves%3D%223%22%20seed%3D%2211%22%20stitchTiles%3D%22stitch%22%2F%3E%3CfeColorMatrix%20values%3D%220%200%200%200%20.20%200%200%200%200%20.17%200%200%200%200%20.12%20.08%200%200%200%200%22%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3Cpath%20fill%3D%22white%22%20filter%3D%22url%28%23paper%29%22%20d%3D%22M0%200h320v320H0z%22%2F%3E%3C%2Fsvg%3E");
+ --material-linen: repeating-linear-gradient(0deg,#6d5c4203 0 1px,transparent 1px 4px),repeating-linear-gradient(90deg,#6d5c4203 0 1px,transparent 1px 4px);
+ --material-stone: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22640%22%20viewBox%3D%220%200%20640%20640%22%3E%3Cdefs%3E%3Cfilter%20id%3D%22stone%22%20x%3D%220%22%20y%3D%220%22%20width%3D%22100%25%22%20height%3D%22100%25%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%22.025%20.036%22%20numOctaves%3D%224%22%20seed%3D%2221%22%20stitchTiles%3D%22stitch%22%2F%3E%3CfeColorMatrix%20values%3D%220%200%200%200%20.094%200%200%200%200%20.090%200%200%200%200%20.074%20.035%200%200%200%200%22%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3Cpath%20fill%3D%22white%22%20filter%3D%22url%28%23stone%29%22%20d%3D%22M0%200h640v640H0z%22%2F%3E%3C%2Fsvg%3E");
+ --material-ink: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22640%22%20viewBox%3D%220%200%20640%20640%22%3E%3Cdefs%3E%3Cfilter%20id%3D%22stone%22%20x%3D%220%22%20y%3D%220%22%20width%3D%22100%25%22%20height%3D%22100%25%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%22.025%20.036%22%20numOctaves%3D%224%22%20seed%3D%2221%22%20stitchTiles%3D%22stitch%22%2F%3E%3CfeColorMatrix%20values%3D%220%200%200%200%20.95%200%200%200%200%20.94%200%200%200%200%20.90%20.055%200%200%200%200%22%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3Cpath%20fill%3D%22white%22%20filter%3D%22url%28%23stone%29%22%20d%3D%22M0%200h640v640H0z%22%2F%3E%3C%2Fsvg%3E");
+ background-image: var(--material-paper);
+ background-size: 360px 360px;
+}
+.durable-site .site-header { background-image: var(--material-paper); background-size: 360px 360px; }
+.durable-site .home-work,
+.durable-site .home-founder,
+.durable-site .website-evidence,
+.durable-site .website-service-section,
+.durable-site .spreadsheet-repair,
+.durable-site .package-process,
+.durable-site .website-preview-section,
+.durable-site .website-example-section { background-image: var(--material-paper),var(--material-linen); background-size: 360px 360px,4px 4px,4px 4px; }
+.durable-site .hero-editorial { background-image: linear-gradient(120deg,#fcfaf5bf,#f4f0e659),var(--material-paper); background-size: 100% 100%,360px 360px; }
+.durable-site .work-hero { background-image: var(--material-paper),var(--material-stone); background-size: 360px 360px,1200px 1200px; }
+.our-work-page.durable-site .work-client-project { background-image: var(--material-paper); background-size: 360px 360px; }
+.durable-site .site-footer { background-image: var(--material-paper),var(--material-linen); background-size: 360px 360px,4px 4px,4px 4px; }
+.service-scope-page.durable-site .service-scope-section { background-image: var(--material-paper),var(--material-linen),linear-gradient(110deg,#e8ddc4,#f7f3ea 62%); background-size: 360px 360px,4px 4px,4px 4px,100% 100%; }
+.service-scope-page.durable-site .service-scope-section:nth-of-type(odd) { background-image: var(--material-paper),var(--material-linen),linear-gradient(110deg,#dbe3da,#f1f2e9 66%); }
+@media (forced-colors: active) {
+ .durable-site { --material-paper: none; --material-linen: none; --material-stone: none; --material-ink: none; }
+}
