@@ -128,3 +128,16 @@ assert.ok(PUBLIC_MANIFEST.includes('our-work/index.html'));
 assert.ok(PUBLIC_MANIFEST.includes('assets/css/our-work.css'));
 assert.equal(PUBLIC_MANIFEST.some(f => f.startsWith('docs/our-work-review/')), false);
 console.log('Our Work migration, approved assets, evidence boundary and internal links passed.');
+
+// The mobile menu must be viewport-sized, not trapped by the blurred header.
+const workCss = read('assets/css/our-work.css');
+assert.match(workCss, /@media \(max-width: 960px\)/);
+assert.match(workCss, /\.our-work-page\.menu-open \.site-header\s*\{\s*-webkit-backdrop-filter: none;\s*backdrop-filter: none;/);
+const workMenu = workCss.match(/\.our-work-page\.durable-site \.primary-nav\.is-open\s*\{([^}]+)\}/)?.[1];
+assert.ok(workMenu, 'Our Work needs a scoped full-viewport menu');
+for (const declaration of ['top: var(--work-menu-top)', 'bottom: auto', 'height: calc(100vh - var(--work-menu-top))', 'height: calc(100dvh - var(--work-menu-top))', 'max-height: none', 'overflow-y: auto', 'overscroll-behavior-y: contain']) assert.ok(workMenu.includes(declaration), declaration);
+assert.match(workCss, /padding-bottom: calc\(24px \+ env\(safe-area-inset-bottom, 0px\)\)/);
+assert.match(workCss, /\.our-work-page \.primary-nav > a \{ flex-shrink: 0; \}/);
+assert.match(workCss, /--work-menu-top: 73px/);
+assert.match(work, /our-work\.css\?v=menu-overlay-20261107/);
+console.log('Our Work menu viewport, overflow, safe-area and cache guards passed.');

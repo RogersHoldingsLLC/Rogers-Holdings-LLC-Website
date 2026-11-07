@@ -272,3 +272,23 @@
  .our-work-page [data-live-mobile-proof] .project-capture-link { width: min(100%,360px); margin-inline: auto; }
  .our-work-page [data-live-mobile-proof] figcaption { max-width: none; }
 }
+
+/* The scrolled header's backdrop filter must not contain the fixed menu. */
+@media (max-width: 960px) {
+  .our-work-page { --work-menu-top: 73px; }
+  .our-work-page.menu-open .site-header {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .our-work-page.durable-site .primary-nav.is-open {
+    top: var(--work-menu-top);
+    bottom: auto;
+    height: calc(100vh - var(--work-menu-top));
+    height: calc(100dvh - var(--work-menu-top));
+    max-height: none;
+    padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+  }
+  .our-work-page .primary-nav > a { flex-shrink: 0; }
+}
