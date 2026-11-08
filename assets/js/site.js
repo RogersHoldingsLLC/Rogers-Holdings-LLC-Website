@@ -244,6 +244,8 @@ const BUSINESS_SNAPSHOT_ANALYTICS_EVENTS = new Set([
   'business_snapshot_submitted',
   'business_snapshot_email_prepared',
   'business_snapshot_submission_failed',
+  'business_snapshot_submit_blocked',
+  'business_snapshot_verification_issue',
   'business_snapshot_abandoned',
   'business_snapshot_runtime_failed'
 ]);
@@ -313,14 +315,27 @@ function classifyBusinessSnapshotFailure({ error, response, result }) {
   return 'ambiguous_response';
 }
 
+function businessSnapshotAnalyticsIsEnabled(location = window.location) {
+  try {
+    const url = new URL(location.href);
+    return url.protocol === 'https:'
+      && ['rogersholdingsllc.com', 'www.rogersholdingsllc.com'].includes(url.hostname)
+      && url.searchParams.get('analytics') !== 'off';
+  } catch {
+    return false;
+  }
+}
+
 function trackBusinessSnapshotEvent(eventName, category) {
   if (
     !BUSINESS_SNAPSHOT_ANALYTICS_EVENTS.has(eventName)
+    || !businessSnapshotAnalyticsIsEnabled()
     || typeof window.gtag !== 'function'
   ) return;
   const parameters = { event_category: 'lead' };
   if (
-    eventName === 'business_snapshot_submission_failed'
+    ['business_snapshot_submission_failed', 'business_snapshot_submit_blocked',
+      'business_snapshot_verification_issue'].includes(eventName)
     && BUSINESS_SNAPSHOT_FAILURE_CATEGORIES.has(category)
   ) parameters.failure_category = category;
   if (
@@ -385,6 +400,20 @@ function createBusinessSnapshotJourneyTracker(trackEvent = trackBusinessSnapshot
   };
 }
 
+function createBusinessSnapshotVerificationIssueReporter(
+  journey, trackEvent = trackBusinessSnapshotEvent
+) {
+  const reported = new Set();
+  const categories = new Set(['turnstile_error', 'turnstile_expired', 'turnstile_timeout']);
+  return (category) => {
+    if (journey.currentStage() === 'submitted'
+      || !categories.has(category) || reported.has(category)) return false;
+    reported.add(category);
+    trackEvent('business_snapshot_verification_issue', category);
+    return true;
+  };
+}
+
 function createBusinessSnapshotRuntimeErrorReporter(
   trackEvent = trackBusinessSnapshotEvent
 ) {
@@ -424,6 +453,7 @@ if (leadForm) {
   const defaultSubmitLabel = 'Request My Free Business Snapshot';
   const requestId = crypto.randomUUID();
   const journey = createBusinessSnapshotJourneyTracker();
+  const reportVerificationIssue = createBusinessSnapshotVerificationIssueReporter(journey);
   const reportRuntimeError = createBusinessSnapshotRuntimeErrorReporter();
   let submissionPending = false;
   let turnstileWidgetId = null;
@@ -582,17 +612,17 @@ if (leadForm) {
   window.businessSnapshotTurnstileError = () => {
     turnstileToken = '';
     setTurnstileStatus('error', businessSnapshotFailureMessages.turnstile_error);
-    trackBusinessSnapshotEvent('business_snapshot_submission_failed', 'turnstile_error');
+    reportVerificationIssue('turnstile_error');
   };
   window.businessSnapshotTurnstileExpired = () => {
     resetTurnstileForFreshToken();
     setTurnstileStatus('expired', businessSnapshotFailureMessages.turnstile_expired, true);
-    trackBusinessSnapshotEvent('business_snapshot_submission_failed', 'turnstile_expired');
+    reportVerificationIssue('turnstile_expired');
   };
   window.businessSnapshotTurnstileTimeout = () => {
     resetTurnstileForFreshToken();
     setTurnstileStatus('timeout', businessSnapshotFailureMessages.turnstile_timeout, true);
-    trackBusinessSnapshotEvent('business_snapshot_submission_failed', 'turnstile_timeout');
+    reportVerificationIssue('turnstile_timeout');
   };
 
   renderBusinessSnapshotTurnstile = () => {
@@ -647,7 +677,7 @@ if (leadForm) {
 
   leadForm.addEventListener('submit', async (event) => {
     event.preventDefault();
-    if (submissionPending) return;
+    if (submissionPending || journey.currentStage() === 'submitted') return;
     formStatus.hidden = true;
     formStatus.className = 'form-status';
 
@@ -658,7 +688,7 @@ if (leadForm) {
       formStatus.hidden = false;
       invalidFields[0].focus();
       journey.fail();
-      trackBusinessSnapshotEvent('business_snapshot_submission_failed', 'user_validation');
+      trackBusinessSnapshotEvent('business_snapshot_submit_blocked', 'user_validation');
       return;
     }
 
@@ -683,7 +713,7 @@ if (leadForm) {
         request,
         error: true
       });
-      trackBusinessSnapshotEvent('business_snapshot_submission_failed', 'turnstile_missing');
+      trackBusinessSnapshotEvent('business_snapshot_submit_blocked', 'turnstile_missing');
       journey.fail();
       return;
     }
@@ -766,7 +796,9 @@ if (typeof module !== 'undefined' && module.exports) {
     businessSnapshotEndpointIsConfigured,
     businessSnapshotResponseIsAccepted,
     classifyBusinessSnapshotFailure,
+    businessSnapshotAnalyticsIsEnabled,
     createBusinessSnapshotJourneyTracker,
+    createBusinessSnapshotVerificationIssueReporter,
     createBusinessSnapshotRuntimeErrorReporter,
     trackBusinessSnapshotEvent
   };
