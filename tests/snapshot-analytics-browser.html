@@ -1,0 +1,53 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Snapshot analytics browser checks</title>
+<style>body{font:16px/1.5 system-ui;margin:24px;background:#f4f0e6}pre{white-space:pre-wrap}iframe{position:fixed;left:-20000px;top:0;border:0}.pass{color:#185b28}.fail{color:#a11616}#preview{position:static;border:1px solid #aaa;height:850px}button{font:inherit;padding:12px}</style>
+<h1>Snapshot analytics browser checks</h1><p>Built artifact, isolated fetch and verification. External connections and form navigation are blocked by the QA server.</p><p id="status">Running…</p><pre id="results"></pre>
+<button id="show-preview">Show 390px Snapshot preview</button><div id="preview-slot"></div>
+<script type="module">
+const out=document.querySelector('#results');let pass=0,fail=0;
+const check=(ok,label)=>{out.textContent+=`${ok?'PASS':'FAIL'} ${label}\n`;ok?pass++:fail++;};
+const tick=()=>new Promise(r=>setTimeout(r,40));
+async function frame(width,scenario='success',plain=false){const f=document.createElement('iframe');f.width=width;f.height=900;f.title='Snapshot isolated QA';f.src=plain?'/business-snapshot/?analytics=off':'/__qa/snapshot/?scenario='+scenario;const loaded=new Promise(r=>f.onload=r);document.body.append(f);await loaded;await tick();return f;}
+function completeFields(d){for(const [id,value] of Object.entries({'full-name':'Offline Fixture','business-name':'Fixture Business','email':'fixture@example.invalid','challenge':'This is isolated browser QA and will never be transmitted.'})){const el=d.getElementById(id);el.value=value;el.dispatchEvent(new Event('input',{bubbles:true}));}d.getElementById('consent').checked=true;d.getElementById('consent').dispatchEvent(new Event('change',{bubbles:true}));}
+function submit(d){d.querySelector('[data-lead-form]').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));}
+try {
+ for(const width of [320,390,768,1440]){
+  const f=await frame(width),d=f.contentDocument,w=f.contentWindow,q=w.__snapshotQA;
+  check(d.documentElement.scrollWidth<=width+1,`${width}px no page overflow`);
+  check(!d.querySelector('script[src*="googletagmanager"]'),`${width}px preview does not load GA`);
+  check(w.dataLayer.length===0,`${width}px preview creates no GA commands`);
+  check(w.businessSnapshotAnalyticsIsEnabled({href:'https://rogersholdingsllc.com/business-snapshot/'}),`${width}px production URL passes pure host gate`);
+  check(!w.businessSnapshotAnalyticsIsEnabled({href:'https://rogersholdingsllc.com/business-snapshot/?analytics=off'}),`${width}px explicit test URL is suppressed`);
+  for(let i=0;i<30;i++)for(const type of ['Error','Expired','Timeout'])w['businessSnapshotTurnstile'+type]();
+  check(q.requests.length===0&&w.dataLayer.length===0,`${width}px 90 idle callbacks make no submission or GA emission`);
+  submit(d);await tick();check(q.requests.length===0&&!d.querySelector('[data-form-status]').hidden,`${width}px invalid input blocked with visible feedback`);
+  completeFields(d);submit(d);await tick();check(q.requests.length===0&&d.querySelector('[data-form-status]').textContent.includes('Human verification is required'),`${width}px missing token blocked with recovery guidance`);
+  w.businessSnapshotTurnstileSuccess('offline-fixture-token');submit(d);await tick();
+  check(q.requests.length===1,`${width}px accepted mocked response uses one attempted request`);
+  const form=d.querySelector('[data-lead-form]'),confirmation=d.querySelector('[data-submission-confirmation]');
+  check(form.hidden&&!confirmation.hidden&&d.activeElement===confirmation,`${width}px confirmation is shown and focused`);
+  for(const type of ['Error','Expired','Timeout'])w['businessSnapshotTurnstile'+type]();submit(d);await tick();
+  check(q.requests.length===1,`${width}px callbacks/repeated submit after success do not resubmit`);
+  check(q.errors.length===0,`${width}px no runtime errors`);
+  check(d.documentElement.scrollWidth<=width+1,`${width}px confirmation fits viewport`);
+  check(!w.performance.getEntriesByType('resource').some(r=>/google-analytics|googletagmanager|intake\.rogersholdingsllc\.com/.test(r.name)),`${width}px no GA or real intake resource requests`);
+  f.remove();
+ }
+ for(const scenario of ['network','timeout','rejected','malformed']){
+  const f=await frame(390,scenario),d=f.contentDocument,w=f.contentWindow,q=w.__snapshotQA;
+  completeFields(d);w.businessSnapshotTurnstileSuccess('offline-fixture-token');submit(d);await tick();
+  check(q.requests.length===1&&!d.querySelector('[data-lead-form]').hidden,`${scenario}: one mocked request, form stays available`);
+  check(!d.querySelector('[data-form-status]').hidden&&d.querySelector('[data-submission-confirmation]').hidden,`${scenario}: honest error, no success confirmation`);
+  check(!d.querySelector('[data-submit-button]').disabled&&q.resets===1,`${scenario}: retry and verification reset preserved`);
+  check(q.errors.length===0,`${scenario}: no runtime error`);f.remove();
+ }
+ const f=await frame(390,'pending'),d=f.contentDocument,w=f.contentWindow,q=w.__snapshotQA;
+ completeFields(d);w.businessSnapshotTurnstileSuccess('offline-fixture-token');submit(d);submit(d);await tick();
+ check(q.requests.length===1&&d.querySelector('[data-submit-button]').disabled, 'pending: duplicate submit blocked and button disabled');
+ for(const type of ['Error','Expired','Timeout'])w['businessSnapshotTurnstile'+type]();q.resolve();await tick();
+ check(!d.querySelector('[data-submission-confirmation]').hidden&&q.requests.length===1,'pending: verification callbacks do not turn accepted result into failure');f.remove();
+ const plain=await frame(390,'success',true),pd=plain.contentDocument,pw=plain.contentWindow;
+ check(!pd.querySelector('script[src*="googletagmanager"]')&&pw.dataLayer.length===0,'unmodified built Snapshot with analytics=off has no GA bootstrap');plain.remove();
+} catch(error){check(false,error.stack||String(error));}
+document.querySelector('#status').textContent=`${pass} passed; ${fail} failed. No real submissions.`;document.querySelector('#status').className=fail?'fail':'pass';
+document.querySelector('#show-preview').onclick=()=>{const f=document.createElement('iframe');f.id='preview';f.width=390;f.src='/business-snapshot/?analytics=off';f.title='390px Snapshot preview';document.querySelector('#preview-slot').replaceChildren(f);};
+</script></html>

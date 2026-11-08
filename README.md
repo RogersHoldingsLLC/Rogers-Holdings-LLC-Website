@@ -301,3 +301,7 @@ The bounded hero pass keeps all live wording verbatim, moves the service descrip
 ## Premium editorial homepage — local review
 
 The distinct review version applies a homepage-scoped editorial system: full-width headline, paired phone signature, aligned grids, alternating project evidence, numbered services and a larger Snapshot presentation. All existing information and assets stay intact. See [PREMIUM_EDITORIAL_LOCAL_REVIEW_2026_10_27.md](docs/design-source/PREMIUM_EDITORIAL_LOCAL_REVIEW_2026_10_27.md) for actual before/after comparisons, payload/accessibility checks, tradeoffs and the unexecuted preview plan.
+
+## Snapshot analytics correction — 2026-11-08
+
+Verification diagnostics and pre-request validation blocks now have separate events from attempted-request failures. Snapshot analytics are suppressed on preview hosts and with an explicit current-page analytics=off query. The form and delivery contract are preserved. Event definitions, verification coverage and limits are recorded in [SNAPSHOT_ANALYTICS_RELEASE_2026_11_08.md](docs/SNAPSHOT_ANALYTICS_RELEASE_2026_11_08.md).
