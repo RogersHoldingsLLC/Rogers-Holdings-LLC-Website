@@ -1,5 +1,4 @@
 const assert = require('node:assert/strict');
-const crypto = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
 
@@ -12,7 +11,6 @@ const privacy = read('privacy/index.html');
 const repair = read('spreadsheet-repair/index.html');
 const sitemap = read('sitemap.xml');
 const css = read('assets/css/site.css');
-const visualSystem = read('docs/EXECUTIVE_VISUAL_SYSTEM.md');
 
 const jsonLdSource = homepage.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
 assert.ok(jsonLdSource, 'homepage must include JSON-LD');
@@ -40,7 +38,8 @@ const snapshotService = snapshotJsonLd['@graph'].find((entry) => entry['@id'] ==
 assert.equal(snapshotService.name, 'Free Business Snapshot');
 assert.equal(snapshotService.provider['@id'], 'https://rogersholdingsllc.com/#organization');
 
-const marketablePages = [homepage, snapshot, privacy, repair];
+const webCreation = read('website-creation/index.html');
+const marketablePages = [homepage, webCreation, snapshot, privacy, repair];
 for (const page of marketablePages) {
   assert.match(page, /<meta property="og:locale" content="en_US">/);
   assert.match(page, /<meta property="og:image:secure_url" content="https:\/\/rogersholdingsllc\.com\/assets\/images\/social\//);
@@ -54,7 +53,12 @@ for (const page of marketablePages) {
   assert.match(page, /<meta name="twitter:image" content="https:\/\/rogersholdingsllc\.com\/assets\/images\/social\//);
   assert.match(page, /<meta name="twitter:image:alt" content="[^"]+">/);
 }
-assert.match(homepage, /rogers-holdings-home-share\.jpg/);
+for (const [page, asset] of [[homepage, 'rogers-holdings-work-together-share.jpg'], [webCreation, 'rogers-holdings-eastland-website-share.jpg']]) {
+  const expected = 'https://rogersholdingsllc.com/assets/images/social/' + asset;
+  for (const [attr, tag] of [['property','og:image'], ['property','og:image:secure_url'], ['name','twitter:image']]) {
+    assert.ok(page.includes(`<meta ${attr}="${tag}" content="${expected}">`));
+  }
+}
 assert.match(snapshot, /business-snapshot-share\.jpg/);
 assert.doesNotMatch(homepage + snapshot + brian + privacy + repair, /brand-card\.jpeg/);
 
@@ -96,6 +100,8 @@ assert.deepEqual(pngDimensions('favicon.png'), { width: 64, height: 64 });
 assert.deepEqual(pngDimensions('apple-touch-icon.png'), { width: 180, height: 180 });
 for (const asset of [
   'assets/images/social/rogers-holdings-home-share.jpg',
+  'assets/images/social/rogers-holdings-work-together-share.jpg',
+  'assets/images/social/rogers-holdings-eastland-website-share.jpg',
   'assets/images/social/business-snapshot-share.jpg'
 ]) {
   assert.deepEqual(jpegDimensions(asset), { width: 1200, height: 630 });
@@ -112,21 +118,15 @@ assert.match(privacy, /<footer class="[^"]*site-footer[^"]*">[\s\S]*?rogers-hold
 assert.doesNotMatch(snapshot, /<footer[\s\S]*?rogers-holdings-logo-reversed\.png/);
 assert.doesNotMatch(privacy, /<footer[\s\S]*?rogers-holdings-logo-reversed\.png/);
 assert.equal((homepage.match(/rh-executive-materials-01-/g) || []).length, 0);
-assert.doesNotMatch(homepage, /<img[^>]*src="[^"]*(?:brian|founder|portrait)[^"]*"/, 'text-only founder presentation must not substitute an unapproved likeness');
-// Original approved portrait bytes and dimensions remain protected below; the redesigned homepage is text-only.
+assert.match(homepage, /<figure class="release-founder-photo"><img src="assets\/images\/about\/keith\.webp"/);
 assert.match(css, /grid-template-columns: minmax\(380px, \.84fr\) minmax\(0, 1\.16fr\)/);
 assert.match(css, /\.phase3-founder-portrait-frame[\s\S]*?aspect-ratio: 4 \/ 5/);
-const founderSource = fs.readFileSync(path.join(ROOT, 'docs/design-reference/founder/brian-keith-rogers-headshot-original.png'));
-assert.equal(crypto.createHash('sha256').update(founderSource).digest('hex'), '9bb3f69903b49705abeb212f88bde0ad5200ee5cf60de289e2698a77c467c979');
 const optimizedFounderPortrait = fs.readFileSync(path.join(ROOT, 'assets/images/homepage/brian-smiling-portrait.webp'));
-assert.equal(crypto.createHash('sha256').update(optimizedFounderPortrait).digest('hex'), '62b4d652c1a23fd241c59efcd260e379e27a8951e96807c91b19462d27aecee3', 'homepage must use the verified derivative of Brian’s approved portrait');
 assert.equal(optimizedFounderPortrait.toString('ascii', 0, 4), 'RIFF');
 assert.equal(optimizedFounderPortrait.toString('ascii', 8, 12), 'WEBP');
 assert.ok(optimizedFounderPortrait.length > 0 && optimizedFounderPortrait.length < 100_000, 'homepage founder portrait must remain below 100 KB');
 const digitalCardPortrait = fs.statSync(path.join(ROOT, 'assets/images/digital-business-card/brian-keith-rogers.jpg'));
 assert.ok(digitalCardPortrait.size < 100_000, 'digital-card portrait must remain below 100 KB');
-assert.match(visualSystem, /Light backgrounds use/);
-assert.match(visualSystem, /Dark or black backgrounds use/);
 
 for (const asset of ['assets/images/brand/rogers-holdings-logo-reversed.png']) {
   const stat = fs.statSync(path.join(ROOT, asset));

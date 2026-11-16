@@ -23,8 +23,8 @@ function artifactHashes() {
 }
 
 validateSourceBoundary();
-assert.deepEqual(PUBLIC_MANIFEST, JSON.parse(fs.readFileSync(new URL('./approved-public-manifest.json', import.meta.url), 'utf8')), 'exact reviewed production manifest: 132 preserved files plus the approved founder portrait');
-assert.equal(PUBLIC_MANIFEST.length, 133);
+assert.deepEqual(PUBLIC_MANIFEST, JSON.parse(fs.readFileSync(new URL('./approved-public-manifest.json', import.meta.url), 'utf8')), 'exact reviewed production manifest: 133 preserved files plus two approved link preview cards');
+assert.equal(PUBLIC_MANIFEST.length, 135);
 const aboutPortrait = 'assets/images/about/keith.webp';
 assert.ok(PUBLIC_MANIFEST.includes(aboutPortrait));
 assert.ok(fs.statSync(path.join(REPOSITORY_ROOT, aboutPortrait)).size < 100_000);
