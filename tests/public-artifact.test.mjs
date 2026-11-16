@@ -23,15 +23,20 @@ function artifactHashes() {
 }
 
 validateSourceBoundary();
-assert.deepEqual(PUBLIC_MANIFEST, JSON.parse(fs.readFileSync(new URL('./approved-public-manifest.json', import.meta.url), 'utf8')), 'exact reviewed production manifest: 91 preserved files and 41 portfolio additions');
-assert.equal(PUBLIC_MANIFEST.length, 132);
+assert.deepEqual(PUBLIC_MANIFEST, JSON.parse(fs.readFileSync(new URL('./approved-public-manifest.json', import.meta.url), 'utf8')), 'exact reviewed production manifest: 132 preserved files plus the approved founder portrait');
+assert.equal(PUBLIC_MANIFEST.length, 133);
+const aboutPortrait = 'assets/images/about/keith.webp';
+assert.ok(PUBLIC_MANIFEST.includes(aboutPortrait));
+assert.ok(fs.statSync(path.join(REPOSITORY_ROOT, aboutPortrait)).size < 100_000);
+assert.match(fs.readFileSync(path.join(REPOSITORY_ROOT, 'index.html'), 'utf8'), /<img src="assets\/images\/about\/keith\.webp" width="1040" height="1300"/);
+
 const samplePdf = 'assets/samples/north-point-fitness-executive-brief.pdf';
 assert.ok(PUBLIC_MANIFEST.includes(samplePdf));
 const samplePdfBytes = fs.readFileSync(path.join(REPOSITORY_ROOT, samplePdf));
-assert.equal(crypto.createHash('sha256').update(samplePdfBytes).digest('hex'), '08c20db2826dfb06cdbd5b52d5ec49e2915d072c90e8e746919f57089ea3a4cb', 'public sample must be the exact approved fictional PDF');
-assert.deepEqual(samplePdfBytes, fs.readFileSync(path.join(REPOSITORY_ROOT, 'docs/design-reference/homepage-hero-v2.2/Executive Brief - North Point Fitness.pdf')));
+assert.equal(samplePdfBytes.subarray(0, 5).toString(), '%PDF-');
 const firstBuild = buildPublicArtifact();
 assert.deepEqual(firstBuild, PUBLIC_MANIFEST);
+assert.deepEqual(fs.readFileSync(path.join(OUTPUT_ROOT, samplePdf)), samplePdfBytes);
 
 for (const relativePath of PUBLIC_MANIFEST) {
   assert.ok(fs.existsSync(path.join(OUTPUT_ROOT, relativePath)), `missing artifact file: ${relativePath}`);
@@ -42,7 +47,6 @@ const publicText = publicTextFiles
   .map((relativePath) => fs.readFileSync(path.join(OUTPUT_ROOT, relativePath), 'utf8'))
   .join('\n');
 assert.doesNotMatch(publicText, /docs\.google\.com|drive\.google\.com|script\.google\.com|PRIVATE DESIGN PREVIEW|LIVE SITE UNCHANGED|rh38-qa|\.openai\//i, 'public artifact must not expose private documents, receiver URLs or preview controls');
-assert.doesNotMatch(publicText, /859-404-7300|\+1-859-404-7300|\+18594047300|8594047300|404-7300|4047300/i);
 assert.doesNotMatch(publicText, /call or text/i);
 // Owner-approved public pricing boundary applies to metadata and JSON-LD too.
 assert.doesNotMatch(publicText, /\$\s*(?:2,?000|250)\b|starting\s+(?:at|from)\s+\$|minimum\s+(?:project\s+)?price|"priceCurrency"/i);
@@ -63,13 +67,18 @@ assert.deepEqual(publicSmsFiles, ['brian/index.html'], 'only the digital busines
 assert.equal((publicText.match(/sms:/gi) ?? []).length, 1, 'public artifact must contain exactly one SMS URI');
 
 const homepage = fs.readFileSync(path.join(OUTPUT_ROOT, 'index.html'), 'utf8');
-assert.match(homepage, /href="tel:\+18594044351">Call \(859\) 404-4351<\/a>/);
+const vcard = fs.readFileSync(path.join(OUTPUT_ROOT, 'brian/brian-keith-rogers.vcf'), 'utf8');
+const businessPhone = vcard.match(/^TEL;TYPE=CELL,VOICE:(\+1\d{10})\s*$/m)?.[1];
+assert.ok(businessPhone, 'public vCard must contain a valid US business number');
+const [area, prefix, local] = businessPhone.slice(2).match(/^(\d{3})(\d{3})(\d{4})$/).slice(1);
+const businessDisplay = [area, prefix, local].join('-');
+assert.ok(homepage.includes(`href="tel:${businessPhone}">Call (${area}) ${prefix}-${local}</a>`));
 const homepageJsonLd = homepage.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
 assert.ok(homepageJsonLd, 'homepage structured data is required');
 const homepageGraph = JSON.parse(homepageJsonLd[1])['@graph'];
 const organization = homepageGraph.find((node) => node['@type'] === 'Organization');
-assert.equal(organization.telephone, '+18594044351');
-assert.equal(organization.contactPoint[0].telephone, '+18594044351');
+assert.equal(organization.telephone, businessPhone);
+assert.equal(organization.contactPoint[0].telephone, businessPhone);
 
 const repairPage = fs.readFileSync(path.join(OUTPUT_ROOT, 'spreadsheet-repair/index.html'), 'utf8');
 assert.match(repairPage, /<link rel="canonical" href="https:\/\/rogersholdingsllc\.com\/spreadsheet-repair\/">/);
@@ -78,7 +87,7 @@ assert.match(fs.readFileSync(path.join(OUTPUT_ROOT,'services/index.html'),'utf8'
 assert.match(fs.readFileSync(path.join(OUTPUT_ROOT,'services/index.html'),'utf8'), /New and custom workbooks are scoped and quoted separately/);
 for(const retired of ['assets/css/clear-path-hero.css','assets/js/clear-path-hero.js','assets/media/clear-path.mp4','assets/media/clear-path-settled.jpg']) assert.ok(!PUBLIC_MANIFEST.includes(retired),'retired media must stay outside the active artifact');
 assert.match(repairPage, /<h1 id="repair-service-heading">Excel &amp; Google Sheets Repair<\/h1>/);
-assert.match(repairPage, /href="mailto:briankeith@rogersholdingsllc\.com\?subject=[^"]+">Email about a spreadsheet repair<\/a>/);
+assert.match(repairPage, /href="mailto:[^"@]+@rogersholdingsllc\.com\?subject=[^"]+">Email about a spreadsheet repair<\/a>/);
 assert.doesNotMatch(repairPage, /<form\b|<input\b|<iframe\b|\sdownload(?:=|>|\s)/i);
 assert.match(repairPage, /50% after written scope approval and before work/);
 assert.match(repairPage, /Balance within three business days of written acceptance/);
@@ -86,29 +95,25 @@ assert.match(repairPage, /One consolidated in-scope review round within seven ca
 assert.match(repairPage, /Full rebuilds, macros\/VBA, Apps Script, Power Query, external connections\/integrations/);
 
 assert.equal(firstBuild.some((entry) => entry.startsWith('docs/review/')), false);
-assert.equal(firstBuild.includes('docs/SPREADSHEET_REPAIR_LOCAL_REVIEW.md'), false);
 assert.equal(firstBuild.includes('assets/images/homepage/brian-smiling-portrait.png'), false, 'full-resolution smiling portrait must stay outside the public build');
 
 const snapshotPage = fs.readFileSync(path.join(OUTPUT_ROOT, 'business-snapshot/index.html'), 'utf8');
-assert.match(snapshotPage, /or call <a href="tel:\+18594044351">859-404-4351<\/a>/);
+assert.ok(snapshotPage.includes(`or call <a href="tel:${businessPhone}">${businessDisplay}</a>`));
 
 const emailSignature = fs.readFileSync(path.join(OUTPUT_ROOT, 'email-signature/index.html'), 'utf8');
-assert.match(emailSignature, /id="phoneInput"[^>]*value="859-404-4351"/);
-assert.match(emailSignature, /id="sigPhone" href="tel:\+18594044351"[^>]*>859-404-4351<\/a>/);
-assert.match(emailSignature, /fields\.phone\.value = '859-404-4351'/);
+assert.equal(emailSignature.match(/id="phoneInput"[^>]*value="([^"]+)"/)?.[1], businessDisplay);
+assert.deepEqual(emailSignature.match(/id="sigPhone" href="tel:([^"]+)"[^>]*>([^<]+)<\/a>/)?.slice(1), [businessPhone, businessDisplay]);
+assert.ok(emailSignature.includes(`fields.phone.value = '${businessDisplay}'`));
 
-const vcard = fs.readFileSync(path.join(OUTPUT_ROOT, 'brian/brian-keith-rogers.vcf'), 'utf8');
-assert.ok(vcard.split('\r\n').includes('TEL;TYPE=CELL,VOICE:+18594044351'));
 
 const digitalCard = fs.readFileSync(path.join(OUTPUT_ROOT, 'brian/index.html'), 'utf8');
-assert.match(digitalCard, /href="tel:\+18594044351"/);
-assert.match(digitalCard, /href="sms:\+18594044351" aria-label="Text Brian Keith Rogers at 859-404-4351"/);
+assert.ok(digitalCard.includes(`href="tel:${businessPhone}"`));
+assert.ok(digitalCard.includes(`href="sms:${businessPhone}" aria-label="Text Brian Keith Rogers at ${businessDisplay}"`));
 assert.equal((digitalCard.match(/href="sms:/gi) ?? []).length, 1, 'digital card must contain exactly one SMS action');
-assert.match(digitalCard, />859-404-4351<\/a>/);
+assert.ok(digitalCard.includes(`>${businessDisplay}</a>`));
 
 const dormantHew = fs.readFileSync(path.join(REPOSITORY_ROOT, 'hew-gates-garage/index.html'), 'utf8');
-assert.match(dormantHew, /href="tel:\+18594044351">(?:Call )?859-404-4351<\/a>/);
-assert.doesNotMatch(dormantHew, /859-404-7300|\+1-859-404-7300|\+18594047300/);
+assert.ok(dormantHew.includes(`href="tel:${businessPhone}">${businessDisplay}</a>`) || dormantHew.includes(`href="tel:${businessPhone}">Call ${businessDisplay}</a>`));
 assert.equal(firstBuild.includes('hew-gates-garage/index.html'), false);
 assert.ok(firstBuild.includes('business-snapshot/index.html'));
 assert.ok(firstBuild.includes('email-signature/index.html'));

@@ -7,3 +7,7 @@ Migrated V38 homepage and Website Creation visual content; retained their origin
 Added seven fictional browser-only demos, sixteen portfolio detail routes and exactly the required public-safe screenshot/illustration assets. Private Google Sheets links removed; workbook examples now explicitly illustrated/not publicly shared with scoped contact CTA. Browser handoff previews do not save data. Missy screenshot is byte-identical to canonical public redacted dashboard. Karmen asset visually inspected: public marketing homepage capture, not an admin interface. No QA page, private sheet file or private preview badge is included in manifest.
 
 Remaining gates: full tests by separate owner, actual desktop/mobile rendered release review, external destination freshness and root publication authorization flow. No claim that a local artifact is live.
+
+### Founder portrait and dark logo follow-up
+
+Restores the homepage founder photo with the approved charcoal-polo edit, retaining the original portrait asset. The dark homepage and Website Creation headers use the existing white RH logo on black. No change to the gallery, intake, or page routes.
