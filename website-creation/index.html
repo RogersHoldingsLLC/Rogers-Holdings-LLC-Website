@@ -65,7 +65,7 @@ p{margin:0;color:var(--muted)}.kicker{margin:0 0 10px;color:var(--gold);font-siz
 .list{list-style:none;padding:0;margin:0;display:grid;gap:4px}.list li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:13px;border-top:1px solid var(--line);padding:10px 0}.list .num{color:var(--gold);font-size:.75rem;font-weight:800;padding-top:2px}.list strong{display:block;font-size:.95rem}.list p{font-size:.875rem;line-height:1.45;margin-top:3px}
 figure{margin:0}figure img{display:block;width:100%;height:auto;border:1px solid #d0b57771;border-radius:5px;box-shadow:0 16px 26px -21px #030304}figcaption,.note{color:var(--muted);font-size:.76rem;margin-top:8px}
 .actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px 18px;margin-top:14px}.actions a{min-height:44px;display:inline-flex;align-items:center;font-weight:760;font-size:.84rem}.button{padding:10px 15px;background:var(--gold);color:var(--ink);border:1px solid #fae1af;border-radius:3px;text-decoration:none}.button:hover{background:#f9dfa9}
-.scope{padding:clamp(36px,6vw,70px) 0}.scope h2{font-size:clamp(1.9rem,3.7vw,3.5rem)}.scope-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px 30px;margin-top:19px}.scope-grid div{padding:14px 0;border-top:1px solid var(--line)}.scope-grid p{font-size:.92rem}
+.scope{padding:clamp(36px,6vw,70px) 0}.scope h2{font-size:clamp(1.9rem,3.7vw,3.5rem)}.scope-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px 30px;margin-top:19px}.scope-grid article{padding:16px 0 11px;border-top:1px solid var(--line)}.scope-grid p:not(.kicker){font-size:.92rem}.scope-grid .kicker{margin-bottom:6px}.scope-grid h3{font-size:clamp(1.12rem,2vw,1.4rem)}.scope-standalone{margin-top:18px;font-size:.9rem}.scope-standalone a{color:var(--gold)}.scope-details{margin-top:13px;border-top:1px solid var(--line);font-size:.85rem}.scope-details summary{cursor:pointer;padding:12px 0;min-height:44px;color:var(--cream)}.scope-details p{margin:0 0 8px;max-width:72ch}
 footer{border-top:1px solid var(--line);padding:20px 0;font-size:.79rem;color:var(--muted)}
 @media(max-width:700px){.wrap{width:calc(100% - 30px)}header .wrap{padding:7px 0}header nav a{font-size:.76rem}.example{padding:17px}.grid,.scope-grid{grid-template-columns:1fr}.grid{margin-top:15px}.example .head{margin-top:8px}.actions{gap:7px 13px}}
 /* Editorial case feature: work above, explanation below. */
@@ -84,7 +84,7 @@ footer{border-top:1px solid var(--line);padding:20px 0;font-size:.79rem;color:va
 .feature-steps .num{display:block;color:#624b29;padding:0;margin-bottom:3px}
 .feature-steps .list strong{font-size:.99rem;color:#24211d}.feature-steps p{color:#4a433a}
 .feature-steps .actions{margin-top:17px}.feature-steps .button{background:#24262a;color:#fff6e3;border:1px solid #24262a;border-bottom-color:#997d4f}.feature-steps .button:hover{background:#37393d}.feature-steps a:focus-visible{outline-color:#674e27}
-.scope-grid div{padding:16px 0 11px}.scope .actions{margin-top:13px}
+.scope .actions{margin-top:13px}
 @media(max-width:700px){
  .intro{grid-template-columns:1fr;gap:15px;padding-top:30px}.intro .intro-line{padding-left:13px;margin:0}
  .feature-top{grid-template-columns:1fr;padding:18px;gap:16px}
@@ -120,8 +120,18 @@ footer{border-top:1px solid var(--line);padding:20px 0;font-size:.79rem;color:va
 <div class="actions"><a class="button" href="../portfolio/precision-fabrication/">Try the website demo</a><a href="../portfolio/projects/customer-follow-up/">See the matching tracker</a><a href="../#work">Browse all work</a></div>
 <p class="note">Fictional demo. It doesn’t send quotes or write to Google Sheets.</p>
 </div></section>
-<section class="scope" aria-labelledby="package"><h2 id="package">What’s included</h2><div class="scope-grid">
-<div><h3>The website</h3><p>Up to five mobile-friendly pages using your approved content, a clear contact path, page titles and descriptions, launch checks, and two rounds of in-scope revisions.</p></div>
-<div><h3>Separate quotes</h3><p>Domains, hosting, support, copywriting, extra pages, booking, payments and integrations are quoted separately. Your accounts stay yours.</p></div></div>
-<div class="actions"><a class="button" href="../#contact">Discuss your website</a></div><p class="note">You’ll get scope, timing and price in writing before work begins.</p></section>
+<section class="scope" aria-labelledby="package">
+<h2 id="package">Choose what you need.</h2>
+<div class="scope-grid">
+<article><p class="kicker">01 · Website</p><h3>Website Launch</h3><p>Up to five mobile-friendly pages to explain your services, show your work, and make it easy for customers to reach you.</p></article>
+<article><p class="kicker">02 · Website + spreadsheet</p><h3>Website + Quote Tracker</h3><p>Everything in Website Launch, plus a quote form connected to a Google Sheet built around how you follow up. See what came in, what you’ve replied to, and who’s still waiting.</p></article>
+</div>
+<div class="actions"><a class="button" href="../#contact">Get a website quote</a><a href="#form-field">See the quote tracker demo</a></div>
+<p class="scope-standalone">Already have a website you like? <a href="../services/#spreadsheets">Explore standalone spreadsheet work.</a></p>
+<details class="scope-details"><summary>What’s included and what’s quoted separately</summary>
+<p>Both options use your approved content and include a clear contact path, page titles and descriptions, launch checks, and two rounds of in-scope revisions.</p>
+<p>Domains, hosting, support, copywriting, extra pages, booking, payments and integrations are quoted separately when they aren’t included in the option you choose. Ongoing support is optional. Your accounts stay yours.</p>
+</details>
+<p class="note">You’ll get scope, timing and price in writing before work begins.</p>
+</section>
 </main><footer><div class="wrap">Rogers Holdings LLC · Website creation</div><nav class="release-footer" aria-label="Footer navigation"><a href="/services/">Services</a><a href="/our-work/">Project stories</a><a href="/#about">About</a><a href="/privacy/">Privacy</a><a href="/business-snapshot/">Free Business Snapshot</a></nav></footer><script src="/assets/js/site.js" defer></script></body></html>
