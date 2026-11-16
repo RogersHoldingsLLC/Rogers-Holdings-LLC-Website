@@ -9,31 +9,39 @@ const read = f => fs.readFileSync(path.join(root, f), 'utf8');
 const home = read('index.html');
 const work = read('our-work/index.html');
 assert.match(home, /id="work"/);
-assert.match(home, /href="our-work\/">See all work/);
-assert.match(home, /href="our-work\/#eastland"/);
-assert.match(home, /href="our-work\/#missys-squishies"/);
+assert.match(home, /href="#work">Our Work/);
+assert.match(home, /href="\/our-work\/">Project stories/);
+assert.match(home, /href="portfolio\/projects\/eastland\/"/);
+const eastlandDetail=read('portfolio/projects/eastland/index.html');
+assert.match(eastlandDetail, /href="https:\/\/eastlandfirstchurchofgod\.com\/#service-times"/);
+assert.match(home, /href="portfolio\/projects\/missys-squishies\/"/);
+const missyDetail=read('portfolio/projects/missys-squishies/index.html');
+assert.match(missyDetail, /href="\/our-work\/#missys-squishies"/);
 
 // Keep project evidence in the portfolio instead of repeating it in service cards.
-const serviceCards = home.slice(home.indexOf('id="capabilities"'), home.indexOf('id="work"'));
+const serviceCards = home.match(/<section class="section service-pair"[\s\S]*?<\/section>/)[0];
 assert.doesNotMatch(serviceCards, /eastland-product-family|missy-workbook-redacted/);
-assert.equal((home.match(/class="homepage-eastland-picture"/g) || []).length, 1);
+assert.equal([...home.matchAll(/<figure class="rh-orbit-panel[^>]*>[\s\S]*?<\/figure>/g)].filter(([figure])=>figure.includes('href="portfolio/projects/eastland/"')).length, 1);
 assert.equal((work.match(/class="homepage-eastland-picture"/g) || []).length, 1);
 assert.equal((home.match(/missy-workbook-redacted\.png/g) || []).length, 0);
 assert.equal((work.match(/missy-workbook-redacted\.png/g) || []).length, 0);
 const website = read('website-creation/index.html');
 assert.doesNotMatch(home + work + website, /eastland-product-family/);
-assert.match(home, /eastland-live-home\.jpg/);
+assert.match(home, /portfolio\/showcase\/eastland\.webp/);
 assert.match(work, /eastland-live-mobile-services\.png/);
-assert.match(website, /eastland-live-home\.jpg/);
-// Prospects can see the examples on the service page without opening a disclosure.
-const serviceExamples=website.match(/<section class="section website-preview-section"[\s\S]*?<\/section>/)?.[0];
-assert.ok(serviceExamples,'Website Creation needs a visible examples section');
+assert.match(website, /portfolio\/showcase\/fabrication\.jpg/);
+// The approved service redesign features one visible end-to-end fictional workflow.
+// The complete sixteen-item portfolio and seven demos are tested independently.
+const serviceExamples=website.match(/<section class="example" id="form-field"[\s\S]*?<\/section>/)?.[0];
+assert.ok(serviceExamples,'Website Creation needs a visible workflow example');
 assert.doesNotMatch(serviceExamples,/<details|<iframe|<form/);
-assert.equal((serviceExamples.match(/class="website-preview-card"/g)||[]).length,4);
-assert.ok(website.indexOf('id="website-examples"')<website.indexOf('id="website-included-heading"'),'examples precede long service detail');
-for(const [key,href,label]of [['howl-and-timber','../examples/howl-and-timber/','Fictional law-firm concept'],['cortez-capital','../examples/cortez-capital/','Fictional website concept'],['captured-by-karmen','https://capturedbykarmen.rogersholdingsllc.com/','Owned prelaunch project']]){
- assert.ok(serviceExamples.includes('href="'+href+'"')&&serviceExamples.includes(label));
- assert.ok(PUBLIC_MANIFEST.includes('assets/images/our-work/'+key+'-website-preview.jpg'));
+assert.ok(website.indexOf('id="form-field"')<website.indexOf('id="package"'),'evidence precedes long service detail');
+assert.match(serviceExamples,/href="\.\.\/portfolio\/precision-fabrication\/"/);
+assert.match(serviceExamples,/href="\.\.\/portfolio\/projects\/customer-follow-up\/"/);
+assert.match(serviceExamples,/Fictional demo/);
+assert.match(serviceExamples,/doesn’t send quotes or write to Google Sheets/);
+for(const key of ['howl-and-timber','cortez-capital','captured-by-karmen']) {
+ assert.ok(PUBLIC_MANIFEST.includes('assets/images/our-work/'+key+'-website-preview.jpg'), 'existing reviewed portfolio assets remain preserved');
 }
 for(const [,closed]of work.matchAll(/(<details(?![^>]*\bopen\b)[^>]*>[\s\S]*?<\/details>)/g))assert.doesNotMatch(closed,/class="website-example-card/,'example links must not be hidden in closed details');
 assert.ok(PUBLIC_MANIFEST.includes('assets/images/social/website-creation-examples-share.jpg'));
@@ -47,12 +55,16 @@ assert.match(website,/<meta property="og:image:type" content="image\/jpeg">/);
 assert.match(website,/Rogers Holdings LLC logo and company name on a black, cream and gold textured background/);
 assert.doesNotMatch(home, /missy-artwork-extracted|missy-workbook-redacted/);
 // Only the reviewed, flattened actual dashboard derivative may enter active proof.
-for(const page of [home, work]) {
+for(const page of [work]) {
  assert.match(page, /missy-dashboard-redacted\.png/);
  assert.match(page, /Actual dashboard · Private business data and operational details redacted\./);
  assert.match(page, /View Missy’s redacted dashboard at full resolution \(opens in a new tab\)/);
  assert.doesNotMatch(page, /data-workbook-demo|portfolio-workbook|Representative workbook layout|missy-workbook-redacted\.png|\.private-missy|image\(20261106/);
 }
+assert.match(home, /portfolio\/showcase\/missy-redacted\.png/);
+assert.match(missyDetail, /The live workbook is not shared/);
+assert.match(missyDetail, /Redacted original workbook capture/);
+assert.deepEqual(fs.readFileSync(path.join(root,'portfolio/showcase/missy-redacted.png')), fs.readFileSync(path.join(root,'assets/images/our-work/missy-dashboard-redacted.png')), 'new carousel copy must retain exact reviewed flattened redaction');
 const redactedBytes=fs.readFileSync(path.join(root,'assets/images/our-work/missy-dashboard-redacted.png'));
 assert.equal(crypto.createHash('sha256').update(redactedBytes).digest('hex'),'0071940d13c8fc6050e597eed02bb919d5745526740e0eb518f1147edbd05715','sanitized dashboard must remain the reviewed flattened derivative');
 assert.equal(redactedBytes.readUInt32BE(16),1189);assert.equal(redactedBytes.readUInt32BE(20),780);assert.equal(redactedBytes[24],8);assert.equal(redactedBytes[25],2,'RGB without alpha');
@@ -136,7 +148,14 @@ const pages = PUBLIC_MANIFEST.filter(f => f.endsWith('.html'));
 for(const f of ['index.html','business-snapshot/index.html','privacy/index.html','spreadsheet-repair/index.html','our-work/index.html']) {
   const html = read(f);
   const prefix = f === 'index.html' ? '' : '../';
-  if(f !== 'our-work/index.html') assert.equal((html.match(new RegExp(`href="${prefix.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}our-work/">Our Work`, 'g')) || []).length, 2, `${f} header/footer navigation must reach Our Work`);
+  if(f === 'index.html') {
+    assert.match(html, /href="#work">Our Work/);
+    assert.match(html, /href="\/our-work\/">Project stories/);
+  } else if(f !== 'our-work/index.html') {
+    const workLinks=[...html.matchAll(/<a[^>]*href="([^"]+)"[^>]*>Our Work<\/a>/g)]
+      .filter(([,href])=>new URL(href,`https://rogersholdingsllc.com/${f}`).pathname==='/our-work/');
+    assert.equal(workLinks.length,2,`${f} header/footer navigation must reach Our Work`);
+  }
 }
 
 // Validate internal destinations AND fragment targets throughout the allowlisted site.
@@ -144,7 +163,8 @@ for(const page of pages) {
   const html = read(page);
   const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map(m=>m[1]);
   assert.equal(ids.length, new Set(ids).size, `duplicate IDs in ${page}`);
-  for(const [, raw] of html.matchAll(/\bhref="([^"]+)"/g)) {
+  const markup=html.replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi,'');
+  for(const [, raw] of markup.matchAll(/\bhref="([^"]+)"/g)) {
     const href = raw.replaceAll('&amp;','&');
     if(/^(mailto|tel|sms|data):/.test(href)) continue;
     const url = new URL(href, `https://rogersholdingsllc.com/${page}`);
@@ -153,6 +173,8 @@ for(const page of pages) {
     if(!target) continue;
     assert.ok(PUBLIC_MANIFEST.includes(target), `${page}: target not allowlisted ${href}`);
     if(url.hash && target.endsWith('.html')) {
+      // Exact, bounded fictional handoff state is tested by executing its parser in premium-portfolio.test.cjs.
+      if(target==='portfolio/projects/customer-follow-up/index.html' && /^#quote-process=(sheet|assembly|prototype)$/.test(url.hash)) continue;
       assert.ok(read(target).includes(`id="${decodeURIComponent(url.hash.slice(1))}"`), `${page}: broken fragment ${href}`);
     }
   }
@@ -175,8 +197,8 @@ assert.match(workCss, /--work-menu-top: 73px/);
 assert.match(work, /our-work\.css\?v=natural-client-stories-20261107/);
 console.log('Our Work menu viewport, overflow, safe-area and cache guards passed.');
 
-assert.match(serviceExamples,/id="eastland-client-work" href="https:\/\/www\.eastlandfirstchurchofgod\.com\/"/);
-assert.equal(website.split('eastland-live-home.jpg').length-1,1,'integrate the existing Eastland screenshot without duplication');
-assert.match(serviceExamples,/Client website project/);
-assert.match(serviceExamples,/href="\.\.\/our-work\/#eastland"/);
+assert.equal(website.split('portfolio/showcase/fabrication.jpg').length-1,1,'featured workflow screenshot is not duplicated');
+assert.match(website,/Up to five mobile-friendly pages/);
+assert.match(website,/two rounds of in-scope revisions/);
+assert.match(website,/Domains, hosting, support, copywriting, extra pages, booking, payments and integrations are quoted separately/);
 assert.doesNotMatch(website,/<section class="section website-evidence"/);

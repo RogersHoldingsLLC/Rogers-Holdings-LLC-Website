@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1316" height="685" viewBox="0 0 1316 685" role="img"><title>Paper Trail Goods — Receipt tracker</title><desc>Illustrated preview based on fictional workbook sample data. Rogers Holdings LLC.</desc>
+<rect x="0" y="0" width="1316" height="685" rx="0" fill="#fcf7e9"/>
+<rect x="941" y="0" width="375" height="685" rx="0" fill="#243b31"/>
+<text x="57" y="60" fill="#335a4c" font-size="25" font-family="sans-serif" font-weight="780" text-anchor="start">PAPER TRAIL GOODS</text>
+<text x="57" y="126" fill="#24332a" font-size="58" font-family="Georgia,serif" font-weight="650" text-anchor="start">Receipt exceptions</text>
+<path d="M57 174L896 174" fill="none" stroke="#779084" stroke-width="2"/>
+<text x="57" y="232" fill="#415d50" font-size="22" font-family="sans-serif" font-weight="800" text-anchor="start">EXPENSE</text>
+<text x="651" y="232" fill="#415d50" font-size="22" font-family="sans-serif" font-weight="800" text-anchor="end">AMOUNT</text>
+<text x="896" y="232" fill="#415d50" font-size="22" font-family="sans-serif" font-weight="800" text-anchor="end">RECEIPT</text>
+<path d="M57 258L896 258" fill="none" stroke="#9baba1" stroke-width="2"/>
+<text x="57" y="326" fill="#24332a" font-size="39" font-family="sans-serif" font-weight="650" text-anchor="start">Packaging supplies</text>
+<text x="652" y="325" fill="#24332a" font-size="31" font-family="sans-serif" font-weight="700" text-anchor="end">$42.00</text>
+<rect x="726" y="285" width="170" height="57" rx="4" fill="#f0d7b3"/>
+<text x="811" y="324" fill="#563b2c" font-size="26" font-family="sans-serif" font-weight="700" text-anchor="middle">Missing</text>
+<path d="M57 359L896 359" fill="none" stroke="#9baba1" stroke-width="2"/>
+<text x="974" y="119" fill="#d4e4d7" font-size="22" font-family="sans-serif" font-weight="800" text-anchor="start">NEEDS FOLLOW-UP</text>
+<text x="974" y="228" fill="#fff5dc" font-size="86" font-family="sans-serif" font-weight="720" text-anchor="start">2</text>
+<text x="974" y="271" fill="#e5ebd9" font-size="25" font-family="sans-serif" font-weight="650" text-anchor="start">missing receipts</text>
+<path d="M973 312L1279 312" fill="none" stroke="#6c8a76" stroke-width="2"/>
+<text x="974" y="390" fill="#fff5dc" font-size="55" font-family="sans-serif" font-weight="730" text-anchor="start">$69.25</text>
+<text x="974" y="431" fill="#e5ebd9" font-size="25" font-family="sans-serif" font-weight="650" text-anchor="start">outstanding</text>
+<text x="59" y="647" fill="#24332a" font-size="19" font-family="sans-serif" font-weight="650" text-anchor="start">Fictional workbook sample · Rogers Holdings LLC</text>
+</svg>

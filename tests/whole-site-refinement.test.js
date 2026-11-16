@@ -1,6 +1,6 @@
 const assert=require('node:assert/strict');const fs=require('node:fs');const path=require('node:path');const crypto=require('node:crypto');const root=path.resolve(__dirname,'..');const read=f=>fs.readFileSync(path.join(root,f),'utf8');
 const pages=['index.html','services/index.html','website-creation/index.html','spreadsheet-repair/index.html','packages/index.html','our-work/index.html','business-snapshot/index.html','privacy/index.html'];
-for(const p of pages){const html=read(p);const nav=html.match(/<nav class="primary-nav"[\s\S]*?<\/nav>/)[0];const labels=[...nav.matchAll(/<a[^>]*>([^<]+)<\/a>/g)].map(m=>m[1]);assert.deepEqual(labels,['Services','Our Work','About','Discuss a project'],p);assert.match(html,/studio-review\.css/);assert.doesNotMatch(html,/localhost|workers\.dev|TURNSTILE_SECRET_KEY/);}
+for(const p of pages){const html=read(p);const nav=html.match(/<nav class="primary-nav"[\s\S]*?<\/nav>/)[0];const labels=[...nav.matchAll(/<a[^>]*>([^<]+)<\/a>/g)].map(m=>m[1]);assert.deepEqual(labels,['Services','Our Work','About','Discuss a project'],p);if(!['index.html','website-creation/index.html'].includes(p))assert.match(html,/studio-review\.css/);else assert.match(html,/\.site-header \.primary-nav\.is-open\{display:flex\}/);assert.doesNotMatch(html,/localhost|workers\.dev|TURNSTILE_SECRET_KEY/);}
 const snapshot=read('business-snapshot/index.html'),js=read('assets/js/site.js');const hash=s=>crypto.createHash('sha256').update(s).digest('hex');
 assert.equal(hash(snapshot.match(/<form class="lead-form"[\s\S]*?<\/form>/)[0]),'669fbe5bb55d50f006d3499a6f74e092bace488df6fce37d7d176f1c87c733a6','intake fields, consent and native validation contract must be unchanged');
 assert.equal(hash(js),'b274a00733ca5f32f820a3ae54707936a87a9f7ae6648b3fecde82349ecf39cc','reviewed shared behavior, including the approved Snapshot analytics correction, must remain unchanged');
@@ -10,7 +10,7 @@ assert.match(read('privacy/index.html'),/Privacy/);
 console.log('Shared navigation, intake identity, production response and privacy contracts passed');
 
 // Expandable sections share a visible native-summary invitation without new JS.
-const disclosurePages = ['index.html', 'services/index.html', 'business-snapshot/index.html', 'our-work/index.html', 'spreadsheet-repair/index.html', 'packages/index.html'];
+const disclosurePages = ['services/index.html', 'business-snapshot/index.html', 'our-work/index.html', 'spreadsheet-repair/index.html', 'packages/index.html'];
 let disclosureCount = 0;
 for (const page of disclosurePages) {
   const source = fs.readFileSync(path.join(root, page), 'utf8');
@@ -26,8 +26,12 @@ for (const page of disclosurePages) {
   }
   assert.match(source, /studio-review\.css\?v=clear-disclosures-20261107/);
 }
-assert.equal(disclosureCount, 14);
-console.log('Fourteen native expandable sections have clear, consistent disclosure cues.');
+assert.equal(disclosureCount, 13, 'thirteen unchanged service and case-study disclosures remain');
+const homeDisclosure=read('index.html').match(/<details id="approach">[\s\S]*?<\/details>/)?.[0];
+assert.ok(homeDisclosure, 'homepage retains its native process disclosure');
+assert.match(homeDisclosure, /<summary>How a project works<\/summary>/);
+assert.doesNotMatch(homeDisclosure.match(/<summary>[\s\S]*?<\/summary>/)[0], /<button|<a\s|role="button"|aria-expanded/);
+console.log('Thirteen unchanged disclosures and the redesigned native homepage process disclosure passed.');
 
 const websiteDetails=read('services/index.html').match(/<section[^>]*id="websites"[\s\S]*?<\/section>/)[0];
 assert.match(websiteDetails, /<details class="editorial-detail"><summary class="disclosure-summary">/);
@@ -45,7 +49,7 @@ assert.ok(textureCSS, 'shared texture system exists');
 const textureProperties = [...textureCSS.matchAll(/(?:^|[;{])\s*([a-z-]+)\s*:/gm)].map(m=>m[1]);
 assert.ok(textureProperties.every(p=>p.startsWith('--material-') || ['background-image','background-size'].includes(p)), 'texture pass changes background paint only');
 assert.doesNotMatch(textureCSS, /https?:|animation\s*:|transition\s*:/, 'textures have no remote assets or motion');
-for (const file of ['index.html','services/index.html','our-work/index.html','website-creation/index.html','spreadsheet-repair/index.html','business-snapshot/index.html','packages/index.html','privacy/index.html']) {
+for (const file of ['services/index.html','our-work/index.html','spreadsheet-repair/index.html','business-snapshot/index.html','packages/index.html','privacy/index.html']) {
  assert.match(read(file), /texture=balanced-paper-20261107/, `${file} uses refreshed shared texture CSS`);
 }
 const luminance = c => c.map(v=>v/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4).reduce((n,v,i)=>n+v*[.2126,.7152,.0722][i],0);

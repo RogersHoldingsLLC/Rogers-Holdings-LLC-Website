@@ -112,8 +112,8 @@ assert.match(privacy, /<footer class="[^"]*site-footer[^"]*">[\s\S]*?rogers-hold
 assert.doesNotMatch(snapshot, /<footer[\s\S]*?rogers-holdings-logo-reversed\.png/);
 assert.doesNotMatch(privacy, /<footer[\s\S]*?rogers-holdings-logo-reversed\.png/);
 assert.equal((homepage.match(/rh-executive-materials-01-/g) || []).length, 0);
-assert.equal((homepage.match(/assets\/images\/homepage\/brian-smiling-portrait\.webp/g) || []).length, 1);
-assert.match(homepage, /width="1040" height="1300" loading="lazy"/);
+assert.doesNotMatch(homepage, /<img[^>]*src="[^"]*(?:brian|founder|portrait)[^"]*"/, 'text-only founder presentation must not substitute an unapproved likeness');
+// Original approved portrait bytes and dimensions remain protected below; the redesigned homepage is text-only.
 assert.match(css, /grid-template-columns: minmax\(380px, \.84fr\) minmax\(0, 1\.16fr\)/);
 assert.match(css, /\.phase3-founder-portrait-frame[\s\S]*?aspect-ratio: 4 \/ 5/);
 const founderSource = fs.readFileSync(path.join(ROOT, 'docs/design-reference/founder/brian-keith-rogers-headshot-original.png'));
