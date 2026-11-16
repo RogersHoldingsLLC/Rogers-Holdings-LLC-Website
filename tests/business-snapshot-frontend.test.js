@@ -254,7 +254,7 @@ for (const retiredJourneyLabel of canonicalJourney.slice(2)) {
   assert.doesNotMatch(homepageBody, new RegExp(retiredJourneyLabel), `${retiredJourneyLabel} must not be rendered on the homepage`);
 }
 assert.match(homepageBody, /id="process"/);
-assert.match(homepageBody, /href="business-snapshot\/" data-report-link>Explore the Free Business Snapshot/);
+assert.match(homepageBody, /<a\b[^>]*href="\/?business-snapshot\/"[^>]*data-report-link[^>]*>[^<]*Free Business Snapshot/);
 
 assert.match(html, /<title>Free Business Snapshot \| Rogers Holdings LLC<\/title>/);
 assert.match(html, /Request Your Free Business Snapshot/);

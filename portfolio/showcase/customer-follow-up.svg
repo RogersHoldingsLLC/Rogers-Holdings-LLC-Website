@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1316" height="685" viewBox="0 0 1316 685" role="img"><title>Form / Field — Quote follow-up tracker</title><desc>Illustrated preview based on fictional workbook sample data. Rogers Holdings LLC.</desc>
+<rect x="0" y="0" width="1316" height="685" rx="0" fill="#eeeaf3"/>
+<rect x="0" y="0" width="351" height="685" rx="0" fill="#302343"/>
+<text x="48" y="61" fill="#dcc4ed" font-size="24" font-family="sans-serif" font-weight="800" text-anchor="start">FORM / FIELD</text>
+<text x="48" y="141" fill="#fff4fd" font-size="51" font-family="Georgia,serif" font-weight="680" text-anchor="start">Quote</text>
+<text x="48" y="202" fill="#fff4fd" font-size="51" font-family="Georgia,serif" font-weight="680" text-anchor="start">follow-up</text>
+<path d="M48 263L302 263" fill="none" stroke="#aa8fb9" stroke-width="2"/>
+<text x="48" y="320" fill="#dfc9ef" font-size="23" font-family="sans-serif" font-weight="800" text-anchor="start">AS OF</text>
+<text x="48" y="365" fill="#fdf6ff" font-size="32" font-family="sans-serif" font-weight="700" text-anchor="start">Nov 15, 2026</text>
+<rect x="386" y="76" width="874" height="133" rx="8" fill="#e2c5ca"/>
+<text x="412" y="120" fill="#682f41" font-size="23" font-family="sans-serif" font-weight="820" text-anchor="start">OVERDUE</text>
+<text x="412" y="169" fill="#21192b" font-size="37" font-family="sans-serif" font-weight="700" text-anchor="start">Sample Alder Studio</text>
+<text x="1231" y="166" fill="#682f41" font-size="27" font-family="sans-serif" font-weight="720" text-anchor="end">Owner A</text>
+<rect x="386" y="241" width="874" height="133" rx="8" fill="#ded2eb"/>
+<text x="412" y="285" fill="#4f2d66" font-size="23" font-family="sans-serif" font-weight="820" text-anchor="start">DUE TODAY</text>
+<text x="412" y="334" fill="#21192b" font-size="37" font-family="sans-serif" font-weight="700" text-anchor="start">Sample Birch Goods</text>
+<text x="1231" y="331" fill="#4f2d66" font-size="27" font-family="sans-serif" font-weight="720" text-anchor="end">Owner B</text>
+<rect x="386" y="406" width="874" height="133" rx="8" fill="#dad6e6"/>
+<text x="412" y="450" fill="#3f3b58" font-size="23" font-family="sans-serif" font-weight="820" text-anchor="start">SET A NEXT DATE</text>
+<text x="412" y="499" fill="#21192b" font-size="37" font-family="sans-serif" font-weight="700" text-anchor="start">Sample Elm Counter</text>
+<text x="1231" y="496" fill="#3f3b58" font-size="27" font-family="sans-serif" font-weight="720" text-anchor="end">Owner B</text>
+<text x="386" y="647" fill="#4c3f58" font-size="19" font-family="sans-serif" font-weight="650" text-anchor="start">Fictional workbook sample · Rogers Holdings LLC</text>
+</svg>

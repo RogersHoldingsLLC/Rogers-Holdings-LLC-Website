@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1316" height="685" viewBox="0 0 1316 685" role="img"><title>Silt &amp; Ember — Pickup and shipping tracker</title><desc>Illustrated preview based on fictional workbook sample data. Rogers Holdings LLC.</desc>
+<rect x="0" y="0" width="1316" height="685" rx="0" fill="#f2ebdf"/>
+<text x="58" y="58" fill="#714630" font-size="25" font-family="sans-serif" font-weight="790" text-anchor="start">SILT &amp; EMBER</text>
+<text x="58" y="130" fill="#302823" font-size="63" font-family="Georgia,serif" font-weight="650" text-anchor="start">Dispatch lanes</text>
+<rect x="58" y="176" width="586" height="402" rx="15" fill="#ede2d1"/>
+<text x="86" y="233" fill="#4f3328" font-size="26" font-family="sans-serif" font-weight="800" text-anchor="start">PICKUP</text>
+<text x="86" y="346" fill="#4f3024" font-size="81" font-family="sans-serif" font-weight="760" text-anchor="start">3</text>
+<text x="157" y="341" fill="#4f3328" font-size="25" font-family="sans-serif" font-weight="700" text-anchor="start">units ready</text>
+<path d="M86 381L616 381" fill="none" stroke="#92746a" stroke-width="2"/>
+<rect x="672" y="176" width="586" height="402" rx="15" fill="#dfc4b2"/>
+<text x="700" y="233" fill="#4f3328" font-size="26" font-family="sans-serif" font-weight="800" text-anchor="start">SHIPPING</text>
+<text x="700" y="346" fill="#4f3024" font-size="81" font-family="sans-serif" font-weight="760" text-anchor="start">6</text>
+<text x="771" y="341" fill="#4f3328" font-size="25" font-family="sans-serif" font-weight="700" text-anchor="start">units ready</text>
+<path d="M700 381L1230 381" fill="none" stroke="#92746a" stroke-width="2"/>
+<rect x="700" y="416" width="530" height="112" rx="8" fill="#813f2d"/>
+<text x="722" y="458" fill="#ffe8d9" font-size="24" font-family="sans-serif" font-weight="800" text-anchor="start">DEMO-101</text>
+<text x="722" y="502" fill="#fff3e6" font-size="32" font-family="sans-serif" font-weight="700" text-anchor="start">Shipping · 6 units</text>
+<text x="59" y="647" fill="#302823" font-size="19" font-family="sans-serif" font-weight="650" text-anchor="start">Fictional workbook sample · Rogers Holdings LLC</text>
+</svg>

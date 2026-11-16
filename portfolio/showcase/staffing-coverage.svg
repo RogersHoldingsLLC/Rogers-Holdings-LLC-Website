@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1316" height="685" viewBox="0 0 1316 685" role="img"><title>Clockwise Coffee — Staffing coverage planner</title><desc>Illustrated preview based on fictional workbook sample data. Rogers Holdings LLC.</desc>
+<rect x="0" y="0" width="1316" height="685" rx="0" fill="#eef3f8"/>
+<text x="58" y="60" fill="#2c4e6a" font-size="25" font-family="sans-serif" font-weight="800" text-anchor="start">CLOCKWISE COFFEE</text>
+<text x="58" y="127" fill="#162e43" font-size="57" font-family="sans-serif" font-weight="720" text-anchor="start">Coverage board</text>
+<rect x="916" y="45" width="342" height="104" rx="9" fill="#143650"/>
+<text x="940" y="84" fill="#e2edf5" font-size="22" font-family="sans-serif" font-weight="740" text-anchor="start">TOTAL UNFILLED</text>
+<text x="940" y="129" fill="#fff" font-size="39" font-family="sans-serif" font-weight="730" text-anchor="start">5 h</text>
+<text x="411" y="218" fill="#2b4662" font-size="25" font-family="sans-serif" font-weight="800" text-anchor="start">COUNTER</text>
+<text x="838" y="218" fill="#2b4662" font-size="25" font-family="sans-serif" font-weight="800" text-anchor="start">WORKSHOP</text>
+<text x="58" y="325" fill="#162e43" font-size="47" font-family="sans-serif" font-weight="750" text-anchor="start">Mon</text>
+<rect x="292" y="251" width="471" height="117" rx="10" fill="#e9af99"/>
+<text x="318" y="324" fill="#592f27" font-size="36" font-family="sans-serif" font-weight="750" text-anchor="start">2 h short</text>
+<rect x="787" y="251" width="471" height="117" rx="10" fill="#dce9f1"/>
+<text x="813" y="324" fill="#254762" font-size="36" font-family="sans-serif" font-weight="750" text-anchor="start">Covered</text>
+<text x="58" y="469" fill="#162e43" font-size="47" font-family="sans-serif" font-weight="750" text-anchor="start">Tue</text>
+<rect x="292" y="395" width="471" height="117" rx="10" fill="#dce9f1"/>
+<text x="318" y="468" fill="#254762" font-size="36" font-family="sans-serif" font-weight="750" text-anchor="start">Covered</text>
+<rect x="787" y="395" width="471" height="117" rx="10" fill="#e9af99"/>
+<text x="813" y="468" fill="#592f27" font-size="36" font-family="sans-serif" font-weight="750" text-anchor="start">3 h short</text>
+<text x="58" y="564" fill="#31506c" font-size="24" font-family="sans-serif" font-weight="650" text-anchor="start">Monday counter: 6 staffed hours</text>
+<text x="59" y="647" fill="#162e43" font-size="19" font-family="sans-serif" font-weight="650" text-anchor="start">Fictional workbook sample · Rogers Holdings LLC</text>
+</svg>

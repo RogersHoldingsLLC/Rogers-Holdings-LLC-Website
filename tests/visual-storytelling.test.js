@@ -101,10 +101,11 @@ assert.doesNotMatch(html, /<figure class="snapshot-brief"/,'sample is secondary 
 assert.equal((snapshot.match(/<figure class="snapshot-brief"/g)||[]).length,1);
 assert.match(snapshot,/North Point Fitness is a fictional business/);
 assert.match(snapshot,/href="..\/assets\/samples\/north-point-fitness-executive-brief\.pdf"/);
-for(const [page,asset] of [[html,'eastland-live-home.jpg'],[work,'eastland-live-mobile-services.png'],[fs.readFileSync(path.join(root,'website-creation/index.html'),'utf8'),'eastland-live-home.jpg']]) {
+for(const [page,asset] of [[html,'portfolio/showcase/eastland.webp'],[work,'eastland-live-mobile-services.png'],[fs.readFileSync(path.join(root,'website-creation/index.html'),'utf8'),'portfolio/showcase/fabrication.jpg']]) {
  assert.ok(page.includes(asset));assert.doesNotMatch(page,/eastland-product-family/);
 }
-assert.match(html,/Actual dashboard · Private business data and operational details redacted/);
+assert.match(html,/portfolio\/projects\/missys-squishies\//);
+assert.match(fs.readFileSync(path.join(root,'portfolio/projects/missys-squishies/index.html'),'utf8'),/Redacted original workbook capture/);
 assert.match(work,/Private business data and operational details redacted/);
 assert.match(html,/I’m Brian Keith Rogers/);
 assert.match(html,/My faith shapes how I work: be honest, help where I can and follow through/);

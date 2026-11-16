@@ -23,7 +23,8 @@ function artifactHashes() {
 }
 
 validateSourceBoundary();
-assert.equal(PUBLIC_MANIFEST.length, 91, 'public artifact retains approved assets and adds the requested transparent Missy logo');
+assert.deepEqual(PUBLIC_MANIFEST, JSON.parse(fs.readFileSync(new URL('./approved-public-manifest.json', import.meta.url), 'utf8')), 'exact reviewed production manifest: 91 preserved files and 41 portfolio additions');
+assert.equal(PUBLIC_MANIFEST.length, 132);
 const samplePdf = 'assets/samples/north-point-fitness-executive-brief.pdf';
 assert.ok(PUBLIC_MANIFEST.includes(samplePdf));
 const samplePdfBytes = fs.readFileSync(path.join(REPOSITORY_ROOT, samplePdf));
@@ -36,10 +37,11 @@ for (const relativePath of PUBLIC_MANIFEST) {
   assert.ok(fs.existsSync(path.join(OUTPUT_ROOT, relativePath)), `missing artifact file: ${relativePath}`);
 }
 
-const publicTextFiles = firstBuild.filter((entry) => /\.(?:css|html|js|txt|vcf|xml)$/i.test(entry));
+const publicTextFiles = firstBuild.filter((entry) => /\.(?:css|html|js|svg|txt|vcf|xml)$/i.test(entry));
 const publicText = publicTextFiles
   .map((relativePath) => fs.readFileSync(path.join(OUTPUT_ROOT, relativePath), 'utf8'))
   .join('\n');
+assert.doesNotMatch(publicText, /docs\.google\.com|drive\.google\.com|script\.google\.com|PRIVATE DESIGN PREVIEW|LIVE SITE UNCHANGED|rh38-qa|\.openai\//i, 'public artifact must not expose private documents, receiver URLs or preview controls');
 assert.doesNotMatch(publicText, /859-404-7300|\+1-859-404-7300|\+18594047300|8594047300|404-7300|4047300/i);
 assert.doesNotMatch(publicText, /call or text/i);
 // Owner-approved public pricing boundary applies to metadata and JSON-LD too.
@@ -61,7 +63,7 @@ assert.deepEqual(publicSmsFiles, ['brian/index.html'], 'only the digital busines
 assert.equal((publicText.match(/sms:/gi) ?? []).length, 1, 'public artifact must contain exactly one SMS URI');
 
 const homepage = fs.readFileSync(path.join(OUTPUT_ROOT, 'index.html'), 'utf8');
-assert.match(homepage, /href="tel:\+18594044351">859-404-4351<\/a>/);
+assert.match(homepage, /href="tel:\+18594044351">Call \(859\) 404-4351<\/a>/);
 const homepageJsonLd = homepage.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
 assert.ok(homepageJsonLd, 'homepage structured data is required');
 const homepageGraph = JSON.parse(homepageJsonLd[1])['@graph'];
@@ -71,7 +73,8 @@ assert.equal(organization.contactPoint[0].telephone, '+18594044351');
 
 const repairPage = fs.readFileSync(path.join(OUTPUT_ROOT, 'spreadsheet-repair/index.html'), 'utf8');
 assert.match(repairPage, /<link rel="canonical" href="https:\/\/rogersholdingsllc\.com\/spreadsheet-repair\/">/);
-assert.match(homepage, /href="services\/#spreadsheets"/);
+assert.match(homepage, /href="services\/"/);
+assert.match(fs.readFileSync(path.join(OUTPUT_ROOT,'services/index.html'),'utf8'), /id="spreadsheets"/);
 assert.match(fs.readFileSync(path.join(OUTPUT_ROOT,'services/index.html'),'utf8'), /New and custom workbooks are scoped and quoted separately/);
 for(const retired of ['assets/css/clear-path-hero.css','assets/js/clear-path-hero.js','assets/media/clear-path.mp4','assets/media/clear-path-settled.jpg']) assert.ok(!PUBLIC_MANIFEST.includes(retired),'retired media must stay outside the active artifact');
 assert.match(repairPage, /<h1 id="repair-service-heading">Excel &amp; Google Sheets Repair<\/h1>/);

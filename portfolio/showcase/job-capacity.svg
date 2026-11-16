@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1316" height="685" viewBox="0 0 1316 685" role="img"><title>Benchline Workshop — Job capacity planner</title><desc>Illustrated preview based on fictional workbook sample data. Rogers Holdings LLC.</desc>
+<rect x="0" y="0" width="1316" height="685" rx="0" fill="#202529"/>
+<rect x="0" y="0" width="16" height="685" rx="0" fill="#d59c70"/>
+<text x="59" y="60" fill="#e9ae82" font-size="24" font-family="sans-serif" font-weight="800" text-anchor="start">BENCHLINE WORKSHOP</text>
+<text x="59" y="127" fill="#f6f2e9" font-size="55" font-family="sans-serif" font-weight="700" text-anchor="start">Weekly capacity planner</text>
+<text x="59" y="212" fill="#d5dadc" font-size="22" font-family="sans-serif" font-weight="750" text-anchor="start">IN PROGRESS</text>
+<text x="1178" y="212" fill="#d5dadc" font-size="22" font-family="sans-serif" font-weight="750" text-anchor="end">CAPACITY: 24 h</text>
+<rect x="59" y="247" width="1119" height="104" rx="9" fill="#3f4b50"/>
+<rect x="59" y="247" width="746" height="104" rx="9" fill="#dfad81"/>
+<text x="92" y="315" fill="#251a15" font-size="38" font-family="sans-serif" font-weight="740" text-anchor="start">16 h in progress</text>
+<text x="1002" y="314" fill="#f8f1e7" font-size="34" font-family="sans-serif" font-weight="700" text-anchor="middle">8 h slack</text>
+<path d="M59.0 365L59.0 390" fill="none" stroke="#d3cfc6" stroke-width="3"/>
+<text x="59.0" y="428" fill="#dedbd3" font-size="22" font-family="sans-serif" font-weight="650" text-anchor="middle">0</text>
+<path d="M338.75 365L338.75 390" fill="none" stroke="#d3cfc6" stroke-width="3"/>
+<text x="338.75" y="428" fill="#dedbd3" font-size="22" font-family="sans-serif" font-weight="650" text-anchor="middle">6</text>
+<path d="M618.5 365L618.5 390" fill="none" stroke="#d3cfc6" stroke-width="3"/>
+<text x="618.5" y="428" fill="#dedbd3" font-size="22" font-family="sans-serif" font-weight="650" text-anchor="middle">12</text>
+<path d="M898.25 365L898.25 390" fill="none" stroke="#d3cfc6" stroke-width="3"/>
+<text x="898.25" y="428" fill="#dedbd3" font-size="22" font-family="sans-serif" font-weight="650" text-anchor="middle">18</text>
+<path d="M1178.0 365L1178.0 390" fill="none" stroke="#d3cfc6" stroke-width="3"/>
+<text x="1178.0" y="428" fill="#dedbd3" font-size="22" font-family="sans-serif" font-weight="650" text-anchor="middle">24</text>
+<rect x="59" y="475" width="608" height="96" rx="9" fill="#2c353a" stroke="#68777d" stroke-width="2"/>
+<text x="85" y="536" fill="#f4eee1" font-size="29" font-family="sans-serif" font-weight="700" text-anchor="start">Ready work · 6 h</text>
+<text x="1178" y="536" fill="#f1bb92" font-size="34" font-family="sans-serif" font-weight="730" text-anchor="end">Within capacity</text>
+<text x="59" y="647" fill="#ccc6b9" font-size="19" font-family="sans-serif" font-weight="650" text-anchor="start">Fictional workbook sample · Rogers Holdings LLC</text>
+</svg>
