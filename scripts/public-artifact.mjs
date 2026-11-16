@@ -86,6 +86,7 @@ export const PUBLIC_MANIFEST = Object.freeze([
   'assets/images/brand/rogers-holdings-logo-reversed.png',
   'assets/images/brand/rogers-holdings-logo.png',
   'assets/images/digital-business-card/brian-keith-rogers.jpg',
+  'assets/images/about/keith.webp',
   'assets/images/homepage/brian-smiling-portrait.webp',
   'assets/images/homepage/eastland-product-family-desktop.avif',
   'assets/images/homepage/eastland-product-family-desktop.jpg',
