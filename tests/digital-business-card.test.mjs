@@ -19,7 +19,7 @@ for (const content of [
   'Founder · Rogers Holdings LLC',
   'briankeith@rogersholdingsllc.com',
   '859-404-4351',
-  'I help business owners make practical improvements by understanding how your business operates and what matters to you.'
+  'I build and refresh small-business websites, create custom trackers, and connect them so customer inquiries are easier to manage.'
 ]) assert.ok(html.includes(content), `card is missing locked content: ${content}`);
 
 for (const action of ['Save Contact', 'Call', 'Text', 'Email', 'Visit Website', 'Share']) {
@@ -46,10 +46,10 @@ const jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<
 assert.ok(jsonLdMatch, 'Person JSON-LD is required');
 const person = JSON.parse(jsonLdMatch[1]);
 assert.equal(person['@type'], 'Person');
-assert.equal(person.description, 'I help business owners make practical improvements by understanding how your business operates and what matters to you.');
+assert.equal(person.description, 'I build and refresh small-business websites, create custom trackers, and connect them so customer inquiries are easier to manage.');
 for (const marker of ['name=\"description\"', 'property=\"og:description\"', 'name=\"twitter:description\"']) {
   const meta = html.split('\n').find((line) => line.includes(marker));
-  assert.ok(meta?.includes('I help business owners make practical improvements by understanding how your business operates and what matters to you.'), 'profile descriptions must retain approved positioning');
+  assert.ok(meta?.includes('I build and refresh small-business websites, create custom trackers, and connect them so customer inquiries are easier to manage.'), 'profile descriptions must retain approved positioning');
 }
 assert.equal(person.name, 'Brian Keith Rogers');
 assert.equal(person.jobTitle, 'Founder');
@@ -81,7 +81,7 @@ for (const requiredLine of [
 ]) assert.ok(vcard.split('\r\n').includes(requiredLine), `vCard is missing: ${requiredLine}`);
 
 const unfoldedVcardLines = vcard.replace(/\r\n[ \t]/g, '').split('\r\n');
-assert.ok(unfoldedVcardLines.includes('NOTE:I help business owners make practical improvements by understanding how your business operates and what matters to you.'), 'vCard note must match approved positioning');
+assert.ok(unfoldedVcardLines.includes('NOTE:I help business owners make practical improvements by understanding how your business operates and what matters to you.'), 'preserved downloadable vCard retains its reviewed legacy note');
 const photoProperty = unfoldedVcardLines.find((line) => line.startsWith('PHOTO;ENCODING=b;TYPE=JPEG:'));
 assert.ok(photoProperty, 'vCard must include an embedded JPEG contact photo');
 const embeddedPhoto = Buffer.from(photoProperty.slice(photoProperty.indexOf(':') + 1), 'base64');

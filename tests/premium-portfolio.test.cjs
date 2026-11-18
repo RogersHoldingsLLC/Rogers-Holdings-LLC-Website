@@ -11,6 +11,7 @@ const projectSlugs = ['captured-by-karmen', 'eastland', 'store', 'order-fulfillm
   'precision-fabrication', 'customer-follow-up', 'pizzeria', 'bike-repair', 'orchard',
   'repair-cafe', 'print-review', 'missys-squishies', 'inventory-tracker', 'job-capacity',
   'receipt-tracker', 'staffing-coverage'];
+const carouselSlugs = projectSlugs.filter(slug => !['order-fulfillment', 'customer-follow-up'].includes(slug));
 const demoSlugs = ['store', 'precision-fabrication', 'pizzeria', 'bike-repair',
   'orchard', 'repair-cafe', 'print-review'];
 const projectPaths = projectSlugs.map(slug => `portfolio/projects/${slug}/index.html`);
@@ -47,10 +48,10 @@ for (const file of ['index.html', 'website-creation/index.html']) {
 }
 
 const figures = [...home.matchAll(/<figure\b[^>]*class="rh-orbit-panel\b[^>]*>[\s\S]*?<\/figure>/g)].map(m => m[0]);
-assert.equal(figures.length, 16, 'carousel has exactly sixteen entries');
+assert.equal(figures.length, 14, 'carousel has exactly fourteen reviewed paired-project entries');
 const destinations = figures.map(figure => attr(figure.match(/<a\b[^>]*>/)[0], 'href').replace(/^\//, ''));
-assert.deepEqual(destinations, projectSlugs.map(slug => `portfolio/projects/${slug}/`), 'carousel route order and identity are explicit');
-assert.equal(new Set(destinations).size, 16);
+assert.deepEqual(destinations, carouselSlugs.map(slug => `portfolio/projects/${slug}/`), 'carousel route order and identity are explicit');
+assert.equal(new Set(destinations).size, 14);
 for (const figure of figures) assert.match(figure, /aria-label="View [^"]+ details"/, 'each carousel destination is named');
 assert.match(home, /aria-roledescription="carousel"/);
 assert.match(home, /class="rh-orbit-stage"[^>]*tabindex="0"[^>]*role="group"/);
@@ -81,6 +82,7 @@ function runCarousel(search = '', hash = '') {
   const prev = element(), next = element();
   const panels = figures.map(() => {
     const panel = element(), link = element(), image = element();
+    link.focus = () => { panels.focused = link; };
     image.complete = true; image.naturalWidth = 1; image.parentElement = element();
     panel.link = link; panel.image = image;
     panel.querySelector = selector => selector === '.rh-orbit-screen-link' ? link : image;
@@ -104,22 +106,32 @@ function runCarousel(search = '', hash = '') {
     }
     return panels.indexOf(visible[0]);
   };
-  const key = key => { let prevented = false; stage.handlers.keydown({ key, preventDefault() { prevented = true; } }); return prevented; };
+  stage.querySelector = selector => { assert.equal(selector, '.rh-orbit-screen-link[tabindex="0"]'); return panels.find(p => p.link.tabIndex === 0).link; };
+  const key = (key, fromLink = false) => { let prevented = false; stage.handlers.keydown({ key, target: { closest() { return fromLink ? panels.find(p => p.link.tabIndex === 0).link : null; } }, preventDefault() { prevented = true; } }); if (fromLink && prevented) assert.equal(panels.focused, panels.find(p => p.link.tabIndex === 0).link, 'keyboard movement transfers focus to the selected visible link'); return prevented; };
   return { selected, key, prev: () => prev.handlers.click(), next: () => next.handlers.click(), status, title };
 }
 const demo = runCarousel();
 assert.equal(demo.selected(), 0);
-for (let i = 1; i <= 16; i++) { demo.next(); assert.equal(demo.selected(), i % 16); assert.match(demo.status.textContent, new RegExp(`${i % 16 + 1} of 16\\.`)); }
-demo.prev(); assert.equal(demo.selected(), 15);
+for (let i = 1; i <= 14; i++) { demo.next(); assert.equal(demo.selected(), i % 14); assert.match(demo.status.textContent, new RegExp(`${i % 14 + 1} of 14\\.`)); }
+demo.prev(); assert.equal(demo.selected(), 13);
 assert.equal(demo.key('Home'), true); assert.equal(demo.selected(), 0);
-assert.equal(demo.key('End'), true); assert.equal(demo.selected(), 15);
+assert.equal(demo.key('End'), true); assert.equal(demo.selected(), 13);
 demo.key('ArrowRight'); assert.equal(demo.selected(), 0);
-demo.key('ArrowLeft'); assert.equal(demo.selected(), 15);
+demo.key('ArrowLeft'); assert.equal(demo.selected(), 13);
 assert.equal(demo.key('Tab'), false, 'carousel does not intercept Tab');
-assert.equal(runCarousel('?project=16').selected(), 15);
+assert.equal(runCarousel('?project=16').selected(), 13);
 for (const invalid of ['0', '17', '-1', '1.5', 'NaN']) assert.equal(runCarousel('?project=' + invalid).selected(), 0);
-assert.equal(runCarousel('', '#spreadsheets').selected(), 3);
+assert.equal(runCarousel('', '#spreadsheets').selected(), 2);
 assert.equal(runCarousel('', '#eastland-work').selected(), 1);
+// Stable slugs and old numeric links retain their semantic destination after pairing.
+for (let i = 0; i < projectSlugs.length; i++) {
+  const paired = {'order-fulfillment': 'store', 'customer-follow-up': 'precision-fabrication'};
+  const expected = carouselSlugs.indexOf(paired[projectSlugs[i]] || projectSlugs[i]);
+  assert.equal(runCarousel('?project=' + (i + 1)).selected(), expected);
+  assert.equal(runCarousel('?project=' + projectSlugs[i]).selected(), expected);
+}
+demo.key('ArrowRight', true);
+demo.key('ArrowLeft', true);
 
 for (const file of demoPaths) {
   const html = read(file);
@@ -154,4 +166,4 @@ for (const value of ['', '0', '-1', '121', '1.5', 'NaN', '<script>']) {
 assert.match(read('portfolio/store/index.html'), /href="\.\.\/projects\/order-fulfillment\/#order-units='/);
 assert.match(read('portfolio/precision-fabrication/index.html'), /\.\.\/projects\/customer-follow-up\/#quote-process=/);
 
-console.log('Premium portfolio: 16 exact accessible carousel routes, keyboard/wrap VM checks, 7 fictional local-only demos, bounded handoff parsers and public privacy boundaries passed.');
+console.log('Premium portfolio: 14 exact accessible paired carousel routes, keyboard/wrap VM checks, 7 fictional local-only demos, bounded handoff parsers and public privacy boundaries passed.');

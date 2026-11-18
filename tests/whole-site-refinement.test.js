@@ -10,11 +10,13 @@ assert.match(read('privacy/index.html'),/Privacy/);
 console.log('Shared navigation, intake identity, production response and privacy contracts passed');
 
 // Expandable sections share a visible native-summary invitation without new JS.
-const disclosurePages = ['services/index.html', 'business-snapshot/index.html', 'our-work/index.html', 'spreadsheet-repair/index.html', 'packages/index.html'];
+const disclosureCounts = {'services/index.html': 5, 'business-snapshot/index.html': 1, 'our-work/index.html': 0, 'spreadsheet-repair/index.html': 1, 'packages/index.html': 1};
+const disclosurePages = Object.keys(disclosureCounts);
 let disclosureCount = 0;
 for (const page of disclosurePages) {
   const source = fs.readFileSync(path.join(root, page), 'utf8');
   const summaries = [...source.matchAll(/<summary\b[^>]*>([\s\S]*?)<\/summary>/g)];
+  assert.equal(summaries.length, disclosureCounts[page], `${page}: exact reviewed native disclosure count`);
   for (const summary of summaries) {
     disclosureCount++;
     assert.match(summary[0], /<summary class="disclosure-summary">/);
@@ -26,17 +28,25 @@ for (const page of disclosurePages) {
   }
   assert.match(source, /studio-review\.css\?v=clear-disclosures-20261107/);
 }
-assert.equal(disclosureCount, 13, 'thirteen unchanged service and case-study disclosures remain');
-const homeDisclosure=read('index.html').match(/<details id="approach">[\s\S]*?<\/details>/)?.[0];
-assert.ok(homeDisclosure, 'homepage retains its native process disclosure');
-assert.match(homeDisclosure, /<summary>How a project works<\/summary>/);
-assert.doesNotMatch(homeDisclosure.match(/<summary>[\s\S]*?<\/summary>/)[0], /<button|<a\s|role="button"|aria-expanded/);
-console.log('Thirteen unchanged disclosures and the redesigned native homepage process disclosure passed.');
+assert.equal(disclosureCount, 8, 'eight current service, scope and Snapshot disclosures remain');
+// The approved minimal homepage moves the process to a fully visible About section.
+const home = read('index.html'), about = read('about/index.html');
+assert.match(home, /id="about"[^>]*>[\s\S]*?id="approach"[\s\S]*?href="\/about\/"/, 'both legacy founder/process anchors reach About');
+const process = about.match(/<section[^>]*id="approach"[\s\S]*?<\/section>/)?.[0];
+assert.ok(process, 'About retains the complete visible project process');
+assert.match(process, /aria-labelledby="approach-heading"/);
+assert.match(process, /<h2 id="approach-heading">How a project works<\/h2>/);
+assert.equal((process.match(/<li>/g)||[]).length, 3);
+for (const heading of ['Understand the work', 'Agree the scope', 'Complete and review']) assert.ok(process.includes(`<h3>${heading}</h3>`));
+assert.match(process, /scope, quote and review criteria before paid work begins/);
+assert.match(process, /Any further work is agreed separately/);
+assert.doesNotMatch(process, /<button|<details|aria-expanded/, 'the moved process is visible without interaction');
+console.log('Eight current native disclosures and the complete visible About process passed.');
 
 const websiteDetails=read('services/index.html').match(/<section[^>]*id="websites"[\s\S]*?<\/section>/)[0];
 assert.match(websiteDetails, /<details class="editorial-detail"><summary class="disclosure-summary">/);
 assert.match(websiteDetails, /Website project details/);
-assert.match(websiteDetails, /Up to five core pages/);
+assert.match(websiteDetails, /[Uu]p to five core pages/);
 assert.match(websiteDetails, /two revision rounds/);
 assert.match(websiteDetails, /Domain registration, hosting and ongoing maintenance are separate/);
 assert.match(websiteDetails, /<\/details><a class="service-detail-link" href="\.\.\/website-creation\/">/);
