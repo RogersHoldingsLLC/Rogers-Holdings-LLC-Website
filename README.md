@@ -313,3 +313,7 @@ Updated only the homepage social and structured-data image references to the own
 ## SEO metadata alignment — 2026-11-18
 
 Aligned homepage and Services search/social descriptions and structured data with the current website, spreadsheet and automation offer. Updated the homepage and Website Creation sitemap dates to their verified November 18 release. Allowed crawlers to read the existing noindex directives on both fictional /examples/ pages. No real project indexing changes, design changes, new tracking, or share-image replacements. Regression coverage checks sitemap/canonicals, headings, schema JSON and fictional-page noindex protection.
+
+## Responsive carousel images — review candidate
+
+Added responsive WebP variants to the existing homepage carousel, preserving original source fallbacks and eager loading. Both faces of each panel share the same source set to reuse downloads. Existing full-size WebP assets are retained where smaller than re-encoded versions. No carousel script, layout, interaction, forms, analytics or share image changes. Projected byte savings are not measured loading-time improvements.

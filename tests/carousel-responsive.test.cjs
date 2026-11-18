@@ -1,0 +1,13 @@
+const fs=require('fs'),path=require('path'),assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'..'),html=fs.readFileSync(root+'/index.html','utf8');
+const figures=[...html.matchAll(/<figure class="rh-orbit-panel[^\n]+/g)];assert.equal(figures.length,14);
+for(const [i,f] of figures.entries()){
+ const images=[...f[0].matchAll(/<img ([^>]+)>/g)].map(m=>Object.fromEntries([...m[1].matchAll(/([\w-]+)="([^"]*)"/g)].map(a=>[a[1],a[2]])));
+ assert.equal(images.length,2);assert.equal(images[0].srcset,images[1].srcset);assert.equal(images[0].sizes,images[1].sizes);assert.equal(images[0].src,images[1].src);
+ for(const [face,img] of images.entries()){
+ assert.ok(fs.existsSync(root+'/'+img.src));assert.equal(img.decoding,'async');assert.notEqual(img.loading,'lazy');if(i!==0||face!==0)assert.equal(img.loading,'eager');
+ let last=0;for(const part of img.srcset.split(', ')){const [asset,w]=part.split(' ');const width=parseInt(w);assert.ok(width>last);last=width;assert.ok(fs.existsSync(root+'/'+asset));}
+ }
+ if(i===0)assert.equal(images[0].fetchpriority,'high');
+}
+console.log('PASS responsive carousel: 14 paired source sets, existing fallbacks, eager loading, priority and valid asset candidates.');
