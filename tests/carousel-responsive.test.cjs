@@ -11,3 +11,11 @@ for(const [i,f] of figures.entries()){
  if(i===0)assert.equal(images[0].fetchpriority,'high');
 }
 console.log('PASS responsive carousel: 14 paired source sets, existing fallbacks, eager loading, priority and valid asset candidates.');
+
+const preload='<link rel="preload" as="image" href="assets/images/brand/rh-abstract-fold.svg" fetchpriority="high" media="not (prefers-contrast: more)">';
+assert.equal(html.split(preload).length-1,1);
+assert.ok(html.indexOf(preload)<html.indexOf('<style'));
+assert.ok(html.includes('url("assets/images/brand/rh-abstract-fold.svg")'));
+assert.ok(fs.existsSync(root+'/assets/images/brand/rh-abstract-fold.svg'));
+assert.match(html,/@media\(prefers-contrast:more\)\{[^}]*background-image:none/);
+console.log('PASS hero preload: single early exact CSS image URL with contrast opt-out; original front priority preserved.');

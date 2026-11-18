@@ -317,3 +317,7 @@ Aligned homepage and Services search/social descriptions and structured data wit
 ## Responsive carousel images — review candidate
 
 Added responsive WebP variants to the existing homepage carousel, preserving original source fallbacks and eager loading. Both faces of each panel share the same source set to reuse downloads. Existing full-size WebP assets are retained where smaller than re-encoded versions. No carousel script, layout, interaction, forms, analytics or share image changes. Projected byte savings are not measured loading-time improvements.
+
+## Hero resource discovery — review candidate
+
+Added a single early high-priority preload for the existing hero SVG, which PageSpeed identified within the largest-contentful-paint region. The media condition skips preloading when increased contrast removes that background. No asset, design, carousel priority or behavior changed; this improves resource discovery opportunity, not a verified loading-time result.
