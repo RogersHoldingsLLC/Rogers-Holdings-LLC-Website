@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /examples/
+# Fictional example HTML is crawlable so its noindex directives can be read.
 
 Sitemap: https://rogersholdingsllc.com/sitemap.xml
