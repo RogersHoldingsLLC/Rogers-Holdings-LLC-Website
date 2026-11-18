@@ -99,7 +99,7 @@ for (const [viewport, expectedDimensions] of Object.entries(heroV22Dimensions)) 
 const snapshot=fs.readFileSync(path.join(root,'business-snapshot/index.html'),'utf8');
 assert.doesNotMatch(html, /<figure class="snapshot-brief"/,'sample is secondary detail, not homepage proof');
 assert.equal((snapshot.match(/<figure class="snapshot-brief"/g)||[]).length,1);
-assert.match(snapshot,/North Point Fitness is a fictional business/);
+assert.match(snapshot,/North Point Fitness is an example business/);
 assert.match(snapshot,/href="..\/assets\/samples\/north-point-fitness-executive-brief\.pdf"/);
 for(const [page,asset] of [[html,'portfolio/showcase/eastland.webp'],[work,'portfolio/showcase/eastland.webp'],[fs.readFileSync(path.join(root,'website-creation/index.html'),'utf8'),'portfolio/showcase/fabrication.jpg']]) {
  assert.ok(page.includes(asset));assert.doesNotMatch(page,/eastland-product-family/);

@@ -83,7 +83,7 @@ for(const width of [320,390,768,1024,1200,1440])for(const route of ['/','/servic
   const bar=d.querySelector('.concept-bar'),header=d.querySelector('.site-header'),link=bar.querySelector('a');
   check(d.documentElement.scrollWidth<=width+1&&bar.getBoundingClientRect().right<=width+1,`${width}px Cortez: full page and notice fit viewport (document ${d.documentElement.scrollWidth}, notice ${bar.getBoundingClientRect().right})`);
   check(bar.getBoundingClientRect().height<=29&&bar.getBoundingClientRect().height>=24,`${width}px Cortez: compact notice with readable target`);
-  check(bar.textContent.includes('Fictional design concept')&&bar.scrollWidth<=bar.clientWidth,`${width}px Cortez: fictional notice visible without overflow`);
+  check(bar.textContent.includes('Example design concept')&&bar.scrollWidth<=bar.clientWidth,`${width}px Cortez: fictional notice visible without overflow`);
   check(link.getBoundingClientRect().height>=24&&header.getBoundingClientRect().top>=bar.getBoundingClientRect().bottom-1,`${width}px Cortez: return link usable and header not overlapped`);
   const toggle=d.querySelector('[data-menu-toggle]');
   if(w.getComputedStyle(toggle).display!=='none'){toggle.click();await tick();check(header.hasAttribute('data-open'),`${width}px Cortez: mobile menu opens`);d.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));check(!header.hasAttribute('data-open'),`${width}px Cortez: Escape closes menu`);}

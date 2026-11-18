@@ -76,8 +76,8 @@ assert.doesNotMatch(heroMarkup, /testimonial|endorsement|guarantee|\b\d+(?:\.\d+
 
 assert.ok(html.includes('class="snapshot-brief"'));
 assert.ok(html.includes('The path from interest to membership is not obvious'));
-assert.ok(html.includes('View fictional sample brief (PDF)'));
-assert.ok(html.includes('Illustrative Executive Brief sample — North Point Fitness is a fictional business. Shown to demonstrate the format and level of detail.'));
+assert.ok(html.includes('View sample brief (PDF)'));
+assert.ok(html.includes('Illustrative Executive Brief sample — North Point Fitness is an example business. Shown to demonstrate the format and level of detail.'));
 
 const fieldContract = [...formMarkup.matchAll(/<(input|textarea)\b[^>]*>/gi)].map((match) => ({
   tag: match[1].toLowerCase(),

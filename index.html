@@ -313,7 +313,7 @@ footer{padding:20px 0;font-size:.78rem;color:var(--muted)}
  .caption a{margin-top:0}
 }
 @media(max-width:347px){.feature{padding-inline:16px}}
-/* A separate editorial index for fictional work, never presented as a client. */
+/* A separate editorial index for example work, never presented as a client. */
 .spec-band{background:#282520;color:var(--cream);border-block:1px solid #b59161}
 .spec-grid{display:grid;grid-template-columns:minmax(85px,.43fr) minmax(0,2fr) auto;align-items:center;padding-block:clamp(29px,5.5vw,56px);gap:15px clamp(16px,3vw,42px)}
 .spec-index{align-self:stretch;border-right:1px solid #786044;margin:0;padding:0 13px 0 0;display:flex;justify-content:center;flex-direction:column;color:#e0bd88;text-transform:uppercase;letter-spacing:.13em;font-size:.66rem;font-weight:700}
@@ -1109,7 +1109,8 @@ main.gallery-home{background:radial-gradient(ellipse 100% 22rem at 44% 14%,#2a30
  background-image:linear-gradient(180deg,transparent 0%,transparent 52%,#19191995 83%,#191919 100%),url("assets/images/brand/rh-abstract-fold.svg"),radial-gradient(ellipse at 94% 14%,#45454586,transparent 51%);
 }
 .gallery-home .rh-orbit.all-work{position:relative;background:radial-gradient(ellipse at 48% 51%,#3b383535,transparent 62%)}
-.gallery-home .rh-orbit.all-work::before{content:"";display:block;position:absolute;pointer-events:none;top:13px;left:157px;right:0;height:38px;background:linear-gradient(132deg,transparent 49%,#a386608c 50%,#a386608c 54%,transparent 55%) 0 13px/17px 18px no-repeat,linear-gradient(90deg,#a38660a8,transparent 86%) 17px 22px/calc(100% - 17px) 1px no-repeat;z-index:-1}
+/* Avoid a fixed-position rule crossing the responsive Our Work heading. */
+.gallery-home .rh-orbit.all-work::before{content:none}
 .gallery-home .hero-work-heading::after{width:62px;background-size:12px 12px,51px 1px}
 .gallery-home .contact>.wrap{
  border-bottom-color:#705b40!important;
@@ -1120,7 +1121,6 @@ main.gallery-home{background:radial-gradient(ellipse 100% 22rem at 44% 14%,#2a30
 .gallery-home footer{border-top:1px solid #8f755438}
 @media(max-width:760px){
  .gallery-home .hero--dimensional{background-image:linear-gradient(90deg,#1b1b1b70 7%,#1b1b1bb0 47%,#1b1b1b41 93%),linear-gradient(180deg,transparent 28%,#191919a0 63%,#191919 94%),url("assets/images/brand/rh-abstract-fold.svg")}
- .gallery-home .rh-orbit.all-work::before{top:34px;left:5%;right:5%;height:14px;background:linear-gradient(90deg,transparent,#997b5138 22%,#a4885c40 34%,transparent 40% 60%,#a4885c40 66%,#997b5138 78%,transparent) center 7px/100% 1px no-repeat}
  .gallery-home .hero-work-heading::after{width:34px;background-size:11px 11px,24px 1px}
  .gallery-home .contact>.wrap::after{width:78px;height:56px;opacity:.54}
 }

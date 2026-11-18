@@ -1,7 +1,7 @@
 {
   "name": "Cortez Capital",
   "short_name": "Cortez",
-  "description": "Fictional website concept demonstrating design by Rogers Holdings LLC.",
+  "description": "Example website concept demonstrating design by Rogers Holdings LLC.",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#050505",

@@ -157,7 +157,7 @@ for (const relativePath of approvedPrintMaterials) {
   assert.equal(image.subarray(0, 4).toString(), 'RIFF');
   assert.equal(image.subarray(8, 12).toString(), 'WEBP');
 }
-assert.match(fs.readFileSync(path.join(OUTPUT_ROOT, 'portfolio/print-review/index.html'), 'utf8'), /illustrative AI-generated photograph/);
+assert.match(fs.readFileSync(path.join(OUTPUT_ROOT, 'portfolio/print-review/index.html'), 'utf8'), /illustrative photograph/);
 
 for (const requiredFile of [
   'CNAME',
