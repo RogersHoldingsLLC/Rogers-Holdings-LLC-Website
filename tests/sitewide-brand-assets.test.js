@@ -23,7 +23,7 @@ assert.equal(organization.alternateName, 'Rogers Holdings');
 assert.equal(organization.logo.url, 'https://rogersholdingsllc.com/assets/images/brand/rogers-holdings-logo.png');
 assert.deepEqual(organization.founder, { '@id': 'https://rogersholdingsllc.com/#brian-keith-rogers' });
 assert.deepEqual(organization.knowsAbout, [
-  'Websites', 'Spreadsheets', 'Forms and intake',
+  'Websites', 'Spreadsheets', 'Everyday task automation', 'Forms and intake',
   'Business documents and templates', 'SEO and local search foundations'
 ]);
 assert.equal(founder.name, 'Brian Keith Rogers');
@@ -112,7 +112,7 @@ for (const asset of [
 }
 
 assert.doesNotMatch(sitemap, /<priority>|<changefreq>/);
-assert.match(sitemap, /<loc>https:\/\/rogersholdingsllc\.com\/<\/loc>\s*<lastmod>2026-10-12<\/lastmod>/);
+assert.match(sitemap, /<loc>https:\/\/rogersholdingsllc\.com\/<\/loc>\s*<lastmod>2026-11-18<\/lastmod>/);
 assert.match(sitemap, /<loc>https:\/\/rogersholdingsllc\.com\/spreadsheet-repair\/<\/loc>\s*<lastmod>2026-10-08<\/lastmod>/);
 assert.match(sitemap, /<loc>https:\/\/rogersholdingsllc\.com\/business-snapshot\/<\/loc>\s*<lastmod>2026-08-22<\/lastmod>/);
 

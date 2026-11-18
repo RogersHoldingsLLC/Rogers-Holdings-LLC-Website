@@ -309,3 +309,7 @@ Verification diagnostics and pre-request validation blocks now have separate eve
 ## Homepage share image refresh — 2026-11-18
 
 Updated only the homepage social and structured-data image references to the owner-approved charcoal/brass “Let’s make work easier.” card, using current Form / Field website and matching tracker captures. The new unique asset path avoids reusing the previous image URL; previous share assets and all other pages remain unchanged.
+
+## SEO metadata alignment — 2026-11-18
+
+Aligned homepage and Services search/social descriptions and structured data with the current website, spreadsheet and automation offer. Updated the homepage and Website Creation sitemap dates to their verified November 18 release. Allowed crawlers to read the existing noindex directives on both fictional /examples/ pages. No real project indexing changes, design changes, new tracking, or share-image replacements. Regression coverage checks sitemap/canonicals, headings, schema JSON and fictional-page noindex protection.
