@@ -11,24 +11,34 @@ const work = read('our-work/index.html');
 assert.match(home, /id="work"/);
 assert.match(home, /href="#work">Our Work/);
 assert.match(home, /href="\/our-work\/">Project stories/);
-assert.match(home, /href="portfolio\/projects\/eastland\/"/);
+assert.match(home, /href="\/portfolio\/projects\/eastland\/"/);
 const eastlandDetail=read('portfolio/projects/eastland/index.html');
 assert.match(eastlandDetail, /href="https:\/\/eastlandfirstchurchofgod\.com\/#service-times"/);
-assert.match(home, /href="portfolio\/projects\/missys-squishies\/"/);
+assert.match(home, /href="\/portfolio\/projects\/missys-squishies\/"/);
 const missyDetail=read('portfolio/projects/missys-squishies/index.html');
 assert.match(missyDetail, /href="\/our-work\/#missys-squishies"/);
 
-// Keep project evidence in the portfolio instead of repeating it in service cards.
-const serviceCards = home.match(/<section class="section service-pair"[\s\S]*?<\/section>/)[0];
-assert.doesNotMatch(serviceCards, /eastland-product-family|missy-workbook-redacted/);
-assert.equal([...home.matchAll(/<figure class="rh-orbit-panel[^>]*>[\s\S]*?<\/figure>/g)].filter(([figure])=>figure.includes('href="portfolio/projects/eastland/"')).length, 1);
-assert.equal((work.match(/class="homepage-eastland-picture"/g) || []).length, 1);
+// v68 replaces service cards with fourteen paired, accessible project previews.
+const panels = [...home.matchAll(/<figure class="rh-orbit-panel[^>]*>[\s\S]*?<\/figure>/g)].map(m=>m[0]);
+assert.equal(panels.length,14);
+assert.equal(panels.filter(p=>p.includes('href="/portfolio/projects/eastland/"')).length,1);
+for (const panel of panels) {
+ const front=panel.match(/<a[^>]*class="rh-orbit-frame[^"]*"[^>]*>[\s\S]*?<\/a>/)?.[0];
+ assert.ok(front);
+ assert.match(front,/aria-label="[^"]+"/);
+ assert.match(front,/href="\/portfolio\/projects\/[^"]+\/"/);
+ const back=panel.match(/<div class="rh-orbit-back" aria-hidden="true">([\s\S]*?)<\/div>/)?.[1];
+ assert.ok(back);
+ assert.equal(front.match(/src="([^"]+)"/)[1],back.match(/src="([^"]+)"/)[1]);
+ assert.match(back,/alt=""/);
+ assert.doesNotMatch(back,/<a\b|tabindex/);
+}
 assert.equal((home.match(/missy-workbook-redacted\.png/g) || []).length, 0);
 assert.equal((work.match(/missy-workbook-redacted\.png/g) || []).length, 0);
 const website = read('website-creation/index.html');
 assert.doesNotMatch(home + work + website, /eastland-product-family/);
 assert.match(home, /portfolio\/showcase\/eastland\.webp/);
-assert.match(work, /eastland-live-mobile-services\.png/);
+assert.match(work, /portfolio\/showcase\/eastland\.webp/);
 assert.match(website, /portfolio\/showcase\/fabrication\.jpg/);
 // The approved service redesign features one visible end-to-end fictional workflow.
 // The complete sixteen-item portfolio and seven demos are tested independently.
@@ -50,20 +60,24 @@ assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root,'
 const webpage=JSON.parse(website.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'].find(x=>x['@type']==='WebPage');
 assert.equal(webpage.primaryImageOfPage.width,1200);assert.equal(webpage.primaryImageOfPage.height,630);
 assert.equal(webpage.primaryImageOfPage.url,'https://rogersholdingsllc.com/assets/images/social/rogers-holdings-eastland-website-share.jpg');
-assert.equal(webpage.hasPart.itemListElement.length,4);
+assert.deepEqual(webpage.hasPart.itemListElement.map(x=>x.url),[
+ 'https://rogersholdingsllc.com/portfolio/precision-fabrication/',
+ 'https://rogersholdingsllc.com/portfolio/projects/customer-follow-up/'
+]);
 assert.match(website,/<meta property="og:image:type" content="image\/jpeg">/);
 assert.match(website,/A screenshot of the Eastland First Church of God website/);
 assert.doesNotMatch(home, /missy-artwork-extracted|missy-workbook-redacted/);
 // Only the reviewed, flattened actual dashboard derivative may enter active proof.
-for(const page of [work]) {
- assert.match(page, /missy-dashboard-redacted\.png/);
- assert.match(page, /Actual dashboard · Private business data and operational details redacted\./);
- assert.match(page, /View Missy’s redacted dashboard at full resolution \(opens in a new tab\)/);
+for(const page of [home,work,missyDetail]) {
+ assert.match(page, /missy-redacted\.png/);
  assert.doesNotMatch(page, /data-workbook-demo|portfolio-workbook|Representative workbook layout|missy-workbook-redacted\.png|\.private-missy|image\(20261106/);
 }
+assert.match(missyDetail,/Redacted capture of the real workbook. No customer order data is shown here/);
+assert.match(missyDetail,/Only redacted examples are shown; the operational workbook stays private/);
+assert.match(missyDetail,/<img[^>]*alt="Redacted view of the Missy’s Squishies inventory and fulfillment workbook"/);
 assert.match(home, /portfolio\/showcase\/missy-redacted\.png/);
 assert.match(missyDetail, /The live workbook is not shared/);
-assert.match(missyDetail, /Redacted original workbook capture/);
+assert.match(missyDetail, /Redacted capture of the real workbook/);
 assert.deepEqual(fs.readFileSync(path.join(root,'portfolio/showcase/missy-redacted.png')), fs.readFileSync(path.join(root,'assets/images/our-work/missy-dashboard-redacted.png')), 'new carousel copy must retain exact reviewed flattened redaction');
 const redactedBytes=fs.readFileSync(path.join(root,'assets/images/our-work/missy-dashboard-redacted.png'));
 assert.equal(crypto.createHash('sha256').update(redactedBytes).digest('hex'),'0071940d13c8fc6050e597eed02bb919d5745526740e0eb518f1147edbd05715','sanitized dashboard must remain the reviewed flattened derivative');
@@ -72,56 +86,50 @@ const redactionChunks=[];for(let p=8;p<redactedBytes.length;){const length=redac
 assert.deepEqual(redactionChunks,['IHDR','IDAT','IEND'],'no metadata, embedded original or extra frames');
 assert.ok(PUBLIC_MANIFEST.includes('assets/images/our-work/missy-dashboard-redacted.png'));
 assert.equal(PUBLIC_MANIFEST.some(p=>/source\.png|image\(20261106|\.private-missy|ocr-source|redact\.py/.test(p)),false);
-assert.doesNotMatch(serviceCards, /<img|<picture|<input|<form|<table/);
+assert.doesNotMatch(home.match(/<section class="rh-orbit[\s\S]*?<\/section>/)[0], /<input|<form|<table/);
 assert.doesNotMatch(home, /class="eastland-story-timeline"|class="eastland-live-proof"/);
 assert.equal((work.match(/<h1\b/g) || []).length, 1);
 assert.match(work, /<link rel="canonical" href="https:\/\/rogersholdingsllc\.com\/our-work\/">/);
 assert.match(work, /aria-current="page">Our Work/);
 
-// Client identity and project story form one unit; no redundant jump-card row.
-assert.doesNotMatch(work, /<nav class="project-logo-index|client-logo-index/);
-assert.match(work, /class="container client-project-grid"/);
-for (const [id,logo] of [['eastland','eastland-official-logo.jpg'],['missys-squishies','missy-logo-transparent.png']]) {
- const section=work.slice(work.indexOf('id="'+id+'"'),work.indexOf('</details>',work.indexOf('id="'+id+'"')));
- assert.match(section, /work-project-header/);
- assert.ok(section.includes(logo));
- assert.match(section, /<h2 /);
- assert.match(section, /<details class="work-project-details">/);
- assert.equal(work.split(logo).length-1,1,'show each client logo once');
+// The approved gallery has sixteen visible stories, including both fictional concepts.
+const expectedProjects=['eastland','precision-fabrication','captured-by-karmen','missys-squishies','store','pizzeria','bike-repair','orchard','repair-cafe','print-review','inventory-tracker','job-capacity','receipt-tracker','staffing-coverage','howl-and-timber','cortez-capital'];
+const exhibits=[...work.matchAll(/<article class="work-exhibit" id="([^"]+)" aria-labelledby="([^"]+)">([\s\S]*?)<\/article>/g)];
+assert.deepEqual(exhibits.map(m=>m[1]),expectedProjects);
+for(const [,id,heading,body] of exhibits) {
+ assert.ok(body.includes('<h2 id="'+heading+'">'));
+ assert.equal((body.match(/<img\b/g)||[]).length,1);
+ assert.match(body,/<img[^>]*alt="[^"]+"/);
+ const links=[...body.matchAll(/href="([^"]+)"/g)].map(m=>m[1]);
+ assert.deepEqual(links,['/portfolio/projects/'+id+'/','/portfolio/projects/'+id+'/']);
+ assert.match(body,/aria-label="View [^"]+ project"/);
+ assert.match(body,/<span class="sr-only">:/);
+ assert.doesNotMatch(body,/<details|<iframe|<form/);
 }
 assert.ok(PUBLIC_MANIFEST.includes('assets/images/our-work/missy-logo-transparent.png'));
 assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root,'assets/images/our-work/missy-logo-transparent.png'))).digest('hex'),'8a7163bb97ef4873126bfa1b4d33efb85a09544e2b7ed83f6bc05d03a9eed912','reviewed transparent logo is preserved');
 assert.ok(read('assets/css/our-work.css').includes('.project-logo-eastland { background: #fefefe; }'));
 assert.ok(read('assets/css/our-work.css').includes('.project-logo-missy { background: #f3e1e9; color: #58236c; overflow: hidden; }'));
 
-const exampleSection=work.match(/<section class="section website-example-section"[\s\S]*?<\/section>/)?.[0];
-assert.ok(exampleSection);
-assert.doesNotMatch(exampleSection, /<nav|concept-logo-index|work-design-disclosure/);
-assert.equal((exampleSection.match(/<details /g)||[]).length,3,'one story per example');
-assert.equal((exampleSection.match(/<article /g)||[]).length,3,'one cohesive section per example');
-for(const story of exampleSection.matchAll(/<details[\s\S]*?<\/details>/g)) {
- assert.match(story[0], /disclosure-summary/);
- assert.equal((story[0].match(/<h4>/g)||[]).length,3);
- assert.doesNotMatch(story[0], /<a /,'visible destination is not duplicated in the story');
+// Detailed disclosures now live at the linked project destinations, not hidden gallery stories.
+const howl=read('portfolio/projects/howl-and-timber/index.html');
+const cortez=read('portfolio/projects/cortez-capital/index.html');
+const cbk=read('portfolio/projects/captured-by-karmen/index.html');
+assert.match(howl,/No legal services, attorney credentials, client relationships or case results are represented/);
+assert.match(cortez,/No investment or advisory services, real holdings, transactions, operating history or client results are represented/);
+for(const [page,key] of [[howl,'howl-and-timber'],[cortez,'cortez-capital']]) {
+ assert.match(page,/Fictional concept · Website design demonstration, not a client-results case study/);
+ assert.match(page,/Fictional content and imagery, not an operating business/);
+ assert.ok(page.includes('href="../../../examples/'+key+'/"'));
 }
-assert.match(exampleSection,/inquiry submissions remain unavailable/);
-assert.match(exampleSection,/No legal services, attorney credentials, client relationships or case results/);
-assert.match(exampleSection,/No investment or advisory services, transactions, operating history or client results/);
-assert.equal((exampleSection.match(/<a /g)||[]).length, 3, 'exactly one link per design example');
-for (const [logo, destination, label] of [['howl-and-timber-wordmark.svg','../examples/howl-and-timber/','Fictional law-firm concept'],['cortez-capital-concept-logo.png','../examples/cortez-capital/','Fictional website concept'],['captured-by-karmen-wordmark.png','https://capturedbykarmen.rogersholdingsllc.com/','Prelaunch owned project']]) {
- assert.equal(work.split(logo).length - 1, 1, 'show each example logo once on Our Work');
- assert.equal((exampleSection.split('href="'+destination+'"').length - 1), 1);
- assert.ok(exampleSection.includes(logo) && exampleSection.includes(label));
-}
-const exampleDestinations=[...exampleSection.matchAll(/<a [^>]*href="([^"]+)"/g)].map(m=>m[1]);
-assert.deepEqual(exampleDestinations,['https://capturedbykarmen.rogersholdingsllc.com/','../examples/howl-and-timber/','../examples/cortez-capital/'],'lead with Captured by Karmen in both visual and keyboard order');
-const howlBackground=read('assets/images/our-work/howl-and-timber-wordmark.svg').match(/<rect[^>]*fill="(#[a-f0-9]{6})"/)?.[1];
-assert.equal(howlBackground, '#17262b');
-assert.ok(read('assets/css/our-work.css').includes('.our-work-page .website-example-card-howl { background: '+howlBackground+'; color: #f4f0e6; }'),'the full card must match the exact logo background');
-assert.match(exampleSection, /no client results are claimed/);
-assert.match(exampleSection, /target="_blank" rel="noopener noreferrer"/);
+assert.match(cbk,/The current contact path is email only, not a booking form/);
+assert.match(cbk,/not an automatic booking/);
+assert.match(cbk,/href="https:\/\/capturedbykarmen\.rogersholdingsllc\.com\/"/);
+// Any new-tab project destination must retain opener isolation.
+for(const page of [work,howl,cortez,cbk]) for(const [link] of page.matchAll(/<a\b[^>]*target="_blank"[^>]*>/g)) assert.match(link,/rel="noopener noreferrer"/);
 
-assert.match(work, /href="\.\.\/spreadsheet-repair\/"/);
+assert.match(work, /href="\.\.\/services\/"/);
+assert.match(read('services/index.html'), /href="[^"]*spreadsheet-repair\/"/);
 assert.match(work, /href="\.\.\/business-snapshot\/" data-report-link/);
 
 // Preserve every byte of the approved four-screen composition derivatives.
@@ -134,10 +142,10 @@ for(const [, name, hash] of assetRows) {
 }
 
 // Approved story keeps its illustration disclosure and excludes internal review notes.
-const missy = work.slice(work.indexOf('id="missys-squishies"'), work.indexOf('</section>', work.indexOf('id="missys-squishies"')));
+const missy = missyDetail.match(/<main[\s\S]*?<\/main>/)[0];
 assert.doesNotMatch(work + home, /Local review|Proposed website adaptation|await owner-approved|Story awaiting approval|Demonstration image pending/i);
-assert.match(missy, /Actual dashboard · Private business data and operational details redacted\./);
-assert.equal((missy.match(/<img\b/g) || []).length, 2);
+assert.match(missy,/No customer order data is shown here/);
+assert.equal((missy.match(/<img\b/g)||[]).length,1);
 assert.ok(PUBLIC_MANIFEST.includes('assets/images/our-work/missy-artwork-extracted.webp'));
 assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root, 'assets/images/our-work/missy-artwork-extracted.webp'))).digest('hex'), '7c46fd3e8a18ce7fe7b845e66545871dc75790d4af213b9572ac44640b23e596', 'approved extracted illustration changed');
 assert.equal(PUBLIC_MANIFEST.includes('docs/design-reference/missys-squishies/missy-story-source.jpg'), false);
@@ -151,6 +159,9 @@ for(const f of ['index.html','business-snapshot/index.html','privacy/index.html'
   if(f === 'index.html') {
     assert.match(html, /href="#work">Our Work/);
     assert.match(html, /href="\/our-work\/">Project stories/);
+  } else if(f === 'spreadsheet-repair/index.html') {
+    assert.match(html,/href="\.\.\/#work">Our Work/);
+    assert.match(html,/href="\.\.\/our-work\/">Project stories/);
   } else if(f !== 'our-work/index.html') {
     const workLinks=[...html.matchAll(/<a[^>]*href="([^"]+)"[^>]*>Our Work<\/a>/g)]
       .filter(([,href])=>new URL(href,`https://rogersholdingsllc.com/${f}`).pathname==='/our-work/');

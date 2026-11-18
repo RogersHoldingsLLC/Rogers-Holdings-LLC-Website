@@ -14,8 +14,8 @@ for (const id of ['top', 'capabilities', 'work', 'about', 'contact', 'approach',
 assert.match(hero, /href="#contact">Discuss a project/);
 assert.doesNotMatch(hero, /href="\/?business-snapshot/);
 assert.match(main, /written scope and price before paid work starts/);
-assert.match(main, /href="website-creation\/"/);
-assert.match(home, /href="services\/"/);
+assert.match(main, /href="\/?website-creation\/"/);
+assert.match(home, /href="\/?services\/"/);
 // All five approved services remain reachable through the primary Services link.
 const services = read('services/index.html');
 for (const id of ['websites', 'spreadsheets', 'forms-intake', 'business-documents', 'seo-local-search']) {

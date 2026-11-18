@@ -101,14 +101,19 @@ assert.doesNotMatch(html, /<figure class="snapshot-brief"/,'sample is secondary 
 assert.equal((snapshot.match(/<figure class="snapshot-brief"/g)||[]).length,1);
 assert.match(snapshot,/North Point Fitness is a fictional business/);
 assert.match(snapshot,/href="..\/assets\/samples\/north-point-fitness-executive-brief\.pdf"/);
-for(const [page,asset] of [[html,'portfolio/showcase/eastland.webp'],[work,'eastland-live-mobile-services.png'],[fs.readFileSync(path.join(root,'website-creation/index.html'),'utf8'),'portfolio/showcase/fabrication.jpg']]) {
+for(const [page,asset] of [[html,'portfolio/showcase/eastland.webp'],[work,'portfolio/showcase/eastland.webp'],[fs.readFileSync(path.join(root,'website-creation/index.html'),'utf8'),'portfolio/showcase/fabrication.jpg']]) {
  assert.ok(page.includes(asset));assert.doesNotMatch(page,/eastland-product-family/);
 }
 assert.match(html,/portfolio\/projects\/missys-squishies\//);
-assert.match(fs.readFileSync(path.join(root,'portfolio/projects/missys-squishies/index.html'),'utf8'),/Redacted original workbook capture/);
-assert.match(work,/Private business data and operational details redacted/);
-assert.match(html,/I’m Brian Keith Rogers/);
-assert.match(html,/My faith shapes how I work: be honest, help where I can and follow through/);
+assert.match(fs.readFileSync(path.join(root,'portfolio/projects/missys-squishies/index.html'),'utf8'),/Redacted capture of the real workbook/);
+assert.match(fs.readFileSync(path.join(root,'portfolio/projects/missys-squishies/index.html'),'utf8'),/No customer order data is shown here/);
+assert.match(work,/portfolio\/showcase\/missy-redacted\.png/);
+// v68 leads with project previews; approved founder content moves to About.
+const about=fs.readFileSync(path.join(root,'about/index.html'),'utf8');
+assert.match(about,/I’m Brian Keith Rogers/);
+assert.match(about,/My faith shapes how I work: be honest, help where I can and follow through/);
+assert.equal((html.match(/<figure class="rh-orbit-panel/g)||[]).length,14);
+assert.equal((work.match(/<article class="work-exhibit"/g)||[]).length,16);
 assert.doesNotMatch(html, /data-rh-sculpture|listening-hero|<canvas/);
 const hash=f=>crypto.createHash('sha256').update(fs.readFileSync(f)).digest('hex');
 assert.equal(hash(eastlandReference),'516d0b764d82f2ac1b451ca0194602da2abe7e3e57ea94d9218d1dde693acb62');

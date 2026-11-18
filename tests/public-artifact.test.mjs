@@ -23,12 +23,14 @@ function artifactHashes() {
 }
 
 validateSourceBoundary();
-assert.deepEqual(PUBLIC_MANIFEST, JSON.parse(fs.readFileSync(new URL('./approved-public-manifest.json', import.meta.url), 'utf8')), 'exact reviewed production manifest: 133 preserved files plus two approved link preview cards');
-assert.equal(PUBLIC_MANIFEST.length, 135);
+assert.deepEqual(PUBLIC_MANIFEST, JSON.parse(fs.readFileSync(new URL('./approved-public-manifest.json', import.meta.url), 'utf8')), 'exact reviewed v68 production manifest: 135 preserved files plus 49 explicitly approved public paths');
+assert.equal(PUBLIC_MANIFEST.length, 184);
 const aboutPortrait = 'assets/images/about/keith.webp';
 assert.ok(PUBLIC_MANIFEST.includes(aboutPortrait));
 assert.ok(fs.statSync(path.join(REPOSITORY_ROOT, aboutPortrait)).size < 100_000);
-assert.match(fs.readFileSync(path.join(REPOSITORY_ROOT, 'index.html'), 'utf8'), /<img src="assets\/images\/about\/keith\.webp" width="1040" height="1300"/);
+assert.match(fs.readFileSync(path.join(REPOSITORY_ROOT, 'about/index.html'), 'utf8'), /<img src="\.\.\/assets\/images\/about\/keith\.webp" width="1040" height="1300"/);
+
+assert.match(fs.readFileSync(path.join(REPOSITORY_ROOT, 'about/index.html'), 'utf8'), /alt="Brian Keith Rogers, founder of Rogers Holdings LLC, wearing a charcoal Rogers Holdings polo"/);
 
 const samplePdf = 'assets/samples/north-point-fitness-executive-brief.pdf';
 assert.ok(PUBLIC_MANIFEST.includes(samplePdf));
@@ -56,7 +58,8 @@ assert.match(packages, /id="business-systems"/);
 assert.match(packages, /recommend only the work you need/);
 assert.match(packages, /free, optional and separate/);
 assert.match(packages, /You retain ownership of your business content and accounts/);
-assert.match(packages, /not automatically included/);
+assert.match(packages, /Domain registration, hosting, third-party services and ongoing support are discussed separately/);
+assert.match(packages, /Later additions need their own agreement/);
 assert.doesNotMatch(packages, /<form\b|<input\b|Starter|Enhanced|Complete tier|\$[0-9]/i);
 
 
@@ -67,6 +70,7 @@ assert.deepEqual(publicSmsFiles, ['brian/index.html'], 'only the digital busines
 assert.equal((publicText.match(/sms:/gi) ?? []).length, 1, 'public artifact must contain exactly one SMS URI');
 
 const homepage = fs.readFileSync(path.join(OUTPUT_ROOT, 'index.html'), 'utf8');
+assert.match(homepage, /href="\/about\/"/);
 const vcard = fs.readFileSync(path.join(OUTPUT_ROOT, 'brian/brian-keith-rogers.vcf'), 'utf8');
 const businessPhone = vcard.match(/^TEL;TYPE=CELL,VOICE:(\+1\d{10})\s*$/m)?.[1];
 assert.ok(businessPhone, 'public vCard must contain a valid US business number');
@@ -82,9 +86,9 @@ assert.equal(organization.contactPoint[0].telephone, businessPhone);
 
 const repairPage = fs.readFileSync(path.join(OUTPUT_ROOT, 'spreadsheet-repair/index.html'), 'utf8');
 assert.match(repairPage, /<link rel="canonical" href="https:\/\/rogersholdingsllc\.com\/spreadsheet-repair\/">/);
-assert.match(homepage, /href="services\/"/);
+assert.match(homepage, /href="\/services\/"/);
 assert.match(fs.readFileSync(path.join(OUTPUT_ROOT,'services/index.html'),'utf8'), /id="spreadsheets"/);
-assert.match(fs.readFileSync(path.join(OUTPUT_ROOT,'services/index.html'),'utf8'), /New and custom workbooks are scoped and quoted separately/);
+assert.match(fs.readFileSync(path.join(OUTPUT_ROOT,'services/index.html'),'utf8'), /A new Custom Tracker is scoped and quoted separately from repair work/);
 for(const retired of ['assets/css/clear-path-hero.css','assets/js/clear-path-hero.js','assets/media/clear-path.mp4','assets/media/clear-path-settled.jpg']) assert.ok(!PUBLIC_MANIFEST.includes(retired),'retired media must stay outside the active artifact');
 assert.match(repairPage, /<h1 id="repair-service-heading">Excel &amp; Google Sheets Repair<\/h1>/);
 assert.match(repairPage, /href="mailto:[^"@]+@rogersholdingsllc\.com\?subject=[^"]+">Email about a spreadsheet repair<\/a>/);
@@ -142,7 +146,18 @@ for (const excludedFile of [
 }
 const publicDocs = firstBuild.filter((entry) => entry.startsWith('docs/'));
 assert.deepEqual(publicDocs, ['docs/design-reference/founder/brian-keith-rogers-headshot-original.png']);
-assert.equal(firstBuild.some((entry) => /(?:proof|rollback)/i.test(entry)), false);
+// These two fictional print-demo photographs are public artwork, not private QA proof.
+const approvedPrintMaterials = new Set([
+  'portfolio/media/proof-materials-1280.webp',
+  'portfolio/media/proof-materials-640.webp'
+]);
+assert.deepEqual(firstBuild.filter((entry) => /(?:proof|rollback)/i.test(entry)), [...approvedPrintMaterials].sort());
+for (const relativePath of approvedPrintMaterials) {
+  const image = fs.readFileSync(path.join(OUTPUT_ROOT, relativePath));
+  assert.equal(image.subarray(0, 4).toString(), 'RIFF');
+  assert.equal(image.subarray(8, 12).toString(), 'WEBP');
+}
+assert.match(fs.readFileSync(path.join(OUTPUT_ROOT, 'portfolio/print-review/index.html'), 'utf8'), /illustrative AI-generated photograph/);
 
 for (const requiredFile of [
   'CNAME',

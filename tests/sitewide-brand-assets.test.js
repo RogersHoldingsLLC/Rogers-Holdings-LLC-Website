@@ -63,9 +63,9 @@ assert.match(snapshot, /business-snapshot-share\.jpg/);
 assert.doesNotMatch(homepage + snapshot + brian + privacy + repair, /brand-card\.jpeg/);
 
 for (const page of [homepage, snapshot, brian, privacy, repair]) {
-  assert.match(page, /<link rel="icon" type="image\/png" sizes="64x64" href="\/favicon\.png">/);
-  assert.match(page, /<link rel="shortcut icon" href="\/favicon\.ico">/);
-  assert.match(page, /<link rel="apple-touch-icon" sizes="180x180" href="\/apple-touch-icon\.png">/);
+  assert.match(page, /<link rel="icon" type="image\/png" sizes="64x64" href="(?:https:\/\/rogersholdingsllc\.com)?\/favicon\.png">/);
+  assert.match(page, /<link rel="shortcut icon" href="(?:https:\/\/rogersholdingsllc\.com)?\/favicon\.ico">/);
+  assert.match(page, /<link rel="apple-touch-icon" sizes="180x180" href="(?:https:\/\/rogersholdingsllc\.com)?\/apple-touch-icon\.png">/);
   assert.doesNotMatch(page, /(?:favicon|apple-touch-icon)\.(?:png|ico)\?v=/);
 }
 
@@ -118,7 +118,10 @@ assert.match(privacy, /<footer class="[^"]*site-footer[^"]*">[\s\S]*?rogers-hold
 assert.doesNotMatch(snapshot, /<footer[\s\S]*?rogers-holdings-logo-reversed\.png/);
 assert.doesNotMatch(privacy, /<footer[\s\S]*?rogers-holdings-logo-reversed\.png/);
 assert.equal((homepage.match(/rh-executive-materials-01-/g) || []).length, 0);
-assert.match(homepage, /<figure class="release-founder-photo"><img src="assets\/images\/about\/keith\.webp"/);
+assert.match(homepage, /href="\/about\/"/, 'founder remains reachable from the homepage');
+const about = read('about/index.html');
+assert.match(about, /<figure class="about-photo"><img src="\.\.\/assets\/images\/about\/keith\.webp" width="1040" height="1300"/);
+assert.match(about, /alt="Brian Keith Rogers, founder of Rogers Holdings LLC,[^"]+"/);
 assert.match(css, /grid-template-columns: minmax\(380px, \.84fr\) minmax\(0, 1\.16fr\)/);
 assert.match(css, /\.phase3-founder-portrait-frame[\s\S]*?aspect-ratio: 4 \/ 5/);
 const optimizedFounderPortrait = fs.readFileSync(path.join(ROOT, 'assets/images/homepage/brian-smiling-portrait.webp'));
