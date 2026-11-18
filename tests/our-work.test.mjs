@@ -48,7 +48,7 @@ assert.doesNotMatch(serviceExamples,/<details|<iframe|<form/);
 assert.ok(website.indexOf('id="form-field"')<website.indexOf('id="package"'),'evidence precedes long service detail');
 assert.match(serviceExamples,/href="\.\.\/portfolio\/precision-fabrication\/"/);
 assert.match(serviceExamples,/href="\.\.\/portfolio\/projects\/customer-follow-up\/"/);
-assert.match(serviceExamples,/Fictional demo/);
+assert.match(serviceExamples,/Example demo/);
 assert.match(serviceExamples,/doesn’t send quotes or write to Google Sheets/);
 for(const key of ['howl-and-timber','cortez-capital','captured-by-karmen']) {
  assert.ok(PUBLIC_MANIFEST.includes('assets/images/our-work/'+key+'-website-preview.jpg'), 'existing reviewed portfolio assets remain preserved');
@@ -118,8 +118,8 @@ const cbk=read('portfolio/projects/captured-by-karmen/index.html');
 assert.match(howl,/No legal services, attorney credentials, client relationships or case results are represented/);
 assert.match(cortez,/No investment or advisory services, real holdings, transactions, operating history or client results are represented/);
 for(const [page,key] of [[howl,'howl-and-timber'],[cortez,'cortez-capital']]) {
- assert.match(page,/Fictional concept · Website design demonstration, not a client-results case study/);
- assert.match(page,/Fictional content and imagery, not an operating business/);
+ assert.match(page,/Example concept · Website design demonstration, not a client-results case study/);
+ assert.match(page,/Example content and imagery, not an operating business/);
  assert.ok(page.includes('href="../../../examples/'+key+'/"'));
 }
 assert.match(cbk,/The current contact path is email only, not a booking form/);
@@ -213,3 +213,13 @@ assert.match(website,/Up to five mobile-friendly pages/);
 assert.match(website,/two rounds of in-scope revisions/);
 assert.match(website,/Domains, hosting, support, copywriting, extra pages, booking, payments and integrations are quoted separately/);
 assert.doesNotMatch(website,/<section class="section website-evidence"/);
+
+// Owner-requested cleanup: examples remain distinct from real client work, without the old labels.
+for (const file of PUBLIC_MANIFEST.filter(f => /\.(html|webmanifest)$/.test(f) || f.endsWith('howl-and-timber-wordmark.svg') || f.endsWith('assets/wordmark.svg'))) {
+ const presentation = read(file).replace(/<!--[^]*?-->/g,'').replace(/<(style)\b[^>]*>[^]*?<\/\1>/gi,'').replaceAll('fictional-team','example-team');
+ assert.doesNotMatch(presentation,/\bfictional\b|AI-generated|AI-assisted/i,`${file}: no old presentation labels`);
+}
+assert.match(home,/\.gallery-home \.rh-orbit\.all-work::before\{content:none\}/);
+assert.doesNotMatch(home,/left:157px/,'no fixed-position rule through Our Work');
+assert.match(home,/\.rh-orbit-stage:focus-visible\{outline:3px solid #f2c679/,'carousel keyboard focus remains visible');
+console.log('Our Work decorative rule removed; example disclosures and keyboard focus preserved.');

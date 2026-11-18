@@ -135,7 +135,7 @@ demo.key('ArrowLeft', true);
 
 for (const file of demoPaths) {
   const html = read(file);
-  assert.match(html, /fictional/i, `${file}: visible fictional demonstration disclosure`);
+  assert.match(html, /example/i, `${file}: visible example demonstration disclosure`);
   assert.doesNotMatch(html, /fetch\s*\(|XMLHttpRequest|sendBeacon\s*\(|WebSocket\s*\(|https?:[^"'<>\s]*(?:stripe|paypal|checkout)|localStorage|sessionStorage|document\.cookie/i, `${file}: no real transaction, submission or persistence API`);
   for (const [tag] of html.matchAll(/<form\b[^>]*>/g)) assert.ok(!attr(tag, 'action'), `${file}: no remote form action`);
 }
