@@ -305,3 +305,7 @@ The distinct review version applies a homepage-scoped editorial system: full-wid
 ## Snapshot analytics correction — 2026-11-08
 
 Verification diagnostics and pre-request validation blocks now have separate events from attempted-request failures. Snapshot analytics are suppressed on preview hosts and with an explicit current-page analytics=off query. The form and delivery contract are preserved. Event definitions, verification coverage and limits are recorded in [SNAPSHOT_ANALYTICS_RELEASE_2026_11_08.md](docs/SNAPSHOT_ANALYTICS_RELEASE_2026_11_08.md).
+
+## Homepage share image refresh — 2026-11-18
+
+Updated only the homepage social and structured-data image references to the owner-approved charcoal/brass “Let’s make work easier.” card, using current Form / Field website and matching tracker captures. The new unique asset path avoids reusing the previous image URL; previous share assets and all other pages remain unchanged.

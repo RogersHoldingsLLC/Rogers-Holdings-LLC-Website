@@ -174,6 +174,7 @@ export const PUBLIC_MANIFEST = Object.freeze([
   'assets/images/our-work/missy-dashboard-redacted.png',
   'assets/images/social/rogers-holdings-home-share.jpg',
   'assets/images/social/rogers-holdings-work-together-share.jpg',
+  'assets/images/social/rogers-holdings-make-work-easier-share.jpg',
   'assets/images/social/rogers-holdings-eastland-website-share.jpg',
   'assets/js/digital-business-card.js',
   'assets/js/site.js',
