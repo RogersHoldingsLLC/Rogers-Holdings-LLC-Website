@@ -22,12 +22,13 @@
   <link rel="stylesheet" href="../assets/css/studio-review.css?v=clear-disclosures-20261107">
   <link rel="stylesheet" href="../assets/css/core-brand-alignment.css?v=rh-core-20261117">
   <style>
-    .about-page .about-layout{display:grid;grid-template-columns:minmax(220px,.68fr) minmax(0,1.32fr);gap:clamp(32px,6vw,84px);align-items:center;max-width:1060px}
+    .about-page .about-layout{display:grid;grid-template-columns:minmax(220px,.68fr) minmax(0,1.32fr);column-gap:clamp(32px,6vw,84px);row-gap:clamp(22px,3.4vw,42px);align-items:start;max-width:1060px}
+    .about-page .about-heading{grid-column:1/-1;min-width:0}
     .about-page .about-photo{margin:0;max-width:340px;min-width:0}
     .about-page .about-photo img{display:block;width:100%;height:auto;border:1px solid #c5ac7970;border-radius:5px;box-shadow:0 16px 34px #05060a4d}
-    .about-page .about-copy h1{max-width:14ch;margin:0 0 23px;font-size:clamp(40px,4.5vw,64px)}
+    .about-page .about-heading h1{max-width:none;margin:0;font-size:clamp(40px,4.5vw,64px)}
     .about-page .about-copy p:not(.eyebrow):not(.about-scope-note){max-width:53ch;color:#ddd9cf;font-size:16px;line-height:1.8;margin:0 0 17px}
-    .about-page .about-copy .eyebrow{margin-bottom:15px}
+    .about-page .about-heading .eyebrow{margin-bottom:15px}
     .about-page .about-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin-top:27px}
     .about-page .about-services{display:inline-flex;align-items:center;min-height:44px;color:#eac987;font-size:13px;line-height:1.5;text-underline-offset:4px}
     .about-page .about-layout .about-copy p.about-scope-note{max-width:55ch;margin:15px 0 0;color:#d8d4cb;font-size:12px;line-height:1.75}
@@ -40,8 +41,8 @@
     .about-page .about-steps p{color:#59514a;font-size:14px;line-height:1.8;margin:0;max-width:35ch}
     @media(max-width:700px){
       .about-page .about-layout{grid-template-columns:minmax(0,1fr);gap:27px}
-      .about-page .about-photo{width:min(100%,250px);justify-self:start}
-      .about-page .about-copy h1{font-size:clamp(36px,9.3vw,48px);max-width:16ch;margin-bottom:20px}
+      .about-page .about-photo{width:min(100%,250px);justify-self:start;order:-1}
+      .about-page .about-heading h1{font-size:clamp(36px,9.3vw,48px);max-width:16ch;margin-inline:auto}
       .about-page .about-copy p:not(.eyebrow):not(.about-scope-note){font-size:15px;line-height:1.8}
       .about-page .about-actions{margin-top:22px}
       .about-page .about-steps{grid-template-columns:1fr;gap:22px}
@@ -50,7 +51,7 @@
     }
   </style>
   <noscript><style>@media(max-width:960px){body.about-page .site-header .nav-shell{display:block;padding-block:16px}body.about-page .site-header .menu-toggle{display:none}body.about-page .site-header .primary-nav{display:flex;position:static;flex-direction:row;flex-wrap:wrap;gap:8px 20px;padding:12px 0;background:transparent;opacity:1;visibility:visible;transform:none;pointer-events:auto}body.about-page .site-header .primary-nav>a{font-size:12px}}</style></noscript>
-<style id="mobile-page-heading-cohesion">@media(max-width:860px){.about-copy h1,.about-copy>.eyebrow,.about-process>h2{text-align:center}.about-actions{justify-content:center}}</style>
+<style id="mobile-page-heading-cohesion">@media(max-width:860px){.about-heading h1,.about-heading>.eyebrow,.about-process>h2{text-align:center}.about-actions{justify-content:center}}</style>
 <style id="rh-v67-editorial-precision">
 /* v67 editorial precision: cropped planes and engraved diagonal traces,
    not a logo reproduction. All decoration is background-only. */
@@ -133,12 +134,15 @@ body:is(.our-work-page,.service-scope-page,.about-page) .footer-bottom{box-shado
   <main id="main-content">
     <section class="interior-hero about-hero" id="about" aria-labelledby="founder-heading">
       <div class="container about-layout">
-        <figure class="about-photo"><img src="../assets/images/about/keith.webp" width="1040" height="1300" decoding="async" alt="Brian Keith Rogers, founder of Rogers Holdings LLC, wearing a charcoal Rogers Holdings polo"></figure>
-        <div class="about-copy">
+        <div class="about-heading">
           <p class="eyebrow">The person behind Rogers Holdings</p>
           <h1 id="founder-heading">I’m Brian Keith Rogers.</h1>
-          <p>I’m comfortable with technology and with getting my hands dirty. I work on a farm, and I bring that same hands-on attitude to helping business owners.</p>
-          <p>My faith shapes how I work: be honest, help where I can and follow through. You work directly with me.</p>
+        </div>
+        <figure class="about-photo"><img src="../assets/images/about/keith.webp" width="1040" height="1300" decoding="async" alt="Brian Keith Rogers, founder of Rogers Holdings LLC, wearing a charcoal Rogers Holdings polo"></figure>
+        <div class="about-copy">
+          <p>I’m a dad of two, I work on a farm, and I’m as comfortable getting my hands dirty as I am figuring out how a piece of technology works. Farm work has taught me to pay attention to what’s getting in the way and find a fix that holds up when the work gets busy. I bring that same approach to helping business owners.</p>
+          <p>I pay attention to the little things that make somebody’s day harder. When I built Eastland’s website, I wanted someone planning their first visit to find the service times and directions without hunting for them. When I helped with Missy’s workbook, I looked at what happens after a Facebook Live sale, when orders have to be totaled, packed, and sent out. I like figuring out where people get stuck and building something that helps them get on with the work.</p>
+          <p>My faith shapes how I work. I’ll give you a straight answer, help where I can, and follow through on what I say I’ll do. When you work with Rogers Holdings, you work directly with me.</p>
           <div class="about-actions"><a class="button button-gold" href="../#contact">Discuss a project <span aria-hidden="true">→</span></a><a class="about-services" href="../services/">See how I can help</a></div>
           <p class="about-scope-note">You’ll get a written scope and price before paid work starts. Further work is agreed separately.</p>
         </div>
