@@ -108,7 +108,17 @@ function runCarousel(search = '', hash = '') {
   };
   stage.querySelector = selector => { assert.equal(selector, '.rh-orbit-screen-link[tabindex="0"]'); return panels.find(p => p.link.tabIndex === 0).link; };
   const key = (key, fromLink = false) => { let prevented = false; stage.handlers.keydown({ key, target: { closest() { return fromLink ? panels.find(p => p.link.tabIndex === 0).link : null; } }, preventDefault() { prevented = true; } }); if (fromLink && prevented) assert.equal(panels.focused, panels.find(p => p.link.tabIndex === 0).link, 'keyboard movement transfers focus to the selected visible link'); return prevented; };
-  return { selected, key, prev: () => prev.handlers.click(), next: () => next.handlers.click(), status, title };
+  return { selected, key, prev: () => prev.handlers.click(), next: () => next.handlers.click(), status, title, kind };
+}
+// Visible, announced and no-script labels distinguish actual work from samples.
+const projectCopy = JSON.parse(home.match(/const projects=(\[\[.*?\]\]);/)[1]);
+for (let i = 0; i < carouselSlugs.length; i++) {
+  const label = i === 0 ? 'In-house project' : [1, 9].includes(i) ? 'Client project' : 'Sample project';
+  assert.ok(projectCopy[i][1].startsWith(label + ' · '));
+  assert.ok(figures[i].includes(label), 'static link describes project status');
+  const current = runCarousel('?project=' + carouselSlugs[i]);
+  assert.equal(current.kind.textContent, projectCopy[i][1], 'visible label matches selected project');
+  assert.ok(fallback.includes(label + ' · '), 'classification remains available without scripts');
 }
 const demo = runCarousel();
 assert.equal(demo.selected(), 0);

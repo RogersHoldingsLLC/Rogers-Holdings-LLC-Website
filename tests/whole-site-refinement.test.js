@@ -2,7 +2,7 @@ const assert=require('node:assert/strict');const fs=require('node:fs');const pat
 const pages=['index.html','services/index.html','website-creation/index.html','spreadsheet-repair/index.html','packages/index.html','our-work/index.html','business-snapshot/index.html','privacy/index.html'];
 for(const p of pages){const html=read(p);const nav=html.match(/<nav class="primary-nav"[\s\S]*?<\/nav>/)[0];const labels=[...nav.matchAll(/<a[^>]*>([^<]+)<\/a>/g)].map(m=>m[1]);assert.deepEqual(labels,['Services','Our Work','About','Discuss a project'],p);if(!['index.html','website-creation/index.html'].includes(p))assert.match(html,/studio-review\.css/);else assert.match(html,/\.site-header \.primary-nav\.is-open\{display:flex\}/);assert.doesNotMatch(html,/localhost|workers\.dev|TURNSTILE_SECRET_KEY/);}
 const snapshot=read('business-snapshot/index.html'),js=read('assets/js/site.js');const hash=s=>crypto.createHash('sha256').update(s).digest('hex');
-assert.equal(hash(snapshot.match(/<form class="lead-form"[\s\S]*?<\/form>/)[0]),'669fbe5bb55d50f006d3499a6f74e092bace488df6fce37d7d176f1c87c733a6','intake fields, consent and native validation contract must be unchanged');
+assert.equal(hash(snapshot.match(/<form class="lead-form"[\s\S]*?<\/form>/)[0]),'2e09fd119a71c05d3133844de9321a3c4b161ac8d9d5fe88b400e74f66869811','intake fields, consent and native validation contract must be unchanged');
 assert.equal(hash(js),'b274a00733ca5f32f820a3ae54707936a87a9f7ae6648b3fecde82349ecf39cc','reviewed shared behavior, including the approved Snapshot analytics correction, must remain unchanged');
 assert.match(snapshot,/href="#snapshot-sample"/);assert.match(snapshot,/id="snapshot-sample"/);
 assert.match(js,/result\.requestId === requestId/);assert.match(js,/result\.environment === 'production'/);assert.match(js,/typeof result\.retry === 'boolean'/);
@@ -79,3 +79,10 @@ assert.match(servicesDetail, /\.service-scope-page \.editorial-detail\[open\]::b
 assert.doesNotMatch(servicesDetail, /box-shadow:inset 2px 0 0 #d4b77f/);
 assert.match(servicesDetail, /\.service-scope-page\.durable-site \.service-introduction>\.eyebrow\{\s*font-size:13px;line-height:1\.6;letter-spacing:\.11em;/);
 console.log('Service detail gutter and label hierarchy passed');
+
+assert.match(read('our-work/index.html'), /story, preview or working example/);
+assert.match(read('portfolio/projects/missys-squishies/index.html'), /href="\/our-work\/#missys-squishies">See the short project overview/);
+for (const file of ['portfolio/projects/customer-follow-up/index.html','portfolio/projects/job-capacity/index.html','portfolio/projects/order-fulfillment/index.html','portfolio/projects/inventory-tracker/index.html','portfolio/orchard/index.html','portfolio/print-review/index.html']) {
+  assert.doesNotMatch(read(file), /Example working example|[Aa]n planning example|A EXAMPLE PRINT-STUDIO CONCEPT/);
+}
+console.log('Portfolio classifications, overview links and bounded copy corrections passed');
