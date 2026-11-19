@@ -47,9 +47,9 @@ const preFieldWords = preFieldMarkup
 const approvedHeroCopy = {
   eyebrow: 'Free Business Snapshot',
   heading: 'Not sure where to start?',
-  lede: 'Tell Brian what you need. A website is optional. He typically sends your Executive Brief within three business days.',
+  lede: 'Tell Brian what you need. A website is optional. He will review your request and prepare your Executive Brief.',
   cta: 'Request Your Free Business Snapshot',
-  trust: 'Free <span aria-hidden="true">·</span> Human-reviewed by Brian Rogers <span aria-hidden="true">·</span> Typically within three business days'
+  trust: 'Free <span aria-hidden="true">·</span> Human-reviewed by Brian Rogers <span aria-hidden="true">·</span> No obligation'
 };
 for (const copy of Object.values(approvedHeroCopy)) {
   assert.ok(heroMarkup.includes(copy), `Snapshot hero missing approved copy: ${copy}`);
@@ -442,3 +442,8 @@ console.log('Business Snapshot frontend contract tests passed.');
 
 assert.ok(html.includes('It will summarize what we reviewed, what the evidence supports, any suggested next step, and the reasoning behind it.'), 'receipt must distinguish reviewed evidence from a presumed diagnosis');
 assert.ok(!html.includes('It will identify the clearest visible issue, what deserves attention first, a practical recommended next step, and plain-English reasoning.'), 'receipt must not promise a diagnosis before review');
+
+// Copy scope matches the existing policy without changing contact permission.
+assert.doesNotMatch(html, /typically[^<.]*three business days|Your information is used only to review and respond/i);
+assert.match(html, /We use your information as described in our <a href="\.\.\/privacy\/">Privacy Policy<\/a>, including to review and respond to your request\. We do not sell personal information\./);
+assert.match(html, /This permission applies only to your Snapshot request\. It does not subscribe you to marketing\./);
