@@ -123,7 +123,7 @@ assert.doesNotMatch(privacy, /<footer[\s\S]*?rogers-holdings-logo-reversed\.png/
 assert.equal((homepage.match(/rh-executive-materials-01-/g) || []).length, 0);
 assert.match(homepage, /href="\/about\/"/, 'founder remains reachable from the homepage');
 const about = read('about/index.html');
-assert.match(about, /<figure class="about-photo"><img src="\.\.\/assets\/images\/about\/keith\.webp" width="1040" height="1300"/);
+assert.match(about, /<figure class="about-photo"><img src="\.\.\/assets\/images\/about\/keith\.webp\?v=[a-f0-9]{12}" width="1040" height="1300"/);
 assert.match(about, /alt="Brian Keith Rogers, founder of Rogers Holdings LLC,[^"]+"/);
 assert.match(css, /grid-template-columns: minmax\(380px, \.84fr\) minmax\(0, 1\.16fr\)/);
 assert.match(css, /\.phase3-founder-portrait-frame[\s\S]*?aspect-ratio: 4 \/ 5/);

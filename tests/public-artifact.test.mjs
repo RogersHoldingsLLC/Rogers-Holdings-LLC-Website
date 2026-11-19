@@ -28,9 +28,9 @@ assert.equal(PUBLIC_MANIFEST.length, 224);
 const aboutPortrait = 'assets/images/about/keith.webp';
 assert.ok(PUBLIC_MANIFEST.includes(aboutPortrait));
 assert.ok(fs.statSync(path.join(REPOSITORY_ROOT, aboutPortrait)).size < 100_000);
-assert.match(fs.readFileSync(path.join(REPOSITORY_ROOT, 'about/index.html'), 'utf8'), /<img src="\.\.\/assets\/images\/about\/keith\.webp" width="1040" height="1300"/);
+assert.match(fs.readFileSync(path.join(REPOSITORY_ROOT, 'about/index.html'), 'utf8'), /<img src="\.\.\/assets\/images\/about\/keith\.webp\?v=[a-f0-9]{12}" width="1040" height="1300"/);
 
-assert.match(fs.readFileSync(path.join(REPOSITORY_ROOT, 'about/index.html'), 'utf8'), /alt="Brian Keith Rogers, founder of Rogers Holdings LLC, wearing a charcoal Rogers Holdings polo"/);
+assert.match(fs.readFileSync(path.join(REPOSITORY_ROOT, 'about/index.html'), 'utf8'), /alt="Brian Keith Rogers, founder of Rogers Holdings LLC, wearing a white Rogers Holdings polo"/);
 
 const samplePdf = 'assets/samples/north-point-fitness-executive-brief.pdf';
 assert.ok(PUBLIC_MANIFEST.includes(samplePdf));
