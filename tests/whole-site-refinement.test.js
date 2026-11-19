@@ -72,3 +72,10 @@ assert.ok(contrast([222,216,203],lightenedInk)>=4.5,'light reading text retains 
 console.log('Shared texture paint-only, cache, no-motion and conservative text contrast guards passed.');
 
 assert.equal((read('assets/css/studio-review.css').match(/{/g)||[]).length,(read('assets/css/studio-review.css').match(/}/g)||[]).length,'shared stylesheet blocks balance');
+
+// Services: preserve copy alignment while shifting the rule into the card gutter.
+const servicesDetail = read('services/index.html');
+assert.match(servicesDetail, /\.service-scope-page \.editorial-detail\[open\]::before\{[^}]*inset-inline-start:-12px;[^}]*width:2px;[^}]*pointer-events:none;/);
+assert.doesNotMatch(servicesDetail, /box-shadow:inset 2px 0 0 #d4b77f/);
+assert.match(servicesDetail, /\.service-scope-page\.durable-site \.service-introduction>\.eyebrow\{\s*font-size:13px;line-height:1\.6;letter-spacing:\.11em;/);
+console.log('Service detail gutter and label hierarchy passed');

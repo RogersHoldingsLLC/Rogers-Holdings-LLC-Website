@@ -19,3 +19,8 @@ assert.ok(html.includes('url("assets/images/brand/rh-abstract-fold.svg")'));
 assert.ok(fs.existsSync(root+'/assets/images/brand/rh-abstract-fold.svg'));
 assert.match(html,/@media\(prefers-contrast:more\)\{[^}]*background-image:none/);
 console.log('PASS hero preload: single early exact CSS image URL with contrast opt-out; original front priority preserved.');
+
+assert.match(html,/\.gallery-home \.all-work \.rh-orbit-panel\{transform:rotateY\(var\(--rh-angle\)\) translateZ\(var\(--rh-radius\)\) scale\(var\(--rh-active-scale,1\)\);transition:transform 850ms cubic-bezier\(\.22,\.7,\.18,1\),filter 650ms ease,opacity 650ms ease\}/);
+assert.match(html,/\.gallery-home \.all-work \.rh-orbit-panel\.is-front\{--rh-active-scale:1\.045\}/);
+assert.match(html,/@media\(prefers-reduced-motion:reduce\)\{\.rh-orbit-ring,\.rh-orbit-panel,\.rh-orbit-panel img,\.rh-orbit-arrow\{transition:none!important\}/);
+console.log('PASS active-card emphasis: scale only at front, original placement and reduced-motion guard retained.');
