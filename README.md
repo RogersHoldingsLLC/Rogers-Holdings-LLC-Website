@@ -321,3 +321,5 @@ Added responsive WebP variants to the existing homepage carousel, preserving ori
 ## Hero resource discovery — review candidate
 
 Added a single early high-priority preload for the existing hero SVG, which PageSpeed identified within the largest-contentful-paint region. The media condition skips preloading when increased contrast removes that background. No asset, design, carousel priority or behavior changed; this improves resource discovery opportunity, not a verified loading-time result.
+
+The portfolio visual refresh keeps each example’s own design and interaction patterns. The homepage share card uses the current Form / Field website and its sample quote tracker; carousel images are captured from the released page designs.
