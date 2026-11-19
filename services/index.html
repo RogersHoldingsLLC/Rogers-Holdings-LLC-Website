@@ -116,7 +116,16 @@ body:is(.our-work-page,.service-scope-page,.about-page) .interior-hero{
  background-image:linear-gradient(90deg,transparent 0 6%,#d7bb804d 6% 12%,#d7bb8017 12% 94%,transparent 94%);
  background-size:100% 1px;background-position:center top;background-repeat:no-repeat;
 }
-.service-scope-page .editorial-detail[open]{box-shadow:inset 2px 0 0 #d4b77f,inset 0 1px 0 #d4b77f26}
+/* Keep the brass rule in the card gutter, not on the expanded text edge. */
+.service-scope-page .editorial-detail[open]{position:relative;box-shadow:inset 0 1px 0 #d4b77f26}
+.service-scope-page .editorial-detail[open]::before{
+ content:"";position:absolute;inset-block:0;inset-inline-start:-12px;
+ width:2px;background:#d4b77f;pointer-events:none;
+}
+/* Service names remain secondary to the benefit headlines. */
+.service-scope-page.durable-site .service-introduction>.eyebrow{
+ font-size:13px;line-height:1.6;letter-spacing:.11em;
+}
 /* A quiet ruled progression supports Brian's existing three-step process. */
 .about-page .about-steps>li{
  background-image:linear-gradient(90deg,#d8bb80aa 0 32px,#d8bb8026 32px 100%);
