@@ -111,7 +111,8 @@ assert.match(work,/portfolio\/showcase\/missy-redacted\.png/);
 // v68 leads with project previews; approved founder content moves to About.
 const about=fs.readFileSync(path.join(root,'about/index.html'),'utf8');
 assert.match(about,/I’m Brian Keith Rogers/);
-assert.match(about,/My faith shapes how I work: be honest, help where I can and follow through/);
+assert.match(about,/I’m a dad of two, I work on a farm/);
+assert.match(about,/My faith shapes how I work[.] I’ll give you a straight answer, help where I can, and follow through/);
 assert.equal((html.match(/<figure class="rh-orbit-panel/g)||[]).length,14);
 assert.equal((work.match(/<article class="work-exhibit"/g)||[]).length,16);
 assert.doesNotMatch(html, /data-rh-sculpture|listening-hero|<canvas/);
