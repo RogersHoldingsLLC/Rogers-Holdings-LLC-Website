@@ -26,3 +26,9 @@ The checked deployment workflow runs on `main` pushes or explicit manual dispatc
 These changes help visitors and crawlers understand the business; they do not guarantee a Google position or indexing schedule. Search Console verification, recrawling and external business-profile work are separate.
 
 Guidance: [Google Search Essentials](https://developers.google.com/search/docs/essentials) and [title-link guidance](https://developers.google.com/search/docs/appearance/title-link).
+
+## Separate visual follow-up
+
+The local copy and metadata above went live in PR #97. The follow-up visual candidate starts from that exact release (`0258c8a939a8e5a76c47a86b474af0439c714bf9`) and is staged separately. It breaks the existing single heading into balanced service and location lines, improves intro spacing and sets Eastland apart as a clearly labeled real client project before the starter options. It reuses the currently public 520 px Eastland screenshot with lazy loading and intrinsic dimensions. Form / Field, pricing scope, shared CSS, navigation, metadata, canonical, schema and existing scripts are unchanged.
+
+Cloud Chromium comparison at 320, 390, 768 and 1100 CSS-pixel iframe widths showed legible line breaks and no horizontal overflow. The Eastland thumbnail loaded at its intended intrinsic size, the project link reached the existing case story, and the example link focused the Form / Field heading. No forms or external links were opened. All 11 test groups passed and the public build still has 224 files.
