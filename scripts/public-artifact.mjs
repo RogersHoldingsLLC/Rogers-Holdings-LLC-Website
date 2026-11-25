@@ -206,6 +206,8 @@ export const PUBLIC_MANIFEST = Object.freeze([
   'assets/media/monoform-tour-v1.webp',
   'our-work/monoform/story.css',
   'our-work/monoform/m01-silver.webp',
+  'portfolio/showcase/fabrication-preview.jpg',
+  'our-work/monoform/demo-r104-material.webp',
   'robots.txt',
   'sitemap.xml',
   'services/index.html',

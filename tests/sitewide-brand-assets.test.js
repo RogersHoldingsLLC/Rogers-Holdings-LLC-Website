@@ -53,13 +53,13 @@ for (const page of marketablePages) {
   assert.match(page, /<meta name="twitter:image" content="https:\/\/rogersholdingsllc\.com\/assets\/images\/social\//);
   assert.match(page, /<meta name="twitter:image:alt" content="[^"]+">/);
 }
-for (const [page, asset] of [[homepage, 'rogers-holdings-make-work-easier-share.jpg?v=b033c101c0d0'], [webCreation, 'rogers-holdings-eastland-website-share.jpg']]) {
+for (const [page, asset] of [[homepage, 'rogers-holdings-make-work-easier-share.jpg?v=54a9d15bf8a4'], [webCreation, 'rogers-holdings-eastland-website-share.jpg']]) {
   const expected = 'https://rogersholdingsllc.com/assets/images/social/' + asset;
   for (const [attr, tag] of [['property','og:image'], ['property','og:image:secure_url'], ['name','twitter:image']]) {
     assert.ok(page.includes(`<meta ${attr}="${tag}" content="${expected}">`));
   }
 }
-assert.equal(require('node:crypto').createHash('sha256').update(fs.readFileSync(path.join(ROOT, 'assets/images/social/rogers-holdings-make-work-easier-share.jpg'))).digest('hex'), 'b033c101c0d0d200230b57e8d64ce27b4c6be8c54f1fcba3f2ba8e59d1b5c67b', 'exact owner-approved homepage share artwork');
+assert.equal(require('node:crypto').createHash('sha256').update(fs.readFileSync(path.join(ROOT, 'assets/images/social/rogers-holdings-make-work-easier-share.jpg'))).digest('hex'), '54a9d15bf8a4b9b80f66edc7523944829125663f4f40a0f06fcb6af269c21bcf', 'exact owner-approved homepage share artwork');
 assert.match(homepage, /Let’s make work easier\. Form \/ Field example website and matching quote follow-up tracker\./);
 assert.match(snapshot, /business-snapshot-share\.jpg/);
 assert.doesNotMatch(homepage + snapshot + brian + privacy + repair, /brand-card\.jpeg/);
