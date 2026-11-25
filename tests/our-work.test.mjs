@@ -223,3 +223,10 @@ assert.match(home,/\.gallery-home \.rh-orbit\.all-work::before\{content:none\}/)
 assert.doesNotMatch(home,/left:157px/,'no fixed-position rule through Our Work');
 assert.match(home,/\.rh-orbit-stage:focus-visible\{outline:3px solid #f2c679/,'carousel keyboard focus remains visible');
 console.log('Our Work decorative rule removed; example disclosures and keyboard focus preserved.');
+
+const monoform=read('our-work/monoform/index.html');
+assert.match(work,/href="\/our-work\/monoform\/"/);
+assert.match(monoform,/rel="canonical" href="https:\/\/rogersholdingsllc\.com\/our-work\/monoform\/">/);
+assert.match(monoform,/href="https:\/\/monoform-m01-studio\.briankeithrogers8290\.chatgpt\.site\/"/);
+assert.match(monoform,/not a real sale/);
+assert.doesNotMatch(monoform,/graphite\/|homepage-review|<iframe|<form/i);

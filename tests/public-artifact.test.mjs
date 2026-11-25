@@ -23,8 +23,8 @@ function artifactHashes() {
 }
 
 validateSourceBoundary();
-assert.deepEqual(PUBLIC_MANIFEST, JSON.parse(fs.readFileSync(new URL('./approved-public-manifest.json', import.meta.url), 'utf8')), 'reviewed v68 production manifest plus approved homepage share image');
-assert.equal(PUBLIC_MANIFEST.length, 224);
+assert.deepEqual(PUBLIC_MANIFEST, JSON.parse(fs.readFileSync(new URL('./approved-public-manifest.json', import.meta.url), 'utf8')), 'reviewed v68 production manifest plus approved homepage share image and MONOFORM project route');
+assert.equal(PUBLIC_MANIFEST.length, 227);
 const aboutPortrait = 'assets/images/about/keith.webp';
 assert.ok(PUBLIC_MANIFEST.includes(aboutPortrait));
 assert.ok(fs.statSync(path.join(REPOSITORY_ROOT, aboutPortrait)).size < 100_000);
