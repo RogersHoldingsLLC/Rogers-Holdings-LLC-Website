@@ -14,34 +14,29 @@ assert.match(home, /href="\/our-work\/">Project stories/);
 assert.match(home, /href="\/portfolio\/projects\/eastland\/"/);
 const eastlandDetail=read('portfolio/projects/eastland/index.html');
 assert.match(eastlandDetail, /href="https:\/\/eastlandfirstchurchofgod\.com\/"/);
-assert.match(home, /href="\/portfolio\/projects\/missys-squishies\/"/);
+assert.match(work, /href="\/portfolio\/projects\/missys-squishies\/"/);
 const missyDetail=read('portfolio/projects/missys-squishies/index.html');
 assert.match(missyDetail, /href="\/our-work\/#missys-squishies"/);
 
-// v68 replaces service cards with fourteen paired, accessible project previews.
-const panels = [...home.matchAll(/<figure class="rh-orbit-panel[^>]*>[\s\S]*?<\/figure>/g)].map(m=>m[0]);
-assert.equal(panels.length,14);
-assert.equal(panels.filter(p=>p.includes('href="/portfolio/projects/eastland/"')).length,1);
-for (const panel of panels) {
- const front=panel.match(/<a[^>]*class="rh-orbit-frame[^"]*"[^>]*>[\s\S]*?<\/a>/)?.[0];
- assert.ok(front);
- assert.match(front,/aria-label="[^"]+"/);
- assert.match(front,/href="\/portfolio\/projects\/[^"]+\/"/);
- const back=panel.match(/<div class="rh-orbit-back" aria-hidden="true">([\s\S]*?)<\/div>/)?.[1];
- assert.ok(back);
- assert.equal(front.match(/src="([^"]+)"/)[1],back.match(/src="([^"]+)"/)[1]);
- assert.match(back,/alt=""/);
- assert.doesNotMatch(back,/<a\b|tabindex/);
+// Graphite promotes one client story and two clear working examples.
+assert.match(home, /<section class="rh-selected" id="work" tabindex="-1" aria-labelledby="selected-title"/);
+assert.match(home, /href="\/our-work\/">See all projects/);
+for (const [name, destination] of [['MONOFORM', '/our-work/monoform/demo/'], ['Form / Field', '/portfolio/projects/precision-fabrication/']]) {
+ const match = [...home.matchAll(/<article class="rh-project-card[^"]*">[\s\S]*?<\/article>/g)].map(m => m[0]).find(card => card.includes(name));
+ assert.ok(match, name);
+ const links = [...match.matchAll(/href="([^"]+)"/g)].map(m => m[1]);
+ assert.deepEqual(links, [destination, destination]);
+ assert.match(match, /<img[^>]*alt="[^"]+"/);
 }
 assert.equal((home.match(/missy-workbook-redacted\.png/g) || []).length, 0);
 assert.equal((work.match(/missy-workbook-redacted\.png/g) || []).length, 0);
 const website = read('website-creation/index.html');
 assert.doesNotMatch(home + work + website, /eastland-product-family/);
-assert.match(home, /portfolio\/showcase\/eastland\.webp/);
+assert.match(home, /assets\/media\/eastland-homepage-poster\.webp/);
 assert.match(work, /portfolio\/showcase\/eastland\.webp/);
 assert.match(website, /portfolio\/showcase\/fabrication\.jpg/);
 // The approved service redesign features one visible end-to-end fictional workflow.
-// The complete sixteen-item portfolio and seven demos are tested independently.
+// The complete seventeen-item portfolio and seven demos are tested independently.
 const serviceExamples=website.match(/<section class="example" id="form-field"[\s\S]*?<\/section>/)?.[0];
 assert.ok(serviceExamples,'Website Creation needs a visible workflow example');
 assert.doesNotMatch(serviceExamples,/<details|<iframe|<form/);
@@ -68,17 +63,17 @@ assert.match(website,/<meta property="og:image:type" content="image\/jpeg">/);
 assert.match(website,/A screenshot of the Eastland First Church of God website/);
 assert.doesNotMatch(home, /missy-artwork-extracted|missy-workbook-redacted/);
 // Only the reviewed, flattened actual dashboard derivative may enter active proof.
-for(const page of [home,work,missyDetail]) {
+for(const page of [work,missyDetail]) {
  assert.match(page, /missy-redacted\.png/);
  assert.doesNotMatch(page, /data-workbook-demo|portfolio-workbook|Representative workbook layout|missy-workbook-redacted\.png|\.private-missy|image\(20261106/);
 }
 assert.match(missyDetail,/Redacted capture of the real workbook. No customer order data is shown here/);
 assert.match(missyDetail,/Only redacted examples are shown; the operational workbook stays private/);
 assert.match(missyDetail,/<img[^>]*alt="Redacted view of the Missy’s Squishies inventory and fulfillment workbook"/);
-assert.match(home, /portfolio\/showcase\/missy-redacted\.png/);
+assert.match(work, /portfolio\/showcase\/missy-redacted\.png/);
 assert.match(missyDetail, /The live workbook is not shared/);
 assert.match(missyDetail, /Redacted capture of the real workbook/);
-assert.deepEqual(fs.readFileSync(path.join(root,'portfolio/showcase/missy-redacted.png')), fs.readFileSync(path.join(root,'assets/images/our-work/missy-dashboard-redacted.png')), 'new carousel copy must retain exact reviewed flattened redaction');
+assert.deepEqual(fs.readFileSync(path.join(root,'portfolio/showcase/missy-redacted.png')), fs.readFileSync(path.join(root,'assets/images/our-work/missy-dashboard-redacted.png')), 'gallery copy must retain exact reviewed flattened redaction');
 const redactedBytes=fs.readFileSync(path.join(root,'assets/images/our-work/missy-dashboard-redacted.png'));
 assert.equal(crypto.createHash('sha256').update(redactedBytes).digest('hex'),'0071940d13c8fc6050e597eed02bb919d5745526740e0eb518f1147edbd05715','sanitized dashboard must remain the reviewed flattened derivative');
 assert.equal(redactedBytes.readUInt32BE(16),1189);assert.equal(redactedBytes.readUInt32BE(20),780);assert.equal(redactedBytes[24],8);assert.equal(redactedBytes[25],2,'RGB without alpha');
@@ -86,14 +81,14 @@ const redactionChunks=[];for(let p=8;p<redactedBytes.length;){const length=redac
 assert.deepEqual(redactionChunks,['IHDR','IDAT','IEND'],'no metadata, embedded original or extra frames');
 assert.ok(PUBLIC_MANIFEST.includes('assets/images/our-work/missy-dashboard-redacted.png'));
 assert.equal(PUBLIC_MANIFEST.some(p=>/source\.png|image\(20261106|\.private-missy|ocr-source|redact\.py/.test(p)),false);
-assert.doesNotMatch(home.match(/<section class="rh-orbit[\s\S]*?<\/section>/)[0], /<input|<form|<table/);
+assert.doesNotMatch(home.match(/<section class="rh-selected[\s\S]*?<\/section>/)[0], /<input|<form|<table/);
 assert.doesNotMatch(home, /class="eastland-story-timeline"|class="eastland-live-proof"/);
 assert.equal((work.match(/<h1\b/g) || []).length, 1);
 assert.match(work, /<link rel="canonical" href="https:\/\/rogersholdingsllc\.com\/our-work\/">/);
 assert.match(work, /aria-current="page">Our Work/);
 
-// The approved gallery has sixteen visible stories, including both fictional concepts.
-const expectedProjects=['eastland','precision-fabrication','captured-by-karmen','missys-squishies','store','pizzeria','bike-repair','orchard','repair-cafe','print-review','inventory-tracker','job-capacity','receipt-tracker','staffing-coverage','howl-and-timber','cortez-capital'];
+// The approved gallery has seventeen visible stories, including both fictional concepts.
+const expectedProjects=['eastland','monoform','precision-fabrication','captured-by-karmen','missys-squishies','store','pizzeria','bike-repair','orchard','repair-cafe','print-review','inventory-tracker','job-capacity','receipt-tracker','staffing-coverage','howl-and-timber','cortez-capital'];
 const exhibits=[...work.matchAll(/<article class="work-exhibit" id="([^"]+)" aria-labelledby="([^"]+)">([\s\S]*?)<\/article>/g)];
 assert.deepEqual(exhibits.map(m=>m[1]),expectedProjects);
 for(const [,id,heading,body] of exhibits) {
@@ -101,7 +96,10 @@ for(const [,id,heading,body] of exhibits) {
  assert.equal((body.match(/<img\b/g)||[]).length,1);
  assert.match(body,/<img[^>]*alt="[^"]+"/);
  const links=[...body.matchAll(/href="([^"]+)"/g)].map(m=>m[1]);
- assert.deepEqual(links,['/portfolio/projects/'+id+'/','/portfolio/projects/'+id+'/']);
+ const target = id === 'monoform' ? '/our-work/monoform/' : '/portfolio/projects/' + id + '/';
+ const expectedLinks = [target,target];
+ if (['monoform','precision-fabrication'].includes(id)) expectedLinks.push(target + '#walkthrough');
+ assert.deepEqual(links, expectedLinks);
  assert.match(body,/aria-label="View [^"]+ project"/);
  assert.match(body,/<span class="sr-only">:/);
  assert.doesNotMatch(body,/<details|<iframe|<form/);
@@ -219,10 +217,9 @@ for (const file of PUBLIC_MANIFEST.filter(f => /\.(html|webmanifest)$/.test(f) |
  const presentation = read(file).replace(/<!--[^]*?-->/g,'').replace(/<(style)\b[^>]*>[^]*?<\/\1>/gi,'').replaceAll('fictional-team','example-team');
  assert.doesNotMatch(presentation,/\bfictional\b|AI-generated|AI-assisted/i,`${file}: no old presentation labels`);
 }
-assert.match(home,/\.gallery-home \.rh-orbit\.all-work::before\{content:none\}/);
-assert.doesNotMatch(home,/left:157px/,'no fixed-position rule through Our Work');
-assert.match(home,/\.rh-orbit-stage:focus-visible\{outline:3px solid #f2c679/,'carousel keyboard focus remains visible');
-console.log('Our Work decorative rule removed; example disclosures and keyboard focus preserved.');
+assert.doesNotMatch(home, /<section class="rh-orbit|left:157px/);
+assert.match(read('assets/css/homepage-graphite.css'), /focus-visible/);
+console.log('Selected Graphite projects, gallery disclosures and keyboard focus preserved.');
 
 const monoform=read('our-work/monoform/index.html');
 assert.match(work,/href="\/our-work\/monoform\/"/);

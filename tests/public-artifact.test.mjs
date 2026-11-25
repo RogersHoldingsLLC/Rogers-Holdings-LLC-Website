@@ -23,8 +23,8 @@ function artifactHashes() {
 }
 
 validateSourceBoundary();
-assert.deepEqual(PUBLIC_MANIFEST, JSON.parse(fs.readFileSync(new URL('./approved-public-manifest.json', import.meta.url), 'utf8')), 'reviewed v68 production manifest plus approved homepage share image and MONOFORM project route');
-assert.equal(PUBLIC_MANIFEST.length, 351);
+assert.deepEqual(PUBLIC_MANIFEST, JSON.parse(fs.readFileSync(new URL('./approved-public-manifest.json', import.meta.url), 'utf8')), 'approved Graphite production manifest and portfolio media');
+assert.equal(PUBLIC_MANIFEST.length, 359);
 
 for (const [route, slug] of [
   ['our-work/monoform/index.html', 'monoform-tour-v1'],

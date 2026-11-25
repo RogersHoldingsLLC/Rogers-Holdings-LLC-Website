@@ -5,8 +5,8 @@ const root = path.resolve(__dirname, '..');
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 const home = read('index.html');
 const main = home.match(/<main[\s\S]*?<\/main>/)[0];
-const hero = main.slice(0, main.indexOf('<!-- Portfolio ring:'));
-// The approved redesign replaces four legacy sections with a project carousel.
+const hero = main.slice(0, main.indexOf('<section class="rh-selected"'));
+// The approved Graphite redesign replaces the old carousel with selected projects.
 // Preserve the destination, consent and honest-offer contracts, not old geometry.
 for (const id of ['top', 'capabilities', 'work', 'about', 'contact', 'approach', 'process', 'website-creation', 'spreadsheet-repair']) {
   assert.ok(main.includes('id="' + id + '"'), `preserve existing deep link #${id}`);
@@ -26,7 +26,9 @@ assert.match(main, /href="tel:\+18594044351"/);
 assert.match(main, /Free Business Snapshot/);
 assert.match(main, /optional and separate from paid work/i);
 assert.match(main, /Please do not send passwords or confidential customer data/);
-assert.doesNotMatch(home, /clear-path|<video|<canvas|Play animation|Replay/, 'retired decorative media must not load');
+assert.doesNotMatch(home, /clear-path|<canvas|Play animation|Replay/, 'retired decorative media must not load');
+assert.equal((home.match(/<video\b/g) || []).length, 1, 'only the approved Eastland walkthrough can use homepage video');
+assert.match(hero, /href="\/our-work\/">See our work/);
 const visibleMain = main.replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, '');
 assert.doesNotMatch(visibleMain, /<form|<input|testimonial|[0-9]+%|hours saved|revenue increased/i);
 console.log('Redesigned homepage routes, truthful scope, optional Snapshot and contact privacy contracts passed.');
