@@ -9,3 +9,5 @@ figcaption{background:#17192367}
 .work-notes span{color:#e6bd9f;font:700 .68rem ui-monospace,monospace}
 .work-notes h3{margin:7px 0;font-size:1.02rem}.work-notes p{margin:0;font-size:.94rem;color:#dccfc3}
 @media(max-width:600px){.work-notes{grid-template-columns:1fr;gap:8px}}
+
+.demo-capture img{width:100%;height:auto;padding:0;filter:none}

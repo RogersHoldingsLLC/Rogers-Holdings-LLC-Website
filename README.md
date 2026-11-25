@@ -327,3 +327,5 @@ The portfolio visual refresh keeps each example’s own design and interaction p
 ### Portfolio walkthroughs
 
 Our Work links to the MONOFORM and Form / Field walkthroughs on their respective project pages. Their same-origin videos are assigned only after an explicit play action; the poster and ordinary demo links do not depend on video playback. The Form / Field film shows the newer design preview, not a replacement of the older public interactive demo.
+
+November 25, 2026: renewed portfolio captures from current public sites and example worksheets. Form / Field’s summary thumbnail and homepage share card show the newer design already visible in the public walkthrough; the case and service links that open the earlier interactive demo continue to show a matching capture of that demo. The share card’s tracker uses the public sample workbook. Missy’s approved redacted proof was retained.
