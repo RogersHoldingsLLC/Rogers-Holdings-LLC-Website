@@ -195,6 +195,8 @@ export const PUBLIC_MANIFEST = Object.freeze([
   'packages/index.html',
   'our-work/index.html',
   ...MONOFORM,
+  'our-work/monoform/demo/index.html',
+  'our-work/monoform/demo/shop/index.html',
   'our-work/monoform/index.html',
   'our-work/monoform/story.css',
   'our-work/monoform/m01-silver.webp',

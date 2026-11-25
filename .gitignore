@@ -2,4 +2,8 @@
 .codex/
 _site/
 
-/our-work/monoform/demo/
+/our-work/monoform/demo/*
+!/our-work/monoform/demo/index.html
+!/our-work/monoform/demo/shop/
+/our-work/monoform/demo/shop/*
+!/our-work/monoform/demo/shop/index.html

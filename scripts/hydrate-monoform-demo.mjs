@@ -20,8 +20,6 @@ function normalize(key,bytes){
  if(key==='flight.css'){
   return Buffer.from(bytes.toString().replace(/url\(['"]?assets\/(?:flight-cloudbank\.webp\?v=2|baffle-aperture-mask(?:-phone)?\.svg)['"]?\)/g,'none'));
  }
- if(key==='index.html')return Buffer.from(bytes.toString().replace('<section class="home-finishes"', '<div id="lineup" aria-hidden="true"></div><section class="home-finishes"').replace('M01 is a fictional product and an original design study by Rogers Holdings LLC.','MONOFORM is a storefront demonstration by Rogers Holdings LLC. Checkout is simulated.'));
- if(key==='shop/index.html')return Buffer.from(bytes.toString().replace('MONOFORM is a fictional product concept by Rogers Holdings LLC.','MONOFORM is a storefront demonstration by Rogers Holdings LLC.'));
  if(key==='store-home.js')return Buffer.from(bytes.toString().replace('legacy.before(shelf);legacy.hidden=true;', "const marker=document.getElementById('lineup');if(marker)marker.replaceWith(shelf);else legacy.before(shelf);legacy.hidden=true;"));
  return bytes;
 }

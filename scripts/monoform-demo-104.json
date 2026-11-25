@@ -505,11 +505,6 @@
     "served": "0e7bdff7db9910b582bf2702d671e4f3d42ca7449d14d57833b90ea59958d133"
   },
   {
-    "file": "index.html",
-    "source": "9a490cc35d7bdb003c1b5206b11232b3a1cef51e2fbb3361aeb9adb1cd0bb108",
-    "served": "e98ff27c3fc34d2674dd31d5da41ab4e75a927038a4dcbb830c070cfa2632e66"
-  },
-  {
     "file": "listening-desk.css",
     "source": "47c0c1a823395b8987140fcf33382655c5686377d399a7b9453aa7be6a8257df",
     "served": "47c0c1a823395b8987140fcf33382655c5686377d399a7b9453aa7be6a8257df"
@@ -538,11 +533,6 @@
     "file": "range-store.css",
     "source": "8e3616ab02984818081c098b79220c0ddd51895c5fa5da29a2fbf2b0daaef0fd",
     "served": "8e3616ab02984818081c098b79220c0ddd51895c5fa5da29a2fbf2b0daaef0fd"
-  },
-  {
-    "file": "shop/index.html",
-    "source": "0e1c5aff031326499c407a20ab60a68305f2239c3488b1e583b17a1cb16f83a6",
-    "served": "5fea30ebba65fccf56e068b8fea5a7ce24d383bea6de271b08cf43b2af9a0d07"
   },
   {
     "file": "shop/shop.css",
