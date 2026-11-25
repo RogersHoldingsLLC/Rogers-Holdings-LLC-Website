@@ -6,6 +6,8 @@ export const REPOSITORY_ROOT = fs.realpathSync(fileURLToPath(new URL('../', impo
 export const OUTPUT_ROOT = path.join(REPOSITORY_ROOT, '_site');
 export const PRODUCTION_ORIGIN = 'https://rogersholdingsllc.com';
 
+const MONOFORM = JSON.parse(fs.readFileSync(new URL('./monoform-demo-104.json', import.meta.url), 'utf8')).map(({file}) => 'our-work/monoform/demo/'+file);
+
 export const PUBLIC_MANIFEST = Object.freeze([
   // Approved v68 visual release: explicit public assets/routes only.
   'about/index.html',
@@ -192,6 +194,7 @@ export const PUBLIC_MANIFEST = Object.freeze([
   'privacy/index.html',
   'packages/index.html',
   'our-work/index.html',
+  ...MONOFORM,
   'our-work/monoform/index.html',
   'our-work/monoform/story.css',
   'our-work/monoform/m01-silver.webp',

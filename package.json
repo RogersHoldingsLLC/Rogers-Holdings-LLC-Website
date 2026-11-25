@@ -12,7 +12,9 @@
     "test:whole-site-refinement": "node tests/whole-site-refinement.test.js",
     "test:business-snapshot-analytics": "node tests/business-snapshot-analytics.test.cjs",
     "test:seo-metadata": "node tests/seo-metadata.test.cjs",
-    "test:carousel-responsive": "node tests/carousel-responsive.test.cjs"
+    "test:carousel-responsive": "node tests/carousel-responsive.test.cjs",
+    "pretest": "node scripts/hydrate-monoform-demo.mjs",
+    "prebuild:public": "node scripts/hydrate-monoform-demo.mjs"
   },
   "devDependencies": {
     "sharp": "latest"
