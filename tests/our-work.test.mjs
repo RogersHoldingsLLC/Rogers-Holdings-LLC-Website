@@ -34,7 +34,7 @@ const website = read('website-creation/index.html');
 assert.doesNotMatch(home + work + website, /eastland-product-family/);
 assert.match(home, /assets\/media\/eastland-homepage-poster\.webp/);
 assert.match(work, /portfolio\/showcase\/eastland\.webp/);
-assert.match(website, /portfolio\/showcase\/fabrication\.jpg/);
+assert.match(website, /portfolio\/showcase\/fabrication-preview\.jpg/);
 // The approved service redesign features one visible end-to-end fictional workflow.
 // The complete seventeen-item portfolio and seven demos are tested independently.
 const serviceExamples=website.match(/<section class="example" id="form-field"[\s\S]*?<\/section>/)?.[0];
@@ -207,7 +207,7 @@ assert.match(workCss, /--work-menu-top: 73px/);
 assert.match(work, /our-work\.css\?v=natural-client-stories-20261107/);
 console.log('Our Work menu viewport, overflow, safe-area and cache guards passed.');
 
-assert.equal(website.split('portfolio/showcase/fabrication.jpg').length-1,1,'featured workflow screenshot is not duplicated');
+assert.equal(website.split('portfolio/showcase/fabrication-preview.jpg').length-1,1,'featured workflow screenshot is not duplicated');
 assert.match(website,/Up to five mobile-friendly pages/);
 assert.match(website,/two rounds of in-scope revisions/);
 assert.match(website,/Domains, hosting, support, copywriting, extra pages, booking, payments and integrations are quoted separately/);
@@ -229,3 +229,17 @@ assert.match(monoform,/href="\/our-work\/monoform\/demo\/"/);
 assert.doesNotMatch(monoform, /chatgpt\.(?:site|com)/i);
 assert.match(monoform,/not a real sale/);
 assert.doesNotMatch(monoform,/graphite\/|homepage-review|<iframe|<form/i);
+
+// Form / Field public r24 lives at the stable demo route; the companion stays fictional.
+const ffBase='portfolio/precision-fabrication/';
+const ffPages=['index.html','capabilities/index.html','library/index.html','brief/index.html','tracker/index.html'];
+for (const file of ffPages) {
+ const page=read(ffBase+file);
+ assert.match(page,/https:\/\/rogersholdingsllc\.com\/portfolio\/precision-fabrication\//);
+ assert.doesNotMatch(page,/chatgpt\.(?:site|com)|docs\.google\.com|href="\/"|(?:src|href)="\/assets\//i);
+ assert.match(page,/form-action 'none'/);
+ assert.ok(PUBLIC_MANIFEST.includes(ffBase+file));
+}
+assert.match(read(ffBase+'brief/index.html'),/data-public-tracker/);
+assert.match(read(ffBase+'site.js'),/customer-follow-up\/#quote-process=/);
+assert.doesNotMatch(read('portfolio/projects/precision-fabrication/index.html'),/original single-page workflow|newer design preview/);

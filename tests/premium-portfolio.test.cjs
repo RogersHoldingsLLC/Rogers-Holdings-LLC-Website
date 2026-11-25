@@ -98,6 +98,7 @@ for (const value of ['', '0', '-1', '121', '1.5', 'NaN', '<script>']) {
   assert.deepEqual(handoff('order-fulfillment', '#order-units=' + value), { value: '', shown: false });
 }
 assert.match(read('portfolio/store/index.html'), /href="\.\.\/projects\/order-fulfillment\/#order-units='/);
-assert.match(read('portfolio/precision-fabrication/index.html'), /\.\.\/projects\/customer-follow-up\/#quote-process=/);
+assert.match(read('portfolio/precision-fabrication/brief/index.html'), /customer-follow-up\/#quote-process=sheet/);
+assert.doesNotMatch(read('portfolio/precision-fabrication/site.js'), /fetch\s*\(|localStorage|sessionStorage|sendBeacon|XMLHttpRequest/);
 
 console.log('Premium portfolio: 16 preserved legacy project destinations, bounded redirect VM checks, 7 fictional local-only demos, bounded handoff parsers and public privacy boundaries passed.');

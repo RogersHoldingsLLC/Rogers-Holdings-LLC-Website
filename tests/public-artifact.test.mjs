@@ -24,7 +24,7 @@ function artifactHashes() {
 
 validateSourceBoundary();
 assert.deepEqual(PUBLIC_MANIFEST, JSON.parse(fs.readFileSync(new URL('./approved-public-manifest.json', import.meta.url), 'utf8')), 'approved Graphite production manifest and portfolio media');
-assert.equal(PUBLIC_MANIFEST.length, 359);
+assert.equal(PUBLIC_MANIFEST.length, 402);
 
 const homeSource = fs.readFileSync(path.join(REPOSITORY_ROOT, 'index.html'), 'utf8');
 for (const [route, slug] of [
