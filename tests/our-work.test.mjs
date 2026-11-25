@@ -227,6 +227,7 @@ console.log('Our Work decorative rule removed; example disclosures and keyboard 
 const monoform=read('our-work/monoform/index.html');
 assert.match(work,/href="\/our-work\/monoform\/"/);
 assert.match(monoform,/rel="canonical" href="https:\/\/rogersholdingsllc\.com\/our-work\/monoform\/">/);
-assert.match(monoform,/href="https:\/\/monoform-m01-studio\.briankeithrogers8290\.chatgpt\.site\/"/);
+assert.match(monoform,/href="\/our-work\/monoform\/demo\/"/);
+assert.doesNotMatch(monoform, /chatgpt\.(?:site|com)/i);
 assert.match(monoform,/not a real sale/);
 assert.doesNotMatch(monoform,/graphite\/|homepage-review|<iframe|<form/i);
