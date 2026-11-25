@@ -24,7 +24,23 @@ function artifactHashes() {
 
 validateSourceBoundary();
 assert.deepEqual(PUBLIC_MANIFEST, JSON.parse(fs.readFileSync(new URL('./approved-public-manifest.json', import.meta.url), 'utf8')), 'reviewed v68 production manifest plus approved homepage share image and MONOFORM project route');
-assert.equal(PUBLIC_MANIFEST.length, 343);
+assert.equal(PUBLIC_MANIFEST.length, 349);
+
+for (const [route, slug] of [
+  ['our-work/monoform/index.html', 'monoform-tour-v1'],
+  ['portfolio/projects/precision-fabrication/index.html', 'form-field-tour-v1']
+]) {
+  const page = fs.readFileSync(path.join(REPOSITORY_ROOT, route), 'utf8');
+  assert.match(page, /id="walkthrough"/);
+  assert.match(page, /<video hidden controls playsinline muted loop preload="none"/);
+  assert.doesNotMatch(page.match(/<video[^>]*>/)[0], /\bsrc=/, 'do not fetch the walkthrough before a click');
+  assert.ok(page.includes(`href="/assets/media/${slug}.mp4" data-tour-fallback`));
+  assert.ok(fs.statSync(path.join(REPOSITORY_ROOT, `assets/media/${slug}.webp`)).size < 80_000);
+  const media = fs.readFileSync(path.join(REPOSITORY_ROOT, `assets/media/${slug}.mp4`));
+  assert.equal(media.subarray(4, 8).toString(), 'ftyp');
+  assert.ok(media.indexOf('moov') > 0 && media.indexOf('moov') < media.indexOf('mdat'), 'streamable MP4');
+}
+
 const aboutPortrait = 'assets/images/about/keith.webp';
 assert.ok(PUBLIC_MANIFEST.includes(aboutPortrait));
 assert.ok(fs.statSync(path.join(REPOSITORY_ROOT, aboutPortrait)).size < 100_000);
