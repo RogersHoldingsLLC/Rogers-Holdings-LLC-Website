@@ -323,3 +323,7 @@ Added responsive WebP variants to the existing homepage carousel, preserving ori
 Added a single early high-priority preload for the existing hero SVG, which PageSpeed identified within the largest-contentful-paint region. The media condition skips preloading when increased contrast removes that background. No asset, design, carousel priority or behavior changed; this improves resource discovery opportunity, not a verified loading-time result.
 
 The portfolio visual refresh keeps each example’s own design and interaction patterns. The homepage share card uses the current Form / Field website and its sample quote tracker; carousel images are captured from the released page designs.
+
+### Portfolio walkthroughs
+
+Our Work links to the MONOFORM and Form / Field walkthroughs on their respective project pages. Their same-origin videos are assigned only after an explicit play action; the poster and ordinary demo links do not depend on video playback. The Form / Field film shows the newer design preview, not a replacement of the older public interactive demo.
