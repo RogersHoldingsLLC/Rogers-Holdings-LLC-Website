@@ -243,3 +243,12 @@ for (const file of ffPages) {
 assert.match(read(ffBase+'brief/index.html'),/data-public-tracker/);
 assert.match(read(ffBase+'site.js'),/customer-follow-up\/#quote-process=/);
 assert.doesNotMatch(read('portfolio/projects/precision-fabrication/index.html'),/original single-page workflow|newer design preview/);
+
+// The public browser worksheet and both of its captures follow the companion workbook palette.
+const ffWorksheet=read('portfolio/projects/customer-follow-up/index.html');
+assert.match(ffWorksheet,/\.quote-desk \.demo-brand\{background:#202723/);
+assert.match(ffWorksheet,/form-field-workbook-palette/);
+assert.doesNotMatch(ffWorksheet,/#(?:132b42|173b58|eaf1f7|dbe6ef)\b/i);
+for(const f of ['portfolio/projects/customer-follow-up/index.html','portfolio/projects/precision-fabrication/index.html']) {
+ assert.match(read(f),/customer-follow-up\.jpg\?v=20261125-form-field-brand/);
+}
