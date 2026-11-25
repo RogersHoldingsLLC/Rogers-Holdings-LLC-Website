@@ -25,7 +25,7 @@ for (const [name, destination] of [['MONOFORM', '/our-work/monoform/demo/'], ['F
  const match = [...home.matchAll(/<article class="rh-project-card[^"]*">[\s\S]*?<\/article>/g)].map(m => m[0]).find(card => card.includes(name));
  assert.ok(match, name);
  const links = [...match.matchAll(/href="([^"]+)"/g)].map(m => m[1]);
- assert.deepEqual(links, [destination, destination]);
+ assert.deepEqual(links.filter(href => !href.endsWith(".mp4")), [destination, destination]);
  assert.match(match, /<img[^>]*alt="[^"]+"/);
 }
 assert.equal((home.match(/missy-workbook-redacted\.png/g) || []).length, 0);
@@ -98,7 +98,8 @@ for(const [,id,heading,body] of exhibits) {
  const links=[...body.matchAll(/href="([^"]+)"/g)].map(m=>m[1]);
  const target = id === 'monoform' ? '/our-work/monoform/' : '/portfolio/projects/' + id + '/';
  const expectedLinks = [target,target];
- if (['monoform','precision-fabrication'].includes(id)) expectedLinks.push(target + '#walkthrough');
+ if (id === 'monoform') expectedLinks.push('/#monoform-walkthrough');
+ if (id === 'precision-fabrication') expectedLinks.push('/#form-field-walkthrough');
  assert.deepEqual(links, expectedLinks);
  assert.match(body,/aria-label="View [^"]+ project"/);
  assert.match(body,/<span class="sr-only">:/);

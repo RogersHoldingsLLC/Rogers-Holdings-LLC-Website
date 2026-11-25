@@ -1129,6 +1129,8 @@ main.gallery-home{background:radial-gradient(ellipse 100% 22rem at 44% 14%,#2a30
 @media(prefers-contrast:more){.gallery-home .hero--dimensional,.gallery-home .rh-orbit.all-work{background-image:none}.gallery-home .rh-orbit.all-work::before,.gallery-home .contact>.wrap::after{display:none}}
 </style><script async src="https://www.googletagmanager.com/gtag/js?id=G-MK4TVD3CYT"></script>
 <link rel="stylesheet" href="/assets/css/homepage-graphite.css?v=1">
+<link rel="stylesheet" href="/assets/css/portfolio-walkthrough.css?v=2">
+<script defer src="/assets/js/portfolio-walkthrough.js?v=2"></script>
 </head><body class="rh-graphite-page">
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
@@ -1221,14 +1223,28 @@ main.gallery-home{background:radial-gradient(ellipse 100% 22rem at 44% 14%,#2a30
    <div class="rh-selected-pair">
    <article class="rh-project-card rh-project-card--monoform">
      <p class="rh-selected-label">02 <span>Storefront concept</span></p>
-     <a class="rh-selected-shot" href="/our-work/monoform/demo/" aria-label="Open the MONOFORM demo" tabindex="-1"><img src="/assets/media/monoform-tour-v1.webp" width="1152" height="720" loading="lazy" decoding="async" alt="MONOFORM Audio storefront with the silver M01 speaker"></a>
+     <figure class="rh-selected-shot rh-card-tour" id="monoform-walkthrough" data-portfolio-tour>
+       <a href="/our-work/monoform/demo/" aria-label="Open the MONOFORM demo" class="rh-tour-project-link" tabindex="-1">
+         <img src="/assets/media/monoform-tour-v1.webp" width="1152" height="720" loading="lazy" decoding="async" alt="MONOFORM Audio storefront with the silver M01 speaker">
+         <video width="1152" height="720" muted playsinline loop preload="none" aria-hidden="true" data-src="/assets/media/monoform-tour-v1.mp4"></video>
+       </a>
+       <button class="rh-tour-toggle" type="button" data-tour-toggle aria-label="Play MONOFORM walkthrough" data-tour-name="MONOFORM" hidden>Play</button>
+       <noscript><a class="rh-tour-noscript" href="/assets/media/monoform-tour-v1.mp4">Watch MONOFORM walkthrough</a></noscript>
+     </figure>
      <h4>MONOFORM M01</h4>
      <p>A cinematic speaker showcase with a sound test, a choice of finishes and a simulated shop.</p>
      <a class="rh-selected-link" href="/our-work/monoform/demo/">View storefront demo</a>
    </article>
    <article class="rh-project-card rh-project-card--form-field">
      <p class="rh-selected-label">03 <span>Workflow demo</span></p>
-     <a class="rh-selected-shot" href="/portfolio/projects/precision-fabrication/" aria-label="Open the Form / Field demo case" tabindex="-1"><img src="/portfolio/showcase/fabrication-preview.jpg?v=20261125-capture" width="1300" height="676" loading="lazy" decoding="async" alt="Current Form / Field website preview with its fabrication workshop"></a>
+     <figure class="rh-selected-shot rh-card-tour" id="form-field-walkthrough" data-portfolio-tour>
+       <a href="/portfolio/projects/precision-fabrication/" aria-label="Open the Form / Field demo case" class="rh-tour-project-link" tabindex="-1">
+         <img src="/portfolio/showcase/fabrication-preview.jpg?v=20261125-capture" width="1300" height="676" loading="lazy" decoding="async" alt="Current Form / Field website preview with its fabrication workshop">
+         <video width="1152" height="720" muted playsinline loop preload="none" aria-hidden="true" data-src="/assets/media/form-field-tour-v1.mp4"></video>
+       </a>
+       <button class="rh-tour-toggle" type="button" data-tour-toggle aria-label="Play Form / Field walkthrough" data-tour-name="Form / Field" hidden>Play</button>
+       <noscript><a class="rh-tour-noscript" href="/assets/media/form-field-tour-v1.mp4">Watch Form / Field walkthrough</a></noscript>
+     </figure>
      <h4>Form / Field</h4>
      <p>Choose a fabrication process, prepare quote details and see how a shop can organize the next follow-up.</p>
      <a class="rh-selected-link" href="/portfolio/projects/precision-fabrication/">Explore the workflow</a>

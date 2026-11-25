@@ -27,7 +27,7 @@ assert.match(main, /Free Business Snapshot/);
 assert.match(main, /optional and separate from paid work/i);
 assert.match(main, /Please do not send passwords or confidential customer data/);
 assert.doesNotMatch(home, /clear-path|<canvas|Play animation|Replay/, 'retired decorative media must not load');
-assert.equal((home.match(/<video\b/g) || []).length, 1, 'only the approved Eastland walkthrough can use homepage video');
+assert.equal((home.match(/<video\b/g) || []).length, 3, 'only the three approved walkthroughs use homepage video');
 assert.match(hero, /href="\/our-work\/">See our work/);
 const visibleMain = main.replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, '');
 assert.doesNotMatch(visibleMain, /<form|<input|testimonial|[0-9]+%|hours saved|revenue increased/i);

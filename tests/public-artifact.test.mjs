@@ -26,16 +26,22 @@ validateSourceBoundary();
 assert.deepEqual(PUBLIC_MANIFEST, JSON.parse(fs.readFileSync(new URL('./approved-public-manifest.json', import.meta.url), 'utf8')), 'approved Graphite production manifest and portfolio media');
 assert.equal(PUBLIC_MANIFEST.length, 359);
 
+const homeSource = fs.readFileSync(path.join(REPOSITORY_ROOT, 'index.html'), 'utf8');
 for (const [route, slug] of [
   ['our-work/monoform/index.html', 'monoform-tour-v1'],
   ['portfolio/projects/precision-fabrication/index.html', 'form-field-tour-v1']
 ]) {
   const page = fs.readFileSync(path.join(REPOSITORY_ROOT, route), 'utf8');
+  const anchor = slug.replace('-tour-v1','-walkthrough');
   assert.match(page, /id="walkthrough"/);
-  assert.match(page, /<video hidden controls playsinline muted loop preload="none"/);
-  assert.doesNotMatch(page.match(/<video[^>]*>/)[0], /\bsrc=/, 'do not fetch the walkthrough before a click');
-  assert.ok(page.includes(`href="/assets/media/${slug}.mp4" data-tour-fallback`));
-  assert.ok(fs.statSync(path.join(REPOSITORY_ROOT, `assets/media/${slug}.webp`)).size < 80_000);
+  assert.doesNotMatch(page, /<video\b|\.mp4/);
+  assert.ok(page.includes(`href="/#${anchor}"`), 'old fragments lead to the homepage player');
+  const figure = homeSource.split(`id="${anchor}"`)[1].split('</figure>')[0];
+  assert.match(figure, /<video [^>]*muted playsinline loop preload="none"/);
+  assert.doesNotMatch(figure.match(/<video[^>]*>/)[0], /\ssrc=/, 'viewport-gated video has no starting source');
+  assert.ok(figure.includes(`data-src="/assets/media/${slug}.mp4"`));
+  assert.ok(figure.includes(`href="/assets/media/${slug}.mp4"`), 'no-script video link');
+  assert.match(figure, /<button[^>]*data-tour-toggle[^>]*aria-label="Play [^"]+ walkthrough"/);
   const media = fs.readFileSync(path.join(REPOSITORY_ROOT, `assets/media/${slug}.mp4`));
   assert.equal(media.subarray(4, 8).toString(), 'ftyp');
   assert.ok(media.indexOf('moov') > 0 && media.indexOf('moov') < media.indexOf('mdat'), 'streamable MP4');
