@@ -11,3 +11,11 @@ figcaption{background:#17192367}
 @media(max-width:600px){.work-notes{grid-template-columns:1fr;gap:8px}}
 
 .demo-capture img{width:100%;height:auto;padding:0;filter:none}
+
+/* Give the phone a visible way into the experience before the project image. */
+.story-intro-summary{color:#d5c8bc}
+.story-phone-demo{display:none}
+@media(max-width:600px){
+ .story-phone-demo{display:inline-flex;align-items:center}
+ .details>.demo{display:none}
+}
