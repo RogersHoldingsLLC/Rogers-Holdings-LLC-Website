@@ -273,6 +273,8 @@ export const PUBLIC_MANIFEST = Object.freeze([
   'assets/media/eastland-homepage-chapters.en.vtt',
   'assets/media/eastland-homepage-tour.mp4',
   'assets/js/portfolio-walkthrough.js',
+  'assets/css/worksheet-mobile.css',
+  'assets/js/worksheet-mobile.js',
   'assets/media/form-field-tour-v1.mp4',
   'assets/media/form-field-tour-v1.webp',
   'assets/media/monoform-tour-v1.mp4',
