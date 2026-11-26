@@ -252,3 +252,8 @@ assert.doesNotMatch(ffWorksheet,/#(?:132b42|173b58|eaf1f7|dbe6ef)\b/i);
 for(const f of ['portfolio/projects/customer-follow-up/index.html','portfolio/projects/precision-fabrication/index.html']) {
  assert.match(read(f),/customer-follow-up\.jpg\?v=20261125-form-field-brand/);
 }
+
+const ffCase = read('portfolio/projects/precision-fabrication/index.html');
+assert.match(ffCase, /href="\.\.\/customer-follow-up\/">Try the quote tracker in your browser<\/a>/);
+assert.match(ffCase, /href="\/portfolio\/downloads\/form-field-quote-follow-up\.xlsx" download>Download the Excel workbook \(\.xlsx\)<\/a>/);
+assert.doesNotMatch(ffCase, /<video\b|docs\.google\.com|chatgpt\.(?:com|site)/i);
