@@ -257,3 +257,10 @@ const ffCase = read('portfolio/projects/precision-fabrication/index.html');
 assert.match(ffCase, /href="\.\.\/customer-follow-up\/">Try the quote tracker in your browser<\/a>/);
 assert.match(ffCase, /href="\/portfolio\/downloads\/form-field-quote-follow-up\.xlsx" download>Download the Excel workbook \(\.xlsx\)<\/a>/);
 assert.doesNotMatch(ffCase, /<video\b|docs\.google\.com|chatgpt\.(?:com|site)/i);
+
+for (const project of ['inventory-tracker','job-capacity','receipt-tracker','staffing-coverage','order-fulfillment','customer-follow-up','store','precision-fabrication']) {
+ const page=read('portfolio/projects/'+project+'/index.html');
+ assert.match(page,/Actual Excel sample/);
+ assert.match(page,/Custom web app/);
+ assert.match(page,/portfolio\/showcase\/workbooks\//);
+}

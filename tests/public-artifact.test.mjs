@@ -24,7 +24,7 @@ function artifactHashes() {
 
 validateSourceBoundary();
 assert.deepEqual(PUBLIC_MANIFEST, JSON.parse(fs.readFileSync(new URL('./approved-public-manifest.json', import.meta.url), 'utf8')), 'approved Graphite production manifest and portfolio media');
-assert.equal(PUBLIC_MANIFEST.length, 403);
+assert.equal(PUBLIC_MANIFEST.length, 419);
 const publicExcel = 'portfolio/downloads/form-field-quote-follow-up.xlsx';
 assert.deepEqual(PUBLIC_MANIFEST.filter((entry) => /\.xlsx$/i.test(entry)), [publicExcel]);
 assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(REPOSITORY_ROOT, publicExcel))).digest('hex'),
