@@ -316,3 +316,30 @@ for (const [project,route,site] of [['precision-fabrication','customer-follow-up
 }
 assert.match(read('portfolio/projects/precision-fabrication/index.html'), /href="\/#form-field-walkthrough"/);
 console.log('Compact cases, workbook and web app links, legacy app routing, and the standalone website previews passed.');
+
+// Visitors see static case-study evidence; interactive controls belong to a deliberate demo view.
+const allCases = new Set([...work.matchAll(/href="(\/portfolio\/projects\/[a-z-]+\/|\/our-work\/monoform\/)"/g)].map(m => m[1]));
+assert.equal(allCases.size,17);
+allCases.add('/portfolio/projects/customer-follow-up/');
+allCases.add('/portfolio/projects/order-fulfillment/');
+for (const route of allCases) {
+ const file = route.slice(1)+'index.html';
+ const page = read(file);
+ const main = page.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)?.[1];
+ assert.ok(main,file);
+ const caseView=main.replace(/<template\b[^>]*>[\s\S]*?<\/template>/g,'').replace(/<script\b[^>]*>[\s\S]*?<\/script>/g,'');
+ assert.doesNotMatch(caseView,/<(?:iframe|video|form|canvas|object|embed|button|input|select|textarea)\b/i,file);
+ const still = [...caseView.matchAll(/<img\b[^>]*\bsrc="(?!data:)([^"]+)"[^>]*>/g)];
+ assert.ok(still.length>=1,file+' needs a static project screenshot');
+ for (const [tag,src] of still) {
+  assert.match(tag,/\balt="[^"]+"/,file);
+  assert.ok(PUBLIC_MANIFEST.includes(referenceToManifestPath(file,src)),file+' screenshot is not in the public artifact');
+ }
+ const slug=route.split('/').at(-2);
+ if(demoCases.has(slug)){
+  assert.equal(still.length,1,file+' needs exactly one case-view screenshot');
+  assert.match(caseView,/<figure class="case-static-preview" data-case-only>/);
+  assert.match(still[0][1],new RegExp('/portfolio/showcase/'+slug+'\\.jpg'));
+ }
+}
+console.log('All 19 portfolio case routes show static evidence and no inline interactive demos.');
