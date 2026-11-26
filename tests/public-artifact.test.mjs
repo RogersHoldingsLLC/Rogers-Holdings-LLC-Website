@@ -24,7 +24,7 @@ function artifactHashes() {
 
 validateSourceBoundary();
 assert.deepEqual(PUBLIC_MANIFEST, JSON.parse(fs.readFileSync(new URL('./approved-public-manifest.json', import.meta.url), 'utf8')), 'approved Graphite production manifest and portfolio media');
-assert.equal(PUBLIC_MANIFEST.length, 453);
+assert.equal(PUBLIC_MANIFEST.length, 454);
 const publicWorkbookHashes = Object.freeze({
   'portfolio/downloads/benchline-job-capacity.xlsx': '6c68484236bd30c9e832519a863792d7aa3eb1b4a0724731e9f184ca4e07bfd0',
   'portfolio/downloads/clockwise-staffing-coverage.xlsx': '2edfa45d934516aab6298d283deb1fc6218b748a417ae39b6b2b7e10bd630415',
