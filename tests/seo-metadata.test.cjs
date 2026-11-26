@@ -27,7 +27,7 @@ for(const file of ['index.html','services/index.html']){
  const text=html.match(new RegExp(`<meta (?:name|property)="${key}" content="([^"]+)"`))?.[1];assert.ok(text?.includes('automation'));
  }
 }
-assert.match(read('index.html'),/rogers-holdings-make-work-easier-share\.jpg/);
+assert.match(read('index.html'),/rogers-holdings-form-field-site-and-sheet-share\.jpg/);
 console.log('PASS SEO metadata: 10 canonical sitemap pages, single headings, valid schema, unique titles, all fictional pages noindex, /examples/ crawlable for noindex.');
 
 // Local service clarity on the existing canonical page, not a doorway-page clone.
