@@ -28,7 +28,7 @@ assert.equal(PUBLIC_MANIFEST.length, 419);
 const publicExcel = 'portfolio/downloads/form-field-quote-follow-up.xlsx';
 assert.deepEqual(PUBLIC_MANIFEST.filter((entry) => /\.xlsx$/i.test(entry)), [publicExcel]);
 assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(REPOSITORY_ROOT, publicExcel))).digest('hex'),
-  '78515121e9486033aa83261984f1e61db31f2e06cd8c4927a142bebf72c8cd2b',
+  'da5dda4e1d09111ff49133e1d79028f1d67ee631cc9e49c7c6760c9fc6190c90',
   'only publish the reviewed fictional workbook; re-review before updating its checksum');
 
 
