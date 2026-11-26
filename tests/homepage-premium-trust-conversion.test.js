@@ -35,7 +35,9 @@ console.log('Redesigned homepage routes, truthful scope, optional Snapshot and c
 require('./premium-portfolio.test.cjs');
 
 assert.match(hero, /websites, spreadsheets and custom web apps/);
-assert.match(main, /href="\/services\/#custom-web-apps">Explore custom web apps/);
-assert.match(services, /connect it to a spreadsheet you already use or set up a new system/);
-assert.match(services, /records update behind the scenes/);
+assert.doesNotMatch(main, /Hate fooling with spreadsheets|records update behind the scenes/);
+const customApp = services.match(/<section[^>]*id="custom-web-apps"[\s\S]*?<\/section>/)[0];
+assert.match(customApp, /Hate fooling with spreadsheets/);
+assert.match(customApp, /log orders or update jobs from their phones/);
+assert.equal((customApp.match(/<p>/g) || []).length, 1);
 assert.match(read('our-work/index.html'), /separate examples and do not sync/);
