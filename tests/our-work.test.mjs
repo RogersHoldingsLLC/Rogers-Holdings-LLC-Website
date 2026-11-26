@@ -11,7 +11,7 @@ const home = read('index.html');
 const work = read('our-work/index.html');
 assert.match(home, /id="work"/);
 assert.match(home, /href="#work">Our Work/);
-assert.match(home, /href="\/our-work\/">Project stories/);
+assert.match(home, /href="\/our-work\/">Our Work/);
 assert.match(home, /href="\/portfolio\/projects\/eastland\/"/);
 const eastlandDetail=read('portfolio/projects/eastland/index.html');
 assert.match(eastlandDetail, /href="https:\/\/eastlandfirstchurchofgod\.com\/"/);
@@ -158,10 +158,10 @@ for(const f of ['index.html','business-snapshot/index.html','privacy/index.html'
   const prefix = f === 'index.html' ? '' : '../';
   if(f === 'index.html') {
     assert.match(html, /href="#work">Our Work/);
-    assert.match(html, /href="\/our-work\/">Project stories/);
+    assert.match(html, /href="\/our-work\/">Our Work/);
   } else if(f === 'spreadsheet-repair/index.html') {
     assert.match(html,/href="\.\.\/#work">Our Work/);
-    assert.match(html,/href="\.\.\/our-work\/">Project stories/);
+    assert.match(html,/href="\/our-work\/">Our Work/);
   } else if(f !== 'our-work/index.html') {
     const workLinks=[...html.matchAll(/<a[^>]*href="([^"]+)"[^>]*>Our Work<\/a>/g)]
       .filter(([,href])=>new URL(href,`https://rogersholdingsllc.com/${f}`).pathname==='/our-work/');
