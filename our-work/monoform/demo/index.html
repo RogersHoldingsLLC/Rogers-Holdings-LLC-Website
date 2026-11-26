@@ -28,6 +28,7 @@
 <script src="audio-range.js?v=14" defer></script>
 <script src="store-home.js?v=8" defer></script>
 <style id="mobile-showroom">
+.mono-mobile-desk-entry{display:none}
 /* The phone keeps the continuous r104 film without letting its sticky stage
    cover the actual store. The desktop layout and frame atlas are untouched. */
 @media (max-width: 760px) {
@@ -56,6 +57,32 @@
     background: var(--mono-accent, #e6ab8a) !important;
     color: var(--mono-button-ink, #201611) !important;
     padding-inline: 16px;
+  }
+  /* The stage stays sticky; this copy follows page position, not atlas progress. */
+  .flight[data-motion][data-phone-title] .flight-intro {
+    animation: none !important;
+    transform: translateY(var(--mono-title-lift, 0px)) !important;
+  }
+  html[data-audio92] .root-commercial-head nav > .mono-mobile-sound-link {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+  .flight[data-motion] .mono-mobile-desk-entry {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 12px;
+    border: 1px solid #e6ab8a9c;
+    color: #fff3e9;
+    background: #18202ccc;
+    border-radius: 2px;
+    font: 650 .84rem/1.2 var(--sans);
+    white-space: nowrap;
+  }
+  .flight[data-motion] .mono-mobile-desk-entry:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 4px;
   }
   .flight[data-quiet-pass][data-motion] .start-fall:focus-visible {
     outline: 2px solid #fff;
@@ -121,6 +148,52 @@
   }
 }
 </style>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const phone = matchMedia('(max-width: 760px)');
+  const flight = document.querySelector('.flight');
+  const header = document.querySelector('.root-commercial-head');
+  const deskLink = header.querySelector('nav > a[href="#listen"]');
+  const profileMenu = header.querySelector('.studio-profiles')?.closest('details');
+  const originalLabel = deskLink?.textContent;
+  const originalHidden = deskLink?.hidden;
+
+  let frame = 0, stageStart = 0, headerEnd = 0;
+  const paint = () => {
+    frame = 0;
+    if (!phone.matches) return;
+    const lift = Math.min(480, Math.max(0, scrollY - stageStart));
+    flight.style.setProperty('--mono-title-lift', -lift + 'px');
+    if (scrollY > headerEnd) header.querySelectorAll('.studio-menu[open]').forEach(menu => { menu.open = false; });
+  };
+  const queue = () => { if (phone.matches && !frame) frame = requestAnimationFrame(paint); };
+  const measure = () => {
+    stageStart = flight.getBoundingClientRect().top + scrollY;
+    headerEnd = header.getBoundingClientRect().bottom + scrollY;
+    queue();
+  };
+  const apply = () => {
+    const small = phone.matches;
+    flight.toggleAttribute('data-phone-title', small);
+    if (!small) flight.style.removeProperty('--mono-title-lift');
+    if (deskLink) {
+      deskLink.classList.toggle('mono-mobile-sound-link', small);
+      deskLink.hidden = small ? false : originalHidden;
+      deskLink.textContent = small ? 'Sound test' : originalLabel;
+    }
+    if (profileMenu) {
+      if (small) profileMenu.open = false;
+      profileMenu.hidden = small;
+    }
+    measure();
+  };
+  apply();
+  addEventListener('scroll', queue, {passive:true});
+  addEventListener('resize', measure, {passive:true});
+  phone.addEventListener?.('change', apply);
+  if ('ResizeObserver' in window) new ResizeObserver(measure).observe(header);
+});
+</script>
 </head>
 <body id="top">
 <a class="skip" href="#main">Skip to content</a>
@@ -216,7 +289,7 @@
         <h1 id="hero-title">Play it<br>close<span>.</span></h1>
         <p>A small speaker for the music you keep close.</p>
       </div>
-      <div class="scene-finish-flight metal-entry" hidden><a href="#fall" class="start-fall" data-flight-start>Start the fall</a><a href="#finishes" class="metal-open" data-open-metals>Compare metals <span aria-hidden="true">+</span></a></div>
+      <div class="scene-finish-flight metal-entry" hidden><a href="#fall" class="start-fall" data-flight-start>Start the fall</a><a href="#finishes" class="metal-open" data-open-metals>Compare metals <span aria-hidden="true">+</span></a><a class="mono-mobile-desk-entry" href="#listen">Sound test</a></div>
       <p class="flight-craft" aria-hidden="true">Precision,<br>down to the dial.</p>
       <div class="flight-word" aria-hidden="true">M01</div>
       <div class="flight-vector" aria-hidden="true"><i></i><b></b><i></i></div>
