@@ -27,6 +27,100 @@
 <script src="store-data.js?v=8" defer></script>
 <script src="audio-range.js?v=14" defer></script>
 <script src="store-home.js?v=8" defer></script>
+<style id="mobile-showroom">
+/* The phone keeps the continuous r104 film without letting its sticky stage
+   cover the actual store. The desktop layout and frame atlas are untouched. */
+@media (max-width: 760px) {
+  html[data-audio92] .root-commercial-head {
+    padding-inline: max(12px, env(safe-area-inset-left, 0px)) max(12px, env(safe-area-inset-right, 0px));
+  }
+  html[data-audio92] .root-commercial-head nav {
+    justify-content: space-between;
+    gap: 4px;
+  }
+  html[data-audio92] .root-commercial-head :is(.root-buy, .studio-menu > summary, nav > a) {
+    min-height: 44px;
+    font-size: .8rem;
+  }
+  .flight[data-closed-review][data-quiet-pass][data-motion] {
+    height: 231svh;
+    min-height: 1160px;
+  }
+  .flight[data-closed-review][data-motion][data-ending] .flight-intro {
+    top: clamp(45px, 8svh, 76px) !important;
+  }
+  .flight[data-quiet-pass][data-motion] .metal-entry:not([hidden]) {
+    bottom: clamp(110px, 23svh, 203px);
+  }
+  .flight[data-quiet-pass][data-motion] .start-fall {
+    background: var(--mono-accent, #e6ab8a) !important;
+    color: var(--mono-button-ink, #201611) !important;
+    padding-inline: 16px;
+  }
+  .flight[data-quiet-pass][data-motion] .start-fall:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 4px;
+  }
+  /* The old .home-finishes target is hidden in r104; the real lineup must
+     also clear the sticky stage that overlaps the unused listening-desk tail. */
+  main > .store-shelf {
+    position: relative;
+    z-index: 2;
+    padding: 34px max(16px, 4vw) 44px;
+  }
+  .shelf-head {
+    padding-bottom: 16px;
+  }
+  html[data-polished] .shelf-choices {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    overflow: visible;
+    scroll-snap-type: none;
+    gap: 13px 7px;
+    padding: 14px 0 0;
+    margin: 0 0 20px;
+  }
+  .shelf-choices .shelf-group:first-child,
+  .shelf-choices .shelf-group:last-child {
+    grid-column: 1 / -1;
+  }
+  .shelf-choices .shelf-group:nth-child(3) {
+    grid-column: span 2;
+  }
+  .shelf-choices .shelf-group > div {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+  }
+  html[data-polished] .shelf-choices button {
+    width: 100%;
+    min-height: 86px;
+    grid-template-rows: 36px auto 1fr;
+    padding: 5px 4px;
+    overflow-wrap: anywhere;
+  }
+  .shelf-choices .shelf-thumb,
+  .shelf-choices button img {
+    height: 36px;
+  }
+  html[data-polished] .shelf-choices .shelf-group:last-child button {
+    min-height: 50px;
+    grid-template-columns: minmax(70px, 30%) auto 1fr;
+    grid-template-rows: auto;
+    justify-items: start;
+    gap: 9px;
+    text-align: left;
+  }
+}
+@media (max-width: 365px) {
+  html[data-audio92] .root-commercial-head :is(.root-buy, .studio-menu > summary, nav > a) {
+    font-size: .75rem;
+  }
+  .flight[data-closed-review][data-motion][data-ending] .flight-intro h1 {
+    font-size: clamp(2.25rem, 10vw, 2.55rem);
+  }
+}
+</style>
 </head>
 <body id="top">
 <a class="skip" href="#main">Skip to content</a>
