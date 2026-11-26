@@ -337,9 +337,17 @@ for (const route of allCases) {
  }
  const slug=route.split('/').at(-2);
  if(demoCases.has(slug)){
-  assert.equal(still.length,1,file+' needs exactly one case-view screenshot');
-  assert.match(caseView,/<figure class="case-static-preview" data-case-only>/);
-  assert.match(still[0][1],new RegExp('/portfolio/showcase/'+slug+'\\.jpg'));
+  assert.equal(still.length,2,file+' needs a spreadsheet and web app screenshot');
+  assert.match(caseView,/<section class="worksheet-proof" aria-labelledby="worksheet-proof-title" data-case-only>/);
+  assert.deepEqual(still.map((entry)=>entry[1]),['sheet','app'].map((kind)=>'/portfolio/showcase/worksheet-proof/'+slug+'-'+kind+'.webp'));
+  for(const kind of ['sheet','app']){
+   const mobile='/portfolio/showcase/worksheet-proof/'+slug+'-'+kind+'-mobile.webp';
+   assert.ok(caseView.includes('srcset="'+mobile+'"'));
+   assert.ok(PUBLIC_MANIFEST.includes(mobile.slice(1)));
+  }
+ } else if(slug==='precision-fabrication'||slug==='store'){
+  assert.equal(still.length,3,file+' needs the website and both companion tool screenshots');
+  assert.match(caseView,/<section class="worksheet-proof" aria-labelledby="worksheet-proof-title">/);
  }
 }
 console.log('All 19 portfolio case routes show static evidence and no inline interactive demos.');

@@ -24,7 +24,7 @@ function artifactHashes() {
 
 validateSourceBoundary();
 assert.deepEqual(PUBLIC_MANIFEST, JSON.parse(fs.readFileSync(new URL('./approved-public-manifest.json', import.meta.url), 'utf8')), 'approved Graphite production manifest and portfolio media');
-assert.equal(PUBLIC_MANIFEST.length, 428);
+assert.equal(PUBLIC_MANIFEST.length, 453);
 const publicWorkbookHashes = Object.freeze({
   'portfolio/downloads/benchline-job-capacity.xlsx': '6c68484236bd30c9e832519a863792d7aa3eb1b4a0724731e9f184ca4e07bfd0',
   'portfolio/downloads/clockwise-staffing-coverage.xlsx': '2edfa45d934516aab6298d283deb1fc6218b748a417ae39b6b2b7e10bd630415',
@@ -186,8 +186,10 @@ const approvedPrintMaterials = new Set([
   'portfolio/media/proof-materials-1280.webp',
   'portfolio/media/proof-materials-640.webp'
 ]);
-assert.deepEqual(firstBuild.filter((entry) => /(?:proof|rollback)/i.test(entry)), [...approvedPrintMaterials].sort());
-for (const relativePath of approvedPrintMaterials) {
+const approvedWorksheetProof = ['customer-follow-up','inventory-tracker','job-capacity','order-fulfillment','receipt-tracker','staffing-coverage']
+  .flatMap(slug=>['app','sheet'].flatMap(kind=>['-mobile',''].map(size=>`portfolio/showcase/worksheet-proof/${slug}-${kind}${size}.webp`)));
+assert.deepEqual(firstBuild.filter((entry) => /(?:proof|rollback)/i.test(entry)), [...approvedPrintMaterials,'assets/css/worksheet-proof.css',...approvedWorksheetProof].sort());
+for (const relativePath of [...approvedPrintMaterials,...approvedWorksheetProof]) {
   const image = fs.readFileSync(path.join(OUTPUT_ROOT, relativePath));
   assert.equal(image.subarray(0, 4).toString(), 'RIFF');
   assert.equal(image.subarray(8, 12).toString(), 'WEBP');

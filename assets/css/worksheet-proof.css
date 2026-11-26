@@ -1,0 +1,13 @@
+/* Case-study evidence only; the standalone example tools keep their own styles. */
+.worksheet-proof{grid-column:1/-1;width:100%;max-width:none;margin:12px 0 32px;min-width:0}
+.worksheet-proof h2{margin:0 0 8px}
+.worksheet-proof p{margin:0 0 18px;color:var(--muted,#d5d0c6)}
+.worksheet-proof-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.worksheet-proof figure{margin:0;min-width:0;max-width:none}
+.worksheet-proof figure img{display:block;width:100%;height:auto;aspect-ratio:1.59;object-fit:contain;object-position:50% 0;border:0;border-radius:0;box-shadow:none}
+.worksheet-proof-image{display:block;overflow:hidden;border:1px solid #9c875f;border-radius:9px;background:#282726;box-shadow:0 10px 24px #111b2026}
+.worksheet-proof-image:focus-visible,.worksheet-proof figcaption a:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.worksheet-proof figcaption{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:0 8px;margin:0 0 2px;color:var(--ink,#f1eee8);font-size:.88rem}
+.worksheet-proof figcaption strong{font-weight:650}
+.worksheet-proof figcaption a{display:inline-flex;align-items:center;min-height:44px;color:inherit;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:680px){.worksheet-proof-grid{grid-template-columns:1fr;gap:12px}.worksheet-proof figure img{aspect-ratio:auto}.worksheet-proof{margin-bottom:24px}}
