@@ -16,9 +16,9 @@ assert.doesNotMatch(hero, /href="\/?business-snapshot/);
 assert.match(main, /written scope and price before paid work starts/);
 assert.match(main, /href="\/?website-creation\/"/);
 assert.match(home, /href="\/?services\/"/);
-// All five approved services remain reachable through the primary Services link.
+// All existing services and the custom web app service remain reachable through the primary Services link.
 const services = read('services/index.html');
-for (const id of ['websites', 'spreadsheets', 'forms-intake', 'business-documents', 'seo-local-search']) {
+for (const id of ['websites', 'spreadsheets', 'custom-web-apps', 'forms-intake', 'business-documents', 'seo-local-search']) {
   assert.ok(services.includes('id="' + id + '"'), `approved service ${id} remains available`);
 }
 assert.match(main, /href="mailto:briankeith@rogersholdingsllc\.com\?subject=[^"]+"/);
@@ -33,3 +33,9 @@ const visibleMain = main.replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, '');
 assert.doesNotMatch(visibleMain, /<form|<input|testimonial|[0-9]+%|hours saved|revenue increased/i);
 console.log('Redesigned homepage routes, truthful scope, optional Snapshot and contact privacy contracts passed.');
 require('./premium-portfolio.test.cjs');
+
+assert.match(hero, /websites, spreadsheets and custom web apps/);
+assert.match(main, /href="\/services\/#custom-web-apps">Explore custom web apps/);
+assert.match(services, /connect it to a spreadsheet you already use or set up a new system/);
+assert.match(services, /records update behind the scenes/);
+assert.match(read('our-work/index.html'), /separate examples and do not sync/);
