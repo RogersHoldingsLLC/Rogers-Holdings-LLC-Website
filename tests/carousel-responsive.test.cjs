@@ -13,7 +13,8 @@ const region = html.match(/<section class="rh-selected"[\s\S]*?(?=<script>\n\(\(
 assert.ok(region, 'selected projects region');
 assert.doesNotMatch(region, /aria-roledescription="carousel"|<iframe|<form/);
 const images = [...region.matchAll(/<img ([^>]+)>/g)].map(m => m[1]);
-assert.equal(images.length, 2);
+assert.equal(images.length, 3);
+assert.equal(images.filter(img => img.includes('/portfolio/showcase/missy-redacted.png')).length, 1);
 for (const image of images) {
  const src = image.match(/\bsrc="([^"]+)"/)?.[1];
  assert.ok(src && exists(src));

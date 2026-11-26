@@ -89,9 +89,15 @@ assert.match(work, /<link rel="canonical" href="https:\/\/rogersholdingsllc\.com
 assert.match(work, /aria-current="page">Our Work/);
 
 // The approved gallery has seventeen visible stories, including both fictional concepts.
-const expectedProjects=['eastland','monoform','precision-fabrication','captured-by-karmen','missys-squishies','store','pizzeria','bike-repair','orchard','repair-cafe','print-review','inventory-tracker','job-capacity','receipt-tracker','staffing-coverage','howl-and-timber','cortez-capital'];
+const expectedProjects=['eastland','missys-squishies','monoform','precision-fabrication','captured-by-karmen','store','pizzeria','bike-repair','orchard','repair-cafe','print-review','inventory-tracker','job-capacity','receipt-tracker','staffing-coverage','howl-and-timber','cortez-capital'];
 const exhibits=[...work.matchAll(/<article class="work-exhibit" id="([^"]+)" aria-labelledby="([^"]+)">([\s\S]*?)<\/article>/g)];
 assert.deepEqual(exhibits.map(m=>m[1]),expectedProjects);
+const jump = work.match(/<nav class="work-jump-links"[^>]*>([\s\S]*?)<\/nav>/)?.[1];
+assert.deepEqual([...jump.matchAll(/href="#([^"]+)">([^<]+)/g)].map(m=>[m[1],m[2]]), [['eastland','Websites'],['missys-squishies','Spreadsheets'],['inventory-tracker','Web Apps']]);
+assert.ok(home.indexOf('id="eastland-walkthrough"') < home.indexOf('id="missy-home-title"'));
+assert.ok(home.indexOf('id="missy-home-title"') < home.indexOf('id="monoform-walkthrough"'));
+assert.match(home, /Redacted preview\. No customer order data shown\./);
+assert.match(home, /Email me a few lines about what’s taking too much time or not working right\./);
 for(const [,id,heading,body] of exhibits) {
  assert.ok(body.includes('<h2 id="'+heading+'">'));
  const proof = {

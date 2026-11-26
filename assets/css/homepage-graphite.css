@@ -601,3 +601,11 @@ main.gallery-home.rh-graphite{--ink:#faf5eb;--muted:#e7e0d3;--gallery-wall:#2c2d
 
 /* Keep the two true screenshots in one frame treatment, showing navigation. */
 .rh-graphite .rh-project-card .rh-selected-shot img{object-position:center 16%}
+
+/* Redacted client proof follows the existing lead case. */
+.rh-graphite .rh-client-workbook{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.92fr);align-items:center;gap:clamp(16px,3.2vw,36px);margin-top:clamp(15px,2.5vw,25px);padding:clamp(16px,3vw,30px);background:#28292c;border:1px solid #77654d}
+.rh-graphite .rh-client-workbook h3{font-size:clamp(1.55rem,3.3vw,2.55rem);line-height:1.12}
+.rh-client-workbook figure{min-width:0}
+.rh-client-workbook img{display:block;max-width:100%;height:auto;border-radius:3px}
+.rh-client-workbook figcaption{margin-top:7px;font-size:.76rem;color:#d9d3c8}
+@media(max-width:640px){.rh-graphite .rh-client-workbook{grid-template-columns:minmax(0,1fr);gap:8px}}
