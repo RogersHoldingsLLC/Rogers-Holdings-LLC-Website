@@ -94,15 +94,31 @@ const exhibits=[...work.matchAll(/<article class="work-exhibit" id="([^"]+)" ari
 assert.deepEqual(exhibits.map(m=>m[1]),expectedProjects);
 for(const [,id,heading,body] of exhibits) {
  assert.ok(body.includes('<h2 id="'+heading+'">'));
- assert.equal((body.match(/<img\b/g)||[]).length,1);
- assert.match(body,/<img[^>]*alt="[^"]+"/);
+ const proof = {
+  'precision-fabrication':['Website','Spreadsheet','responsive/fabrication-1040.webp','worksheet-proof/customer-follow-up-sheet.webp'],
+  'store':['Website','Spreadsheet','responsive/store-1040.webp','worksheet-proof/order-fulfillment-sheet.webp'],
+  'inventory-tracker':['Spreadsheet','Web app','worksheet-proof/inventory-tracker-sheet.webp','worksheet-proof/inventory-tracker-app.webp'],
+  'job-capacity':['Spreadsheet','Web app','worksheet-proof/job-capacity-sheet.webp','worksheet-proof/job-capacity-app.webp'],
+  'receipt-tracker':['Spreadsheet','Web app','worksheet-proof/receipt-tracker-sheet.webp','worksheet-proof/receipt-tracker-app.webp'],
+  'staffing-coverage':['Spreadsheet','Web app','worksheet-proof/staffing-coverage-sheet.webp','worksheet-proof/staffing-coverage-app.webp'],
+ }[id];
+ const pictures=[...body.matchAll(/<img\b[^>]*>/g)].map(m=>m[0]);
+ if(proof){
+  assert.equal(pictures.length,2,id);
+  assert.deepEqual([...body.matchAll(/class="work-preview-label">([^<]+)/g)].map(m=>m[1]),proof.slice(0,2));
+  pictures.forEach((img,i)=>{assert.ok(img.includes('src="/portfolio/showcase/'+proof[i+2]+'"'));assert.match(img,/loading="lazy"/);});
+  assert.equal([...body.matchAll(/<source[^>]*srcset="([^"]+)"/g)].filter(m=>PUBLIC_MANIFEST.includes(m[1].slice(1))).length,2);
+ }else{
+  assert.equal(pictures.length,1);
+  assert.match(body,/<img[^>]*alt="[^"]+"/);
+ }
  const links=[...body.matchAll(/href="([^"]+)"/g)].map(m=>m[1]);
  const target = id === 'monoform' ? '/our-work/monoform/' : '/portfolio/projects/' + id + '/';
  const expectedLinks = [target,target];
  if (id === 'monoform') expectedLinks.push('/#monoform-walkthrough');
  if (id === 'precision-fabrication') expectedLinks.push('/#form-field-walkthrough');
  assert.deepEqual(links, expectedLinks);
- assert.match(body,/aria-label="View [^"]+ project"/);
+ assert.match(body,/aria-label="View [^"]+ project(?:: [^"]+ previews)?"/);
  assert.match(body,/<span class="sr-only">:/);
  assert.doesNotMatch(body,/<details|<iframe|<form/);
 }
