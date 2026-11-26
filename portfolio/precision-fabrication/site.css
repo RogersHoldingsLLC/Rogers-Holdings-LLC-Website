@@ -866,7 +866,7 @@ body[data-page=home] .field-film{background:linear-gradient(140deg,#596259,#2934
 }
 @media(max-width:375px){
  .field-copy h1 em{white-space:normal}
- .field-links .field-secondary{min-height:39px}
+ .field-links .field-secondary{min-height:44px}
 }
 @media(prefers-reduced-motion:no-preference) and (hover:hover){
  .job-body{transition:transform .18s ease,box-shadow .18s ease}

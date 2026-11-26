@@ -1,0 +1,9 @@
+.worksheet-mobile-access{display:none}
+@media(max-width:650px){
+  .worksheet-mobile-access{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:12px 14px;border-top:1px solid #d6cbb6;background:#f7f2e8;color:#292219}
+  .worksheet-mobile-access p{flex:1 1 14rem;margin:0;font-size:14px;line-height:1.45}
+  .worksheet-mobile-access button{min-block-size:44px;padding:8px 12px;background:#342719;color:#fffdfa;border:1px solid #342719;border-radius:4px;font:600 16px/1.25 system-ui,sans-serif;text-align:left;cursor:pointer}
+  .worksheet-mobile-access button:focus-visible{outline:2px solid #342719;outline-offset:3px}
+  .worksheet-scroll .worksheet :is(input,select){min-block-size:44px;font-size:16px}
+  .worksheet-scroll .worksheet :is(input,select):focus-visible{outline:2px solid #292219;outline-offset:-2px}
+}
