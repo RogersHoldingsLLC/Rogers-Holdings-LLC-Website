@@ -264,6 +264,7 @@ export const PUBLIC_MANIFEST = Object.freeze([
   'our-work/monoform/demo/shop/index.html',
   'our-work/monoform/index.html',
   'assets/css/portfolio-walkthrough.css',
+  'assets/css/graphite-footer.css',
   'assets/css/homepage-graphite.css',
   'assets/images/brand/rh-monogram-cut.svg',
   'assets/images/brand/foundry-engraving.svg',
