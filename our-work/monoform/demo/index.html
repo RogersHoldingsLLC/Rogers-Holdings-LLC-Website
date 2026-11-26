@@ -58,11 +58,53 @@
     color: var(--mono-button-ink, #201611) !important;
     padding-inline: 16px;
   }
-  /* The stage stays sticky; this copy follows page position, not atlas progress. */
-  .flight[data-motion][data-phone-title] .flight-intro {
+  /* Keep the headline in document coordinates, outside the sticky film.
+     The dial caption can never paint over it during a flick or toolbar resize. */
+  .flight[data-mobile-layout] > .flight-intro {
+    position: absolute !important;
+    inset-inline: 3.9vw !important;
+    width: auto !important;
     animation: none !important;
-    transform: translateY(var(--mono-title-lift, 0px)) !important;
+    transform: none !important;
+    opacity: 1 !important;
+    z-index: 3;
   }
+  .mono-phone-sound {
+    --signal: #efc294;
+    --mono: ui-monospace, monospace;
+    position: relative;
+    z-index: 3;
+    background: #18191d;
+    color: #fff1e4;
+    padding: 26px max(16px, env(safe-area-inset-right)) 38px max(16px, env(safe-area-inset-left));
+    scroll-margin-top: 12px;
+  }
+  .mono-phone-sound > .flight-player {
+    position: static;
+    width: min(100%, 540px);
+    margin-inline: auto;
+    padding: 18px;
+    box-sizing: border-box;
+    background: #22242b;
+    border: 1px solid #9479667a;
+    border-radius: 8px;
+  }
+  .mono-phone-sound .flight-player h2 {
+    color: #fff1e4;
+    font: 750 clamp(2.05rem, 8vw, 3.25rem)/1 var(--display);
+    letter-spacing: -.05em;
+    margin: 6px 0 10px;
+  }
+  .mono-phone-sound .desk-label { color: #efc294; }
+  .mono-phone-sound .desk-hint { color: #e1d7cf; margin-bottom: 21px; }
+  .mono-phone-sound .flight-transport { grid-template-columns: auto minmax(0, 1fr); margin-top: 10px; }
+  .mono-phone-sound .flight-transport select { min-width: 0; font-size: 16px; }
+  .mono-phone-sound .flight-transport button { font-size: .88rem; }
+  .mono-phone-sound :is(.flight-scope, .flight-eq-control, .desk-hud-frame, .studio-eq-curve) { display:none; }
+  .mono-phone-sound .flight-voices { display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .mono-phone-sound .flight-voices button { padding: 0 2px; }
+  .mono-phone-sound .flight-player-note { display: flex; flex-wrap: wrap; align-items: center; }
+  .mono-phone-sound #flight-compare { min-height: 44px; }
   html[data-audio92] .root-commercial-head nav > .mono-mobile-sound-link {
     display: inline-flex;
     align-items: center;
@@ -158,40 +200,79 @@ document.addEventListener('DOMContentLoaded', () => {
   const originalLabel = deskLink?.textContent;
   const originalHidden = deskLink?.hidden;
 
-  let frame = 0, stageStart = 0, headerEnd = 0;
-  const paint = () => {
-    frame = 0;
-    if (!phone.matches) return;
-    const lift = Math.min(480, Math.max(0, scrollY - stageStart));
-    flight.style.setProperty('--mono-title-lift', -lift + 'px');
-    if (scrollY > headerEnd) header.querySelectorAll('.studio-menu[open]').forEach(menu => { menu.open = false; });
+  const intro = flight.querySelector('.flight-intro');
+  const player = flight.querySelector('.flight-player');
+  const sound = document.querySelector('#sound-test');
+  const landingTitle = player.querySelector('#landing-title');
+  const play = player.querySelector('#flight-play');
+  const introHome = document.createComment('Animated title home');
+  const playerHome = document.createComment('Animated player home');
+  intro.before(introHome);
+  player.before(playerHome);
+  const mobileActive = () => phone.matches && player.parentElement === sound;
+  const keepPlayerEnabled = () => {
+    if (mobileActive() && player.hasAttribute('inert')) player.removeAttribute('inert');
   };
-  const queue = () => { if (phone.matches && !frame) frame = requestAnimationFrame(paint); };
-  const measure = () => {
-    stageStart = flight.getBoundingClientRect().top + scrollY;
-    headerEnd = header.getBoundingClientRect().bottom + scrollY;
-    queue();
+  // The existing player and Web Audio engine stay intact. On phones only,
+  // cinematic visibility events no longer control the separate sound panel.
+  for (const name of ['landingchange', 'flightvisibility']) flight.addEventListener(name, event => {
+    if (mobileActive()) event.stopImmediatePropagation();
+  }, true);
+  new MutationObserver(keepPlayerEnabled).observe(player, {attributes:true, attributeFilter:['inert']});
+  if ('IntersectionObserver' in window) new IntersectionObserver(([entry]) => {
+    if (mobileActive() && !entry.isIntersecting && flight.hasAttribute('data-playing')) play.click();
+  }).observe(sound);
+  const jump = () => {
+    sound.scrollIntoView({block:'start', behavior:'instant'});
+    landingTitle.focus({preventScroll:true});
   };
+  document.addEventListener('click', event => {
+    if (!mobileActive() || event.ctrlKey || event.shiftKey || event.altKey || event.metaKey || event.button !== 0) return;
+    const link = event.target.closest('a[href="#listen"],a[href="#sound"],a[href="#sound-test"]');
+    if (!link || link.matches('[data-flight-chapter="desk"]')) return;
+    event.preventDefault();
+    event.stopPropagation();
+    header.querySelectorAll('.studio-menu[open]').forEach(menu => { menu.open = false; });
+    if (location.hash !== '#sound-test') history.pushState(history.state, '', '#sound-test');
+    jump();
+  }, true);
   const apply = () => {
     const small = phone.matches;
-    flight.toggleAttribute('data-phone-title', small);
-    if (!small) flight.style.removeProperty('--mono-title-lift');
+    flight.toggleAttribute('data-mobile-layout', small);
+    sound.hidden = !small;
+    if (small) {
+      if (intro.parentElement !== flight) flight.prepend(intro);
+      if (player.parentElement !== sound) sound.append(player);
+      keepPlayerEnabled();
+    } else {
+      if (intro.previousSibling !== introHome) introHome.after(intro);
+      if (player.previousSibling !== playerHome) playerHome.after(player);
+      player.toggleAttribute('inert', !flight.hasAttribute('data-land'));
+    }
+    landingTitle.textContent = small ? 'Sound test' : 'Listen closer.';
+    landingTitle.tabIndex = -1;
     if (deskLink) {
       deskLink.classList.toggle('mono-mobile-sound-link', small);
       deskLink.hidden = small ? false : originalHidden;
       deskLink.textContent = small ? 'Sound test' : originalLabel;
+      deskLink.setAttribute('href', small ? '#sound-test' : '#listen');
     }
+    flight.querySelector('.mono-mobile-desk-entry')?.setAttribute('href', small ? '#sound-test' : '#listen');
     if (profileMenu) {
       if (small) profileMenu.open = false;
       profileMenu.hidden = small;
     }
-    measure();
   };
   apply();
-  addEventListener('scroll', queue, {passive:true});
-  addEventListener('resize', measure, {passive:true});
+  if (mobileActive() && ['#listen', '#sound', '#sound-test'].includes(location.hash)) {
+    // Run after the film's initial deep-link positioning.
+    requestAnimationFrame(() => requestAnimationFrame(jump));
+  }
+  addEventListener('scroll', () => {
+    if (mobileActive() && header.getBoundingClientRect().bottom <= 0)
+      header.querySelectorAll('.studio-menu[open]').forEach(menu => { menu.open = false; });
+  }, {passive:true});
   phone.addEventListener?.('change', apply);
-  if ('ResizeObserver' in window) new ResizeObserver(measure).observe(header);
 });
 </script>
 </head>
@@ -368,6 +449,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </footer>
   </div>
 </section>
+  <div class="mono-phone-sound" id="sound-test" hidden></div>
   <div id="lineup" aria-hidden="true"></div><section class="home-finishes" id="finishes" aria-labelledby="finish-title">
     <div class="wrap finish-grid">
       <div class="finish-copy">
