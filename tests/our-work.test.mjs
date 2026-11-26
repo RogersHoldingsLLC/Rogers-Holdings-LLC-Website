@@ -52,6 +52,12 @@ for(const key of ['howl-and-timber','cortez-capital','captured-by-karmen']) {
 for(const [,closed]of work.matchAll(/(<details(?![^>]*\bopen\b)[^>]*>[\s\S]*?<\/details>)/g))assert.doesNotMatch(closed,/class="website-example-card/,'example links must not be hidden in closed details');
 assert.ok(PUBLIC_MANIFEST.includes('assets/images/social/website-creation-examples-share.jpg'));
 assert.ok(PUBLIC_MANIFEST.includes('assets/images/social/rogers-holdings-brand-share.jpg'));
+const portfolioShareAsset = 'assets/images/social/rogers-holdings-form-field-site-and-sheet-share.jpg';
+assert.ok(PUBLIC_MANIFEST.includes(portfolioShareAsset));
+for (const property of ['og:image', 'og:image:secure_url', 'twitter:image']) {
+  assert.ok(work.includes(`<meta ${property.startsWith('og:') ? 'property' : 'name'}="${property}" content="https://rogersholdingsllc.com/${portfolioShareAsset}">`));
+}
+
 assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root,'assets/images/social/rogers-holdings-brand-share.jpg'))).digest('hex'),'c7885d45a5212ddceb9fd588a57e9dfebd4e29e900b20c7aaea4aa1ef0197d6f','brand share image must be the approved transparent-logo version 2');
 const webpage=JSON.parse(website.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'].find(x=>x['@type']==='WebPage');
 assert.equal(webpage.primaryImageOfPage.width,1200);assert.equal(webpage.primaryImageOfPage.height,630);
