@@ -24,13 +24,20 @@ function artifactHashes() {
 
 validateSourceBoundary();
 assert.deepEqual(PUBLIC_MANIFEST, JSON.parse(fs.readFileSync(new URL('./approved-public-manifest.json', import.meta.url), 'utf8')), 'approved Graphite production manifest and portfolio media');
-assert.equal(PUBLIC_MANIFEST.length, 419);
-const publicExcel = 'portfolio/downloads/form-field-quote-follow-up.xlsx';
-assert.deepEqual(PUBLIC_MANIFEST.filter((entry) => /\.xlsx$/i.test(entry)), [publicExcel]);
-assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(REPOSITORY_ROOT, publicExcel))).digest('hex'),
-  'da5dda4e1d09111ff49133e1d79028f1d67ee631cc9e49c7c6760c9fc6190c90',
-  'only publish the reviewed fictional workbook; re-review before updating its checksum');
-
+assert.equal(PUBLIC_MANIFEST.length, 424);
+const publicWorkbookHashes = Object.freeze({
+  'portfolio/downloads/benchline-job-capacity.xlsx': '6c68484236bd30c9e832519a863792d7aa3eb1b4a0724731e9f184ca4e07bfd0',
+  'portfolio/downloads/clockwise-staffing-coverage.xlsx': '2edfa45d934516aab6298d283deb1fc6218b748a417ae39b6b2b7e10bd630415',
+  'portfolio/downloads/form-field-quote-follow-up.xlsx': 'da5dda4e1d09111ff49133e1d79028f1d67ee631cc9e49c7c6760c9fc6190c90',
+  'portfolio/downloads/paper-trail-receipt-register.xlsx': '773564a30a5f84ecf1ebf27a761080c7fd35bf5b5b47b875722eff3596a69a0f',
+  'portfolio/downloads/second-shelf-inventory.xlsx': 'b4bf17712c5d19f9f43fabdbea64f0efff953d49719df2cebf932b8d0bbf44a5',
+  'portfolio/downloads/silt-ember-order-fulfillment.xlsx': '9d9250c420c80ff16717139ed90de0f8bb8580c4c3680f21bee2b380f2ed8bd2',
+});
+assert.deepEqual(PUBLIC_MANIFEST.filter((entry) => /\.xlsx$/i.test(entry)), Object.keys(publicWorkbookHashes));
+for (const [workbook, expectedHash] of Object.entries(publicWorkbookHashes)) {
+  assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(REPOSITORY_ROOT, workbook))).digest('hex'), expectedHash,
+    're-review the fictional sample before updating its checksum: ' + workbook);
+}
 
 const homeSource = fs.readFileSync(path.join(REPOSITORY_ROOT, 'index.html'), 'utf8');
 for (const [route, slug] of [
