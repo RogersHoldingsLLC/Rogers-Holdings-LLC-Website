@@ -647,6 +647,7 @@ body:not([data-page=home]) main{min-height:71vh}
  body[data-page=home] .field-film{min-height:0}
  body[data-page=home] .field-copy h1{font-size:clamp(3.7rem,15vw,6rem)}
  body[data-page=home] .job-glyph{min-height:79px}
+ .route-process .choices label:has(:checked){color:#382217}
  .library-title h1,#bench .section-head h1,.tracker .section-head h1{grid-area:auto;font-size:clamp(3rem,13vw,4.7rem)}
  .tracker .section-head{grid-template-columns:1fr}.tracker .section-head .code{grid-area:auto}
  .brief-utilities{flex-direction:column}
