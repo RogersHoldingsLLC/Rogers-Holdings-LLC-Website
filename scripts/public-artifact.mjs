@@ -78,7 +78,12 @@ export const PUBLIC_MANIFEST = Object.freeze([
 
   'CNAME',
   'portfolio/bike-repair/index.html',
+  'portfolio/downloads/benchline-job-capacity.xlsx',
+  'portfolio/downloads/clockwise-staffing-coverage.xlsx',
   'portfolio/downloads/form-field-quote-follow-up.xlsx',
+  'portfolio/downloads/paper-trail-receipt-register.xlsx',
+  'portfolio/downloads/second-shelf-inventory.xlsx',
+  'portfolio/downloads/silt-ember-order-fulfillment.xlsx',
   'portfolio/captured-by-karmen-live.webp',
   'portfolio/orchard/index.html',
   'portfolio/pizzeria/hero-small.webp',

@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 import path from 'node:path';
+import vm from 'node:vm';
 import { PUBLIC_MANIFEST, referenceToManifestPath } from '../scripts/public-artifact.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
@@ -249,18 +250,69 @@ const ffWorksheet=read('portfolio/projects/customer-follow-up/index.html');
 assert.match(ffWorksheet,/\.quote-desk \.demo-brand\{background:#202723/);
 assert.match(ffWorksheet,/form-field-workbook-palette/);
 assert.doesNotMatch(ffWorksheet,/#(?:132b42|173b58|eaf1f7|dbe6ef)\b/i);
-for(const f of ['portfolio/projects/customer-follow-up/index.html','portfolio/projects/precision-fabrication/index.html']) {
- assert.match(read(f),/customer-follow-up\.jpg\?v=20261125-form-field-brand/);
+
+// Compact case pages offer the exact workbook and a deliberately opened app.
+const demoCases = new Map([
+ ['customer-follow-up','form-field-quote-follow-up.xlsx'],
+ ['inventory-tracker','second-shelf-inventory.xlsx'],
+ ['job-capacity','benchline-job-capacity.xlsx'],
+ ['receipt-tracker','paper-trail-receipt-register.xlsx'],
+ ['staffing-coverage','clockwise-staffing-coverage.xlsx'],
+ ['order-fulfillment','silt-ember-order-fulfillment.xlsx']
+]);
+function appEntrance(page, search, hash) {
+ const script=page.match(/<script data-example-view>([\s\S]*?)<\/script>/)?.[1];
+ assert.ok(script, 'case has a scoped app-mode initializer');
+ const template={
+  dataset:{},
+  parentElement:{dataset:{}},
+  after(value) {this.inserted=value;},
+  content:{cloneNode(deep){assert.equal(deep,true);return {app:true};}},
+ };
+ vm.runInNewContext(script,{
+  URLSearchParams,location:{search,hash},
+  document:{getElementById(id){assert.equal(id,'example-app-template');return template}},
+  requestAnimationFrame(f) {assert.equal(typeof f,'function');},
+ },{timeout:1000});
+ assert.equal(template.dataset.active==='true',!!template.inserted);
+ assert.equal(template.parentElement.dataset.exampleMode==='app',!!template.inserted);
+ return !!template.inserted;
 }
-
-const ffCase = read('portfolio/projects/precision-fabrication/index.html');
-assert.match(ffCase, /href="\.\.\/customer-follow-up\/">Try the quote tracker in your browser<\/a>/);
-assert.match(ffCase, /href="\/portfolio\/downloads\/form-field-quote-follow-up\.xlsx" download>Download the Excel workbook \(\.xlsx\)<\/a>/);
-assert.doesNotMatch(ffCase, /<video\b|docs\.google\.com|chatgpt\.(?:com|site)/i);
-
-for (const project of ['inventory-tracker','job-capacity','receipt-tracker','staffing-coverage','order-fulfillment','customer-follow-up','store','precision-fabrication']) {
+for (const [project,file] of demoCases) {
  const page=read('portfolio/projects/'+project+'/index.html');
- assert.match(page,/Actual Excel sample/);
- assert.match(page,/Custom web app/);
- assert.match(page,/portfolio\/showcase\/workbooks\//);
+ const links=page.match(/<nav class="case-demo-links"[^>]*>[\s\S]*?<\/nav>/)?.[0];
+ assert.ok(links,project);
+ assert.deepEqual([...links.matchAll(/href="([^"]+)"/g)].map(m=>m[1]), ['/portfolio/downloads/'+file, './?view=app']);
+ assert.ok(links.includes('download>Download spreadsheet (.xlsx)</a>'));
+ assert.ok(links.includes('>Open web app</a>'));
+ assert.doesNotMatch(page,/project-workflow-proof|deliverable-proof|portfolio\/showcase\/workbooks\//);
+ const main=page.slice(page.indexOf('<main'),page.indexOf('</main>'));
+ const app=main.match(/<template id="example-app-template">[\s\S]*?<\/template>/)?.[0];
+ assert.match(app, /class="(?:workbook|demo-workspace) /);
+ assert.match(app, /href="\.\/">Back to the case study<\/a>/);
+ assert.doesNotMatch(main.replace(app,''), /class="(?:workbook|demo-workspace) /);
+ assert.match(main, /<section class="project-scope" data-case-only/);
+ assert.equal(appEntrance(page,'',''),false);
+ assert.equal(appEntrance(page,'?view=app',''),true);
+ assert.equal(appEntrance(page,'?view=web-app',''),true);
+ assert.equal(appEntrance(page,'','#book-title'),true);
+ assert.equal(appEntrance(page,'','#worksheet-summary'),true);
+ assert.equal(appEntrance(page,'?view=app-preview','#unknown'),false);
+ assert.equal(appEntrance(page,'','#quote-process=assembly'),project==='customer-follow-up');
+ assert.equal(appEntrance(page,'','#order-units=4'),project==='order-fulfillment');
+ assert.equal(appEntrance(page,'','#quote-process=unknown'),false);
+ assert.equal(appEntrance(page,'','#order-units=121'),false);
 }
+for (const [project,route,site] of [['precision-fabrication','customer-follow-up','precision-fabrication'],['store','order-fulfillment','store']]) {
+ const page=read('portfolio/projects/'+project+'/index.html');
+ assert.match(page, /rel="canonical" href="https:\/\/rogersholdingsllc\.com\//);
+ assert.ok(page.includes('href="../'+route+'/?view=app">Open web app</a>'));
+ assert.ok(page.includes('href="/portfolio/downloads/'+demoCases.get(route)+'" download>Download spreadsheet (.xlsx)</a>'));
+ assert.ok(page.includes('href="../../'+site+'/"'));
+ assert.doesNotMatch(page, /<video\b|docs\.google\.com|chatgpt\.(?:com|site)|portfolio\/showcase\/workbooks\//i);
+ const preview=page.match(/<div class="project-workflow-proof project-workflow-proof--website"[^>]*>[\s\S]*?<\/div>/)?.[0];
+ assert.ok(preview,'standalone website preview preserved');
+ assert.equal((preview.match(/<figure>/g)||[]).length,1);
+}
+assert.match(read('portfolio/projects/precision-fabrication/index.html'), /href="\/#form-field-walkthrough"/);
+console.log('Compact cases, workbook and web app links, legacy app routing, and the standalone website previews passed.');

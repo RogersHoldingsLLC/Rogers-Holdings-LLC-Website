@@ -9,3 +9,7 @@ The case study also offers the standalone Form / Field Excel sample at `/portfol
 ## Mobile workbook pass (November 25, 2026 ET)
 
 The downloadable fictional Excel sample opens with a narrower Follow-up clock. The queue keeps business, next date and status on the left, with the desktop fields still available to the right. The portfolio uses captures of the updated workbook. The browser demo remains separate and was not changed. The other five sample workbooks remain private; their public case studies show the new opening views.
+
+## Linked tracker samples (November 25, 2026 ET)
+
+Each tracker case study now links directly to the editable sample workbook and the separate browser demo. The app runs on request, so the case study starts with the written example instead of two large previews. Portfolio gallery cards and the homepage walkthroughs are unchanged. The six explicitly allowlisted workbook downloads contain sample data only and do not connect to the browser demos.
