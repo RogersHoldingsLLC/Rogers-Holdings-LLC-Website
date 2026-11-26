@@ -472,3 +472,17 @@
   .our-work-page #receipt-tracker .work-preview-pane:nth-child(2) { --work-preview-position: 87%; }
   .our-work-page #staffing-coverage .work-preview-pane:nth-child(2) .work-preview-frame { aspect-ratio: 2.3 / 1; }
 }
+
+/* Shortcuts point to projects already in the left-to-right gallery sequence. */
+.our-work-page .work-jump-links{display:flex;flex-wrap:wrap;gap:2px 16px;margin-top:12px}
+.our-work-page .work-jump-links a{display:inline-flex;align-items:center;min-height:44px;color:#f0d5a3}
+@media(max-width:700px){
+ .our-work-page .work-jump-links{justify-content:center}
+ .our-work-page .work-exhibit{display:grid;grid-template-columns:minmax(0,1fr)}
+ .our-work-page .work-exhibit .work-exhibit-caption{display:contents}
+ .our-work-page .work-exhibit-type{order:0}
+ .our-work-page .work-exhibit h2{order:1}
+ .our-work-page .work-exhibit-preview{order:2}
+ .our-work-page .work-exhibit-description{order:3;margin-top:13px}
+ .our-work-page .work-exhibit-actions,.our-work-page .work-exhibit-caption>.work-exhibit-link{order:4;justify-self:start}
+}
