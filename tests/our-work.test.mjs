@@ -267,7 +267,8 @@ assert.match(ffWorksheet,/\.quote-desk \.demo-brand\{background:#202723/);
 assert.match(ffWorksheet,/form-field-workbook-palette/);
 assert.doesNotMatch(ffWorksheet,/#(?:132b42|173b58|eaf1f7|dbe6ef)\b/i);
 
-// Compact case pages offer the exact workbook and a deliberately opened app.
+// Compact case pages offer the approved Sheets sample, Excel download and a separate app.
+const approvedPublicSheets = JSON.parse(fs.readFileSync(new URL('./approved-public-sheets.json',import.meta.url),'utf8'));
 const demoCases = new Map([
  ['customer-follow-up','form-field-quote-follow-up.xlsx'],
  ['inventory-tracker','second-shelf-inventory.xlsx'],
@@ -298,9 +299,11 @@ for (const [project,file] of demoCases) {
  const page=read('portfolio/projects/'+project+'/index.html');
  const links=page.match(/<nav class="case-demo-links"[^>]*>[\s\S]*?<\/nav>/)?.[0];
  assert.ok(links,project);
- assert.deepEqual([...links.matchAll(/href="([^"]+)"/g)].map(m=>m[1]), ['/portfolio/downloads/'+file, './?view=app']);
- assert.ok(links.includes('download>Download spreadsheet (.xlsx)</a>'));
+ assert.deepEqual([...links.matchAll(/href="([^"]+)"/g)].map(m=>m[1]), [approvedPublicSheets['portfolio/projects/'+project+'/index.html'], '/portfolio/downloads/'+file, './?view=app']);
+ assert.ok(links.includes('download>Download Excel (.xlsx)</a>'));
+ assert.ok(links.includes('>Open in Google Sheets</a>'));
  assert.ok(links.includes('>Open web app</a>'));
+ assert.match(page, /Google Sheets is view-only\. The Excel download and web app are separate/);
  assert.doesNotMatch(page,/project-workflow-proof|deliverable-proof|portfolio\/showcase\/workbooks\//);
  const main=page.slice(page.indexOf('<main'),page.indexOf('</main>'));
  const app=main.match(/<template id="example-app-template">[\s\S]*?<\/template>/)?.[0];
@@ -323,9 +326,12 @@ for (const [project,route,site] of [['precision-fabrication','customer-follow-up
  const page=read('portfolio/projects/'+project+'/index.html');
  assert.match(page, /rel="canonical" href="https:\/\/rogersholdingsllc\.com\//);
  assert.ok(page.includes('href="../'+route+'/?view=app">Open web app</a>'));
- assert.ok(page.includes('href="/portfolio/downloads/'+demoCases.get(route)+'" download>Download spreadsheet (.xlsx)</a>'));
+ assert.ok(page.includes('href="/portfolio/downloads/'+demoCases.get(route)+'" download>Download Excel (.xlsx)</a>'));
  assert.ok(page.includes('href="../../'+site+'/"'));
- assert.doesNotMatch(page, /<video\b|docs\.google\.com|chatgpt\.(?:com|site)|portfolio\/showcase\/workbooks\//i);
+ const sheets = approvedPublicSheets['portfolio/projects/'+project+'/index.html'];
+ const sheetLink = '<a href="'+sheets+'">Open in Google Sheets</a>';
+ assert.ok(page.includes(sheetLink+'<a href="/portfolio/downloads/'+demoCases.get(route)+'" download>'));
+ assert.doesNotMatch(page.replace(sheetLink,''), /<video\b|docs\.google\.com|chatgpt\.(?:com|site)|portfolio\/showcase\/workbooks\//i);
  const preview=page.match(/<div class="project-workflow-proof project-workflow-proof--website"[^>]*>[\s\S]*?<\/div>/)?.[0];
  assert.ok(preview,'standalone website preview preserved');
  assert.equal((preview.match(/<figure>/g)||[]).length,1);

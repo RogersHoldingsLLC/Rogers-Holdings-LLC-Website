@@ -80,8 +80,20 @@ for (const relativePath of PUBLIC_MANIFEST) {
 }
 
 const publicTextFiles = firstBuild.filter((entry) => /\.(?:css|html|js|svg|txt|vcf|xml)$/i.test(entry));
+const approvedPublicSheets = JSON.parse(fs.readFileSync(new URL('./approved-public-sheets.json', import.meta.url), 'utf8'));
+assert.equal(Object.keys(approvedPublicSheets).length, 8);
+assert.equal(new Set(Object.values(approvedPublicSheets)).size, 6);
+for (const file of Object.keys(approvedPublicSheets)) assert.ok(publicTextFiles.includes(file), file);
 const publicText = publicTextFiles
-  .map((relativePath) => fs.readFileSync(path.join(OUTPUT_ROOT, relativePath), 'utf8'))
+  .map((relativePath) => {
+    const text = fs.readFileSync(path.join(OUTPUT_ROOT, relativePath), 'utf8');
+    const sheet = approvedPublicSheets[relativePath];
+    if (!sheet) return text;
+    assert.match(sheet, /^https:\/\/docs\.google\.com\/spreadsheets\/d\/[A-Za-z0-9_-]+\/(?:edit|view)#gid=\d+$/);
+    const link = '<a href="'+sheet+'">Open in Google Sheets</a>';
+    assert.equal(text.split(link).length, 2, relativePath + ': single exact authorized Sheets sample anchor');
+    return text.replace(link, '');
+  })
   .join('\n');
 assert.doesNotMatch(publicText, /docs\.google\.com|drive\.google\.com|script\.google\.com|PRIVATE DESIGN PREVIEW|LIVE SITE UNCHANGED|rh38-qa|\.openai\//i, 'public artifact must not expose private documents, receiver URLs or preview controls');
 assert.doesNotMatch(publicText, /call or text/i);

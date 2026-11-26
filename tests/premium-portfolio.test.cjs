@@ -15,6 +15,7 @@ const demoSlugs = ['store', 'precision-fabrication', 'pizzeria', 'bike-repair',
   'orchard', 'repair-cafe', 'print-review'];
 const projectPaths = projectSlugs.map(slug => `portfolio/projects/${slug}/index.html`);
 const demoPaths = demoSlugs.map(slug => `portfolio/${slug}/index.html`);
+const approvedPublicSheets = require('./approved-public-sheets.json');
 const attr = (tag, name) => tag.match(new RegExp(`\\b${name}="([^"]*)"`))?.[1];
 
 for (const file of ['index.html', 'website-creation/index.html', ...projectPaths, ...demoPaths]) {
@@ -25,7 +26,9 @@ for (const file of ['index.html', 'website-creation/index.html', ...projectPaths
   assert.equal(ids.length, new Set(ids).size, `${file}: unique IDs`);
   assert.match(html, /<html\b[^>]*lang="en"/, `${file}: document language`);
   assert.match(html, /name="viewport"[^>]*width=device-width/, `${file}: responsive viewport`);
-  assert.doesNotMatch(html, /PRIVATE DESIGN PREVIEW|LIVE SITE UNCHANGED|owner.only preview|rh38-qa|\.openai\/|localhost|127\.0\.0\.1|100\.102\.57\.95|docs\.google\.com|drive\.google\.com|script\.google\.com|TURNSTILE_SECRET_KEY|RECEIVER_SHARED_SECRET/i, `${file}: no private preview, document or receiver references`);
+  const sheet = approvedPublicSheets[file];
+  const privateSurfaceGuard = sheet ? html.replace('<a href="'+sheet+'">Open in Google Sheets</a>', '') : html;
+  assert.doesNotMatch(privateSurfaceGuard, /PRIVATE DESIGN PREVIEW|LIVE SITE UNCHANGED|owner.only preview|rh38-qa|\.openai\/|localhost|127\.0\.0\.1|100\.102\.57\.95|docs\.google\.com|drive\.google\.com|script\.google\.com|TURNSTILE_SECRET_KEY|RECEIVER_SHARED_SECRET/i, `${file}: no private preview, document or receiver references`);
   for (const [tag] of html.matchAll(/<img\b[^>]*>/g)) {
     assert.notEqual(attr(tag, 'alt'), undefined, `${file}: every image has an alt attribute`);
     assert.ok(Number(attr(tag, 'width')) > 0 && Number(attr(tag, 'height')) > 0, `${file}: image reserves dimensions`);
