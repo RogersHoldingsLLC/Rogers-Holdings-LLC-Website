@@ -23,7 +23,7 @@ assert.equal(organization.alternateName, 'Rogers Holdings');
 assert.equal(organization.logo.url, 'https://rogersholdingsllc.com/assets/images/brand/rogers-holdings-logo.png');
 assert.deepEqual(organization.founder, { '@id': 'https://rogersholdingsllc.com/#brian-keith-rogers' });
 assert.deepEqual(organization.knowsAbout, [
-  'Websites', 'Spreadsheets', 'Everyday task automation', 'Forms and intake',
+  'Websites', 'Spreadsheets', 'Custom web apps', 'Everyday task automation', 'Forms and intake',
   'Business documents and templates', 'SEO and local search foundations'
 ]);
 assert.equal(founder.name, 'Brian Keith Rogers');
